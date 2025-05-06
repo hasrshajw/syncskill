@@ -205,69 +205,72 @@
   </div>
 
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-  import { 
-    getAuth, 
-    signOut, 
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence
-  } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { 
+      getAuth, 
+      signOut, 
+      onAuthStateChanged,
+      setPersistence,
+      browserLocalPersistence
+    } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    appId: "YOUR_APP_ID"
-  };
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      appId: "YOUR_APP_ID"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  // Set persistence
-  setPersistence(auth, browserLocalPersistence)
-    .then(() => {
-      // Check auth state
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, display user details
-          const userName = document.getElementById('userName');
-          const userEmail = document.getElementById('userEmail');
-          const profilePic = document.getElementById('profilePic');
-          const welcomeName = document.getElementById('welcomeName');
-          const lastLogin = document.getElementById('lastLogin');
-          const joinDate = document.getElementById('joinDate');
-          
-          userName.textContent = user.displayName;
-          userEmail.textContent = user.email;
-          welcomeName.textContent = user.displayName;
-          profilePic.src = user.photoURL || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+    // Set persistence
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        // Check auth state
+        onAuthStateChanged(auth, (user) => {
+          console.log('Auth state changed:', user); // Log the user object for debugging
 
-          // Display dates
-          const now = new Date();
-          lastLogin.textContent = now.toLocaleString();
-          joinDate.textContent = new Date(user.metadata.creationTime).toLocaleDateString();
-        } else {
-          // Redirect to login page if no user is signed in
-          window.location.href = '/login.html';
-        }
+          if (user) {
+            // User is signed in
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const profilePic = document.getElementById('profilePic');
+            const welcomeName = document.getElementById('welcomeName');
+            const lastLogin = document.getElementById('lastLogin');
+            const joinDate = document.getElementById('joinDate');
+            
+            userName.textContent = user.displayName;
+            userEmail.textContent = user.email;
+            welcomeName.textContent = user.displayName;
+            profilePic.src = user.photoURL || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+
+            // Display dates
+            const now = new Date();
+            lastLogin.textContent = now.toLocaleString();
+            joinDate.textContent = new Date(user.metadata.creationTime).toLocaleDateString();
+          } else {
+            // Log out the user if no user is found
+            console.log('No user is signed in, redirecting to login.');
+            window.location.href = '/login.html';
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("Persistence error:", error);
       });
-    })
-    .catch((error) => {
-      console.error("Persistence error:", error);
-    });
 
-  // Logout handler
-  const logoutBtn = document.getElementById('logoutBtn');
-  logoutBtn.addEventListener('click', () => {
-    signOut(auth).then(() => {
-      window.location.href = '/login.html';
-    }).catch((error) => {
-      console.error('Logout error:', error);
+    // Logout handler
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = '/login.html';
+      }).catch((error) => {
+        console.error('Logout error:', error);
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
