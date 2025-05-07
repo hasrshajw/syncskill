@@ -94,25 +94,6 @@
             </svg>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    <!-- Desktop Auth Buttons -->
     <div class="auth-buttons" style="flex: 1; display: flex; justify-content: flex-end; gap: 12px;">
         <a href="login.html" style="text-decoration: none;">
@@ -169,28 +150,6 @@
         </button>
     </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" 
          style="display: none; position: fixed; top: 0; right: 0; width: 85%; height: 100%; background: rgba(255,255,255,0.98); z-index: 9999; padding: 20px; transform: translateX(100%); backdrop-filter: blur(8px); box-shadow: -4px 0 15px rgba(0,0,0,0.05);"
@@ -379,6 +338,194 @@
         checkResponsive();
     </script>
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section style="max-width:1920px; margin:0 auto; position:relative; overflow:hidden; border-radius:24px;">
+    <!-- Carousel Track -->
+    <div class="carousel-track" style="display:flex; transition:transform 1s cubic-bezier(0.33, 1, 0.68, 1);">
+        <!-- Slide 1 (Active) -->
+        <div class="carousel-slide active" style="position:relative; min-width:100%; height:0; padding-bottom:56.25%; overflow:hidden;">
+            <picture>
+                <source media="(max-width: 640px)" srcset="mobile.png">
+                <source media="(min-width: 641px)" srcset="desktop.png">
+                <img src="fallback-1.jpg" alt="Innovation" 
+                     style="position:absolute; width:100%; height:100%; object-fit:cover; object-position:center top; filter:brightness(0.98);"
+                     loading="lazy" decoding="async">
+            </picture>
+            <div class="slide-content active" style="position:absolute; bottom:12%; left:8%; max-width:600px; color:#1A1A1A; z-index:2; background:rgba(255,255,255,0.9); padding:2rem; border-radius:24px; box-shadow:0 24px 48px -12px rgba(0,0,0,0.18); opacity:1; transform:translateY(0); transition:all 0.8s cubic-bezier(0.33, 1, 0.68, 1) 0.2s;">
+                <h1 style="font-family:Manrope, sans-serif; font-weight:800; font-size:2.5rem; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.03em;">Next-Gen Solutions</h1>
+                <p style="font-size:1.1rem; margin-bottom:2.5rem; opacity:0.9;">Innovative approaches for modern challenges</p>
+                <a href="#" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.25rem 2.5rem; background:#FF4D00; color:#FFFFFF; border-radius:100px; font-weight:700; text-decoration:none; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1);">
+                    Explore Now
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide" style="position:relative; min-width:100%; height:0; padding-bottom:56.25%; overflow:hidden;">
+            <picture>
+                <source media="(max-width: 640px)" srcset="mobile.png">
+                <source media="(min-width: 641px)" srcset="desktop.png">
+                <img src="fallback-2.jpg" alt="Sustainability" 
+                     style="position:absolute; width:100%; height:100%; object-fit:cover; object-position:center top; filter:brightness(0.98);"
+                     loading="lazy" decoding="async">
+            </picture>
+            <div class="slide-content" style="position:absolute; bottom:12%; left:8%; max-width:600px; color:#1A1A1A; z-index:2; background:rgba(255,255,255,0.9); padding:2rem; border-radius:24px; box-shadow:0 24px 48px -12px rgba(0,0,0,0.18); opacity:0; transform:translateY(40px); transition:all 0.8s cubic-bezier(0.33, 1, 0.68, 1) 0.2s;">
+                <h1 style="font-family:Manrope, sans-serif; font-weight:800; font-size:2.5rem; line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.03em;">Eco Innovation</h1>
+                <p style="font-size:1.1rem; margin-bottom:2.5rem; opacity:0.9;">Sustainable solutions for tomorrow</p>
+                <a href="#" style="display:inline-flex; align-items:center; gap:0.75rem; padding:1.25rem 2.5rem; background:#FF4D00; color:#FFFFFF; border-radius:100px; font-weight:700; text-decoration:none; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1);">
+                    Discover More
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div style="position:absolute; bottom:8%; right:8%; display:flex; flex-direction:column; align-items:flex-end; gap:24px; z-index:3;">
+        <div style="display:flex; gap:1rem;">
+            <button class="prev" aria-label="Previous slide" style="width:56px; height:56px; border-radius:50%; border:none; background:rgba(255,255,255,0.9); backdrop-filter:blur(12px); cursor:pointer; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1); box-shadow:0 24px 48px -12px rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="next" aria-label="Next slide" style="width:56px; height:56px; border-radius:50%; border:none; background:rgba(255,255,255,0.9); backdrop-filter:blur(12px); cursor:pointer; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1); box-shadow:0 24px 48px -12px rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+        <div class="pagination" style="display:flex; gap:1rem; position:relative; right:28px;">
+            <div class="pagination-dot active" aria-label="Slide 1" style="width:12px; height:12px; border-radius:50%; background:#FF4D00; cursor:pointer; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1); transform:scale(1.4);"></div>
+            <div class="pagination-dot" aria-label="Slide 2" style="width:12px; height:12px; border-radius:50%; background:rgba(0,0,0,0.2); cursor:pointer; transition:all 0.3s cubic-bezier(0.33, 1, 0.68, 1);"></div>
+        </div>
+    </div>
+
+    <script>
+        class Carousel {
+            constructor(container) {
+                this.track = container.querySelector('.carousel-track');
+                this.slides = Array.from(container.querySelectorAll('.carousel-slide'));
+                this.prevBtn = container.querySelector('.prev');
+                this.nextBtn = container.querySelector('.next');
+                this.dots = Array.from(container.querySelectorAll('.pagination-dot'));
+                this.currentIndex = 0;
+                this.totalSlides = this.slides.length;
+
+                this.init();
+            }
+
+            init() {
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+                
+                // Touch and keyboard events
+                let touchStartX = 0;
+                container.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+                container.addEventListener('touchend', e => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    Math.abs(touchStartX - touchEndX) > 50 && 
+                    (touchStartX > touchEndX ? this.nextSlide() : this.prevSlide());
+                });
+                document.addEventListener('keydown', e => {
+                    e.key === 'ArrowLeft' && this.prevSlide();
+                    e.key === 'ArrowRight' && this.nextSlide();
+                });
+            }
+
+            updateActive() {
+                this.slides.forEach(slide => slide.classList.remove('active'));
+                this.dots.forEach(dot => {
+                    dot.style.background = 'rgba(0,0,0,0.2)';
+                    dot.style.transform = 'scale(1)';
+                });
+                
+                this.slides[this.currentIndex].classList.add('active');
+                this.dots[this.currentIndex].style.background = '#FF4D00';
+                this.dots[this.currentIndex].style.transform = 'scale(1.4)';
+            }
+
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+                this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                this.updateActive();
+            }
+
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+                this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                this.updateActive();
+            }
+
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.track.style.transform = `translateX(-${index * 100}%)`;
+                this.updateActive();
+            }
+        }
+
+        new Carousel(document.querySelector('section'));
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 <body style="font-family: 'Inter', sans-serif; background-color: #ffffff; color: #1f5c3a; line-height: 1.6; margin: 0; padding: 0;">
   
   <section style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 80px 40px; max-width: 1400px; margin: 0 auto; font-family: 'Inter', sans-serif;">
@@ -513,6 +660,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
