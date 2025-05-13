@@ -602,259 +602,248 @@
 
 
 
+.section-growthh {
+  padding: 32px 64px 0 64px;
+}
 
-* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.section-growth-subtitlee {
+  margin: 0;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #002726;
+}
 
-    /* Section Styles */
-    .section-growth {
-      padding: 32px 64px 0;
-    }
+.section-growth-titlee {
+  margin: 4px 0 24px 0;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.558px;
+  color: #002726;
+}
 
-    .section-growth-subtitle {
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 120%;
-      text-transform: uppercase;
-      color: #002726;
-    }
+#scrollContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 32px 64px;
+  position: relative;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-    .section-growth-title {
-      margin: 4px 0 24px;
-      font-size: 36px;
-      font-weight: 500;
-      line-height: 130%;
-      letter-spacing: -0.558px;
-      color: #002726;
-    }
+#cardWrapper {
+  display: inline-block;
+  white-space: nowrap;
+  padding-bottom: 16px;
+}
 
-    /* Carousel Styles */
-    .scroll-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 32px 64px;
-      position: relative;
-      scroll-behavior: smooth;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+.course-card {
+  display: inline-block;
+  width: 280px;
+  margin-right: 24px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: top;
+  position: relative;
+}
 
-    .scroll-container::-webkit-scrollbar {
-      display: none;
-    }
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
 
-    .card-wrapper {
-      display: inline-block;
-      white-space: nowrap;
-      padding-bottom: 16px;
-    }
+.course-card.featured {
+  background: linear-gradient(145deg, #e3f2ff 0%, #f0e8ff 100%);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
 
-    /* Card Styles */
-    .course-card {
-      display: inline-block;
-      width: 280px;
-      margin-right: 24px;
-      background: #ffffff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      vertical-align: top;
-      position: relative;
-    }
+.course-card.featured:hover {
+  box-shadow: 0 12px 30px rgba(15, 98, 254, 0.25);
+}
 
-    .course-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
+.course-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 1px solid #E0E0E0;
+}
 
-    .featured-card {
-      background: linear-gradient(145deg, #e3f2ff 0%, #f0e8ff 100%);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-    }
+.card-content {
+  padding: 24px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
 
-    .featured-card:hover {
-      box-shadow: 0 12px 30px rgba(15, 98, 254, 0.25);
-    }
+.badge.featured {
+  padding: 4px 8px;
+  background: linear-gradient(to right, #7B61FF, #0F62FE);
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 1px;
+}
 
-    .course-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-bottom: 1px solid #e0e0e0;
-    }
+.card-content h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #161616;
+}
 
-    .card-content {
-      padding: 24px;
-      height: 200px;
-      display: flex;
-      flex-direction: column;
-    }
+.duration {
+  padding: 4px 8px;
+  background: #E8F4FF;
+  color: #0F62FE;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  display: inline-block;
+}
 
-    .featured-tag {
-      padding: 4px 8px;
-      background: linear-gradient(to right, #7b61ff, #0f62fe);
-      color: #ffffff;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 1px;
-    }
+.button-group {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+}
 
-    .course-title {
-      margin: 0 0 12px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #161616;
-    }
+.btn {
+  flex: 1;
+  padding: 12px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
 
-    .duration {
-      padding: 4px 8px;
-      background: #e8f4ff;
-      color: #0f62fe;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
+.btn.primary {
+  background: #0F62FE;
+  color: #FFFFFF;
+  border: none;
+}
 
-    .button-group {
-      margin-top: auto;
-      display: flex;
-      gap: 8px;
-    }
+.btn.primary:hover {
+  background: #0043CE;
+}
 
-    .btn {
-      flex: 1;
-      padding: 12px;
-      height: 40px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border: none;
-    }
+.btn.secondary {
+  background: #FFFFFF;
+  color: #0F62FE;
+  border: 1px solid #E0E0E0;
+}
 
-    .btn-primary {
-      background: #0f62fe;
-      color: #ffffff;
-    }
+.btn.secondary:hover {
+  background: #F4F4F4;
+  border-color: #0F62FE;
+}
 
-    .btn-primary:hover {
-      background: #0043ce;
-    }
+.course-card.featured .btn.primary {
+  background: linear-gradient(to right, #7B61FF, #0F62FE);
+}
 
-    .btn-primary.featured {
-      background: linear-gradient(to right, #7b61ff, #0f62fe);
-    }
+.course-card.featured .btn.primary:hover {
+  opacity: 0.9;
+}
 
-    .btn-primary.featured:hover {
-      opacity: 0.9;
-    }
+.course-card.featured .btn.secondary {
+  color: #7B61FF;
+  border: 1px solid #D0D0D0;
+}
 
-    .btn-secondary {
-      background: #ffffff;
-      color: #0f62fe;
-      border: 1px solid #e0e0e0;
-    }
+.course-card.featured .btn.secondary:hover {
+  background: #F7F5FF;
+  border-color: #7B61FF;
+}
 
-    .btn-secondary:hover {
-      background: #f4f4f4;
-      border-color: #0f62fe;
-    }
+.navigation {
+  position: relative;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.96);
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  backdrop-filter: blur(4px);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    .btn-secondary.featured {
-      color: #7b61ff;
-      border-color: #d0d0d0;
-    }
+.nav-btn {
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 100px;
+}
 
-    .btn-secondary.featured:hover {
-      background: #f7f5ff;
-      border-color: #7b61ff;
-    }
+.nav-btn.prev {
+  background: #FFFFFF;
+  color: #0F62FE;
+  border: 1px solid #E0E0E0;
+}
 
-    /* Navigation Buttons */
-    .nav-buttons {
-      position: relative;
-      margin-top: 16px;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.96);
-      padding: 8px;
-      border-radius: 50px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(4px);
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
+.nav-btn.prev:hover {
+  background: #F4F4F4;
+  border-color: #0F62FE;
+}
 
-    .nav-btn {
-      padding: 12px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 100px;
-    }
+.nav-btn.next {
+  background: #0F62FE;
+  color: #FFFFFF;
+  border: 1px solid #0F62FE;
+}
 
-    .nav-btn-prev {
-      background: #ffffff;
-      color: #0f62fe;
-      border: 1px solid #e0e0e0;
-    }
+.nav-btn.next:hover {
+  background: #0043CE;
+  border-color: #0043CE;
+}
 
-    .nav-btn-prev:hover {
-      background: #f4f4f4;
-      border-color: #0f62fe;
-    }
+.nav-btn svg {
+  width: 18px;
+  height: 18px;
+}
 
-    .nav-btn-next {
-      background: #0f62fe;
-      color: #ffffff;
-      border: 1px solid #0f62fe;
-    }
+.nav-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
-    .nav-btn-next:hover {
-      background: #0043ce;
-      border-color: #0043ce;
-    }
+/* Mobile view adjustments */
+@media (max-width: 767px) {
+  .section-growthh {
+    padding: 24px;
+  }
 
-    .nav-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+  .section-growth-subtitlee {
+    font-size: 14px;
+  }
 
-    .nav-btn svg {
-      width: 18px;
-      height: 18px;
-    }
+  .section-growth-titlee {
+    font-size: 28px;
+  }
 
-    /* Mobile Adjustments */
-    @media (max-width: 767px) {
-      .section-growth {
-        padding: 24px;
-      }
-
-      .section-growth-subtitle {
-        font-size: 14px;
-      }
-
-      .section-growth-title {
-        font-size: 28px;
-      }
-
-      .scroll-container {
-        padding: 24px;
-      }
-    }
+  #scrollContainer {
+    padding: 24px;
+  }
+}
 
     </style>
 </head>
@@ -1403,132 +1392,135 @@
 
 
 
-<div class="section-growth">
-    <div class="section-growth-inner">
-      <p class="section-growth-subtitle">Explore Your Possibilities</p>
-      <h2 class="section-growth-title">Your Career, Your Path</h2>
+<div class="section-growthh">
+    <div class="section-growth-innerr">
+      <p class="section-growth-subtitlee">Explore Your Possibilities</p>
+      <h2 class="section-growth-titlee">Your Carrier, Your Path</h2>
     </div>
   </div>
 
-  <div class="scroll-container" id="scrollContainer">
-    <div class="card-wrapper" id="cardWrapper">
-      <!-- Featured Card -->
-      <div class="course-card featured-card">
-        <img src="c1.png" alt="Course Image">
+  <div id="scrollContainer">
+    <div id="cardWrapper">
+      <!-- Course Card 1 -->
+      <div class="course-card featured">
+        <img src="c1.png" alt="Course Image" class="course-image">
         <div class="card-content">
-          <div class="featured-tag">🌟 FEATURED PROGRAM</div>
-          <h3 class="course-title">GenAI Mastery</h3>
+          <div class="badge featured">🌟 FEATURED PROGRAM</div>
+          <h3>GenAI Mastery</h3>
           <div class="duration">12 Weeks</div>
           <div class="button-group">
-            <button class="btn btn-primary featured">Syllabus</button>
-            <button class="btn btn-secondary featured">Know More</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Course Card 1 -->
-      <div class="course-card">
-        <img src="c2.png" alt="Course Image">
-        <div class="card-content">
-          <h3 class="course-title">Web Development</h3>
-          <div class="duration">4 Weeks</div>
-          <div class="button-group">
-            <button class="btn btn-primary">Syllabus</button>
-            <button class="btn btn-secondary">Know More</button>
+            <button class="btn primary">Syllabus</button>
+            <button class="btn secondary">Know More</button>
           </div>
         </div>
       </div>
 
       <!-- Course Card 2 -->
       <div class="course-card">
-        <img src="c3.png" alt="Course Image">
+        <img src="c2.png" alt="Course Image" class="course-image">
         <div class="card-content">
-          <h3 class="course-title">Java Full Stack</h3>
-          <div class="duration">8 Weeks</div>
+          <h3>Web Development</h3>
+          <div class="duration">4 Weeks</div>
           <div class="button-group">
-            <button class="btn btn-primary">Syllabus</button>
-            <button class="btn btn-secondary">Know More</button>
+            <button class="btn primary">Syllabus</button>
+            <button class="btn secondary">Know More</button>
           </div>
         </div>
       </div>
 
       <!-- Course Card 3 -->
       <div class="course-card">
-        <img src="https://static.uacdn.net/web-cms/learnanytimeanywhere_cb19d5de30_b92bc0c6a1.svg?q=75&auto=format,compress&w=3840" alt="Course Image">
+        <img src="c3.png" alt="Course Image" class="course-image">
         <div class="card-content">
-          <h3 class="course-title">AI & ML</h3>
-          <div class="duration">6 Weeks</div>
+          <h3>Java Full Stack</h3>
+          <div class="duration">8 Weeks</div>
           <div class="button-group">
-            <button class="btn btn-primary">Syllabus</button>
-            <button class="btn btn-secondary">Know More</button>
+            <button class="btn primary">Syllabus</button>
+            <button class="btn secondary">Know More</button>
           </div>
         </div>
       </div>
 
       <!-- Course Card 4 -->
       <div class="course-card">
-        <img src="https://static.uacdn.net/web-cms/learnanytimeanywhere_cb19d5de30_b92bc0c6a1.svg?q=75&auto=format,compress&w=3840" alt="Course Image">
+        <img src="https://static.uacdn.net/web-cms/learnanytimeanywhere_cb19d5de30_b92bc0c6a1.svg?q=75&auto=format,compress&w=3840" alt="Course Image" class="course-image">
         <div class="card-content">
-          <h3 class="course-title">UI UX Design</h3>
+          <h3>AI & ML</h3>
+          <div class="duration">6 Weeks</div>
+          <div class="button-group">
+            <button class="btn primary">Syllabus</button>
+            <button class="btn secondary">Know More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Card 5 -->
+      <div class="course-card">
+        <img src="https://static.uacdn.net/web-cms/learnanytimeanywhere_cb19d5de30_b92bc0c6a1.svg?q=75&auto=format,compress&w=3840" alt="Course Image" class="course-image">
+        <div class="card-content">
+          <h3>UI UX Design</h3>
           <div class="duration">2 Weeks</div>
           <div class="button-group">
-            <button class="btn btn-primary">Syllabus</button>
-            <button class="btn btn-secondary">Know More</button>
+            <button class="btn primary">Syllabus</button>
+            <button class="btn secondary">Know More</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Navigation Buttons -->
-  <div class="nav-buttons">
-    <button id="prevBtn" class="nav-btn nav-btn-prev">
+  <div class="navigation">
+    <button id="prevBtn" class="nav-btn prev">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
       </svg>
       Prev
     </button>
-    <button id="nextBtn" class="nav-btn nav-btn-next">
+    <button id="nextBtn" class="nav-btn next">
       Next
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
       </svg>
     </button>
   </div>
-
   <script>
-    const scrollContainer = document.getElementById('scrollContainer');
-    const cardWrapper = document.getElementById('cardWrapper');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+   const scrollContainer = document.getElementById('scrollContainer');
+const cardWrapper = document.getElementById('cardWrapper');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
-    const getScrollAmount = () => {
-      const firstCard = cardWrapper.firstElementChild;
-      return firstCard.offsetWidth + parseInt(window.getComputedStyle(firstCard).marginRight);
-    };
+// Calculate scroll amount based on card width
+const getScrollAmount = () => {
+  const firstCard = cardWrapper.firstElementChild;
+  return firstCard.offsetWidth + parseInt(window.getComputedStyle(firstCard).marginRight);
+};
 
-    const updateButtonStates = () => {
-      prevBtn.disabled = scrollContainer.scrollLeft <= 0;
-      nextBtn.disabled = scrollContainer.scrollLeft + scrollContainer.offsetWidth >= cardWrapper.scrollWidth;
-      prevBtn.style.opacity = prevBtn.disabled ? '0.6' : '1';
-      nextBtn.style.opacity = nextBtn.disabled ? '0.6' : '1';
-      prevBtn.style.cursor = prevBtn.disabled ? 'not-allowed' : 'pointer';
-      nextBtn.style.cursor = nextBtn.disabled ? 'not-allowed' : 'pointer';
-    };
+// Update button states
+const updateButtonStates = () => {
+  prevBtn.disabled = scrollContainer.scrollLeft <= 0;
+  nextBtn.disabled = scrollContainer.scrollLeft + scrollContainer.offsetWidth >= cardWrapper.scrollWidth;
+  
+  prevBtn.style.opacity = prevBtn.disabled ? '0.6' : '1';
+  nextBtn.style.opacity = nextBtn.disabled ? '0.6' : '1';
+  prevBtn.style.cursor = prevBtn.disabled ? 'not-allowed' : 'pointer';
+  nextBtn.style.cursor = nextBtn.disabled ? 'not-allowed' : 'pointer';
+};
 
-    const scrollLeft = () => {
-      scrollContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    };
+// Scroll handlers
+const scrollLeft = () => {
+  scrollContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+};
 
-    const scrollRight = () => {
-      scrollContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    };
+const scrollRight = () => {
+  scrollContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+};
 
-    prevBtn.addEventListener('click', scrollLeft);
-    nextBtn.addEventListener('click', scrollRight);
-    scrollContainer.addEventListener('scroll', updateButtonStates);
-    window.addEventListener('resize', updateButtonStates);
-    updateButtonStates();
+// Event listeners
+prevBtn.addEventListener('click', scrollLeft);
+nextBtn.addEventListener('click', scrollRight);
+scrollContainer.addEventListener('scroll', updateButtonStates);
+window.addEventListener('resize', updateButtonStates);
+updateButtonStates(); // Initial check
   </script>
 </body>
 </html>
