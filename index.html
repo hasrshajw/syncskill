@@ -965,6 +965,167 @@ margin-left: 0px;
       font-size: 15px !important;
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .section-growth {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* Base styles for desktop */
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    min-height: 80vh;
+    padding: var(--container-padding);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    gap: 32px;
+  }
+
+  .left,
+  .right {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px var(--shadow-color);
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  p {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  span {
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      min-height: auto;
+      padding: 32px 16px;
+      gap: 24px;
+    }
+
+    .right {
+      order: -1;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .image {
+      max-height: 400px;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 5vw, 1.75rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image {
+      max-height: 300px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* High contrast for accessibility */
+  @media (prefers-contrast: high) {
+    h1 {
+      color: #000;
+    }
+
+    p {
+      color: #000;
+    }
+
+    span {
+      color: #006644;
+    }
+  }
     </style>
 </head>
 <header>
@@ -1978,5 +2139,93 @@ margin-left: 0px;
   </div>
 </section>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="section-growth">
+  <section class="container">
+    <!-- Left Side - Image -->
+    <div class="left">
+      <picture>
+        <source
+          srcset="https://www.guvi.in/assets/DUN3iNaq-women-with-notebook-latest.webp"
+          media="(min-width: 769px)"
+          type="image/webp"
+        />
+        <source
+          srcset="https://www.guvi.in/assets/DUN3iNaq-women-with-notebook-latest-mobile.webp"
+          media="(max-width: 768px)"
+          type="image/webp"
+        />
+        <img
+          src="https://www.guvi.in/assets/DUN3iNaq-women-with-notebook-latest.jpg"
+          alt="Woman using a notebook on an EdTech platform"
+          class="image"
+          loading="lazy"
+        />
+      </picture>
+    </div>
+
+    <!-- Right Side - Text -->
+    <div class="right">
+      <h1>Leading EdTech Platform for Learning in Native Languages</h1>
+      <p>
+        GUVI-HCL, backed by IIT-M, IIM-A, and HCL, is India’s top tech-driven
+        EdTech platform for learning in regional and global languages. With over
+        3 million learners worldwide, it offers personalized online learning,
+        upskilling, and job opportunities.
+      </p>
+      <p>
+        GUVI: <span>Grab Ur Vernacular Imprint</span>
+      </p>
+    </div>
+  </section>
+</div>
 </body>
 </html>
