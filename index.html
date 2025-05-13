@@ -115,7 +115,9 @@
         }
 
         .carousel-container {
-            max-width: 100%;
+            max-width: 1920px;
+            margin: 0 auto;
+            margin-top: 80px;
             position: relative;
             overflow: hidden;
             border-radius: var(--radius-2xl);
@@ -243,29 +245,29 @@
         /* Large Desktop */
         @media (min-width: 1441px) {
             .carousel-container {
-                max-width: 1920px;
-                margin: 0 auto;
-            }
-            .slide-content {
-                max-width: min(700px, 40%);
-                padding: 2.5rem;
+                max-width: 2560px;
             }
             .slide-title {
-                font-size: clamp(2.5rem, 4vw + 1rem, 4.5rem);
+                font-size: clamp(2.5rem, 3.5vw + 1rem, 4.5rem);
+            }
+            .slide-description {
+                font-size: clamp(1.125rem, 1vw + 0.5rem, 1.5rem);
             }
         }
 
-        /* Desktop */
-        @media (max-width: 1440px) {
+        /* Tablet */
+        @media (min-width: 769px) and (max-width: 1024px) {
             .carousel-slide {
-                aspect-ratio: 16/9;
+                aspect-ratio: 4/3;
             }
             .slide-content {
-                max-width: min(550px, 50%);
-                padding: 2rem;
+                max-width: 70%;
+                left: 6%;
+                bottom: 11%;
+                padding: 1.75rem;
             }
             .carousel-controls {
-                bottom: 10%;
+                bottom: 12%;
                 right: 6%;
             }
             .pagination {
@@ -273,22 +275,19 @@
             }
         }
 
-        /* Tablet */
+        /* Existing Mobile View (Preserved) */
         @media (max-width: 1024px) {
             .carousel-slide {
                 aspect-ratio: 3/4;
             }
             .slide-content {
-                max-width: 70%;
+                max-width: 80%;
                 left: 5%;
                 bottom: 10%;
                 padding: 1.5rem;
             }
-            .slide-title {
-                font-size: clamp(1.75rem, 4vw, 3rem);
-            }
             .carousel-controls {
-                bottom: 12%;
+                bottom: 15%;
                 right: 5%;
             }
             .pagination {
@@ -296,91 +295,27 @@
             }
         }
 
-        /* Mobile */
         @media (max-width: 640px) {
-            .carousel-slide {
-                aspect-ratio: 4/5;
-            }
             .slide-content {
-                max-width: 85%;
+                max-width: 90%;
                 left: 5%;
-                bottom: 8%;
-                padding: 1rem;
+                bottom: 5%;
+                padding: 1.25rem;
             }
             .slide-title {
-                font-size: clamp(1.5rem, 5vw, 2rem);
-            }
-            .slide-description {
-                font-size: clamp(0.875rem, 2vw, 1rem);
-                max-width: 28ch;
-            }
-            .slide-cta {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.875rem;
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
             }
             .carousel-controls {
-                bottom: 8%;
+                bottom: 10%;
                 right: 5%;
-                gap: 16px;
+                gap: 20px;
             }
             .control-button {
-                width: 40px;
-                height: 40px;
-            }
-            .control-button svg {
-                width: 20px;
-                height: 20px;
+                width: 48px;
+                height: 48px;
             }
             .pagination {
                 right: 20px;
-            }
-            .pagination-dot {
-                width: 10px;
-                height: 10px;
-            }
-        }
-
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .carousel-slide {
-                aspect-ratio: 1/1;
-            }
-            .slide-content {
-                max-width: 90%;
-                left: 3%;
-                bottom: 6%;
-                padding: 0.75rem;
-            }
-            .slide-title {
-                font-size: clamp(1.25rem, 4vw, 1.75rem);
-            }
-            .slide-description {
-                font-size: clamp(0.75rem, 2vw, 0.875rem);
-                max-width: 24ch;
-            }
-            .slide-cta {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-            }
-            .carousel-controls {
-                bottom: 6%;
-                right: 3%;
-                gap: 12px;
-            }
-            .control-button {
-                width: 36px;
-                height: 36px;
-            }
-            .control-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            .pagination {
-                right: 18px;
-            }
-            .pagination-dot {
-                width: 8px;
-                height: 8px;
             }
         }
 
