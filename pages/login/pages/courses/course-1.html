@@ -36,7 +36,15 @@
             scroll-behavior: smooth;
         }
 
-        
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: var(--space-md);
+            background: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.5;
+        }
 
 
 
@@ -327,6 +335,7 @@
 
         @media (max-width: 767px) {
             body {
+                padding: 1rem;
                 padding-top: 82px; /* Mobile navbar height + 10px */
             }
 
@@ -344,9 +353,6 @@
         }
 
         @media (max-width: 480px) {
-           body {
-                padding-top: 66px; /* Adjusted for smaller mobile navbar */
-            }
             .seo-course-mentor-card {
                 flex-direction: column;
                 align-items: flex-start;
@@ -886,7 +892,7 @@
 
 
   
- 
+  </main>
   <script type="module">
    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
 import { 
