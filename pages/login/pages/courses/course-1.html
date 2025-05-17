@@ -8,14 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
  <style>
+   * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
       body {
-        overflow-x: hidden; /* Prevent horizontal scroll */
-  width: 100%;
-  box-sizing: border-box;
-        padding: 0rem;
-    margin: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
-        
+        overflow-x: hidden;
+        padding: 2rem;
+        padding-top: 72px;
+    font-family: 'IBM Plex Sans', sans-serif;  
 } 
     
         @media (max-width: 768px) {
@@ -39,12 +41,7 @@
 
 
 
-.advanced-content-wrapper {
-  padding-top: 72px;
-  align-items: center;
-}
-
-        .section-image-left {
+.section-image-left {
             width: 100%;
             max-width: 1200px;
             background: linear-gradient(135deg, #001918 0%, #002d2b 100%);
@@ -55,7 +52,7 @@
             box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
-            padding: 72px 1rem 1rem;
+            padding: 1rem;
         }
 
         .section-image-left__container {
@@ -580,9 +577,7 @@
 
 
   <body>
-    <section id="advanced-content-wrapper">
-    
-    <section class="section-image-left">
+     <section class="section-image-left">
         <div class="section-image-left__container">
             <!-- Image -->
             <div class="section-image-left__image-wrapper">
@@ -664,8 +659,6 @@
             </div>
         </div>
     </section>
-      </section>
-  
  </body>
   <script type="module">
    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
