@@ -46,215 +46,298 @@
             line-height: 1.5;
         }
 
-        /* Component Styles */
-        .course-card {
-            --max-width: 1440px;
-            width: min(100%, var(--max-width));
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--elevation-1);
+        .section-image-left {
+            width: 100%;
+            max-width: 1200px;
+            background: linear-gradient(135deg, #001918 0%, #002d2b 100%);
+            margin: 0 auto;
+            border-radius: 16px;
+            color: white;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            position: relative;
-            color: var(--text-primary);
+            padding: 1rem;
         }
 
-        /* Media Container */
-        .course-media {
-            position: relative;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            aspect-ratio: 16/9;
+        .section-image-left__container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .course-image {
+        /* Image Section */
+        .section-image-left__image-wrapper {
             width: 100%;
-            height: 100%;
+            position: relative;
+        }
+
+        .seo-image-box__image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 5/3;
             object-fit: cover;
-            transition: transform 0.3s var(--transition);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
 
-        .course-image:hover {
-            transform: scale(1.02);
-        }
-
-        /* Content Section */
-        .course-content {
-            display: grid;
-            gap: var(--space-md);
-            align-content: start;
-        }
-
-        .course-header {
-            display: grid;
-            gap: var(--space-xs);
-        }
-
-        .course-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .course-description {
-            color: var(--text-secondary);
-            font-size: clamp(0.875rem, 2vw, 1rem);
-            max-width: 72ch;
-        }
-
-        /* Date Badge */
-        .course-date {
+        /* Buttons Container */
+        .seo-image-box__buttons {
             display: flex;
-            gap: var(--space-xs);
-            align-items: center;
-            padding: var(--space-xs) var(--space-sm);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            width: fit-content;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
         }
 
-        .date-icon {
-            width: 1.25rem;
-            height: 1.25rem;
-            stroke: var(--primary);
+        /* Mobile-first Button Positioning */
+        .section-image-left__buttons-mobile {
+            display: block;
+            margin-top: 1rem;
         }
 
-        /* Mentor Section */
-        .mentor-grid {
-            display: grid;
-            gap: var(--space-sm);
+        .section-image-left__buttons-desktop {
+            display: none;
         }
 
-        .mentor-card {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm);
-            border-radius: var(--radius-sm);
-            transition: background 0.3s var(--transition);
-        }
-
-        .mentor-card:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .mentor-avatar {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-        }
-
-        /* Action Bar */
-        .action-bar {
-            display: grid;
-            gap: var(--space-sm);
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        }
-
-        .course-button {
+        /* Button Styles */
+        .seo-btn {
+            width: 100%;
+            height: 56px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-xs);
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            transition: all 0.3s var(--transition);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
+            gap: 0.5rem;
         }
 
-        .course-button::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: currentColor;
-            opacity: 0;
-            transition: opacity 0.3s var(--transition);
-        }
-
-        .course-button:hover::after {
-            opacity: 0.1;
-        }
-
-        .button-primary {
-            background: var(--primary);
+        .seo-btn--apply {
+            background: #2caa65;
             color: white;
         }
 
-        .button-secondary {
-            background: var(--secondary);
+        .seo-btn--download {
+            background: #fffaf1;
             color: #2d2d2d;
             border: 1px solid rgba(45, 45, 45, 0.1);
         }
 
-        .button-icon {
-            width: 1.25rem;
-            height: 1.25rem;
+        .btn-icon {
+            width: 20px;
+            height: 20px;
             stroke-width: 2;
         }
 
-        /* Responsive Layout */
+        /* Content Section */
+        .section-image-left__content {
+            padding: 0;
+        }
+
+        .seo-course-title label {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+            background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .seo-course-description p {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Date Section */
+        .seo-course-date-time {
+            margin-bottom: 2rem;
+        }
+
+        .seo-course-date-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #9ca3af;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.375rem;
+        }
+
+        .seo-course-date-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .seo-course-date-value svg {
+            width: 18px;
+            height: 18px;
+            stroke: #2caa65;
+        }
+
+        /* Mentors Section */
+        .seo-course-mentor-heading {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #fff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .seo-course-mentor-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .mentor-image-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .seo-course-mentor-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .seo-course-mentor-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.25px;
+        }
+
+        .seo-course-mentor-role {
+            font-size: 0.8125rem;
+            color: #9ca3af;
+            letter-spacing: 0.25px;
+        }
+
+        /* Responsive Breakpoints */
         @media (min-width: 768px) {
-            .course-card {
-                grid-template-columns: repeat(2, 1fr);
-                padding: var(--space-lg);
+            .section-image-left__container {
+                flex-direction: row;
+                gap: 2rem;
+            }
+            
+            .section-image-left__image-wrapper {
+                flex: 0 0 50%;
+            }
+            
+            .section-image-left__buttons-mobile {
+                display: none;
+            }
+            
+            .section-image-left__buttons-desktop {
+                display: block;
+                margin-top: 1rem;
+            }
+            
+            .seo-image-box__buttons {
+                flex-direction: row;
+            }
+            
+            .seo-btn {
+                width: 50%;
+                height: 60px;
+            }
+            
+            .section-image-left__content {
+                padding: 0 0 0 1.5rem;
+            }
+            
+            .seo-course-title label {
+                font-size: 2.25rem;
             }
 
-            .action-bar {
-                grid-column: 1 / -1;
+            .seo-course-description p {
+                font-size: 0.9375rem;
             }
         }
 
         @media (min-width: 1024px) {
-            .course-media {
-                aspect-ratio: 4/3;
+            .section-image-left {
+                padding: 2rem;
+            }
+            
+            .section-image-left__container {
+                gap: 3rem;
+            }
+            
+            .seo-image-box__image {
+                height: 300px;
+            }
+            
+            .seo-course-title label {
+                font-size: 2.5rem;
             }
         }
 
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
+        @media (max-width: 767px) {
+            .section-image-left__container {
+                display: grid;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .seo-image-box__image {
+                grid-row: 1;
+            }
+            
+            .section-image-left__content {
+                grid-row: 2;
+            }
+            
+            .section-image-left__buttons-mobile {
+                grid-row: 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .seo-course-mentor-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .mentor-image-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Hover Effects */
+        @media (hover: hover) {
+            .seo-btn:hover {
+                transform: translateY(-2px);
+            }
+            
+            .seo-btn--apply:hover {
+                background: #239a55;
+                box-shadow: 0 8px 16px rgba(44, 170, 101, 0.3);
             }
 
-            * {
-                transition-duration: 0s !important;
+            .seo-btn--download:hover {
+                background: #fffdf8;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             }
         }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* Interaction States */
-        .course-button:focus-visible {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-        }
-
 
 
 
@@ -670,67 +753,96 @@
   
 <body style="margin: 0; margin-top: 72px;">
 
-        <article class="course-card">
-        <div class="course-media">
-            <img 
-                src="https://via.placeholder.com/800x480" 
-                alt="SEO Masterclass Preview" 
-                class="course-image"
-                loading="lazy"
-                decoding="async"
-            >
-        </div>
-
-        <div class="course-content">
-            <header class="course-header">
-                <h1 class="course-title">Advanced SEO Certification</h1>
-                <p class="course-description">
-                    Master enterprise-level SEO strategies with industry leaders who shaped the digital presence 
-                    of Fortune 500 companies including Myntra, Flipkart, and Cult.fit.
-                </p>
-                <div class="course-date">
-                    <svg class="date-icon" viewBox="0 0 24 24">
-                        <path stroke="currentColor" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Cohort Launch: Q3 2024</span>
+       <section class="section-image-left">
+        <div class="section-image-left__container">
+            <!-- Image -->
+            <div class="section-image-left__image-wrapper">
+                <img src="https://via.placeholder.com/800x480" alt="SEO Course" class="seo-image-box__image">
+                <!-- Desktop Buttons -->
+                <div class="section-image-left__buttons-desktop">
+                    <div class="seo-image-box__buttons">
+                        <button class="seo-btn seo-btn--apply">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                            <span>Apply Now</span>
+                        </button>
+                        <button class="seo-btn seo-btn--download">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-3-3m3 3l3-3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Download Brochure</span>
+                        </button>
+                    </div>
                 </div>
-            </header>
+            </div>
 
-            <section class="mentor-grid">
-                <h2 class="sr-only">Course Mentors</h2>
-                <article class="mentor-card">
-                    <div class="mentor-avatar">
-                        <img 
-                            src="https://d3kl8zsmmx4oop.cloudfront.net/um35_de646040bf.png" 
-                            alt="Kaushal Singh" 
-                            loading="lazy"
-                            decoding="async"
-                        >
+            <!-- Content -->
+            <div class="section-image-left__content">
+                <div class="seo-course-right">
+                    <div class="seo-course-top-bar">
+                        <div class="seo-course-title">
+                            <label>SEO</label>
+                        </div>
+                        <div class="seo-course-description">
+                            <p>Learn SEO from the Brains Behind the SEO strategies of Myntra, Flipkart, Cult.fit, Zivame and many more...</p>
+                        </div>
+                        <div class="seo-course-date-time">
+                            <div class="seo-course-date-label">Cohort start date</div>
+                            <div class="seo-course-date-value">
+                                <span>Coming Soon</span>
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mentor-info">
-                        <h3 class="mentor-name">Kaushal Singh</h3>
-                        <p class="mentor-title">Founder & MD, Infidigit</p>
+
+                    <!-- Mentors -->
+                    <div class="seo-course-mentors">
+                        <label class="seo-course-mentor-heading">Mentors</label>
+                        <div class="seo-course-mentor-list">
+                            <div class="seo-course-mentor-card">
+                                <div class="mentor-image-wrapper">
+                                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/um35_de646040bf.png" alt="Kaushal" class="seo-course-mentor-image">
+                                </div>
+                                <div class="seo-course-mentor-info">
+                                    <label class="seo-course-mentor-name">Kaushal</label>
+                                    <label class="seo-course-mentor-role">Founder &amp; MD, Infidigit</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </article>
-            </section>
-        </div>
+                </div>
+            </div>
 
-        <div class="action-bar">
-            <button class="course-button button-primary">
-                <svg class="button-icon" viewBox="0 0 24 24">
-                    <path stroke="currentColor" d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-                Enroll Now
-            </button>
-            <button class="course-button button-secondary">
-                <svg class="button-icon" viewBox="0 0 24 24">
-                    <path stroke="currentColor" d="M12 3v12m0 0l-3-3m3 3l3-3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                </svg>
-                Download Syllabus
-            </button>
+            <!-- Mobile Buttons -->
+            <div class="section-image-left__buttons-mobile">
+                <div class="seo-image-box__buttons">
+                    <button class="seo-btn seo-btn--apply">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        <span>Apply Now</span>
+                    </button>
+                    <button class="seo-btn seo-btn--download">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-3-3m3 3l3-3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Download Brochure</span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </article>
+    </section>
 
+
+
+
+
+
+
+  
   </main>
   <script type="module">
    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
