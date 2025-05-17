@@ -65,60 +65,7 @@
 
 
 
-    @media (max-width: 1024px) {
-            .carousel-slide {
-                aspect-ratio: 3/4;
-            }
-            
-            .slide-content {
-                max-width: 80%;
-                left: 5%;
-                bottom: 10%;
-                padding: 1.5rem;
-            }
-            
-            .carousel-controls {
-                bottom: 15%;
-                right: 5%;
-            }
-            
-            .pagination {
-                right: 24px; /* Adjusted offset */
-            }
-        }
-
-        @media (max-width: 640px) {
-            .slide-content {
-                max-width: 90%;
-                left: 5%;
-                bottom: 5%;
-                padding: 1.25rem;
-            }
-            
-            .slide-title {
-                font-size: clamp(1.75rem, 6vw, 2.5rem);
-            }
-            
-            .carousel-controls {
-                bottom: 10%;
-                right: 5%;
-                gap: 20px;
-            }
-            
-            .control-button {
-                width: 48px;
-                height: 48px;
-            }
-            
-            .pagination {
-                right: 20px; /* Mobile offset */
-            }
-        }
-
-        .carousel-slide.active .slide-content {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    
         @media (max-width: 768px) {
             .desktop-only { display: none !important; }
             .mobile-menu-button { display: block !important; }
@@ -327,6 +274,9 @@
                 flex-direction: row;
                 gap: 2rem;
             }
+          body {
+        margin-top: 4rem; /* or use 64px depending on your navbar height */
+    }
             .section-image-left {
         padding-top: 4rem; /* Adjust this based on your navbar height (e.g., 64px = 4rem) */
     }
