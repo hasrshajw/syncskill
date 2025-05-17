@@ -19,19 +19,8 @@
         }
         @media (min-width: 769px) {
             .mobile-only { display: none !important; }
-
         }
-.page-container {
-  margin-left: 130px;
-  margin-right: 130px;
-  margin-up: 73px;
-}
-@media (max-width: 768px) {
-    .page-container {
-        margin-left: 3px;
-        margin-right: 3px;
-    }
-}
+
 
 
 
@@ -58,6 +47,8 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
             padding: 1rem;
+     margin-left: 130px;
+  margin-right: 130px;
         }
 
         .section-image-left__container {
@@ -295,6 +286,8 @@
             .section-image-left__container {
                 display: grid;
                 grid-template-rows: auto auto auto;
+              margin-left: 3px;
+        margin-right: 3px;
             }
             
             .seo-image-box__image {
@@ -341,7 +334,7 @@
     </style>
    
 </head>
-<body>
+
 <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); height: 72px; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
   <nav style="max-width: 1440px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; justify-content: space-between; align-items: center;">
     <a href="/" style="display: flex; align-items: center;">
@@ -581,8 +574,7 @@
 
 
 
-  
-<div class="page-container">
+  <body>
 <section class="section-image-left">
         <div class="section-image-left__container">
             <!-- Image -->
@@ -665,7 +657,6 @@
             </div>
         </div>
     </section>
-</div>
  </body>
   <script type="module">
    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
