@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Courses</title>
+ <style>
+        /* Design System Foundation */
+        :root {
+            --primary: #2caa65;
+            --primary-hover: #239a55;
+            --secondary: #fffaf1;
+            --secondary-hover: #fffdf8;
+            --surface: linear-gradient(152deg, #001918 0%, #002d2b 100%);
+            --text-primary: #f8fafc;
+            --text-secondary: #9ca3af;
+            --elevation-1: 0 8px 24px rgba(0, 0, 0, 0.25);
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+        }
+
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: var(--space-md);
+            background: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Component Styles */
+        .course-card {
+            --max-width: 1440px;
+            width: min(100%, var(--max-width));
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--elevation-1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        /* Media Container */
+        .course-media {
+            position: relative;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s var(--transition);
+        }
+
+        .course-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Content Section */
+        .course-content {
+            display: grid;
+            gap: var(--space-md);
+            align-content: start;
+        }
+
+        .course-header {
+            display: grid;
+            gap: var(--space-xs);
+        }
+
+        .course-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            max-width: 72ch;
+        }
+
+        /* Date Badge */
+        .course-date {
+            display: flex;
+            gap: var(--space-xs);
+            align-items: center;
+            padding: var(--space-xs) var(--space-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            width: fit-content;
+        }
+
+        .date-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: var(--primary);
+        }
+
+        /* Mentor Section */
+        .mentor-grid {
+            display: grid;
+            gap: var(--space-sm);
+        }
+
+        .mentor-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: background 0.3s var(--transition);
+        }
+
+        .mentor-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .mentor-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            display: grid;
+            gap: var(--space-sm);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .course-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: all 0.3s var(--transition);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: currentColor;
+            opacity: 0;
+            transition: opacity 0.3s var(--transition);
+        }
+
+        .course-button:hover::after {
+            opacity: 0.1;
+        }
+
+        .button-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .button-secondary {
+            background: var(--secondary);
+            color: #2d2d2d;
+            border: 1px solid rgba(45, 45, 45, 0.1);
+        }
+
+        .button-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke-width: 2;
+        }
+
+        /* Responsive Layout */
+        @media (min-width: 768px) {
+            .course-card {
+                grid-template-columns: repeat(2, 1fr);
+                padding: var(--space-lg);
+            }
+
+            .action-bar {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .course-media {
+                aspect-ratio: 4/3;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition-duration: 0s !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Interaction States */
+        .course-button:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  display: flex;
+  gap: 30px; /* gap between columns */
+}
+
+/* Left and Right stacks */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* gap between stacked boxes */
+  width: 380px; /* updated width */
+}
+
+/* Single Stats Card */
+.statsCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 24px;
+  border-radius: 18px;
+  height: 130px; /* updated height */
+  background-color: #FFFAF1;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.statsCard:hover {
+  box-shadow: 0 7px 14px rgba(0,0,0,0.16);
+}
+
+.stats-card--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stats-card--title {
+  font-size: 24px; /* adjusted font size */
+  font-weight: bold;
+  color: #1a202c;
+}
+
+.stats-card--subtitle {
+  font-size: 16px; /* adjusted font size */
+  color: #4a5568;
+}
+
+.stats-card--image-container {
+  position: relative;
+  width: 135px; /* adjusted image container */
+  height: 120px;
+  align-self: flex-end;
+}
+
+.stats-card--image,
+.stats-card--hover-image {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: opacity 0.3s ease;
+  width: 135px;
+  height: 120px;
+}
+
+.stats-card--hover-image {
+  opacity: 0;
+}
+
+.statsCard:hover .stats-card--hover-image {
+  opacity: 1;
+}
+
+.statsCard:hover .stats-card--image {
+  opacity: 0;
+}
+
+/* Big Box in middle */
+.bigBox {
+  width: 380px; /* same as small box */
+  background-color: #d3e0ff;
+  border-radius: 18px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+  padding: 36px;
+  box-sizing: border-box;
+  color: #1a202c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 30px;
+  user-select: none;
+  /* height dynamically set */
+}
+/* Responsive Styling */
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .stack,
+  .bigBox {
+    width: 100%;
+  }
+
+  .statsCard,
+  .bigBox {
+    height: 150px;      /* same height */
+    padding: 20px;
+  }
+
+  .statsCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats-card--image-container {
+    width: 120px;
+    height: 100px;
+    margin-top: 16px;
+    align-self: flex-end;
+  }
+
+  .stats-card--title {
+    font-size: 24px;
+  }
+
+  .stats-card--subtitle {
+    font-size: 16px;
+  }
+
+  .bigBox {
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
+
+    </style>
+</head>
+<body style="margin: 0; margin-top: 72px;">
+  <div id="navbar-placeholder"></div>
+  <main>
+    <article class="course-card">
+        <div class="course-media">
+            <img 
+                src="https://via.placeholder.com/800x480" 
+                alt="SEO Masterclass Preview" 
+                class="course-image"
+                loading="lazy"
+                decoding="async"
+            >
+        </div>
+
+        <div class="course-content">
+            <header class="course-header">
+                <h1 class="course-title">Advanced SEO Certification</h1>
+                <p class="course-description">
+                    Master enterprise-level SEO strategies with industry leaders who shaped the digital presence 
+                    of Fortune 500 companies including Myntra, Flipkart, and Cult.fit.
+                </p>
+                <div class="course-date">
+                    <svg class="date-icon" viewBox="0 0 24 24">
+                        <path stroke="currentColor" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Cohort Launch: Q3 2024</span>
+                </div>
+            </header>
+
+            <section class="mentor-grid">
+                <h2 class="sr-only">Course Mentors</h2>
+                <article class="mentor-card">
+                    <div class="mentor-avatar">
+                        <img 
+                            src="https://d3kl8zsmmx4oop.cloudfront.net/um35_de646040bf.png" 
+                            alt="Kaushal Singh" 
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
+                    <div class="mentor-info">
+                        <h3 class="mentor-name">Kaushal Singh</h3>
+                        <p class="mentor-title">Founder & MD, Infidigit</p>
+                    </div>
+                </article>
+            </section>
+        </div>
+
+        <div class="action-bar">
+            <button class="course-button button-primary">
+                <svg class="button-icon" viewBox="0 0 24 24">
+                    <path stroke="currentColor" d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+                Enroll Now
+            </button>
+            <button class="course-button button-secondary">
+                <svg class="button-icon" viewBox="0 0 24 24">
+                    <path stroke="currentColor" d="M12 3v12m0 0l-3-3m3 3l3-3M5 21h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                Download Syllabus
+            </button>
+        </div>
+    </article>
+
+  </main>
+  <script type="module">
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('navbar-placeholder').innerHTML = html;
+      });
+  </script>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
