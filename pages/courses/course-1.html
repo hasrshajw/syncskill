@@ -492,12 +492,12 @@
 
   </main>
   <script type="module">
-    fetch('navbar.html')
+    fetch('pages/1navbar/navbar.html')
       .then(response => response.text())
       .then(html => {
         document.getElementById('navbar-placeholder').innerHTML = html;
       });
   </script>
-  <script type="module" src="auth.js"></script>
+  <script type="module" src="pages/1navbar/auth.js"></script>
 </body>
 </html>
