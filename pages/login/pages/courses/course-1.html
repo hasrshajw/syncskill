@@ -83,7 +83,7 @@
 
 
    
-        .section-image-left {
+       .section-image-left {
             width: 100%;
             max-width: 1200px;
             background: linear-gradient(135deg, #001918 0%, #002d2b 100%);
@@ -95,6 +95,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
             padding: 1rem;
+            position: relative;
         }
 
         .section-image-left__container {
@@ -127,7 +128,7 @@
             width: 100%;
         }
 
-        /* Mobile-first Button Positioning */
+        /* Button Positioning */
         .section-image-left__buttons-mobile {
             display: block;
             margin-top: 1rem;
@@ -270,16 +271,15 @@
 
         /* Responsive Breakpoints */
         @media (min-width: 768px) {
+            body {
+                padding-top: 100px; /* Adjust for desktop spacing */
+            }
+
             .section-image-left__container {
                 flex-direction: row;
                 gap: 2rem;
             }
-          body {
-        margin-top: 74px; /* or use 64px depending on your navbar height */
-    }
-            .section-image-left {
-        padding-top: 4rem; /* Adjust this based on your navbar height (e.g., 64px = 4rem) */
-    }
+            
             .section-image-left__image-wrapper {
                 flex: 0 0 50%;
             }
@@ -334,21 +334,21 @@
         }
 
         @media (max-width: 767px) {
+            body {
+                padding: 1rem;
+                padding-top: 70px; /* Mobile navbar height + 10px */
+            }
+
+            .section-image-left {
+                margin-top: 10px;
+                padding: 0.75rem;
+            }
+
             .section-image-left__container {
                 display: grid;
                 grid-template-rows: auto auto auto;
-            }
-            
-            .seo-image-box__image {
-                grid-row: 1;
-            }
-            
-            .section-image-left__content {
-                grid-row: 2;
-            }
-            
-            .section-image-left__buttons-mobile {
-                grid-row: 3;
+                gap: 1rem;
+                padding-bottom: 20px;
             }
         }
 
@@ -361,6 +361,14 @@
             .mentor-image-wrapper {
                 width: 40px;
                 height: 40px;
+            }
+
+            header {
+                height: 56px; /* Smaller mobile navbar */
+            }
+
+            body {
+                padding-top: 66px; /* Adjusted for smaller navbar */
             }
         }
 
@@ -380,7 +388,6 @@
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             }
         }
-
 
 
 
