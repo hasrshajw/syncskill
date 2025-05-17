@@ -39,10 +39,11 @@
 
 
 
- .advanced-content-wrapper {
-  padding: 72px 10px 10px 10px;
-   align-items: center;
-        }
+.section-padding-72 {
+  padding-top: 72px;
+  align-items: center;
+}
+
         .section-image-left {
             width: 100%;
             max-width: 1200px;
@@ -579,7 +580,8 @@
 
 
   <body>
-     <div class="advanced-content-wrapper">
+    <section id="advanced-content-wrapper">
+    
     <section class="section-image-left">
         <div class="section-image-left__container">
             <!-- Image -->
@@ -662,7 +664,8 @@
             </div>
         </div>
     </section>
-    </div>
+      </section>
+  
  </body>
   <script type="module">
    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
