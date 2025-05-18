@@ -561,6 +561,560 @@
         font-size: 20px;
       }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .wrap.section__container {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8);
+            gap: calc(var(--spacing-unit) * 6);
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .left-section, .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 10);
+        }
+
+        /* Typography */
+        .pre-header {
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .section-header {
+            font-size: clamp(28px, 3.5vw, 40px);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .section-subheading, .para {
+            font-size: clamp(16px, 1.8vw, 18px);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        /* Cards */
+        .key-outcomes, .accordion-section, .meet-mentors, .faq-container, .crash-course-section, .before-you-ask-wrap {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: calc(var(--spacing-unit) * 5);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            will-change: transform, box-shadow;
+            animation: slideUp 0.6s ease-out 0.2s both;
+        }
+
+        .key-outcomes:hover, .accordion-section:hover, .meet-mentors:hover, .faq-container:hover, .crash-course-section:hover, .before-you-ask-wrap:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Key Outcomes */
+        .outcomes-list {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+            padding: 0;
+        }
+
+        .outcomes-list.visible {
+            max-height: 600px;
+            opacity: 1;
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .outcomes-list ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .outcomes-list li {
+            font-size: clamp(16px, 1.6vw, 17px);
+            color: var(--text);
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 3);
+        }
+
+        .outcomes-list li::before {
+            content: '✔';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+            background: var(--primary);
+            color: #FFFFFF;
+            font-size: clamp(16px, 1.6vw, 18px);
+            font-weight: 600;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .read-more-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .read-more-link:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .read-more-link:hover {
+            background: #006663;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 122, 118, 0.3);
+        }
+
+        .read-more-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 122, 118, 0.2);
+        }
+
+        .read-more-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-link.read-more-link-open svg {
+            transform: rotate(-180deg);
+        }
+
+        /* Accordion */
+        .accordion-item {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .accordion-title {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .accordion-title:hover {
+            background: rgba(241, 245, 249, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(0, 122, 118, 0.1);
+        }
+
+        .accordion-header {
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .accordion-header-text label {
+            font-size: clamp(12px, 1.2vw, 13px);
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .accordion-header-text h4 {
+            font-size: clamp(18px, 1.8vw, 20px);
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .accordion-header svg {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-header svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 calc(var(--spacing-unit) * 3);
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
+        }
+
+        .accordion-content p {
+            font-size: clamp(16px, 1.6vw, 17px);
+            color: var(--text-secondary);
+        }
+
+        /* Crash Course Section */
+        .crash-course-wrap {
+            background: rgba(255, 247, 237, 0.8);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 3);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .crash-course-wrap .items {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 1.5);
+            font-size: clamp(16px, 1.6vw, 17px);
+            font-weight: 500;
+            color: var(--text);
+            transition: var(--transition);
+            padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 2);
+            border-radius: 12px;
+        }
+
+        .crash-course-wrap .items:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .crash-course-wrap .items svg {
+            stroke: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Meet Mentors */
+        .meet-mentors .identity {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 1.5);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .meet-mentors .identity:hover {
+            background: rgba(241, 245, 249, 0.5);
+        }
+
+        .identity-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 3px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .identity-img:hover {
+            transform: scale(1.05);
+        }
+
+        .meet-mentors .name {
+            font-size: clamp(18px, 1.8vw, 20px);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .meet-mentors .title {
+            font-size: clamp(14px, 1.4vw, 15px);
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Certificate Image */
+        .certificate-img {
+            margin-top: calc(var(--spacing-unit) * 4);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .certificate-img:hover {
+            transform: scale(1.02);
+        }
+
+        .certificate-img img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Learners Block */
+        .learners-block {
+            position: sticky;
+            top: calc(var(--spacing-unit) * 10);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: slideUp 0.6s ease-out 0.4s both;
+        }
+
+        .learners-block:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .learners-block ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .learners-block ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: calc(var(--spacing-unit) * 1.5);
+            font-size: clamp(14px, 1.4vw, 15px);
+            color: var(--text-secondary);
+        }
+
+        .marquee-container-header h2 {
+            font-size: clamp(24px, 2.5vw, 28px);
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .marquee-container-header p {
+            font-size: clamp(14px, 1.4vw, 15px);
+            color: var(--text-secondary);
+        }
+
+        .section__hero-lerners-marquee {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            overflow: hidden;
+        }
+
+        .section__hero-lerners-marquee-slider {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 3);
+            animation: scroll-left 25s linear infinite;
+        }
+
+        .section__hero-lerners-marquee:hover .section__hero-lerners-marquee-slider {
+            animation-play-state: paused;
+        }
+
+        .section__hero-lerners-marquee-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+            min-width: 140px;
+            transition: var(--transition);
+        }
+
+        .section__hero-lerners-marquee-card:hover {
+            transform: scale(1.1);
+        }
+
+        .section__hero-lerners-marquee-card-img img {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .section__hero-lerners-marquee-card-brand img {
+            width: 96px;
+            height: 120px;
+            object-fit: contain;
+        }
+
+        /* Logo Section */
+        .logo-sec {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .w-divider {
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            padding-right: calc(var(--spacing-unit) * 3);
+        }
+
+        .logo-sec-linkedin {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+        }
+
+        .logo-sec-linkedin-text {
+            font-size: clamp(14px, 1.4vw, 15px);
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .logo-sec-linkedin-text span {
+            font-size: clamp(12px, 1.2vw, 13px);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-100% - calc(var(--spacing-unit) * 3))); }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .key-outcomes, .accordion-section, .meet-mentors, .faq-container, .learners-block, .crash-course-section, .before-you-ask-wrap {
+                transition: none;
+                animation: none;
+            }
+            .read-more-link, .accordion-title, .crash-course-wrap .items, .section__hero-lerners-marquee-card {
+                transition: none;
+            }
+            .outcomes-list, .accordion-content {
+                transition: none;
+            }
+            .section__hero-lerners-marquee-slider {
+                animation: none;
+            }
+        }
+
+        /* Multi-device Responsiveness */
+        @media (max-width: 1200px) {
+            .wrap.section__container {
+                grid-template-columns: 3fr 2fr;
+                padding: calc(var(--spacing-unit) * 4);
+                gap: calc(var(--spacing-unit) * 4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrap.section__container {
+                grid-template-columns: 3fr 2fr;
+                padding: calc(var(--spacing-unit) * 3);
+                gap: calc(var(--spacing-unit) * 3);
+            }
+            .section-header {
+                font-size: clamp(24px, 4vw, 32px);
+            }
+            .section-subheading, .para {
+                font-size: clamp(14px, 2vw, 16px);
+            }
+            .read-more-link {
+                padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 2);
+                font-size: clamp(14px, 2vw, 16px);
+            }
+            .key-outcomes, .accordion-section, .meet-mentors, .faq-container, .crash-course-section, .learners-block, .before-you-ask-wrap {
+                padding: calc(var(--spacing-unit) * 3);
+            }
+            .crash-course-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrap.section__container {
+                grid-template-columns: 3fr 2fr;
+                padding: calc(var(--spacing-unit) * 2);
+                gap: calc(var(--spacing-unit) * 2);
+            }
+            .section__hero-lerners-marquee-card-img img {
+                width: 80px;
+                height: 80px;
+            }
+            .section__hero-lerners-marquee-card-brand img {
+                width: 80px;
+                height: 100px;
+            }
+        }
     </style>
    
 </head>
@@ -1155,6 +1709,638 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="wrap section__container">
+        <div class="left-section">
+            <div class="key-outcomes key-outcomes-1">
+                <p class="pre-header">Program Highlights</p>
+                <h2 class="section-header">Master SEO with Proven Outcomes</h2>
+                <div class="section-subheading">
+                    <p>Join our 8-week intensive SEO Mentorship Program to dominate search rankings and skyrocket online visibility. Learn hands-on from industry experts through self-paced videos and live sessions.</p>
+                </div>
+                <div class="outcomes-list" id="key-outcomes-list">
+                    <ul>
+                        <li>Master SEO fundamentals for lasting impact</li>
+                        <li>Craft high-performing, search-optimized content</li>
+                        <li>Optimize websites with advanced technical SEO</li>
+                        <li>Build ethical link profiles to boost authority</li>
+                        <li>Drive sales and engage local audiences</li>
+                        <li>Strategize for global SEO success</li>
+                        <li>Harness Generative AI for cutting-edge SEO</li>
+                        <li>Perform SEO audits and implement optimizations</li>
+                    </ul>
+                </div>
+                <button class="read-more-link" aria-label="Show key outcomes" aria-controls="key-outcomes-list">Read More
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
+                        <path d="M10 8L6 12L2 8" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="accordion-section">
+                <p class="pre-header">Curriculum</p>
+                <h2 class="section-header">Your Path to SEO Expertise</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 1</label>
+                                    <h4>SEO Fundamentals & Algorithms</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Grasp the core of SEO, including search engine mechanics, ranking factors, and algorithm updates.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 2</label>
+                                    <h4>Content Mastery for SEO</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Create engaging, keyword-optimized content that ranks high and converts.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 3</label>
+                                    <h4>Technical SEO Essentials</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Optimize site structure, speed, and technical elements for superior rankings.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 4</label>
+                                    <h4>Advanced Technical SEO</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Master schema markup, crawlability, and advanced technical optimizations.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 5</label>
+                                    <h4>Link Profile Enhancement</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Build authoritative link profiles with ethical strategies.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 6</label>
+                                    <h4>E-Commerce & Local SEO</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Boost visibility for e-commerce platforms and local markets.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 7</label>
+                                    <h4>International SEO Strategies</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Target global audiences with multilingual SEO tactics.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 8</label>
+                                    <h4>Practical SEO Execution</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Apply SEO strategies through real-world audits and projects.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 9</label>
+                                    <h4>The Future of SEO</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Stay ahead with AI-driven SEO and voice search trends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="crash-course-section">
+                <p class="pre-header">Target Audience</p>
+                <h2 class="section-header">Who Should Join?</h2>
+                <p class="section-subheading">Perfect for SEO professionals, digital marketers, copywriters, entrepreneurs, and anyone transitioning to SEO.</p>
+                <div class="crash-course-wrap">
+                    <div class="items">
+                        <svg xmlns="http://www.w3.org/2000/svg 문화, width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.5 13.2273L9.32143 18L18 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <label>Digital Marketing Managers</label>
+                    </div>
+                    <div class="items">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.5 13.2273L9.32143 18L18 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <label>Entrepreneurs</label>
+                    </div>
+                    <div class="items">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.5 13.2273L9.32143 18L18 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <label>Copywriters</label>
+                    </div>
+                    <div class="items">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.5 13.2273L9.32143 18L18 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <label>Digital Marketers</label>
+                    </div>
+                    <div class="items">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.5 13.2273L9.32143 18L18 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <label>SEO Career Transitioners</label>
+                    </div>
+                </div>
+            </div>
+            <div class="meet-mentors">
+                <p class="pre-header">Instructor</p>
+                <h2 class="section-header">Meet Your Expert Mentor</h2>
+                <div class="identity">
+                    <div class="identity-img">
+                        <img alt="Mentor Kaushal" src="https://d3kl8zsmmx4oop.cloudfront.net/um35_de646040bf.png" loading="lazy">
+                    </div>
+                    <div class="mentor">
+                        <label class="name">Kaushal</label>
+                        <label class="title">Founder & MD, Infidigit</label>
+                    </div>
+                </div>
+            </div>
+            <div class="before-you-ask-wrap">
+                <p class="pre-header">Certification</p>
+                <h2 class="section-header">Certified Success</h2>
+                <p class="para">Earn a prestigious certificate upon completing your assignments.</p>
+                <div class="certificate-img">
+                    <img alt="Certificate" src="https://d3kl8zsmmx4oop.cloudfront.net/GS_certificate_d320778e22.png" loading="lazy">
+                </div>
+            </div>
+            <div class="faq-container">
+                <p class="pre-header">Government Certified</p>
+                <h2 class="section-header">NSDC Certification</h2>
+                <div class="para flex flex-col">
+                    <span>Unlock a National Skill Development Corporation (NSDC) certificate, recognized across India, upon course completion.*</span>
+                    <span class="font-medium mt-6">Why NSDC Certification?</span>
+                    <div class="flex flex-col gap-2 mt-3">
+                        <span>1. Elevate your career with a nationally recognized credential.</span>
+                        <span>2. Boost employment and advancement opportunities.</span>
+                        <span>3. Access high-quality, industry-aligned training.</span>
+                    </div>
+                    <span class="mt-6">Enroll today to earn your NSDC certification.</span>
+                    <span class="mt-2 text-gray-500">*Subject to evaluation and attendance</span>
+                </div>
+                <img alt="NSDC Certificate" src="/images/course-diff/nsdc-cert.png" class="mt-8" loading="lazy">
+                <span>For details, visit: <a href="https://nsdcindia.org/" target="_blank" class="text-[var(--primary)] hover:underline">NSDC</a></span>
+            </div>
+            <div class="faq-container">
+                <p class="pre-header">FAQ</p>
+                <h2 class="section-header">Your Questions Answered</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>Any prerequisites for the program?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>No prior SEO experience needed; basic digital marketing knowledge is a plus.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>When are live group calls & guest sessions?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Weekly live sessions with recordings for flexible access.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>Miss a live session?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>All sessions are recorded for on-demand viewing.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>How much access to Kaushal?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Kaushal leads live Q&As and provides assignment feedback.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>Weekly time commitment?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>5-7 hours per week for videos, assignments, and live sessions.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>When do I get my certificate?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Upon successful assignment completion.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <h4>What’s included?</h4>
+                                </div>
+                                <div class="w-12 h-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path d="M16 20L24 28L32 20" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Video lessons, live sessions, assignments, and NSDC certification.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="learners-block">
+                <div class="marquee-container">
+                    <div class="marquee-container-header">
+                        <h2>5.4M+ Learners Empowered</h2>
+                        <p>Transformed careers with our programs</p>
+                    </div>
+                    <div class="section__hero-lerners-marquee">
+                        <div class="section__hero-lerners-marquee-slider">
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/image_1501_Background_Removed_1_24cd3aa66b.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Apna" src="https://d3kl8zsmmx4oop.cloudfront.net/Apna_5f72fa17d3.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4465_Background_Removed_2_1_9d71f19bd4.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Capgemini" src="https://d3kl8zsmmx4oop.cloudfront.net/capgemini_logo_svg_4568aba092.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4465_3_Background_Removed_a4f54f94eb.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Brand" src="https://d3kl8zsmmx4oop.cloudfront.net/Frame_1430105876_453ee9244f.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4465_b53b96934c.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Publicis Groupe" src="https://d3kl8zsmmx4oop.cloudfront.net/publicis_groupe_logo_svg_143e266b83.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4465_1_6ec9db2246.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Simplilearn" src="https://d3kl8zsmmx4oop.cloudfront.net/Simplilearn_svg_d87ae530bf.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4464_1_Background_Removed_e367b4b202.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Flipkart" src="https://d3kl8zsmmx4oop.cloudfront.net/flipkart_logo_svg_98340e6ded.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_6111_5717193e08.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="PhonePe" src="https://d3kl8zsmmx4oop.cloudfront.net/Phone_Pe_svg_84075abce1.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4465_Background_Removed_64aa2b8265.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Vivo" src="https://d3kl8zsmmx4oop.cloudfront.net/vivo_677468ef4a.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/Rectangle_4464_Background_Removed_d78e3f6a37.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="ShareChat" src="https://d3kl8zsmmx4oop.cloudfront.net/sharechat_logo_svg_169f83a462.svg">
+                                </div>
+                            </div>
+                            <div class="section__hero-lerners-marquee-card">
+                                <div class="section__hero-lerners-marquee-card-img">
+                                    <img alt="Learner" src="https://d3kl8zsmmx4oop.cloudfront.net/image_1502_Background_Removed_1_a9a4c4e57c.png" loading="lazy">
+                                </div>
+                                <div class="section__hero-lerners-marquee-card-brand">
+                                    <img alt="Google" src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <img alt="tick" src="/images/new/tick.svg" loading="lazy">
+                        <p>Master industry-relevant skills with expert-led sessions.</p>
+                    </li>
+                    <li>
+                        <img alt="tick" src="/images/new/tick.svg" loading="lazy">
+                        <p>Tackle real-world business challenges hands-on.</p>
+                    </li>
+                    <li>
+                        <img alt="tick" src="/images/new/tick.svg" loading="lazy">
+                        <p>Unlock career opportunities through our network.</p>
+                    </li>
+                </ul>
+                <div class="logo-sec">
+                    <div class="w-divider">
+                        <img alt="GrowthSchool Logo" src="https://d3kl8zsmmx4oop.cloudfront.net/GS_Logo_Full_c138c9840d.svg" loading="lazy">
+                    </div>
+                    <div class="logo-sec-linkedin">
+                        <img alt="LinkedIn" src="https://d3kl8zsmmx4oop.cloudfront.net/linkedin_symbol_svg_1_087168127b.svg" loading="lazy">
+                        <div class="logo-sec-linkedin-text">
+                            <span>LinkedIn</span>
+                            Top Startup India 2023
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Accordion Functionality
+        document.querySelectorAll('.accordion').forEach(accordion => {
+            accordion.addEventListener('click', function(e) {
+                const header = e.target.closest('.accordion-header');
+                if (!header) return;
+
+                const item = header.closest('.accordion-item');
+                const title = item.querySelector('.accordion-title');
+                const isActive = item.classList.contains('active');
+
+                accordion.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                    activeItem.classList.remove('active');
+                    activeItem.querySelector('.accordion-title').setAttribute('aria-expanded', 'false');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    title.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            accordion.addEventListener('keydown', function(e) {
+                const header = e.target.closest('.accordion-header');
+                if (!header) return;
+
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
+                }
+            });
+        });
+
+        // Read More Button Functionality
+        document.querySelector('.read-more-link').addEventListener('click', function() {
+            const list = document.getElementById('key-outcomes-list');
+            const isOpen = this.classList.contains('read-more-link-open');
+
+            list.classList.toggle('visible');
+            this.classList.toggle('read-more-link-open');
+            this.firstChild.textContent = isOpen ? 'Read More' : 'Read Less';
+            this.setAttribute('aria-label', isOpen ? 'Show key outcomes' : 'Hide key outcomes');
+
+            if (!isOpen) {
+                list.setAttribute('tabindex', '-1');
+                list.focus();
+            } else {
+                list.removeAttribute('tabindex');
+            }
+        });
+
+        // Lazy Load Observer
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src || img.src;
+                    observer.unobserve(img);
+                }
+            });
+        }, { rootMargin: '200px' });
+
+        images.forEach(img => observer.observe(img));
+    </script>
   <script>
     function adjustBigBoxHeight() {
       if (window.innerWidth > 768) {
