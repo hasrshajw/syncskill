@@ -1384,7 +1384,7 @@ margin-left: 0px;
 <div class="center-wrapper">
   <div class="responsive-element">
     <div class="text-content">
-<h1 id="welcomeHeading">Hie, <span id="usernamePlaceholder" style="color: #ff9b00;">username</span></h1>
+<h1 id="welcomeHeading">Hie, <span id="user" style="color: #ff9b00;"></span></h1>
       <h1>Become Top 1% in the AI-First World</h1>
       <p>Whether it is Product, Growth, Design, Business, Tech or Data, Syncskill is the place to learn from top experts in the field to become the Top 1%</p>
       <button class="explore-button">
@@ -3334,13 +3334,10 @@ body {
 
 
 <script type="module">
-   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { 
-  getAuth, 
-  onAuthStateChanged, 
-  signOut 
-} from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
+// Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
   authDomain: "syncskilll.firebaseapp.com",
@@ -3351,14 +3348,12 @@ const firebaseConfig = {
   measurementId: "G-JWWWM2ZQSK"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// DOM Elements
+// DOM elements
 const elements = {
-  mobileMenu: document.getElementById('mobileMenu'),
-  mobileMenuButton: document.getElementById('mobileMenuButton'),
-  mobileMenuClose: document.getElementById('mobileMenuClose'),
   userAvatar: document.getElementById('userAvatar'),
   mobileUserAvatar: document.getElementById('mobileUserAvatar'),
   userName: document.getElementById('userName'),
@@ -3366,26 +3361,28 @@ const elements = {
   dropdownName: document.getElementById('dropdownName'),
   dropdownEmail: document.getElementById('dropdownEmail'),
   mobileUserName: document.getElementById('mobileUserName'),
-  usernamePlaceholder: document.getElementById('usernamePlaceholder'),
-  mobileUserEmail: document.getElementById('mobileUserEmail')
+  mobileUserEmail: document.getElementById('mobileUserEmail'),
+  welcomeUserSpan: document.getElementById('user') // 🔥 target your span here
 };
 
-// Update user profile
+// Update user profile on the page
 const updateUserProfile = (user) => {
   if (!user) return;
-  
+
   const fallbackAvatar = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
   const displayName = user.displayName || user.email?.split('@')[0] || 'User';
   const email = user.email || 'No email provided';
   const photoURL = user.photoURL || fallbackAvatar;
 
   try {
-    if (elements.userName) elements.userName.textContent = displayName;
+    // Update elements with user data
     if (elements.userName) elements.userName.textContent = displayName;
     if (elements.dropdownName) elements.dropdownName.textContent = displayName;
     if (elements.mobileUserName) elements.mobileUserName.textContent = displayName;
     if (elements.dropdownEmail) elements.dropdownEmail.textContent = email;
     if (elements.mobileUserEmail) elements.mobileUserEmail.textContent = email;
+
+    if (elements.welcomeUserSpan) elements.welcomeUserSpan.textContent = displayName;
 
     [elements.userAvatar, elements.dropdownAvatar, elements.mobileUserAvatar].forEach(img => {
       if (img) {
@@ -3398,7 +3395,7 @@ const updateUserProfile = (user) => {
   }
 };
 
-// Handle auth state
+// Auth state handling
 const handleAuthState = (user) => {
   if (!user || localStorage.getItem('isLoggedIn') !== 'true') {
     localStorage.removeItem('isLoggedIn');
@@ -3408,66 +3405,19 @@ const handleAuthState = (user) => {
   updateUserProfile(user);
 };
 
-// Initialize auth listener
+// Watch for auth state changes
 onAuthStateChanged(auth, handleAuthState);
 
-// Mobile menu toggle
-const toggleMobileMenu = () => {
-  if (elements.mobileMenu) {
-    const isOpen = elements.mobileMenu.style.transform === 'translateX(0px)';
-    elements.mobileMenu.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0)';
-  }
+// Optional: Auto logout after inactivity (1 hour)
+let inactivityTimer;
+const resetSessionTimer = () => {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => logout(), 3600000); // 1 hour
 };
-
-// Dropdown toggle
-window.toggleDropdown = () => {
-  const dropdown = document.querySelector('.profile-dropdown');
-  if (dropdown) {
-    const isVisible = dropdown.style.opacity === '1';
-    dropdown.style.opacity = isVisible ? '0' : '1';
-    dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
-    dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
-  }
-};
-
-// Close dropdown on outside click
-document.addEventListener('click', (e) => {
-  const profileMenu = document.querySelector('.profile-menu');
-  if (profileMenu && !e.target.closest('.profile-menu')) {
-    const dropdown = document.querySelector('.profile-dropdown');
-    if (dropdown) {
-      dropdown.style.opacity = '0';
-      dropdown.style.transform = 'translateY(-10px)';
-      dropdown.style.visibility = 'hidden';
-    }
-  }
+['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+  window.addEventListener(event, resetSessionTimer);
 });
-
-// Event listeners
-if (elements.mobileMenuButton) elements.mobileMenuButton.addEventListener('click', toggleMobileMenu);
-if (elements.mobileMenuClose) elements.mobileMenuClose.addEventListener('click', toggleMobileMenu);
-
-// Close mobile menu on outside click or ESC
-document.addEventListener('click', (e) => {
-  if (elements.mobileMenu && elements.mobileMenuButton && 
-      !elements.mobileMenu.contains(e.target) && 
-      !elements.mobileMenuButton.contains(e.target) && 
-      window.innerWidth <= 768) {
-    elements.mobileMenu.style.transform = 'translateX(100%)';
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && window.innerWidth <= 768 && elements.mobileMenu) {
-    elements.mobileMenu.style.transform = 'translateX(100%)';
-  }
-});
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 768 && elements.mobileMenu) {
-    elements.mobileMenu.style.transform = 'translateX(100%)';
-  }
-});
+resetSessionTimer();
 
 // Logout function
 window.logout = async () => {
@@ -3481,20 +3431,7 @@ window.logout = async () => {
   }
 };
 
-// Session timeout
-let inactivityTimer;
-const resetSessionTimer = () => {
-  clearTimeout(inactivityTimer);
-  inactivityTimer = setTimeout(() => window.logout(), 3600000); // 1 hour
-};
-
-['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
-  window.addEventListener(event, resetSessionTimer);
-});
-
-resetSessionTimer();
-
-// Initial auth check
+// Optional: Loading overlay while checking auth
 document.addEventListener('DOMContentLoaded', () => {
   const loadingOverlay = document.createElement('div');
   loadingOverlay.style = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;';
@@ -3506,7 +3443,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleAuthState(user);
   });
 });
-  </script>
+</script>
 
   
 </body>
