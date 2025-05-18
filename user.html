@@ -3366,6 +3366,7 @@ const elements = {
   dropdownName: document.getElementById('dropdownName'),
   dropdownEmail: document.getElementById('dropdownEmail'),
   mobileUserName: document.getElementById('mobileUserName'),
+  usernamePlaceholder: document.getElementById('usernamePlaceholder'),
   mobileUserEmail: document.getElementById('mobileUserEmail')
 };
 
@@ -3379,6 +3380,7 @@ const updateUserProfile = (user) => {
   const photoURL = user.photoURL || fallbackAvatar;
 
   try {
+    if (elements.userName) elements.userName.textContent = displayName;
     if (elements.userName) elements.userName.textContent = displayName;
     if (elements.dropdownName) elements.dropdownName.textContent = displayName;
     if (elements.mobileUserName) elements.mobileUserName.textContent = displayName;
