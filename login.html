@@ -238,7 +238,7 @@
 
             status.classList.remove('error');
             status.classList.add('success', 'visible');
-            status.innerHTML = `✅ Signed in as <strong>${user.displayName}</strong><br>Redirecting to dashboard...`;
+            status.innerHTML = `Signed in as <strong>${user.displayName}</strong><br>`;
 
             // Set authentication flags
             localStorage.setItem('isLoggedIn', 'true');
@@ -248,7 +248,7 @@
             await auth.authStateReady();
             
             setTimeout(() => {
-                window.location.href = 'pages/courses/course-1.html';
+                window.location.href = 'user.html';
             }, 1500);
 
         } catch (error) {
@@ -280,7 +280,7 @@
     // Check if already logged in
     auth.onAuthStateChanged((user) => {
         if (user && localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'pages/courses/course-1.html';
+            window.location.href = 'user.html';
         }
     });
 </script>
