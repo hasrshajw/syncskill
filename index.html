@@ -3698,7 +3698,7 @@ body {
 
             status.classList.remove('error');
             status.classList.add('success', 'visible');
-            status.innerHTML = `✅ Signed in as <strong>${user.displayName}</strong><br>Redirecting to dashboard...`;
+            status.innerHTML = `Signed in as <strong>${user.displayName}</strong><br>`;
 
             localStorage.setItem('isLoggedIn', 'true');
             sessionStorage.setItem('firebaseAuthState', 'true');
@@ -3735,7 +3735,7 @@ body {
 
     auth.onAuthStateChanged((user) => {
         if (user && localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'dashboard.html';
+            window.location.href = 'user.html';
         }
     });
   </script>
