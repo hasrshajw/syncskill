@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Courses</title>
+ <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+
+
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="footer-styles.css">
@@ -1300,7 +1306,98 @@ function logout() {
   console.log('User logged out');
 }
 </script>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.style.transform = 'translateX(0)';
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.style.transform = 'translateX(100%)';
+    });
+
+    // Profile Dropdown Toggle
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.profile-dropdown');
+      const isVisible = dropdown.style.opacity === '1';
+      dropdown.style.opacity = isVisible ? '0' : '1';
+      dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
+      dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
+    }
+
+    // Logout Function (Placeholder)
+    function logout() {
+      console.log('Logout clicked');
+      // Implement logout logic here
+    }
+
+    // New Section: Read More Toggle
+    const readMoreLink = document.querySelector('.read-more-link');
+    const outcomesList = document.querySelector('.outcomes-list');
+    readMoreLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = outcomesList.classList.contains('visible');
+      outcomesList.classList.toggle('visible');
+      readMoreLink.classList.toggle('read-more-link-open');
+      readMoreLink.querySelector('span').textContent = isOpen ? 'Show More' : 'Show Less';
+    });
+
+    // New Section: Accordion Functionality
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        accordionItems.forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.accordion-content').style.maxHeight = '0';
+          i.querySelector('.accordion-content').style.opacity = '0';
+          i.querySelector('.accordion-content').style.padding = '0 calc(var(--spacing-unit) * 3)';
+        });
+        if (!isActive) {
+          item.classList.add('active');
+          const content = item.querySelector('.accordion-content');
+          content.style.maxHeight = '600px';
+          content.style.opacity = '1';
+          content.style.padding = 'calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3)';
+        }
+      });
+    });
+
+    // Placeholder for loadFileData (requires XLSX library)
+    function loadFileData(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheet = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheet];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        console.log('Parsed Excel Data:', jsonData);
+        // Process jsonData as needed
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // Example: Handle file input for loadFileData
+    // Uncomment and add an input element in HTML if needed
+    /*
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.xlsx,.xls';
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        loadFileData(file);
+      }
+    });
+    document.body.appendChild(fileInput);
+    */
+  </script>
 <style>
 /* Media Queries */
 @media (max-width: 768px) {
@@ -3412,98 +3509,7 @@ body {
 
 
 
-<script>
-    // Mobile Menu Toggle
-    const mobileMenuButton = document.getElementById('mobileMenuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.style.transform = 'translateX(0)';
-    });
-
-    mobileMenuClose.addEventListener('click', () => {
-      mobileMenu.style.transform = 'translateX(100%)';
-    });
-
-    // Profile Dropdown Toggle
-    function toggleDropdown() {
-      const dropdown = document.querySelector('.profile-dropdown');
-      const isVisible = dropdown.style.opacity === '1';
-      dropdown.style.opacity = isVisible ? '0' : '1';
-      dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
-      dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
-    }
-
-    // Logout Function (Placeholder)
-    function logout() {
-      console.log('Logout clicked');
-      // Implement logout logic here
-    }
-
-    // New Section: Read More Toggle
-    const readMoreLink = document.querySelector('.read-more-link');
-    const outcomesList = document.querySelector('.outcomes-list');
-    readMoreLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isOpen = outcomesList.classList.contains('visible');
-      outcomesList.classList.toggle('visible');
-      readMoreLink.classList.toggle('read-more-link-open');
-      readMoreLink.querySelector('span').textContent = isOpen ? 'Show More' : 'Show Less';
-    });
-
-    // New Section: Accordion Functionality
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach(item => {
-      const header = item.querySelector('.accordion-header');
-      header.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        accordionItems.forEach(i => {
-          i.classList.remove('active');
-          i.querySelector('.accordion-content').style.maxHeight = '0';
-          i.querySelector('.accordion-content').style.opacity = '0';
-          i.querySelector('.accordion-content').style.padding = '0 calc(var(--spacing-unit) * 3)';
-        });
-        if (!isActive) {
-          item.classList.add('active');
-          const content = item.querySelector('.accordion-content');
-          content.style.maxHeight = '600px';
-          content.style.opacity = '1';
-          content.style.padding = 'calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3)';
-        }
-      });
-    });
-
-    // Placeholder for loadFileData (requires XLSX library)
-    function loadFileData(file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const firstSheet = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[firstSheet];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        console.log('Parsed Excel Data:', jsonData);
-        // Process jsonData as needed
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    // Example: Handle file input for loadFileData
-    // Uncomment and add an input element in HTML if needed
-    /*
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '.xlsx,.xls';
-    fileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        loadFileData(file);
-      }
-    });
-    document.body.appendChild(fileInput);
-    */
-  </script>
 
 
 <script type="module">
@@ -3535,12 +3541,37 @@ body {
     dropdownEmail: document.getElementById('dropdownEmail'),
     mobileUserName: document.getElementById('mobileUserName'),
     mobileUserEmail: document.getElementById('mobileUserEmail'),
-    welcomeUserSpan: document.getElementById('user') // 🔥 target your span here
+    welcomeUserSpan: document.getElementById('user')
+  };
+
+  // Clear sensitive data from DOM
+  const clearUserProfile = () => {
+    const fallbackAvatar = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+    try {
+      if (elements.userName) elements.userName.textContent = '';
+      if (elements.dropdownName) elements.dropdownName.textContent = '';
+      if (elements.mobileUserName) elements.mobileUserName.textContent = '';
+      if (elements.dropdownEmail) elements.dropdownEmail.textContent = '';
+      if (elements.mobileUserEmail) elements.mobileUserEmail.textContent = '';
+      if (elements.welcomeUserSpan) elements.welcomeUserSpan.textContent = '';
+
+      [elements.userAvatar, elements.dropdownAvatar, elements.mobileUserAvatar].forEach(img => {
+        if (img) {
+          img.src = fallbackAvatar;
+          img.removeAttribute('srcset'); // Clear any cached image sources
+        }
+      });
+    } catch (error) {
+      console.error('Error clearing profile:', error);
+    }
   };
 
   // Update user profile on the page
   const updateUserProfile = (user) => {
-    if (!user) return;
+    if (!user) {
+      clearUserProfile();
+      return;
+    }
 
     const fallbackAvatar = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
     const displayName = user.displayName || user.email?.split('@')[0] || 'User';
@@ -3548,13 +3579,11 @@ body {
     const photoURL = user.photoURL || fallbackAvatar;
 
     try {
-      // Update elements with user data
       if (elements.userName) elements.userName.textContent = displayName;
       if (elements.dropdownName) elements.dropdownName.textContent = displayName;
       if (elements.mobileUserName) elements.mobileUserName.textContent = displayName;
       if (elements.dropdownEmail) elements.dropdownEmail.textContent = email;
       if (elements.mobileUserEmail) elements.mobileUserEmail.textContent = email;
-
       if (elements.welcomeUserSpan) elements.welcomeUserSpan.textContent = displayName;
 
       [elements.userAvatar, elements.dropdownAvatar, elements.mobileUserAvatar].forEach(img => {
@@ -3571,20 +3600,29 @@ body {
   // Auth state handling
   const handleAuthState = (user) => {
     if (!user) {
-      window.location.href = '/login.html';  // Redirect to login if no user
+      clearUserProfile(); // Clear DOM data immediately
+      window.location.href = '/login.html'; // Redirect to login
       return;
     }
-    updateUserProfile(user);  // Update user profile if logged in
+    updateUserProfile(user); // Update user profile if logged in
   };
 
   // Watch for auth state changes
   onAuthStateChanged(auth, handleAuthState);
 
+  // Prevent back/forward cache (bfcache) from restoring sensitive data
+  window.addEventListener('unload', () => {
+    clearUserProfile(); // Clear DOM data on page unload
+  });
+
   // Logout function
   window.logout = async () => {
     try {
       await signOut(auth);
-      window.location.href = '/login.html';  // Redirect to login page after logout
+      clearUserProfile(); // Clear DOM data before redirect
+      sessionStorage.clear(); // Clear session storage
+      localStorage.removeItem('userData'); // Clear specific localStorage keys if used
+      window.location.href = '/login.html'; // Redirect to login
     } catch (error) {
       console.error('Logout error:', error);
       alert('Error during logout. Please try again.');
@@ -3601,9 +3639,14 @@ body {
     window.addEventListener(event, resetSessionTimer);
   });
   resetSessionTimer();
+
+  // Prevent browser back button from showing cached page
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted || window.performance?.navigation?.type === 2) {
+      // Page was restored from bfcache or back navigation
+      auth.currentUser ? updateUserProfile(auth.currentUser) : handleAuthState(null);
+    }
+  });
 </script>
-
-
-  
 </body>
 </html>
