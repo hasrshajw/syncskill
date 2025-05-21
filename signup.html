@@ -616,7 +616,7 @@
             usernameSpan.textContent = username;
             errorMessage.style.display = 'none';
             signupForm.reset();
-            window.location.href = '/dashboard';
+            window.location.href = '/user';
           })
           .catch((error) => {
             errorMessage.textContent = `Sign-up failed: ${error.message}`;
