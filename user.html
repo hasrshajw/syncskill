@@ -3601,7 +3601,7 @@ body {
   const handleAuthState = (user) => {
     if (!user) {
       clearUserProfile(); // Clear DOM data immediately
-      window.location.href = '/index.html'; // Redirect to login
+      window.location.href = '/login.html'; // Redirect to login
       return;
     }
     updateUserProfile(user); // Update user profile if logged in
@@ -3622,7 +3622,7 @@ body {
       clearUserProfile(); // Clear DOM data before redirect
       sessionStorage.clear(); // Clear session storage
       localStorage.removeItem('userData'); // Clear specific localStorage keys if used
-      window.location.href = '/login.html'; // Redirect to login
+      window.location.href = '/index.html'; // Redirect to login
     } catch (error) {
       console.error('Logout error:', error);
       alert('Error during logout. Please try again.');
