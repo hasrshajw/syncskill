@@ -3119,6 +3119,149 @@ body {
 
 
 
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<section id="animated-section">
+    <p id="text">
+        <span>LEARN</span>
+        <span>GROW</span>
+        <span>EXCEL</span>
+    </p>
+</section>
+
+<style>
+    #animated-section {
+        width: 90%;
+        max-width: 700px;
+        margin: 2rem auto;
+        padding: clamp(0.75rem, 2vw, 1.5rem);
+        font-family: 'IBM Plex Sans', sans-serif;
+        display: flex;
+        justify-content: center;
+    }
+
+    #text {
+        font-size: clamp(1.75rem, 5vw, 3.125rem);
+        line-height: 1.4;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        hyphens: auto;
+        letter-spacing: -0.02em;
+        word-spacing: 0.05em;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+    }
+
+    #text span {
+        color: #000;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+        display: inline-block;
+        padding-left: 0;
+        margin-right: 0.25em;
+    }
+
+    @media (max-width: 1024px), (max-device-width: 1024px) {
+        #text {
+            display: block;
+        }
+        #text span {
+            display: block;
+            margin-right: 0;
+        }
+        #text span:nth-child(1) {
+            padding-left: 0;
+        }
+        #text span:nth-child(2) {
+            padding-left: clamp(2rem, 5vw, 3rem);
+        }
+        #text span:nth-child(3) {
+            padding-left: clamp(4rem, 10vw, 6rem);
+        }
+    }
+</style>
+
+<script>
+    (function() {
+      const section = document.getElementById('animated-section');
+      const p = document.getElementById('text');
+      const spans = Array.from(p.querySelectorAll('span'));
+      const total = spans.length;
+
+      // On resize/update, compute start & end offsets for scroll effect
+      let startOffset, endOffset;
+      function updateOffsets() {
+        const vh = window.innerHeight;
+        const h = section.offsetHeight;
+        startOffset = vh / 2; // when section.top hits middle
+        endOffset = (vh / 2) - h; // when section.bottom hits middle
+      }
+      updateOffsets();
+      window.addEventListener('resize', updateOffsets);
+
+      // Scroll effect
+      function onScroll() {
+        const rect = section.getBoundingClientRect();
+        let prog = (startOffset - rect.top) / (startOffset - endOffset);
+        prog = Math.min(Math.max(prog, 0), 1); // clamp 0–1
+        const count = Math.floor(prog * total);
+        spans.forEach((span, i) => {
+          span.style.color = i < count ? '#ff0000' : '#000';
+        });
+      }
+
+      // Throttle scroll events
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(() => {
+            onScroll();
+            ticking = false;
+          });
+        }
+      });
+
+      // Initial paint
+      onScroll();
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+
+
+
+
+
+
             <div class="css-1gygzac">
               <a class="e1upzolw1 css-g6b8m-StyledAnchor-FlexLink-LinkWithImage e1hrbfz00"
                  href="https://play.google.com/store/apps/details?id=com.unacademy&amp;referrer=utm_source%3DFooter%26utm_medium%3DWebApp%26utm_campaign%3DFooter%26"
