@@ -22,7 +22,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem; /* Added for small screens */
+        padding: 1rem;
       }
 
       h1 {
@@ -86,7 +86,7 @@
       }
 
       .max-w-md {
-        max-width: min(28rem, 90vw); /* Use 90% of viewport width if smaller than 28rem */
+        max-width: min(28rem, 90vw);
       }
 
       .text-center {
@@ -269,13 +269,32 @@
       }
 
       .success-message {
-        background-color: rgb(6 122 29 / 0.1);
+        display: none;
+        background-color: rgb(240 253 244);
         color: rgb(6 122 29);
         padding: 1rem;
         border-radius: 0.5rem;
+        border: 1px solid rgb(6 122 29 / 0.3);
         text-align: center;
         margin-bottom: 1.5rem;
-        display: none;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        animation: slideIn 0.5s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .success-message::before {
+        content: '✔';
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: rgb(6 122 29);
+        color: white;
+        border-radius: 50%;
+        line-height: 1.5rem;
+        margin-right: 0.5rem;
+        font-size: 0.875rem;
+        vertical-align: middle;
       }
 
       .error-message {
@@ -319,28 +338,86 @@
         transform: scale(0.98);
       }
 
+      /* Loading State Styles */
+      .loading-overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255 255 255 / 0.8);
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.5rem;
+        z-index: 10;
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      .spinner {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 4px solid rgb(1 35 65 / 0.2);
+        border-top: 4px solid rgb(1 35 65);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      .loading .google-button,
+      .loading button[type="submit"] {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .loading input {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
       /* Media Queries for Responsiveness */
       @media (max-width: 640px) {
         .max-w-md {
-          max-width: 95vw; /* Use 95% of viewport width on small screens */
+          max-width: 95vw;
         }
 
         .p-8 {
-          padding: 1.5rem; /* Reduce padding on smaller screens */
+          padding: 1.5rem;
         }
 
         .text-2xl {
-          font-size: 1.25rem; /* Slightly smaller heading */
+          font-size: 1.25rem;
           line-height: 1.75rem;
         }
 
         .w-16, .h-16 {
-          width: 3rem; /* Smaller logo */
+          width: 3rem;
           height: 3rem;
         }
 
         .py-3 {
-          padding-top: 0.5rem; /* Adjust button/input padding */
+          padding-top: 0.5rem;
           padding-bottom: 0.5rem;
         }
 
@@ -350,55 +427,75 @@
         }
 
         .text-sm {
-          font-size: 0.8125rem; /* Slightly smaller text */
+          font-size: 0.8125rem;
         }
 
         .divider-text {
-          margin: 0 0.5rem; /* Reduce divider text margin */
+          margin: 0 0.5rem;
           font-size: 0.75rem;
         }
 
         .mb-8 {
-          margin-bottom: 1.5rem; /* Adjust margins */
+          margin-bottom: 1.5rem;
         }
 
         .mb-6 {
           margin-bottom: 1rem;
         }
+
+        .spinner {
+          width: 2rem;
+          height: 2rem;
+        }
       }
 
       @media (max-width: 480px) {
         .p-8 {
-          padding: 1rem; /* Further reduce padding */
+          padding: 1rem;
         }
 
         .text-2xl {
-          font-size: 1.125rem; /* Even smaller heading */
+          font-size: 1.125rem;
           line-height: 1.5rem;
         }
 
         .w-16, .h-16 {
-          width: 2.5rem; /* Smaller logo for very small screens */
+          width: 2.5rem;
           height: 2.5rem;
         }
 
         .text-sm {
-          font-size: 0.75rem; /* Smaller text */
+          font-size: 0.75rem;
         }
 
         .google-button img {
-          width: 1rem; /* Smaller Google icon */
+          width: 1rem;
           height: 1rem;
         }
 
         .mr-3 {
-          margin-right: 0.5rem; /* Adjust icon margin */
+          margin-right: 0.5rem;
+        }
+
+        .spinner {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        .success-message::before {
+          width: 1.25rem;
+          height: 1.25rem;
+          line-height: 1.25rem;
+          font-size: 0.75rem;
         }
       }
     </style>
   </head>
   <body>
-    <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-md">
+    <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-md relative">
+      <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+      </div>
       <div class="text-center mb-8">
         <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/GrowthSchoolNewLogo.svg" alt="Brand Logo" class="w-16 h-16 mx-auto mb-6">
         <h1 class="text-2xl font-semibold text-gs-navy">Sign Up for GrowthSchool</h1>
@@ -472,95 +569,111 @@
     </div>
 
     <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-<script>
-  // Firebase configuration (replace with your Firebase project credentials)
-  const firebaseConfig = {
-    apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
-    authDomain: "syncskilll.firebaseapp.com",
-    projectId: "syncskilll",
-    storageBucket: "syncskilll.firebasestorage.app",
-    messagingSenderId: "203322315096",
-    appId: "1:203322315096:web:958fc7d94806ef9a98552d",
-    measurementId: "G-JWWWM2ZQSK"
-};
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
+        authDomain: "syncskilll.firebaseapp.com",
+        projectId: "syncskilll",
+        storageBucket: "syncskilll.firebasestorage.app",
+        messagingSenderId: "203322315096",
+        appId: "1:203322315096:web:958fc7d94806ef9a98552d",
+        measurementId: "G-JWWWM2ZQSK"
+      };
 
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+      // DOM elements
+      const successMessage = document.getElementById('success-message');
+      const errorMessage = document.getElementById('error-message');
+      const usernameSpan = document.getElementById('username');
+      const signupForm = document.getElementById('signup-form');
+      const googleSignInButton = document.getElementById('google-signin');
+      const loadingOverlay = document.getElementById('loading-overlay');
+      const formContainer = signupForm.parentElement;
 
-  // Hide success/error messages initially
-  const successMessage = document.getElementById('success-message');
-  const errorMessage = document.getElementById('error-message');
-  const usernameSpan = document.getElementById('username');
+      // Function to toggle loading state
+      function toggleLoading(isLoading) {
+        if (isLoading) {
+          formContainer.classList.add('loading');
+          loadingOverlay.style.display = 'flex';
+        } else {
+          formContainer.classList.remove('loading');
+          loadingOverlay.style.display = 'none';
+        }
+      }
 
-  // Email/Password Sign-Up
-  document.getElementById('signup-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username-input').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+      // Email/Password Sign-Up
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        toggleLoading(true);
+        const username = document.getElementById('username-input').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        return user.updateProfile({ displayName: username });
-      })
-      .then(() => {
-        // Display success message and redirect to dashboard
-        successMessage.style.display = 'block';
-        usernameSpan.textContent = username;
-        errorMessage.style.display = 'none';
-        document.getElementById('signup-form').reset();
-
-        // Redirect to another page (e.g., /dashboard)
-        window.location.href = '/dashboard';  // Change '/dashboard' to your desired URL
-      })
-      .catch((error) => {
-        errorMessage.textContent = `Sign-up failed: ${error.message}`;
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            return user.updateProfile({ displayName: username });
+          })
+          .then(() => {
+            toggleLoading(false);
+            successMessage.style.display = 'block';
+            usernameSpan.textContent = username;
+            errorMessage.style.display = 'none';
+            signupForm.reset();
+            setTimeout(() => {
+              window.location.href = '/dashboard';
+            }, 1500);
+          })
+          .catch((error) => {
+            toggleLoading(false);
+            errorMessage.textContent = `Sign-up failed: ${error.message}`;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+          });
       });
-  });
 
-  // Google Sign-In
-  document.getElementById('google-signin').addEventListener('click', () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-      .then((result) => {
-        const user = result.user;
-        const displayName = user.displayName || user.email.split('@')[0];
-
-        // Display success message and redirect to dashboard
-        successMessage.style.display = 'block';
-        usernameSpan.textContent = displayName;
-        errorMessage.style.display = 'none';
-
-        // Redirect to another page (e.g., /dashboard)
-        window.location.href = '/user';  // Change '/dashboard' to your desired URL
-      })
-      .catch((error) => {
-        errorMessage.textContent = `Google Sign-Up failed: ${error.message}`;
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
+      // Google Sign-In
+      googleSignInButton.addEventListener('click', () => {
+        toggleLoading(true);
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            const displayName = user.displayName || user.email.split('@')[0];
+            toggleLoading(false);
+            successMessage.style.display = 'block';
+            usernameSpan.textContent = displayName;
+            errorMessage.style.display = 'none';
+            setTimeout(() => {
+              window.location.href = '/user';
+            }, 1500);
+          })
+          .catch((error) => {
+            toggleLoading(false);
+            errorMessage.textContent = `Google Sign-Up failed: ${error.message}`;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+          });
       });
-  });
 
-  // Monitor auth state
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      const displayName = user.displayName || user.email.split('@')[0];
-      successMessage.style.display = 'block';
-      usernameSpan.textContent = displayName;
-      errorMessage.style.display = 'none';
-    } else {
-      successMessage.style.display = 'none';
-    }
-  });
-</script>
-
+      // Monitor auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          const displayName = user.displayName || user.email.split('@')[0];
+          successMessage.style.display = 'block';
+          usernameSpan.textContent = displayName;
+          errorMessage.style.display = 'none';
+        } else {
+          successMessage.style.display = 'none';
+        }
+      });
+    </script>
   </body>
 </html>
