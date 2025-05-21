@@ -1035,19 +1035,21 @@ margin-left: 0px;
       <div class="desktop-only" style="display: flex; align-items: center; gap: 40px;">
         <div style="position: relative;"
              onmouseenter="
-               const btn = this.querySelector('button');
-               const m = this.querySelector('.mega-menu');
-               const rect = btn.getBoundingClientRect();
-               m.style.top = rect.bottom + 5 + 'px';
-               m.style.opacity = '1';
-               m.style.transform = 'translate(-50%, 0)';
-               m.style.pointerEvents = 'auto';
-             "
-             onmouseleave="
-               const m = this.querySelector('.mega-menu');
-               m.style.opacity = '0';
-               m.style.transform = 'translate(-50%, 8px)';
-               m.style.pointerEvents = 'none';
+              const btn = this.querySelector('button');
+const m = this.querySelector('.mega-menu');
+const rect = btn.getBoundingClientRect();
+m.style.top = rect.top + window.scrollY + btn.offsetHeight + 5 + 'px';
+m.style.opacity = '1';
+m.style.transform = 'translate(-50%, 0)';
+m.style.pointerEvents = 'auto';
+                        "
+                        onmouseleave="
+                            const m = this.querySelector('.mega-menu');
+    window.menuTimeout = setTimeout(() => {
+        m.style.opacity = '0';
+        m.style.transform = 'translate(-50%, 8px)';
+        m.style.pointerEvents = 'none';
+    }, 400);
              ">
           <button style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: transparent; border: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);"
                   onmouseover="this.style.background='#f8f9fa'" 
