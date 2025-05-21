@@ -1077,9 +1077,11 @@ m.style.pointerEvents = 'auto';
                         "
                         onmouseleave="
                             const m = this.querySelector('.mega-menu');
-                            m.style.opacity = '0';
-                            m.style.transform = 'translate(-50%, 8px)';
-                            m.style.pointerEvents = 'none';
+    window.menuTimeout = setTimeout(() => {
+        m.style.opacity = '0';
+        m.style.transform = 'translate(-50%, 8px)';
+        m.style.pointerEvents = 'none';
+    }, 200);
                         ">
                         <button style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: transparent; border: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);"
                                 onmouseover="this.style.background='#f8f9fa'" 
@@ -1092,7 +1094,14 @@ m.style.pointerEvents = 'auto';
                                 <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <div class="mega-menu"
+                        <div class="mega-menu" onmouseenter="clearTimeout(window.menuTimeout)"
+    onmouseleave="
+        const m = this;
+        window.menuTimeout = setTimeout(() => {
+            m.style.opacity = '0';
+            m.style.transform = 'translate(-50%, 8px)';
+            m.style.pointerEvents = 'none';
+        }, 200);
                             style="position: fixed; left: 50%; width: 800px; background: #fff; border-radius: 16px; box-shadow: 0 24px 48px rgba(0,0,0,0.12); padding: 32px; opacity: 0; transform: translate(-50%,8px); transition: all 0.3s cubic-bezier(0.4,0,0.2,1); pointer-events: none;">
                             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;">
                                 <div>
