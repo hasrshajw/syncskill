@@ -1185,111 +1185,167 @@ margin-left: 0px;
                     </svg>
                 </button>
 
-                <div id="mobileMenu" class="mobile-only"
-                    style="position: fixed; top: 0; right: 0; bottom: 0; width: 75vw; max-width: 320px; background: #ffffff; overflow-y: auto; padding: 24px 16px; transform: translateX(100%); transition: transform 0.3s ease; box qword: -2px 0 8px rgba(0,0,0,0.1); z-index: 1000; border-top-left-radius: 16px;">
-                    <div style="display: flex; justify-content: flex-end; margin-bottom: 24px;">
-                        <button id="mobileMenuClose"
-                            style="padding: 8px; border-radius: 8px; border: none; background: transparent; transition: background 0.2s ease, transform 0.2s ease;"
-                            onmouseover="this.style.background='rgba(0,0,0,0.05)'; this.style.transform='scale(1.1)'"
-                            onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
-                            <svg style="width: 24px; height: 24px; color: #4b5563;" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 24px;">
-                        <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;">
-                            <h3 onclick="(function(c){c.style.display=c.style.display==='flex'?'none':'flex'})(this.nextElementSibling)"
-                                style="font-size: 16px; font-weight: 700; color: #2d3436; margin: 0; padding: 12px 0; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                                 <span style="color: black;">Certifications</span>
-                                <span style="font-size: 18px; color: black; line-height: 1;">+</span>
-                            </h3>
-                            <div style="display: none; flex-direction: column; gap: 12px; padding: 8px 0;">
-                                <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);"
-                                    onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.05)'"
-                                    onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-                                    <div style="width: 24px; height: 24px; background: #6366f1; border-radius: 6px; margin-right: 12px;"></div>
-                                    <div>
-                                        <div style="font-size: 14px; font-weight: 600; color: #2d3436;">Data Science Pro</div>
-                                        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">12 Courses · 98 Hours</div>
-                                    </div>
-                                </a>
-                                <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);"
-                                    onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.05)'"
-                                    onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-                                    <div style="width: 24px; height: 24px; background: #6366f1; border-radius: 6px; margin-right: 12px;"></div>
-                                    <div>
-                                        <div style="font-size: 14px; font-weight: 600; color: #2d3436;">AI & ML Foundation</div>
-                                        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">8 Courses · 64 Hours</div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;">
-  <h3 onclick="(function(c){c.style.display=c.style.display==='flex'?'none':'flex'})(this.nextElementSibling)"
-      style="font-size: 16px; font-weight: 700; color: #2d3436; margin: 0; padding: 12px 0; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-    <span style="color: black;">Certifications</span>
-    <span style="font-size: 18px; color: black; line-height: 1;">+</span>
-  </h3>
-  <div style="display: none; flex-direction: column; gap: 12px; padding: 8px 0;">
-    <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);"
-       onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.05)'"
-       onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-      <div style="width: 24px; height: 24px; background: #10b981; border-radius: 6px; margin-right: 12px;"></div>
-      <div>
-        <div style="font-size: 14px; font-weight: 600; color: #2d3436;">Cloud Architect</div>
-        <div style="font-size: 12px; color: #6c757d; margin-top: 4px;">AWS · Azure · GCP</div>
+               <div id="mobileMenu" class="mobile-only" style="position: fixed; top: 0; right: 0; bottom: 0; width: 90vw; max-width: 320px; background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%); display: flex; flex-direction: column; z-index: 1000; transform: translateX(100%); box-shadow: -6px 0 20px rgba(0,0,0,0.08); transition: transform 0.3s ease-in-out; border-top-left-radius: 16px;">
+  <div style="flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px 20px;">
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 24px;">
+      <button id="mobileMenuClose" aria-label="Close menu" style="padding: 12px; border-radius: 12px; border: none; background: transparent; transition: background 0.2s ease, transform 0.2s ease;"
+              onmouseover="this.style.background='rgba(0,0,0,0.05)'; this.style.transform='scale(1.1)'"
+              onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+        <svg style="width: 24px; height: 24px; color: #374151;" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 12px;">
+        <h3 onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="certifications-menu" style="font-family: 'Inter', system-ui, sans-serif; font-size: 16px; font-weight: 600; color: #1f2937; margin: 0; padding: 12px 0; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span>Certifications</span>
+          <span style="font-size: 18px; color: #1f2937; line-height: 1; transition: transform 0.2s ease;" class="accordion-icon">+</span>
+        </h3>
+        <div id="certifications-menu" style="display: none; flex-direction: column; gap: 12px; padding: 12px 0; transition: all 0.3s ease;">
+          <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 10px; background: #ffffff; border: 1px solid #e5e7eb; text-decoration: none; transition: all 0.2s ease;"
+             onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)'"
+             onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="width: 28px; height: 28px; background: #4f46e5; border-radius: 8px; margin-right: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 16px; height: 16px; color: #ffffff;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #1f2937;">Data Science Pro</div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: #6b7280; margin-top: 4px;">12 Courses · 98 Hours</div>
+            </div>
+          </a>
+          <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 10px; background: #ffffff; border: 1px solid #e5e7eb; text-decoration: none; transition: all 0.2s ease;"
+             onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)'"
+             onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="width: 28px; height: 28px; background: #4f46e5; border-radius: 8px; margin-right: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 16px; height: 16px; color: #ffffff;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #1f2937;">AI & ML Foundation</div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: #6b7280; margin-top: 4px;">8 Courses · 64 Hours</div>
+            </div>
+          </a>
+        </div>
       </div>
-    </a>
+      <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 12px;">
+        <h3 onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="cloud-menu" style="font-family: 'Inter', system-ui, sans-serif; font-size: 16px; font-weight: 600; color: #1f2937; margin: 0; padding: 12px 0; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+          <span>Cloud</span>
+          <span style="font-size: 18px; color: #1f2937; line-height: 1; transition: transform 0.2s ease;" class="accordion-icon">+</span>
+        </h3>
+        <div id="cloud-menu" style="display: none; flex-direction: column; gap: 12px; padding: 12px 0; transition: all 0.3s ease;">
+          <a href="#" style="display: flex; align-items: center; padding: 12px 16px; border-radius: 10px; background: #ffffff; border: 1px solid #e5e7eb; text-decoration: none; transition: all 0.2s ease;"
+             onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.06)'"
+             onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="width: 28px; height: 28px; background: #059669; border-radius: 8px; margin-right: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 16px; height: 16px; color: #ffffff;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #1f2937;">Cloud Architect</div>
+              <div style="font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: #6b7280; margin-top: 4px;">AWS · Azure · GCP</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div style="padding: 16px; border-radius: 12px; background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);">
+        <span style="display: block; font-family: 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; color: #1e40af; text-transform: uppercase; margin-bottom: 8px;">Featured Program</span>
+        <h3 style="font-family: 'Inter', system-ui, sans-serif; font-size: 16px; font-weight: 700; color: #1f2937; margin: 0 0 8px 0;">GenAI Mastery</h3>
+        <p style="font-family: 'Inter', system-ui, sans-serif; font-size: 13px; color: #4b5563; margin: 0 0 12px 0; line-height: 1.5;">Master LLMs, Diffusion Models, and Production Deployment</p>
+        <button style="padding: 10px 16px; border-radius: 8px; border: none; background: #1e40af; color: #ffffff; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease;"
+                onmouseover="this.style.background='#1e3a8a'; this.style.transform='scale(1.02)'"
+                onmouseout="this.style.background='#1e40af'; this.style.transform='scale(1)'">
+          Explore Program
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Pinned buttons section -->
+  <div style="flex-shrink: 0; border-top: 1px solid #e5e7eb; padding: 20px; background: #ffffff; box-shadow: 0 -6px 16px rgba(0,0,0,0.06); z-index: 1002; position: sticky; bottom: 0;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <a href="login.html" style="padding: 12px; text-align: center; background: #4f46e5; color: #ffffff; border-radius: 8px; text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 500; transition: background 0.2s ease, transform 0.2s ease;"
+         onmouseover="this.style.background='#4338ca'; this.style.transform='scale(1.02)'"
+         onmouseout="this.style.background='#4f46e5'; this.style.transform='scale(1)'">Join Free</a>
+      <a href="login.html" style="padding: 12px; text-align: center; background: #ffffff; border: 1px solid #d1d5db; color: #1f2937; border-radius: 8px; text-decoration: none; font-family: 'Inter', system-ui, sans-serif; font-size: 14px; font-weight: 500; transition: background 0.2s ease, transform 0.2s ease;"
+         onmouseover="this.style.background='#f3f4f6'; this.style.transform='scale(1.02)'"
+         onmouseout="this.style.background='#ffffff'; this.style.transform='scale(1)'">Log In</a>
+    </div>
   </div>
 </div>
 
-                         <div id="featured-program">
-    <span class="label">FEATURED PROGRAM</span>
-    <h3 class="title">GenAI Mastery</h3>
-    <p class="description">Master LLMs, Diffusion Models, and Production Deployment</p>
-    <button class="cta-button">Explore Program</button>
-  </div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 20px;">
-                        <a href="login.html" style="padding: 12px; text-align: center; background: #7c3aed; color: white; border-radius: 8px; text-decoration: none;">Join free</a>
-                        <a href="login.html" style="padding: 12px; text-align: center; border: 1px solid #d1d5db; color: #4b5563; border-radius: 8px; text-decoration: none;">Log in</a>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    </div>
-    <script>
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
+<script>
+function toggleAccordion(element) {
+  const content = element.nextElementSibling;
+  const icon = element.querySelector('.accordion-icon');
+  const isExpanded = content.style.display === 'flex';
+  content.style.display = isExpanded ? 'none' : 'flex';
+  icon.textContent = isExpanded ? '+' : '−';
+  element.setAttribute('aria-expanded', !isExpanded);
+}
 
-        function toggleMobileMenu() {
-            const isOpen = mobileMenu.style.transform === 'translateX(0px)' || mobileMenu.style.transform === '';
-            mobileMenu.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0)';
-        }
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const isOpen = mobileMenu.style.transform === 'translateX(0px)' || mobileMenu.style.transform === '';
+  mobileMenu.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0)';
+}
 
-        mobileMenuButton.addEventListener('click', toggleMobileMenu);
-        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+document.getElementById('mobileMenuButton').addEventListener('click', toggleMobileMenu);
+document.getElementById('mobileMenuClose').addEventListener('click', toggleMobileMenu);
 
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && window.innerWidth <= 768) {
-                mobileMenu.style.transform = 'translateX(100%)';
-            }
-        });
+document.addEventListener('click', (e) => {
+  if (!mobileMenu.contains(e.target) && !document.getElementById('mobileMenuButton').contains(e.target) && window.innerWidth <= 768) {
+    mobileMenu.style.transform = 'translateX(100%)';
+  }
+});
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && window.innerWidth <= 768) {
-                mobileMenu.style.transform = 'translateX(100%)';
-            }
-        });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && window.innerWidth <= 768) {
+    mobileMenu.style.transform = 'translateX(100%)';
+  }
+});
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                mobileMenu.style.transform = 'translateX(100%)';
-            }
-        });
-    </script>
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    mobileMenu.style.transform = 'translateX(100%)';
+  }
+});
+</script>
+
+<style>
+/* Media Queries */
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+  .mobile-menu-button { display: block !important; }
+}
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+}
+
+/* Ensure no horizontal overflow */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Focus styles for accessibility */
+button:focus, a:focus {
+  outline: 2px solid #1e40af;
+  outline-offset: 2px;
+}
+
+/* High contrast for accessibility */
+#mobileMenu a, #mobileMenu button {
+  color: #1f2937;
+}
+
+/* Smooth scrolling behavior */
+#mobileMenu {
+  overscroll-behavior: contain;
+}
+</style>
    
 
 
