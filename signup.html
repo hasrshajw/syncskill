@@ -381,9 +381,14 @@ label {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   body {
-    background-color: rgb(255 255 255);
-    padding: 1rem;
+    background: linear-gradient(to bottom, rgba(6, 122, 29, 0.05), rgb(255 255 255));
+    padding: 0.5rem 1.5rem;
     font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
   }
 
   .bg-white {
@@ -403,64 +408,152 @@ label {
   }
 
   .p-8 {
-    padding: 1.5rem 0;
+    padding: 1rem 1.5rem;
   }
 
-  .text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-  }
-
-  .text-sm {
-    font-size: 1rem;
-    font-weight: 600;
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
   }
 
   .w-16, .h-16 {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 5.5rem;
+    height: 5.5rem;
+    transition: transform 0.3s ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .text-center img:hover {
+    transform: scale(1.06) rotate(2deg);
+  }
+
+  .text-2xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: rgb(1 35 65);
+  }
+
+  .text-2xl span {
+    font-size: 2rem;
+    background: linear-gradient(90deg, rgb(1 35 65) 0%, rgb(6 122 29) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0,
+
+ 0.1));
+  }
+
+  .text-sm {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: rgb(55 65 81);
+  }
+
+  input {
+    font-size: 1rem;
+    background-color: rgb(245 245 245);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  input::placeholder {
+    color: rgb(156 163 175);
+    font-weight: 500;
+  }
+
+  input:focus {
+    background-color: rgb(255 255 255);
+    box-shadow: 0 0 0 3px rgba(6, 122, 29, 0.2);
+    border-color: rgb(6 122 29);
   }
 
   .py-3 {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
   }
 
   .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .divider {
+    margin: 1rem 0;
   }
 
   .divider-text {
-    margin: 0 0.75rem;
+    margin: 0 1rem;
     font-size: 0.875rem;
     font-weight: 600;
+    color: rgb(75 85 99);
   }
 
   .mb-8 {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .mb-6 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .spinner {
     width: 2rem;
     height: 2rem;
   }
+
+  .google-button {
+    background: linear-gradient(to right, rgb(255 255 255), rgb(245 245 245));
+    border-radius: 0.75rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .google-button:hover {
+    background: linear-gradient(to right, rgb(245 245 245), rgb(235 235 235));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  button.w-full {
+    background: linear-gradient(90deg, rgb(1 35 65) 0%, rgb(17 24 39) 100%);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button.w-full:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(90deg, rgb(6 122 29) 0%, rgb(1 35 65) 100%);
+  }
+
+  .text-gray-600 {
+    transition: color 0.2s ease;
+  }
+
+  .text-gray-600:hover {
+    color: rgb(6 122 29);
+  }
 }
 
 @media (max-width: 480px) {
   .p-8 {
-    padding: 1rem 0;
+    padding: 0.75rem 1rem;
   }
 
   .text-2xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-2xl span {
+    font-size: 1.625rem;
   }
 
   .text-sm {
@@ -469,8 +562,8 @@ label {
   }
 
   .w-16, .h-16 {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
   .google-button img {
