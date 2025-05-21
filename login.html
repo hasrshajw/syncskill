@@ -541,12 +541,12 @@
       </p>
     </div>
 
- <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+<!-- Firebase SDK (using v9+ modular SDK) -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
-<script>
-  // Firebase configuration (replace with your Firebase project credentials)
+  // Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
     authDomain: "syncskilll.firebaseapp.com",
@@ -558,10 +558,10 @@
   };
 
   // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-  // Element references
+  // DOM elements
   const successMessage = document.getElementById('success-message');
   const errorMessage = document.getElementById('error-message');
   const usernameSpan = document.getElementById('username');
@@ -595,7 +595,7 @@
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    auth.signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         const displayName = user.displayName || user.email.split('@')[0];
@@ -621,8 +621,8 @@
   googleButton.addEventListener('click', () => {
     toggleLoadingState(googleButton, true);
 
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         const displayName = user.displayName || user.email.split('@')[0];
@@ -644,7 +644,7 @@
   });
 
   // Monitor auth state and redirect to user page if logged in
-  auth.onAuthStateChanged((user) => {
+  onAuthStateChanged(auth, (user) => {
     if (user) {
       window.location.href = 'user.html';  // Redirect to user page if logged in
     } else {
