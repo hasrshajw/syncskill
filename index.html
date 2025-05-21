@@ -1068,12 +1068,12 @@ margin-left: 0px;
                     <div style="position: relative;"
                         onmouseenter="
                             const btn = this.querySelector('button');
-                            const m = this.querySelector('.mega-menu');
-                            const rect = btn.getBoundingClientRect();
-                            m.style.top = rect.bottom + 5 + 'px';
-                            m.style.opacity = '1';
-                            m.style.transform = 'translate(-50%, 0)';
-                            m.style.pointerEvents = 'auto';
+const m = this.querySelector('.mega-menu');
+const rect = btn.getBoundingClientRect();
+m.style.top = rect.top + window.scrollY + btn.offsetHeight + 5 + 'px';
+m.style.opacity = '1';
+m.style.transform = 'translate(-50%, 0)';
+m.style.pointerEvents = 'auto';
                         "
                         onmouseleave="
                             const m = this.querySelector('.mega-menu');
