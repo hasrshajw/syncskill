@@ -1034,33 +1034,59 @@ margin-left: 0px;
       </a>
       <div class="desktop-only" style="display: flex; align-items: center; gap: 40px;">
         <div style="position: relative;"
-             onmouseenter="
-              const btn = this.querySelector('button');
-const m = this.querySelector('.mega-menu');
-const rect = btn.getBoundingClientRect();
-m.style.top = rect.top + window.scrollY + btn.offsetHeight + 5 + 'px';
-m.style.opacity = '1';
-m.style.transform = 'translate(-50%, 0)';
-m.style.pointerEvents = 'auto';
-                        "
-                        onmouseleave="
-                            const m = this.querySelector('.mega-menu');
-    window.menuTimeout = setTimeout(() => {
-        m.style.opacity = '0';
-        m.style.transform = 'translate(-50%, 8px)';
-        m.style.pointerEvents = 'none';
-    }, 400);
-             ">
-          <button style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: transparent; border: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);"
-                  onmouseover="this.style.background='#f8f9fa'" 
-                  onmouseout="this.style.background='transparent'">
-            <span style="font-family: 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 500; color: #333333; letter-spacing: 0.2px;">Learning Paths</span>
-            <svg style="width: 18px; height: 18px; color: #4d4d4d; transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);" 
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="mega-menu"
+    onmouseenter="
+        clearTimeout(window.menuTimeout);
+        const btn = this.querySelector('button');
+        const m = this.querySelector('.mega-menu');
+        const rect = btn.getBoundingClientRect();
+        m.style.top = rect.top + window.scrollY + btn.offsetHeight + 5 + 'px';
+        m.style.opacity = '1';
+        m.style.transform = 'translate(-50%, 0)';
+        m.style.pointerEvents = 'auto';
+    "
+    onmouseleave="
+        if (!window.menuOpen) {
+            const m = this.querySelector('.mega-menu');
+            window.menuTimeout = setTimeout(() => {
+                m.style.opacity = '0';
+                m.style.transform = 'translate(-50%, 8px)';
+                m.style.pointerEvents = 'none';
+            }, 300);
+        }
+    ">
+    
+    <button onclick="
+        const m = this.parentElement.querySelector('.mega-menu');
+        const rect = this.getBoundingClientRect();
+        m.style.top = rect.top + window.scrollY + this.offsetHeight + 5 + 'px';
+        m.style.opacity = '1';
+        m.style.transform = 'translate(-50%, 0)';
+        m.style.pointerEvents = 'auto';
+        window.menuOpen = true;
+    "
+    onmouseover="this.style.background='#f8f9fa'" 
+    onmouseout="this.style.background='transparent'"
+    style="display: flex; align-items: center; gap: 12px; padding: 12px 20px; background: transparent; border: none; cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);">
+        <span style="font-family: 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 500; color: #333333; letter-spacing: 0.2px;">
+            Learning Paths
+        </span>
+        <svg style="width: 18px; height: 18px; color: #4d4d4d; transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);" 
+             viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M6 9l6 6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <div class="mega-menu"
+        onmouseenter="clearTimeout(window.menuTimeout)"
+        onmouseleave="
+            window.menuTimeout = setTimeout(() => {
+                const m = this;
+                m.style.opacity = '0';
+                m.style.transform = 'translate(-50%, 8px)';
+                m.style.pointerEvents = 'none';
+                window.menuOpen = false;
+            }, 300);
+        "
                style="position: fixed; top: 0; left: 50%; width: 800px; background: #fff; border-radius: 16px; box-shadow: 0 24px 48px rgba(0,0,0,0.12); padding: 32px; opacity: 0; transform: translate(-50%,8px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); pointer-events: none;">
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;">
               <div>
