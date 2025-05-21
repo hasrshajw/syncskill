@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sign Up for GrowthSchool</title>
+    <title>Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       *,
@@ -269,32 +269,13 @@
       }
 
       .success-message {
-        display: none;
-        background-color: rgb(240 253 244);
+        background-color: rgb(6 122 29 / 0.1);
         color: rgb(6 122 29);
         padding: 1rem;
         border-radius: 0.5rem;
-        border: 1px solid rgb(6 122 29 / 0.3);
         text-align: center;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        animation: slideIn 0.5s ease-out;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .success-message::before {
-        content: '✔';
-        display: inline-block;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: rgb(6 122 29);
-        color: white;
-        border-radius: 50%;
-        line-height: 1.5rem;
-        margin-right: 0.5rem;
-        font-size: 0.875rem;
-        vertical-align: middle;
+        display: none;
       }
 
       .error-message {
@@ -340,39 +321,27 @@
 
       /* Loading State Styles */
       .loading-overlay {
-        display: none;
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgb(255 255 255 / 0.8);
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 1.5rem;
         z-index: 10;
-        animation: fadeIn 0.3s ease-in;
+        display: none;
       }
 
       .spinner {
         width: 2.5rem;
         height: 2.5rem;
-        border: 4px solid rgb(1 35 65 / 0.2);
+        border: 4px solid #f3f3f3;
         border-top: 4px solid rgb(1 35 65);
         border-radius: 50%;
         animation: spin 1s linear infinite;
-      }
-
-      .loading .google-button,
-      .loading button[type="submit"] {
-        opacity: 0.6;
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-
-      .loading input {
-        opacity: 0.6;
-        pointer-events: none;
       }
 
       @keyframes spin {
@@ -380,20 +349,33 @@
         100% { transform: rotate(360deg); }
       }
 
-      @keyframes slideIn {
-        from {
-          transform: translateY(-10px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+      .loading {
+        opacity: 0.7;
+        cursor: not-allowed;
       }
 
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+      .loading-button {
+        position: relative;
+        pointer-events: none;
+      }
+
+      .loading-button .button-text {
+        visibility: hidden;
+      }
+
+      .loading-button .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1.5rem;
+        height: 1.5rem;
+        border-width: 3px;
+      }
+
+      .form-disabled {
+        pointer-events: none;
+        opacity: 0.6;
       }
 
       /* Media Queries for Responsiveness */
@@ -482,23 +464,22 @@
           height: 1.5rem;
         }
 
-        .success-message::before {
+        .loading-button .spinner {
           width: 1.25rem;
           height: 1.25rem;
-          line-height: 1.25rem;
-          font-size: 0.75rem;
+          border-width: 2px;
         }
       }
     </style>
   </head>
   <body>
     <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-md relative">
-      <div class="loading-overlay" id="loading-overlay">
+      <div id="loading-overlay" class="loading-overlay">
         <div class="spinner"></div>
       </div>
       <div class="text-center mb-8">
         <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/GrowthSchoolNewLogo.svg" alt="Brand Logo" class="w-16 h-16 mx-auto mb-6">
-        <h1 class="text-2xl font-semibold text-gs-navy">Sign Up for GrowthSchool</h1>
+        <h1 class="text-2xl font-semibold text-gs-navy">Sign Up for Syncskill</h1>
       </div>
 
       <div id="success-message" class="success-message">
@@ -543,7 +524,8 @@
           type="submit"
           class="w-full bg-gray-900 text-white rounded-lg py-3 font-semibold hover:bg-gray-800 transition duration-300"
         >
-          Sign Up
+          <span class="button-text">Sign Up</span>
+          <div class="spinner" style="display: none;"></div>
         </button>
       </form>
 
@@ -559,7 +541,8 @@
           class="google-button flex items-center justify-center w-full rounded-lg py-3 font-semibold text-gray-700"
         >
           <img src="https://s3.ap-south-1.amazonaws.com/assets.growthschool.io/google.svg" alt="Google" class="w-5 h-5 mr-3">
-          Sign Up with Google
+          <span class="button-text">Sign Up with Google</span>
+          <div class="spinner" style="display: none;"></div>
         </button>
       </div>
 
@@ -573,7 +556,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
     <script>
-      // Firebase configuration
+      // Firebase configuration (replace with your Firebase project credentials)
       const firebaseConfig = {
         apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
         authDomain: "syncskilll.firebaseapp.com",
@@ -588,22 +571,28 @@
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
 
-      // DOM elements
+      // Element references
       const successMessage = document.getElementById('success-message');
       const errorMessage = document.getElementById('error-message');
       const usernameSpan = document.getElementById('username');
       const signupForm = document.getElementById('signup-form');
-      const googleSignInButton = document.getElementById('google-signin');
+      const signupButton = signupForm.querySelector('button');
+      const googleButton = document.getElementById('google-signin');
       const loadingOverlay = document.getElementById('loading-overlay');
-      const formContainer = signupForm.parentElement;
 
       // Function to toggle loading state
-      function toggleLoading(isLoading) {
+      function toggleLoadingState(button, isLoading) {
+        const spinner = button.querySelector('.spinner');
+        const buttonText = button.querySelector('.button-text');
         if (isLoading) {
-          formContainer.classList.add('loading');
+          button.classList.add('loading-button');
+          spinner.style.display = 'block';
+          signupForm.classList.add('form-disabled');
           loadingOverlay.style.display = 'flex';
         } else {
-          formContainer.classList.remove('loading');
+          button.classList.remove('loading-button');
+          spinner.style.display = 'none';
+          signupForm.classList.remove('form-disabled');
           loadingOverlay.style.display = 'none';
         }
       }
@@ -611,7 +600,8 @@
       // Email/Password Sign-Up
       signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        toggleLoading(true);
+        toggleLoadingState(signupButton, true);
+        
         const username = document.getElementById('username-input').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
@@ -622,44 +612,43 @@
             return user.updateProfile({ displayName: username });
           })
           .then(() => {
-            toggleLoading(false);
             successMessage.style.display = 'block';
             usernameSpan.textContent = username;
             errorMessage.style.display = 'none';
             signupForm.reset();
-            setTimeout(() => {
-              window.location.href = '/dashboard';
-            }, 1500);
+            window.location.href = '/dashboard';
           })
           .catch((error) => {
-            toggleLoading(false);
             errorMessage.textContent = `Sign-up failed: ${error.message}`;
             errorMessage.style.display = 'block';
             successMessage.style.display = 'none';
+          })
+          .finally(() => {
+            toggleLoadingState(signupButton, false);
           });
       });
 
       // Google Sign-In
-      googleSignInButton.addEventListener('click', () => {
-        toggleLoading(true);
+      googleButton.addEventListener('click', () => {
+        toggleLoadingState(googleButton, true);
+        
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
           .then((result) => {
             const user = result.user;
             const displayName = user.displayName || user.email.split('@')[0];
-            toggleLoading(false);
             successMessage.style.display = 'block';
             usernameSpan.textContent = displayName;
             errorMessage.style.display = 'none';
-            setTimeout(() => {
-              window.location.href = '/user';
-            }, 1500);
+            window.location.href = '/user';
           })
           .catch((error) => {
-            toggleLoading(false);
             errorMessage.textContent = `Google Sign-Up failed: ${error.message}`;
             errorMessage.style.display = 'block';
             successMessage.style.display = 'none';
+          })
+          .finally(() => {
+            toggleLoadingState(googleButton, false);
           });
       });
 
