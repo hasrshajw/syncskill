@@ -4,7 +4,7 @@
     <title>Login to GrowthSchool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    *,
+  *,
 ::before,
 ::after {
   box-sizing: border-box;
@@ -382,8 +382,13 @@ label {
 @media (max-width: 768px) {
   body {
     background-color: rgb(255 255 255);
-    padding: 1rem;
+    padding: 0.5rem;
     font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
   }
 
   .bg-white {
@@ -403,23 +408,45 @@ label {
   }
 
   .p-8 {
-    padding: 1.5rem 0;
+    padding: 1rem 0;
+  }
+
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .w-16, .h-16 {
+    width: 5rem;
+    height: 5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .text-center img:hover {
+    transform: scale(1.05);
   }
 
   .text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .text-2xl span {
+    background: linear-gradient(90deg, rgb(1 35 65) 0%, rgb(6 122 29) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: 0.05em;
   }
 
   .text-sm {
     font-size: 1rem;
     font-weight: 600;
-  }
-
-  .w-16, .h-16 {
-    width: 4.5rem;
-    height: 4.5rem;
   }
 
   .py-3 {
@@ -432,6 +459,10 @@ label {
     padding-right: 1rem;
   }
 
+  .divider {
+    margin: 1rem 0;
+  }
+
   .divider-text {
     margin: 0 0.75rem;
     font-size: 0.875rem;
@@ -439,27 +470,46 @@ label {
   }
 
   .mb-8 {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .mb-6 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .spinner {
     width: 2rem;
     height: 2rem;
   }
+
+  .google-button {
+    transition: all 0.3s ease;
+  }
+
+  .google-button:hover {
+    background: rgb(240 240 240);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  }
+
+  button.w-full {
+    transition: all 0.3s ease;
+  }
+
+  button.w-full:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  }
 }
 
 @media (max-width: 480px) {
   .p-8 {
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
 
   .text-2xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
   }
 
@@ -469,8 +519,8 @@ label {
   }
 
   .w-16, .h-16 {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .google-button img {
@@ -501,9 +551,9 @@ label {
         <div class="spinner"></div>
       </div>
       <div class="text-center mb-8">
-        <img src="logo-s.png" alt="Brand Logo" class="w-16 h-16 mx-auto mb-6">
-        <h1 class="text-2xl font-semibold text-gs-navy">Login to SYNCSKILL</h1>
-      </div>
+  <img src="logo-s.png" alt="Brand Logo" class="w-16 h-16 mx-auto mb-6">
+  <h1 class="text-2xl font-semibold text-gs-navy">Login to <span>SYNCSKILL</span></h1>
+</div>
 
       <div id="success-message" class="success-message">
         Welcome back, <span id="username"></span>! You are now logged in.
