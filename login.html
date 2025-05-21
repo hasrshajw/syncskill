@@ -541,9 +541,9 @@
       </p>
     </div>
 
-   <!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+ <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
 
 <script>
   // Firebase configuration (replace with your Firebase project credentials)
@@ -558,7 +558,7 @@
   };
 
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  const app = firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 
   // Element references
@@ -643,21 +643,16 @@
       });
   });
 
-  // Monitor auth state
+  // Monitor auth state and redirect to user page if logged in
   auth.onAuthStateChanged((user) => {
     if (user) {
-      const displayName = user.displayName || user.email.split('@')[0];
-      successMessage.style.display = 'block';
-      usernameSpan.textContent = displayName;
-      errorMessage.style.display = 'none';
-
-      // Automatically redirect if already logged in
-      window.location.href = 'user.html';  // Redirect to the user page if logged in
+      window.location.href = 'user.html';  // Redirect to user page if logged in
     } else {
       successMessage.style.display = 'none';
     }
   });
 </script>
+
 
   </body>
 </html>
