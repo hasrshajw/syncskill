@@ -3666,7 +3666,7 @@ margin-left: 0px;
       updateProfile(user);
     } else {
       clearProfile();
-      window.location.href = "/login.html";
+      window.location.href = "/pages/verify/login.html";
     }
   }
 
@@ -3688,7 +3688,7 @@ margin-left: 0px;
           if (user) {
             updateProfile(user); // Safe fallback
           } else {
-            window.location.href = "/login.html";
+            window.location.href = "/pages/verify/login.html";
           }
         }
       }, 100); // slight delay to allow Firebase to hydrate
