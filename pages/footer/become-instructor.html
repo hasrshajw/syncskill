@@ -1,0 +1,713 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become an Instructor - SyncSkill</title>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --background: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --spacing-unit: 8px;
+            --font-size-base: 16px;
+            --easing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: var(--font-size-base);
+        }
+
+        .mobile-header {
+            display: none;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 200px;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .wrap.section__container--small {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            animation: fadeIn 0.8s var(--easing);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .pre-header {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .section-header {
+            color: var(--text);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .section-subheading, .para {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s var(--easing), transform 0.3s var(--easing);
+        }
+
+        .cta-button:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+        }
+
+        .benefits-section, .steps-section, .testimonials-section, .form-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--easing);
+        }
+
+        .benefits-section:hover, .steps-section:hover, .testimonials-section:hover, .form-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: calc(var(--spacing-unit));
+        }
+
+        .benefit-item svg {
+            stroke: var(--primary);
+            width: 24px;
+            height: 24px;
+        }
+
+        .benefit-item h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .accordion-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 3);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--easing);
+        }
+
+        .accordion-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .accordion-item {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .accordion-title {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-bg);
+            transition: background 0.3s var(--easing), border-color 0.3s var(--easing);
+        }
+
+        .accordion-title:hover {
+            background: #F1F5F9;
+            border-color: var(--primary);
+        }
+
+        .accordion-header {
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .accordion-header-text h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .accordion-header svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+            transition: transform 0.3s var(--easing);
+        }
+
+        .accordion-item.active .accordion-header svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 calc(var(--spacing-unit) * 3);
+            transition: max-height 0.5s var(--easing), padding 0.5s var(--easing), opacity 0.5s var(--easing);
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+            opacity: 1;
+        }
+
+        .accordion-content p, .accordion-content ul {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            padding-left: calc(var(--spacing-unit) * 2);
+        }
+
+        .accordion-content li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .accordion-content li::before {
+            content: '•';
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .testimonial-item {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .testimonial-item h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-section form {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .form-section input, .form-section textarea {
+            width: 100%;
+            padding: calc(var(--spacing-unit) * 1.5);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text);
+            background: var(--card-bg);
+            transition: border-color 0.3s var(--easing);
+        }
+
+        .form-section input:focus, .form-section textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-section textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #FFFFFF;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing), transform 0.3s var(--easing);
+            cursor: pointer;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wrap.section__container--small,
+            .pre-header,
+            .section-header,
+            .section-subheading,
+            .benefits-section,
+            .steps-section,
+            .testimonials-section,
+            .form-section,
+            .accordion-section,
+            .accordion-title,
+            .accordion-content,
+            .scroll-to-top {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .wrap.section__container--small {
+                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                display: block;
+            }
+
+            .section-header {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .section-subheading, .para {
+                font-size: 0.875rem;
+            }
+
+            .benefits-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-header {
+                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            }
+
+            .benefits-section, .steps-section, .testimonials-section, .form-section, .accordion-section {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .mobile-logo {
+                width: 160px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="mobile-header">
+        <img src="https://via.placeholder.com/200x30?text=SyncSkill+Logo" alt="SyncSkill Logo" class="mobile-logo">
+    </header>
+
+    <div class="wrap section__container--small">
+        <div class="hero-section">
+            <div class="pre-header">Become an Instructor</div>
+            <h1 class="section-header">Share Your Expertise with SyncSkill</h1>
+            <p class="section-subheading">
+                Are you passionate about teaching and ready to inspire B.Tech students across India? Join SyncSkill as an instructor to empower learners, monetize your knowledge, and be part of a mission-driven educational platform.
+            </p>
+            <a href="#apply-form" class="cta-button">Apply Now</a>
+        </div>
+
+        <div class="benefits-section">
+            <h2 class="section-header">Why Teach with SyncSkill?</h2>
+            <p class="para">Unlock opportunities to grow your influence and income while making a difference.</p>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <h4>Reach a Growing Audience</h4>
+                    <p>Connect with motivated B.Tech students in Andhra Pradesh and beyond.</p>
+                </div>
+                <div class="benefit-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4>Earn Revenue</h4>
+                    <p>Monetize your expertise through competitive revenue-sharing models.</p>
+                </div>
+                <div class="benefit-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    <h4>Flexible Teaching</h4>
+                    <p>Create pre-recorded courses, host live classes, or engage in peer-to-peer sessions.</p>
+                </div>
+                <div class="benefit-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    <h4>Powerful Tools</h4>
+                    <p>Use our intuitive course creation tools, analytics, and support to succeed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="steps-section">
+            <h2 class="section-header">How to Become an Instructor</h2>
+            <p class="para">Get started in just a few simple steps.</p>
+            <div class="accordion-section">
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>1. Submit Your Application</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Complete the application form below or email your profile, qualifications, teaching experience, and a brief course proposal to <a href="mailto:harshavardhanjw@gmail.com">harshavardhanjw@gmail.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>2. Application Review</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Our team will review your application within 7-10 business days. We may request additional details or a sample lesson to assess your teaching style.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>3. Sign the Instructor Agreement</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Upon approval, you’ll sign an Instructor Agreement detailing your rights, responsibilities, and revenue-sharing terms.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>4. Create Your Course</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Use SyncSkill’s user-friendly platform to develop and upload engaging course materials, including videos, quizzes, and resources.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>5. Publish and Teach</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Once approved, your course will be published, and you can start teaching and engaging with students.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-section">
+            <h2 class="section-header">What Our Instructors Say</h2>
+            <p class="para">Hear from instructors who’ve transformed lives with SyncSkill.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <p>“Teaching on SyncSkill has been incredibly rewarding. The platform’s tools make it easy to create courses, and I love connecting with motivated students.”</p>
+                    <h5>Dr. Priya Sharma, Data Science Instructor</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>“SyncSkill’s revenue-sharing model allowed me to turn my expertise into a sustainable income stream. The support team is fantastic!”</p>
+                    <h5>Ravi Kumar, Web Development Instructor</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>“I’ve reached students across India with my courses. SyncSkill’s mission to empower B.Tech students resonates with me.”</p>
+                    <h5>Anita Rao, Machine Learning Instructor</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section" id="apply-form">
+            <h2 class="section-header">Apply to Become an Instructor</h2>
+            <p class="para">Ready to join us? Fill out the form below to get started.</p>
+            <form action="mailto:harshavardhanjw@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="text" name="subject" placeholder="Subject Area (e.g., Python, Data Science)" required>
+                <textarea name="proposal" placeholder="Brief Course Proposal (Describe your course idea and teaching experience)" required></textarea>
+                <button type="submit" class="cta-button">Submit Application</button>
+            </form>
+        </div>
+
+        <div class="accordion-section">
+            <h2 class="section-header">Instructor Responsibilities & Policies</h2>
+            <p class="para">Understand your role and our expectations as a SyncSkill instructor.</p>
+            <div class="accordion-item">
+                <div class="accordion-title">
+                    <div class="accordion-header">
+                        <div class="accordion-header-text">
+                            <h4>Instructor Eligibility</h4>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>Proven expertise or professional experience in your subject area (e.g., certifications, degrees, or work experience).</li>
+                            <li>Commitment to creating high-quality, original, and engaging educational content.</li>
+                            <li>Alignment with SyncSkill’s mission to empower B.Tech students in Andhra Pradesh and beyond.</li>
+                            <li>Compliance with Indian laws, including intellectual property and data privacy regulations.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>Instructor Responsibilities</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Create original or properly licensed course content that does not infringe third-party rights.</li>
+                                <li>Ensure accuracy, clarity, and high-quality production in all instructional materials.</li>
+                                <li>Respond promptly and professionally to student queries and feedback.</li>
+                                <li>Adhere to SyncSkill’s Code of Conduct, Community Guidelines, and no-refunded payment policy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>Intellectual Property and Licensing</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>You retain ownership of your original content.</li>
+                                <li>By uploading, you grant SyncSkill a worldwide, royalty-free, sublicensable license to use, distribute, and display your content for platform services.</li>
+                                <li>You warrant that your content does not violate copyright, trademark, or other rights.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <h4>Payment and Revenue Sharing</h4>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Payments are processed securely via Razorpay.</li>
+                                <li>Revenue-sharing details will be outlined in the Instructor Agreement.</li>
+                                <li>Payments are subject to applicable taxes and compliance with Indian financial regulations.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-to-top" id="scrollToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </div>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll-to-top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

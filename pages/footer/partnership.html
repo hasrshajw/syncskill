@@ -1,0 +1,780 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="Join the SyncSkill Partnership Program to collaborate with a leading educational platform and empower B.Tech students across India.">
+        <meta name="description" content="Partner with SyncSkill to deliver transformative education. Explore opportunities for academic institutions, industry experts, and content creators.">
+        <title>Partner Program - SyncSkill</title>
+        <style>
+            :root {
+                --primary: #2563EB;
+                --background: #F9FAFB;
+                --card-bg: #FFFFFF;
+                --text: #1A2533;
+                --text-secondary: #6B7280;
+                --border: #E5E7EB;
+                --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                --gradient: linear-gradient(135deg, #2563EB, #3B82F6);
+                --spacing-unit: 16px;
+                --font-size-base: 16px;
+                --easing: cubic-bezier(0.2, 0.2, 0.2, 1);
+                --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: var(--font-family);
+                background: var(--background);
+                color: var(--text);
+                line-height: 1.5;
+                font-size: var(--font-size-base);
+                font-weight: 400;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .mobile-header {
+                display: none;
+                padding: calc(var(--spacing-unit) * 1.75);
+                background: var(--card-bg);
+                border-bottom: 1px solid var(--border);
+                position: sticky;
+                top: ;
+                z-index: 10;
+            }
+
+            .mobile-logo {
+                width: 160px;
+                height: auto;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: calc(var(--spacing-unit)) * 6) calc(var(--spacing-unit));
+                animation: fadeIn 0.9s var(--easing);
+            }
+
+            .hero {
+                text-align: center;
+                padding: calc(var(--spacing-unit) * 8) 0;
+                margin-bottom: calc(var(--spacing-unit) * 5);
+            }
+
+            .pre-title {
+                color: var(--primary);
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin-bottom: calc(var(--spacing-unit) * 1.5);
+                opacity: 0;
+                animation: slideUp 0.6s var(--easing) forwards;
+                animation-delay: 0.2s;
+            }
+
+            .title {
+                color: var(--text);
+                font-size: clamp(2rem, 5vw, 3rem);
+                font-weight: 700;
+                line-height: 1.15;
+                margin-bottom: calc(var(--spacing-unit) * 2);
+                opacity: 0;
+                animation: slideUp 0.6s var(--easing) forwards;
+                animation-delay: 0.3s;
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .subtitle {
+                font-size: clamp(1rem, 2vw, 1.125rem);
+                color: var(--text-secondary);
+                font-weight: 400;
+                line-height: 1.6;
+                max-width: 600px;
+                margin: 0 auto calc(var(--spacing-unit) * 2.5);
+                opacity: 0;
+                animation: slideUp 0.6s var(--easing) forwards;
+                animation-delay: 0.4s;
+            }
+
+            .cta-button {
+                display: inline-flex;
+                align-items: center;
+                background: var(--gradient);
+                color: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5);
+                border-radius: 10px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 0.9375rem;
+                padding: calc(var(--spacing-unit) * 1.25);
+                transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing), background 0.3s var(--easing);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .cta-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: calc(100% + 1px);
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+                transition: left 0.4s var(--easing);
+            }
+
+            .cta-button:hover::before {
+                left: 100%;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+            }
+
+            .section {
+                background: var(--card-bg);
+                border-radius: 16px;
+                padding: calc(var(--spacing-unit) * 4);
+                margin-bottom: calc(var(--spacing-unit) * 4);
+                box-shadow: var(--shadow);
+                transition: transform 0.3s var(--easing);
+            }
+
+            .section:hover {
+                transform: translateY(-4px);
+            }
+
+            .benefits-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: calc(var(--spacing-unit) * 2.5);
+                margin-top: calc(var(--spacing-unit) * 2);
+            }
+
+            .benefit {
+                display: flex;
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 1.25);
+                padding: calc(var(--spacing-unit) * 1.5);
+                border-radius: 12px;
+                transition: background 0.3s var(--easing);
+            }
+
+            .benefit:hover {
+                background: #F8FAFC;
+            }
+
+            .benefit svg {
+                width: 28px;
+                height: 28px;
+                stroke: var(--primary);
+                transition: transform 0.3s var(--easing);
+            }
+
+            .benefit:hover svg {
+                transform: scale(1.15) rotate(5deg);
+            }
+
+            .benefit h3 {
+                font-size: 1.125rem;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .benefit p {
+                font-size: 0.875rem;
+                color: var(--text-secondary);
+                line-height: 1.5;
+            }
+
+            .accordion {
+                padding: calc(var(--spacing-unit) * 2.5);
+            }
+
+            .accordion-item {
+                margin-bottom: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .accordion-title {
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                background: var(--card-bg);
+                transition: background 0.3s var(--easing), border-color 0.3s var(--easing), transform 0.3s var(--easing);
+            }
+
+            .accordion-title:hover {
+                background: #F1F5F9;
+                border-color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            .accordion-header {
+                padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .accordion-header h3 {
+                font-size: 1.125rem;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .accordion-header svg {
+                width: 20px;
+                height: 20px;
+                stroke: var(--primary);
+                transition: transform 0.3s var(--easing);
+            }
+
+            .accordion-item.active .accordion-header svg {
+                transform: rotate(180deg);
+            }
+
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                padding: 0 calc(var(--spacing-unit) * 2);
+                transition: max-height 0.5s var(--easing), padding 0.5s var(--easing), opacity 0.5s var(--easing);
+                opacity: 0;
+            }
+
+            .accordion-item.active .accordion-content {
+                max-height: 800px;
+                padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+                opacity: 1;
+            }
+
+            .accordion-content p, .accordion-content ul {
+                font-size: 0.9375rem;
+                color: var(--text-secondary);
+                line-height: 1.6;
+            }
+
+            .accordion-content ul {
+                list-style: none;
+                padding-left: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .accordion-content li {
+                position: relative;
+                padding-left: calc(var(--spacing-unit) * 1.5);
+                margin-bottom: calc(var(--spacing-unit) * 0.75);
+            }
+
+            .accordion-content li::before {
+                content: '●';
+                color: var(--primary);
+                font-size: 0.75rem;
+                position: absolute;
+                left: 0;
+                top: 6px;
+            }
+
+            .carousel {
+                position: relative;
+                overflow: hidden;
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .carousel-track {
+                display: flex;
+                transition: transform 0.5s var(--easing);
+            }
+
+            .testimonial {
+                flex: 0 0 calc(33.333% - var(--spacing-unit));
+                background: #F1F5F9;
+                border-radius: 12px;
+                padding: calc(var(--spacing-unit) * 2);
+                margin-right: calc(var(--spacing-unit) * 1.5);
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s var(--easing);
+            }
+
+            .testimonial:hover {
+                transform: translateY(-4px);
+            }
+
+            .testimonial p {
+                font-size: 0.875rem;
+                font-style: italic;
+                color: var(--text-secondary);
+                margin-bottom: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .testimonial h4 {
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .carousel-controls {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 calc(var(--spacing-unit));
+            }
+
+            .carousel-button {
+                background: var(--primary);
+                color: #FFFFFF;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background 0.3s var(--easing), transform 0.3s var(--easing);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .carousel-button:hover {
+                background: #1D4ED8;
+                transform: scale(1.1);
+            }
+
+            .form-section form {
+                display: grid;
+                gap: calc(var(--spacing-unit) * 1.5);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .form-section input,
+            .form-section textarea {
+                width: 100%;
+                padding: calc(var(--spacing-unit) * 1.25);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                font-size: 0.9375rem;
+                color: var(--text);
+                background: var(--card-bg);
+                transition: border-color 0.3s var(--easing), box-shadow 0.3s var(--easing);
+            }
+
+            .form-section input:focus,
+            .form-section textarea:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+                outline: none;
+            }
+
+            .form-section textarea {
+                resize: vertical;
+                min-height: 140px;
+            }
+
+            .scroll-top {
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                background: var(--primary);
+                color: #FFFFFF;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: var(--shadow);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing), transform 0.3s var(--easing);
+                cursor: pointer;
+                z-index: 100;
+            }
+
+            .scroll-top.visible {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .scroll-top:hover {
+                transform: translateY(-4px);
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(12px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .container,
+                .pre-title,
+                .title,
+                .subtitle,
+                .section,
+                .benefit,
+                .accordion-title,
+                .accordion-content,
+                .testimonial,
+                .carousel-button,
+                .scroll-top,
+                .cta-button {
+                    animation: none;
+                    transition: none;
+                }
+            }
+
+            @media (max-width: 1024px) {
+                .container {
+                    padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit));
+                }
+
+                .mobile-header {
+                    display: block;
+                }
+
+                .title {
+                    font-size: clamp(1.75rem, 4vw, 2.25rem);
+                }
+
+                .subtitle {
+                    font-size: 0.9375rem;
+                }
+
+                .benefits-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .testimonial {
+                    flex: 0 0 calc(50% - var(--spacing-unit));
+                }
+            }
+
+            @media (max-width: 640px) {
+                .hero {
+                    padding: calc(var(--spacing-unit) * 5) 0;
+                }
+
+                .title {
+                    font-size: clamp(1.5rem, 3.5vw, 1.875rem);
+                }
+
+                .section {
+                    padding: calc(var(--spacing-unit) * 2.5);
+                }
+
+                .mobile-header {
+                    padding: calc(var(--spacing-unit) * 1.25);
+                }
+
+                .mobile-logo {
+                    width: 140px;
+                }
+
+                .testimonial {
+                    flex: 0 0 calc(100% - var(--spacing-unit));
+                }
+
+                .carousel-controls {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="mobile-header">
+            <img src="https://via.placeholder.com/200x30?text=SyncSkill+Logo" alt="SyncSkill Logo" class="mobile-logo">
+        </header>
+
+        <div class="container">
+            <section class="hero">
+                <span class="pre-title">Partner Program</span>
+                <h1 class="title">Transform Education with SyncSkill</h1>
+                <p class="subtitle">
+                    Partner with SyncSkill to empower B.Tech students and learners across India. Collaborate with us as an academic institution, industry expert, or content creator to deliver world-class education and drive impact.
+                </p>
+                <a href="#apply" class="cta-button">Become a Partner</a>
+            </section>
+
+            <section class="section benefits">
+                <h2 class="title">Why Partner with SyncSkill?</h2>
+                <p class="subtitle">Discover the advantages of collaborating with a leading educational platform.</p>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3>Revenue Growth</h3>
+                        <p>Unlock new income streams through tailored commission or revenue-sharing models.</p>
+                    </div>
+                    <div class="benefit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <h3>Global Reach</h3>
+                        <p>Connect with our expansive network of learners across Andhra Pradesh and India.</p>
+                    </div>
+                    <div class="benefit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                        <h3>Co-Branding</h3>
+                        <p>Elevate your reputation by partnering with SyncSkill’s trusted brand.</p>
+                    </div>
+                    <div class="benefit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>
+                        <h3>Cutting-Edge Tech</h3>
+                        <p>Leverage our advanced platform to deliver and track educational content.</p>
+                    </div>
+                    <div class="benefit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3>Premium Support</h3>
+                        <p>Access dedicated onboarding, technical, and marketing assistance.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section accordion">
+                <h2 class="title">Explore Partnership Opportunities</h2>
+                <p class="subtitle">Learn how you can collaborate with SyncSkill to drive impact.</p>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <h3>Who Can Partner?</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <p>We’re excited to collaborate with:</p>
+                            <ul>
+                                <li>Academic institutions and universities</li>
+                                <li>Industry leaders and expert educators</li>
+                                <li>Content creators and curriculum designers</li>
+                                <li>Tech providers and platform integrators</li>
+                                <li>Marketing affiliates and referral partners</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <h3>Partnership Models</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Content Partnership:</strong> Co-create exclusive courses and certifications.</li>
+                                <li><strong>Affiliate Partnership:</strong> Earn commissions by promoting SyncSkill’s offerings.</li>
+                                <li><strong>Institutional Collaboration:</strong> Develop tailored academic or industry programs.</li>
+                                <li><strong>Technology Integration:</strong> Seamlessly integrate your tools with our platform.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <h3>Eligibility Criteria</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Shared commitment to SyncSkill’s educational mission.</li>
+                                <li>Proven expertise in education or related fields.</li>
+                                <li>Dedication to quality and ethical standards.</li>
+                                <li>Compliance with Indian laws and regulations.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <h3>Terms & Conditions</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li>Partnerships require a signed agreement detailing roles, finances, and confidentiality.</li>
+                                <li>SyncSkill may reject applications at its discretion.</li>
+                                <li>Partners must adhere to intellectual property and data privacy laws.</li>
+                                <li>SyncSkill’s brand usage in marketing requires prior approval.</li>
+                                <li>SyncSkill is not liable for third-party actions or content.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section carousel">
+                <h2 class="title">Our Partners’ Success Stories</h2>
+                <p class="subtitle">Discover the impact of partnering with SyncSkill.</p>
+                <div class="carousel-track">
+                    <div class="testimonial">
+                        <p>“SyncSkill’s platform enabled us to deliver cutting-edge courses to thousands of students. It’s a partnership that drives results.”</p>
+                        <h4>Dr. Sanjay Patel, Dean, Horizon University</h4>
+                    </div>
+                    <div class="testimonial">
+                        <p>“As an affiliate, I’ve grown my revenue while promoting quality education. SyncSkill’s support is unparalleled.”</p>
+                        <h4>Neha Gupta, Digital Marketer</h4>
+                    </div>
+                    <div class="testimonial">
+                        <p>“Integrating our tools with SyncSkill’s platform expanded our reach. It’s a collaboration that works.”</p>
+                        <h4>Vikram Singh, CTO, LearnTech Innovations</h4>
+                    </div>
+                    <div class="testimonial">
+                        <p>“Our co-branded courses with SyncSkill have empowered countless learners. The partnership is transformative.”</p>
+                        <h4>Anita Rao, Curriculum Developer</h4>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <div class="carousel-button prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </div>
+                    <div class="carousel-button next">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section form-section" id="apply">
+                <h2 class="title">Start Your Partnership Journey</h2>
+                <p class="subtitle">Let’s collaborate to shape the future of education. Submit your application today.</p>
+                <form action="mailto:harshavardhanjw@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Organization/Individual Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="text" name="partnership" placeholder="Partnership Type (e.g., Content, Affiliate)" required>
+                    <textarea name="profile" placeholder="Your Profile & Experience" required></textarea>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <button type="submit" class="cta-button">Apply Now</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="scroll-top" id="scroll-top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </div>
+
+        <script>
+            // Accordion functionality
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement.parentElement;
+                    const isActive = item.classList.contains('active');
+                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                    if (!isActive) item.classList.add('active');
+                });
+            });
+
+            // Carousel functionality
+            const track = document.querySelector('.carousel-track');
+            const testimonials = Array.from(track.children);
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const slideWidth = testimonials[0].getBoundingClientRect().width + 24; // Includes margin
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                updateCarousel();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+                updateCarousel();
+            });
+
+            window.addEventListener('resize', updateCarousel);
+
+            // Scroll-to-top functionality
+            const scrollTopBtn = document.getElementById('scroll-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        </script>
+    </body>
+</html>

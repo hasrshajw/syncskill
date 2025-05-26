@@ -1,0 +1,516 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Links - SyncSkill</title>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --background: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --spacing-unit: 8px;
+            --font-size-base: 16px;
+            --easing: cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient: linear-gradient(135deg, #2563EB, #3B82F6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: var(--font-size-base);
+            overflow-x: hidden;
+        }
+
+        .mobile-header {
+            display: none;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 200px;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .wrap.section__container--small {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            animation: fadeIn 0.8s var(--easing);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .pre-header {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .section-header {
+            color: var(--text);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.3s;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subheading, .para {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient);
+            color: #FFFFFF;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s var(--easing);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.3);
+        }
+
+        .social-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .social-card {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: calc(var(--spacing-unit) * 3);
+            text-align: center;
+            transition: transform 0.4s var(--easing), box-shadow 0.4s var(--easing), background 0.4s var(--easing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+        }
+
+        .social-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            background: var(--card-bg);
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            transition: transform 0.3s var(--easing);
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .social-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .social-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .social-card .cta-button {
+            font-size: 0.875rem;
+            padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 2);
+        }
+
+        .testimonial-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .testimonial-item {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: calc(var(--spacing-unit) * 2);
+            text-align: center;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .testimonial-item h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .contact-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-section a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #FFFFFF;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing), transform 0.3s var(--easing);
+            cursor: pointer;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wrap.section__container--small,
+            .pre-header,
+            .section-header,
+            .section-subheading,
+            .social-card,
+            .social-icon,
+            .cta-button,
+            .testimonial-section,
+            .contact-section,
+            .scroll-to-top {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .wrap.section__container--small {
+                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                display: block;
+            }
+
+            .section-header {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .section-subheading,
+            .para {
+                font-size: 0.875rem;
+            }
+
+            .social-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-header {
+                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            }
+
+            .social-section,
+            .testimonial-section,
+            .contact-section {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .mobile-logo {
+                width: 160px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="mobile-header">
+        <img src="https://via.placeholder.com/200x30?text=SyncSkill+Logo" alt="SyncSkill Logo" class="mobile-logo">
+    </header>
+
+    <div class="wrap section__container--small">
+        <div class="hero-section">
+            <div class="pre-header">Connect with Us</div>
+            <h1 class="section-header">Join Our Vibrant Community</h1>
+            <p class="section-subheading">
+                Be the first to discover exclusive courses, expert tips, and exciting updates! Follow SyncSkill on social media to stay inspired, connect with thousands of learners, and unlock your potential. Don’t miss out—join our community today!
+            </p>
+            <a href="#social-links" class="cta-button">Explore Our Socials</a>
+        </div>
+
+        <div class="social-section" id="social-links">
+            <h2 class="section-header">Follow Us on Social Media</h2>
+            <p class="para">Stay connected with SyncSkill for the latest in education and skill-building.</p>
+            <div class="social-grid">
+                <!-- Twitter/X Card -->
+                <div class="social-card">
+                    <img src="https://via.placeholder.com/48x48?text=X" alt="Twitter/X Logo" class="social-icon">
+                    <h3 class="social-title">Twitter/X</h3>
+                    <p class="social-description">
+                        Get real-time updates, course previews, and engage with our community on Twitter/X.
+                    </p>
+                    <a href="https://twitter.com/syncskill" target="_blank" class="cta-button">Follow @SyncSkill</a>
+                </div>
+                <!-- LinkedIn Card -->
+                <div class="social-card">
+                    <img src="https://via.placeholder.com/48x48?text=LI" alt="LinkedIn Logo" class="social-icon">
+                    <h3 class="social-title">LinkedIn</h3>
+                    <p class="social-description">
+                        Connect professionally, explore career insights, and join our network of educators and learners.
+                    </p>
+                    <a href="https://linkedin.com/company/syncskill" target="_blank" class="cta-button">Follow on LinkedIn</a>
+                </div>
+                <!-- Instagram Card -->
+                <div class="social-card">
+                    <img src="https://via.placeholder.com/48x48?text=IG" alt="Instagram Logo" class="social-icon">
+                    <h3 class="social-title">Instagram</h3>
+                    <p class="social-description">
+                        Discover behind-the-scenes content, student stories, and vibrant visuals on Instagram.
+                    </p>
+                    <a href="https://instagram.com/syncskill" target="_blank" class="cta-button">Follow @SyncSkill</a>
+                </div>
+                <!-- YouTube Card -->
+                <div class="social-card">
+                    <img src="https://via.placeholder.com/48x48?text=YT" alt="YouTube Logo" class="social-icon">
+                    <h3 class="social-title">YouTube</h3>
+                    <p class="social-description">
+                        Watch free tutorials, course snippets, and expert-led sessions on our YouTube channel.
+                    </p>
+                    <a href="https://youtube.com/@syncskill" target="_blank" class="cta-button">Subscribe on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-section">
+            <h2 class="section-header">What Our Community Says</h2>
+            <p class="para">See why learners and instructors love staying connected with SyncSkill.</p>
+            <div class="testimonial-grid">
+                <div class="testimonial-item">
+                    <p>“SyncSkill’s Twitter/X posts keep me motivated with quick tips and course updates. I followed all their socials to never miss out!”</p>
+                    <h5>Riya Patel, B.Tech Student</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>“Their Instagram is so inspiring! The student success stories pushed me to join their courses.”</p>
+                    <h5>Akash Verma, Aspiring Developer</h5>
+                </div>
+                <div class="testimonial-item">
+                    <p>“I love the YouTube tutorials. Subscribing to SyncSkill’s channel helped me learn at my own pace.”</p>
+                    <h5>Sneha Rao, Data Science Enthusiast</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2 class="section-header">Get in Touch</h2>
+            <p class="para">
+                Have questions or want to collaborate? Reach out to us directly or follow our socials for the latest updates.
+            </p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:harshavardhanjw@gmail.com">harshavardhanjw@gmail.com</a><br>
+                <strong>Phone:</strong> <a href="tel:+917799181716">+91 77991 81716</a>
+            </p>
+            <a href="#social-links" class="cta-button">Follow Us Now</a>
+        </div>
+    </div>
+
+    <div class="scroll-to-top" id="scrollToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </div>
+
+    <script>
+        // Scroll-to-top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Add pulse animation to social cards on load
+        document.querySelectorAll('.social-card').forEach((card, index) => {
+            setTimeout(() => {
+                card.style.animation = 'pulse 1.5s ease-in-out';
+                setTimeout(() => {
+                    card.style.animation = '';
+                }, 1500);
+            }, index * 200);
+        });
+    </script>
+</body>
+</html>

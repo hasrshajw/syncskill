@@ -1,0 +1,509 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Courses - SyncSkill</title>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --background: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+            --border: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --spacing-unit: 8px;
+            --font-size-base: 16px;
+            --easing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: var(--font-size-base);
+        }
+
+        .mobile-header {
+            display: none;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-logo {
+            width: 200px;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .wrap.section__container--small {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+            animation: fadeIn 0.8s var(--easing);
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .pre-header {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .section-header {
+            color: var(--text);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .section-subheading, .para {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            opacity: 0;
+            animation: slideUp 0.6s var(--easing) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s var(--easing), transform 0.3s var(--easing);
+        }
+
+        .cta-button:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+        }
+
+        .filter-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 3);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .filter-section label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-right: calc(var(--spacing-unit));
+        }
+
+        .filter-section select {
+            padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--text);
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: border-color 0.3s var(--easing);
+        }
+
+        .filter-section select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .courses-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--easing);
+        }
+
+        .courses-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .course-card {
+            background: #F1F5F9;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: calc(var(--spacing-unit) * 2);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .course-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .course-meta span {
+            margin-right: calc(var(--spacing-unit) * 2);
+        }
+
+        .course-card .cta-button {
+            align-self: flex-start;
+            font-size: 0.875rem;
+            padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 2);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #FFFFFF;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s var(--easing), visibility 0.3s var(--easing), transform 0.3s var(--easing);
+            cursor: pointer;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wrap.section__container--small,
+            .pre-header,
+            .section-header,
+            .section-subheading,
+            .filter-section,
+            .courses-section,
+            .course-card,
+            .scroll-to-top {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .wrap.section__container--small {
+                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                display: block;
+            }
+
+            .section-header {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .section-subheading, .para {
+                font-size: 0.875rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-header {
+                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            }
+
+            .filter-section, .courses-section {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+
+            .mobile-header {
+                padding: calc(var(--spacing-unit) * 1.5);
+            }
+
+            .mobile-logo {
+                width: 160px;
+                height: 24px;
+            }
+
+            .filter-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="mobile-header">
+        <img src="https://via.placeholder.com/200x30?text=SyncSkill+Logo" alt="SyncSkill Logo" class="mobile-logo">
+    </header>
+
+    <div class="wrap section__container--small">
+        <div class="hero-section">
+            <div class="pre-header">Free Courses</div>
+            <h1 class="section-header">Explore Free Courses on SyncSkill</h1>
+            <p class="section-subheading">
+                Discover our range of free courses designed to help you build in-demand skills. Perfect for B.Tech students and lifelong learners, these courses offer a taste of SyncSkill’s high-quality education. Enroll today to start learning!
+            </p>
+            <a href="#courses" class="cta-button">Browse Free Courses</a>
+        </div>
+
+        <div class="filter-section">
+            <label for="category-filter">Category:</label>
+            <select id="category-filter">
+                <option value="all">All Categories</option>
+                <option value="programming">Programming</option>
+                <option value="data-science">Data Science</option>
+                <option value="web-development">Web Development</option>
+                <option value="ai">Artificial Intelligence</option>
+            </select>
+            <label for="level-filter">Level:</label>
+            <select id="level-filter">
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+        </div>
+
+        <div class="courses-section" id="courses">
+            <h2 class="section-header">Available Free Courses</h2>
+            <p class="para">Sample our expertly crafted courses to kickstart your learning journey.</p>
+            <div class="courses-grid" id="courses-grid">
+                <!-- Sample Course 1 -->
+                <div class="course-card" data-category="programming" data-level="beginner">
+                    <img src="https://via.placeholder.com/300x180?text=Course+Image" alt="Introduction to Python" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">Introduction to Python</h3>
+                        <p class="course-description">
+                            Learn the basics of Python programming, including variables, loops, and functions. Perfect for beginners looking to start coding.
+                        </p>
+                        <div class="course-meta">
+                            <span>Level: Beginner</span>
+                            <span>Duration: 4 hours</span>
+                        </div>
+                        <a href="#" class="cta-button">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Sample Course 2 -->
+                <div class="course-card" data-category="data-science" data-level="intermediate">
+                    <img src="https://via.placeholder.com/300x180?text=Course+Image" alt="Data Analysis with Pandas" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">Data Analysis with Pandas</h3>
+                        <p class="course-description">
+                            Explore data manipulation and analysis using Python’s Pandas library. Ideal for those with basic Python knowledge.
+                        </p>
+                        <div class="course-meta">
+                            <span>Level: Intermediate</span>
+                            <span>Duration: 6 hours</span>
+                        </div>
+                        <a href="#" class="cta-button">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Sample Course 3 -->
+                <div class="course-card" data-category="web-development" data-level="beginner">
+                    <img src="https://via.placeholder.com/300x180?text=Course+Image" alt="HTML & CSS Basics" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">HTML & CSS Basics</h3>
+                        <p class="course-description">
+                            Build your first website with HTML and CSS. Learn to create responsive layouts and style web pages.
+                        </p>
+                        <div class="course-meta">
+                            <span>Level: Beginner</span>
+                            <span>Duration: 5 hours</span>
+                        </div>
+                        <a href="#" class="cta-button">Enroll Now</a>
+                    </div>
+                </div>
+                <!-- Sample Course 4 -->
+                <div class="course-card" data-category="ai" data-level="advanced">
+                    <img src="https://via.placeholder.com/300x180?text=Course+Image" alt="Intro to Machine Learning" class="course-image">
+                    <div class="course-content">
+                        <h3 class="course-title">Intro to Machine Learning</h3>
+                        <p class="course-description">
+                            Dive into machine learning concepts and build predictive models. Requires prior programming experience.
+                        </p>
+                        <div class="course-meta">
+                            <span>Level: Advanced</span>
+                            <span>Duration: 8 hours</span>
+                        </div>
+                        <a href="#" class="cta-button">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-to-top" id="scrollToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </div>
+
+    <script>
+        // Filter functionality
+        const categoryFilter = document.getElementById('category-filter');
+        const levelFilter = document.getElementById('level-filter');
+        const coursesGrid = document.getElementById('courses-grid');
+        const courseCards = coursesGrid.querySelectorAll('.course-card');
+
+        function filterCourses() {
+            const selectedCategory = categoryFilter.value;
+            const selectedLevel = levelFilter.value;
+
+            courseCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                const cardLevel = card.getAttribute('data-level');
+
+                const categoryMatch = selectedCategory === 'all' || cardCategory === selectedCategory;
+                const levelMatch = selectedLevel === 'all' || cardLevel === selectedLevel;
+
+                if (categoryMatch && levelMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        categoryFilter.addEventListener('change', filterCourses);
+        levelFilter.addEventListener('change', filterCourses);
+
+        // Scroll-to-top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
