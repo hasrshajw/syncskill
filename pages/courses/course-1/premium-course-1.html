@@ -2080,7 +2080,7 @@ function logout() {
 
       // Store redirect path before redirecting to login
       sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
-      window.location.href = "/login.html";
+      window.location.href = "/pages/verify/login.html";
       return;
     }
 
@@ -2092,13 +2092,13 @@ function logout() {
 
       if (!paymentSnap.exists() || !paymentSnap.data().course1Paid) {
         console.warn("User has not purchased the premium course.");
-        window.location.href = "/course-1/base-course-1.html";
+        window.location.href = "/pages/courses/course-1/base-course-1.html";
       } else {
         console.log("User has access to premium course.");
       }
     } catch (error) {
       console.error("Error checking payment status:", error);
-      window.location.href = "/course-1/base-course-1.html";
+      window.location.href = "/pages/courses/course-1/base-course-1.html";
     }
   };
 
