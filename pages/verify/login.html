@@ -681,7 +681,7 @@ label {
   function getRedirectURL() {
     const redirectURL = sessionStorage.getItem('redirectAfterLogin');
     sessionStorage.removeItem('redirectAfterLogin'); // clear after reading
-    return redirectURL || 'user.html';
+    return redirectURL || '/user.html';
   }
 
   // On page load, redirect if already logged in
