@@ -8,23 +8,23 @@ exports.handler = async function(event) {
     };
   }
 
-  const { amount, courseId } = JSON.parse(event.body);
-
-  if (!amount || amount < 1) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Invalid amount" }),
-    };
-  }
-
-  const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-  });
-
   try {
+    const { amount, courseId } = JSON.parse(event.body);
+
+    if (!amount || amount < 1) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Invalid amount" }),
+      };
+    }
+
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
     const order = await razorpay.orders.create({
-      amount: amount,
+      amount,
       currency: "INR",
       receipt: `receipt_${courseId}_${Date.now()}`,
       payment_capture: 1,
@@ -35,9 +35,10 @@ exports.handler = async function(event) {
       body: JSON.stringify(order),
     };
   } catch (error) {
+    console.error("Razorpay order error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: "Server error: " + error.message }),
     };
   }
 };
