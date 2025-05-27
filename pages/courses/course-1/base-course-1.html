@@ -1065,7 +1065,6 @@ function logout() {
   import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
   import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
 
-  // 🔧 Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
     authDomain: "syncskilll.firebaseapp.com",
@@ -1151,32 +1150,50 @@ function logout() {
     }
   });
 
-  // 💳 Razorpay Payment Integration
-  const startRazorpayPayment = async () => {
+  // 💳 Razorpay Order API Flow
+  const startRazorpayPayment = async (courseId, amountInRupees) => {
     if (!currentUser) {
       alert("Please login to continue.");
       return;
     }
 
+    const amount = amountInRupees * 100;
+
+    const res = await fetch("/.netlify/functions/createOrder", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount, courseId })
+    });
+
+    if (!res.ok) {
+      alert("Failed to create order. Please try again.");
+      return;
+    }
+
+    const orderData = await res.json();
+
     const options = {
       key: 'rzp_live_uQ9KargRBDFUu6',
-      amount: 100, // Amount in paise
-      currency: 'INR',
+      amount: orderData.amount,
+      currency: orderData.currency,
       name: 'SyncSkill Academy',
-      description: 'Premium Course Access',
+      description: `Access to ${courseId}`,
       image: '/assets/logo-i.png',
+      order_id: orderData.id,
       handler: async function (response) {
         try {
           await setDoc(doc(db, "payments", currentUser.uid), {
-            course1Paid: true,
+            [`${courseId}Paid`]: true,
             paymentId: response.razorpay_payment_id,
+            orderId: response.razorpay_order_id,
+            signature: response.razorpay_signature,
             paidAt: new Date().toISOString()
           });
-          alert("Payment successful! Redirecting...");
-          window.location.href = "premium-course-1.html";
+          alert("Payment successful!");
+          window.location.href = `premium-${courseId}.html`;
         } catch (err) {
           console.error("Error saving payment:", err);
-          alert("Payment succeeded, but we couldn't update your access. Please contact support.");
+          alert("Payment succeeded but access could not be granted. Contact support.");
         }
       },
       prefill: {
@@ -1192,9 +1209,10 @@ function logout() {
     rzp.open();
   };
 
-  // Expose function globally for button click
+  // Expose globally for course-specific buttons
   window.startRazorpayPayment = startRazorpayPayment;
 </script>
+
 
 
 
