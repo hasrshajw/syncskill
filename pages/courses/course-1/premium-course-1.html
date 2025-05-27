@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Coming Soon - Discover the future of learning with our innovative educational platform.">
+    <title>Coming Soon - Educational Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<div class="background"></div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Coming Soon<div class="speed-trail"></div></h1>
+        <div class="new-text">The Future of Learning Awaits</div>
+    </div>
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://quiz.growthschool.io/large.jpeg') no-repeat center center/cover;
+            z-index: 1;
+            filter: brightness(0.65) contrast(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+            z-index: 2;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateX(-100vw);
+            filter: blur(12px);
+            display: inline-flex;
+            align-items: center;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .new-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(50px);
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .speed-trail {
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, rgba(51, 204, 255, 0), rgba(51, 204, 255, 0.8));
+            opacity: 0;
+            transform: translateX(-100vw);
+            border-radius: 2px;
+            z-index: 3;
+        }
+
+        .spark {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 12px rgba(51, 204, 255, 0.5);
+            animation: sparkle 1.8s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.4); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 0.03em;
+            }
+            .new-text {
+                font-size: 1.5rem;
+            }
+            .speed-trail {
+                width: 60px;
+                height: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .new-text {
+                font-size: 1.2rem;
+            }
+            .speed-trail {
+                width: 40px;
+                height: 2px;
+            }
+        }
+    </style>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // GSAP Animations for racing effect with speed trail
+        gsap.to("h1", {
+            opacity: 1,
+            x: 0,
+            filter: "blur(0px)",
+            duration: 1.3,
+            ease: "power3.out",
+            delay: 0.2,
+            onComplete: () => {
+                gsap.to("h1", {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.in",
+                    delay: 0.5,
+                    onComplete: () => {
+                        gsap.to(".new-text", {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: "power3.out"
+                        });
+                    }
+                });
+            }
+        });
+
+        gsap.to(".speed-trail", {
+            opacity: 0.8,
+            x: 0,
+            duration: 1.3,
+            ease: "power3.out",
+            delay: 0.2,
+            onComplete: () => {
+                gsap.to(".speed-trail", {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.in"
+                });
+            }
+        });
+
+        // Spark Effect
+        const container = document.querySelector('.container');
+        const sparkCount = 15;
+
+        for (let i = 0; i < sparkCount; i++) {
+            const spark = document.createElement('div');
+            spark.classList.add('spark');
+            spark.style.left = `${Math.random() * 60 - 30}vw`;
+            spark.style.top = `${Math.random() * 40 - 20}vh`;
+            spark.style.animationDelay = `${Math.random() * 1.2}s`;
+            container.appendChild(spark);
+        }
+    </script>
+
+
+
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
+    authDomain: "syncskilll.firebaseapp.com",
+    projectId: "syncskilll",
+    storageBucket: "syncskilll.firebasestorage.app",
+    messagingSenderId: "203322315096",
+    appId: "1:203322315096:web:958fc7d94806ef9a98552d",
+    measurementId: "G-JWWWM2ZQSK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Navbar UI elements
+  const elements = {
+    userAvatar: document.getElementById('userAvatar'),
+    mobileUserAvatar: document.getElementById('mobileUserAvatar'),
+    userName: document.getElementById('userName'),
+    dropdownAvatar: document.getElementById('dropdownAvatar'),
+    dropdownName: document.getElementById('dropdownName'),
+    dropdownEmail: document.getElementById('dropdownEmail'),
+    mobileUserName: document.getElementById('mobileUserName'),
+    mobileUserEmail: document.getElementById('mobileUserEmail'),
+    welcomeUserSpan: document.getElementById('user')
+  };
+
+  const fallbackAvatar = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+
+  const clearUserProfile = () => {
+    try {
+      if (elements.userName) elements.userName.textContent = '';
+      if (elements.dropdownName) elements.dropdownName.textContent = '';
+      if (elements.mobileUserName) elements.mobileUserName.textContent = '';
+      if (elements.dropdownEmail) elements.dropdownEmail.textContent = '';
+      if (elements.mobileUserEmail) elements.mobileUserEmail.textContent = '';
+      if (elements.welcomeUserSpan) elements.welcomeUserSpan.textContent = '';
+
+      [elements.userAvatar, elements.dropdownAvatar, elements.mobileUserAvatar].forEach(img => {
+        if (img) {
+          img.src = fallbackAvatar;
+          img.removeAttribute('srcset');
+        }
+      });
+    } catch (error) {
+      console.error('Error clearing profile:', error);
+    }
+  };
+
+  const updateUserProfile = (user) => {
+    if (!user) {
+      clearUserProfile();
+      return;
+    }
+
+    const displayName = user.displayName || user.email?.split('@')[0] || 'User';
+    const email = user.email || 'No email';
+    const photoURL = user.photoURL || fallbackAvatar;
+
+    try {
+      if (elements.userName) elements.userName.textContent = displayName;
+      if (elements.dropdownName) elements.dropdownName.textContent = displayName;
+      if (elements.mobileUserName) elements.mobileUserName.textContent = displayName;
+      if (elements.dropdownEmail) elements.dropdownEmail.textContent = email;
+      if (elements.mobileUserEmail) elements.mobileUserEmail.textContent = email;
+      if (elements.welcomeUserSpan) elements.welcomeUserSpan.textContent = displayName;
+
+      [elements.userAvatar, elements.dropdownAvatar, elements.mobileUserAvatar].forEach(img => {
+        if (img) {
+          img.src = photoURL;
+          img.onerror = () => img.src = fallbackAvatar;
+        }
+      });
+    } catch (error) {
+      console.error('Profile update error:', error);
+    }
+  };
+
+  const checkPaymentAndAccess = async (user) => {
+    if (!user) {
+      clearUserProfile();
+
+      // Store redirect path before redirecting to login
+      sessionStorage.setItem("redirectAfterLogin", window.location.pathname);
+      window.location.href = "/pages/verify/login.html";
+      return;
+    }
+
+    updateUserProfile(user);
+
+    try {
+      const paymentRef = doc(db, 'payments', user.uid);
+      const paymentSnap = await getDoc(paymentRef);
+
+      if (!paymentSnap.exists() || !paymentSnap.data().course1Paid) {
+        console.warn("User has not purchased the premium course.");
+        window.location.href = "/pages/courses/course-1/base-course-1.html";
+      } else {
+        console.log("User has access to premium course.");
+      }
+    } catch (error) {
+      console.error("Error checking payment status:", error);
+      window.location.href = "/pages/courses/course-1/base-course-1.html";
+    }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    checkPaymentAndAccess(user);
+  });
+
+  // Logout
+  window.logout = async () => {
+    try {
+      await signOut(auth);
+      clearUserProfile();
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = '/index.html';
+    } catch (err) {
+      console.error('Logout error:', err);
+      alert("Logout failed.");
+    }
+  };
+</script>
+
+
+</body>
+</html>
