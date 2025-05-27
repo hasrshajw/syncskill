@@ -1082,7 +1082,7 @@ function logout() {
 
   let currentUser = null;
 
-  // 🔁 Redirect to premium if already paid
+  // 🔁 Redirect if already paid
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = "/pages/verify/login.html";
@@ -1151,48 +1151,70 @@ function logout() {
     }
   });
 
-  // 💳 Razorpay Payment Integration
+  // 💳 Razorpay Payment Integration with Orders API
   const startRazorpayPayment = async () => {
     if (!currentUser) {
       alert("Please login to continue.");
       return;
     }
 
-    const options = {
-      key: 'rzp_live_uQ9KargRBDFUu6',
-      amount: 100, // Amount in paise
-      currency: 'INR',
-      name: 'SyncSkill Academy',
-      description: 'Premium Course Access',
-      image: '/assets/logo-i.png',
-      handler: async function (response) {
-        try {
-          await setDoc(doc(db, "payments", currentUser.uid), {
-            course1Paid: true,
-            paymentId: response.razorpay_payment_id,
-            paidAt: new Date().toISOString()
-          });
-          alert("Payment successful! Redirecting...");
-          window.location.href = "premium-course-1.html";
-        } catch (err) {
-          console.error("Error saving payment:", err);
-          alert("Payment succeeded, but we couldn't update your access. Please contact support.");
-        }
-      },
-      prefill: {
-        name: currentUser.displayName || "Student",
-        email: currentUser.email,
-      },
-      theme: {
-        color: "#0f172a"
-      }
-    };
+    try {
+      // Call Netlify function to create order
+      const response = await fetch('/.netlify/functions/createOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 100 }) // ₹1 in paise
+      });
 
-    const rzp = new Razorpay(options);
-    rzp.open();
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create order');
+      }
+
+      const order = await response.json();
+
+      const options = {
+        key: 'rzp_live_uQ9KargRBDFUu6',
+        amount: order.amount,
+        currency: order.currency,
+        name: 'SyncSkill Academy',
+        description: 'Premium Course Access',
+        image: '/assets/logo-i.png',
+        order_id: order.id, // Important: pass the order ID here
+        handler: async function (response) {
+          try {
+            // Save payment details to Firestore
+            await setDoc(doc(db, 'payments', currentUser.uid), {
+              course1Paid: true,
+              paymentId: response.razorpay_payment_id,
+              orderId: response.razorpay_order_id,
+              signature: response.razorpay_signature,
+              paidAt: new Date().toISOString()
+            });
+            alert("Payment successful! Redirecting...");
+            window.location.href = "premium-course-1.html";
+          } catch (err) {
+            console.error("Error saving payment:", err);
+            alert("Payment succeeded but couldn't update your access. Contact support.");
+          }
+        },
+        prefill: {
+          name: currentUser.displayName || "Student",
+          email: currentUser.email,
+        },
+        theme: {
+          color: "#0f172a"
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      alert("Payment initialization failed: " + err.message);
+    }
   };
 
-  // Expose function globally for button click
+  // Expose globally for button
   window.startRazorpayPayment = startRazorpayPayment;
 </script>
 
