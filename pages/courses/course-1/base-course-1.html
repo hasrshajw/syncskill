@@ -1159,37 +1159,25 @@ window.startRazorpayPayment = async () => {
     return;
   }
 
-  const options = {
-    key: 'rzp_test_lesdDWX9Rfaoi4', // Replace with your Razorpay Test Key
-    amount: 50000, // ₹500 = 50000 paise
-    currency: 'INR',
-    name: 'SyncSkill Academy',
-    description: 'Premium Course Access',
-    image: 'https://yourdomain.com/logo.png', // Optional: Your logo URL
-    handler: async function (response) {
-      try {
-        const paymentDocRef = doc(db, 'payments', currentUser.uid);
-        const paymentDoc = await getDoc(paymentDocRef);
-        let paymentData = paymentDoc.exists() ? paymentDoc.data() : {};
-        paymentData.course1Paid = true;
+ const options = {
+  key: 'rzp_live_uQ9KargRBDFUu6', // ✅ This is already a LIVE Razorpay key
+  amount: 100, // ₹1 in paise
+  currency: 'INR',
+  name: 'SyncSkill Academy',
+  description: 'Premium Course Access',
+  image: '/assets/logo-i.png',
+  handler: async function (response) {
+    ...
+  },
+  prefill: {
+    name: currentUser.displayName || "Student",
+    email: currentUser.email,
+  },
+  theme: {
+    color: "#0f172a"
+  }
+};
 
-        await setDoc(paymentDocRef, paymentData, { merge: true });
-
-        alert("Payment successful! Redirecting...");
-        window.location.href = 'premium-course-1.html';
-      } catch (error) {
-        console.error("Firestore Error:", error);
-        alert("Payment done, but failed to update your course access. Contact support.");
-      }
-    },
-    prefill: {
-      name: currentUser.displayName || "Student",
-      email: currentUser.email,
-    },
-    theme: {
-      color: "#0f172a"
-    }
-  };
 
   const rzp = new Razorpay(options);
   rzp.open();
