@@ -6,203 +6,1340 @@
     <meta name="description" content="Coming Soon - Discover the future of learning with our innovative educational platform.">
     <title>Coming Soon - Educational Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #F6F8FA;
+            margin: 0;
+            padding: 32px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        </style>
+    </style>
 </head>
-
-<audio id="whooshSound" src="https://cdn.pixabay.com/audio/2022/03/24/03-02-54-466_7gB3w0M.mp3" preload="auto"></audio>
-    
-<div class="background"></div>
-    <div class="overlay"></div>
-    <div class="container">
-        <h1>Coming Soon<div class="speed-trail"></div></h1>
-        <div class="new-text">The Future of Learning Awaits</div>
-    </div>
+<body>
+ <section class="meet-mentors" role="region" aria-labelledby="mentors-heading">
+  <h2 class="section-header" id="mentors-heading">Meet Your Mentors</h2>
+  <p class="section-subheading">Connect with industry leaders to elevate your career.</p>
+  <div class="mentor-grid" id="mentor-grid">
+    <a href="/mentors/manas-barpande" class="identity highlight" role="button" tabindex="0" aria-label="View Manas Barpande's profile">
+      <div class="identity-img">
+        <img
+          alt="Profile photo of HARSHA VARDHAN"
+          loading="lazy"
+          width="40"
+          height="40"
+          src="https://d3kl8zsmmx4oop.cloudfront.net/um15_cc478c0670.png"
+        />
+      </div>
+      <div class="mentor">
+        <p class="name">Harsha Vardhan</p>
+        <p class="title">Founder SyncSkill</p>
+      </div>
+    </a>
+    <a href="/mentors/krishni" class="identity" role="button" tabindex="0" aria-label="View Krishni's profile">
+      <div class="identity-img">
+        <img
+          alt="Profile photo of Krishni"
+          loading="lazy"
+          width="40"
+          height="40"
+          src="https://d3kl8zsmmx4oop.cloudfront.net/Krishni_Miglani_2024_01_25_profile_Photo_0aa4083152.webp"
+        />
+      </div>
+      <div class="mentor">
+        <p class="name">Krishni Miglani</p>
+        <p class="title">Prime India Shopping Lead at Amazon</p>
+      </div>
+    </a>
+    <a href="/mentors/kaushik-sen-deka" class="identity hidden" role="button" tabindex="0" aria-label="View Kaushik Sen Deka's profile">
+      <div class="identity-img">
+        <img
+          alt="Profile photo of Kaushik Sen Deka"
+          loading="lazy"
+          width="40"
+          height="40"
+          src="https://d3kl8zsmmx4oop.cloudfront.net/Kaushik_Sen_Deka_2024_01_25_profile_Photo_872b9868c5.jpeg"
+        />
+      </div>
+      <div class="mentor">
+        <p class="name">Kaushik Sen Deka</p>
+        <p class="title">Marketing Strategist at Google</p>
+      </div>
+    </a>
+    <!-- Hidden mentors to be shown on "View All Mentors" click -->
+    <a href="/mentors/jane-doe" class="identity hidden" role="button" tabindex="0" aria-label="View Jane Doe's profile">
+      <div class="identity-img">
+        <img
+          alt="Placeholder profile photo for Jane Doe"
+          loading="lazy"
+          width="40"
+          height="40"
+          src="https://via.placeholder.com/40/cccccc/ffffff?text=JD"
+        />
+      </div>
+      <div class="mentor">
+        <p class="name">Jane Doe</p>
+        <p class="title">Product Manager at Example Corp</p>
+      </div>
+    </a>
+    <a href="/mentors/john-smith" class="identity hidden" role="button" tabindex="0" aria-label="View John Smith's profile">
+      <div class="identity-img">
+        <div class="identity-img">
+        <img
+          alt="Placeholder profile photo for John Smith"
+          loading="lazy"
+          width="40"
+          height="40"
+          src="https://via.placeholder.com/40/cccccc/ffffff?text=JS"
+        />
+      </div>
+      <div class="mentor">
+        <p class="name">John Smith</p>
+        <p class="title">UX Designer at Sample Inc</p>
+      </div>
+    </a>
+  </div>
+  <button class="view-all" id="view-all-btn" aria-expanded="false">View All Mentors</button>
+</section>
 
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+.meet-mentors {
+  background: #ffffff;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1a1a1a;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
 
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            height: 100vh;
+.meet-mentors::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+}
+
+.section-header {
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+}
+
+.section-subheading {
+  font-size: clampIneffectiveTagName: div
+  font-size: clamp(0.9rem, 4vw, 1rem);
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.mentor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s cubic-bezier(0.4, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0.8, 0.2, 1), background 0.3s ease;
+  animation: slideIn 0.6s cubic-bezier(0.4, 0.8, 0.2, 1) both;
+  min-height: 80px;
+  text-decoration: none;
+}
+
+.identity.highlight {
+  border: 2px solid #007bff;
+  box-shadow: 0 2px 12px rgba(0, 123, 255, 0.2);
+}
+
+.identity:nth-child(1) { animation-delay: 0.1s; }
+.identity:nth-child(2) { animation-delay: 0.2s; }
+.identity:nth-child(3) { animation-delay: 0.3s; }
+.identity:nth-child(4) { animation-delay: 0.4s; }
+.identity:nth-child(5) { animation-delay: 0.5s; }
+
+.identity:hover,
+.identity:active {
+  transform: scale(1.04) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background: rgba(240, 245, 255, 0.9);
+}
+
+.identity:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.identity-img {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.identity-img img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.4, 0.8, 0.2, 1);
+}
+
+.identity:hover .identity-img img,
+.identity:active .identity-img img {
+  transform: scale(1.08);
+}
+
+.mentor {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 600;
+  font-size: clamp(0.9rem, 4vw, 0.95rem);
+  margin-bottom: 0.2rem;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+}
+
+.title {
+  color: #4a4a4a;
+  font-size: clamp(0.75rem, 3vw, 0.8rem);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.view-all {
+  display: block;
+  text-align: center;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #007bff 0%, #003087 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 4vw, 1.05rem);
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0.8, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 48, 135, 0.2);
+}
+
+.view-all:hover,
+.view-all:active {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #005fd1 0%, #001f5b 100%);
+  box-shadow: 0 4px 12px rgba(0, 48, 135, 0.3);
+}
+
+.view-all:focus {
+  outline: 2px solid #003087;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .mentor-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .meet-mentors {
+    padding: 3rem 2rem;
+    border-radius: 24px;
+  }
+
+  .identity {
+    padding: 1.2rem;
+  }
+
+  .identity-img,
+  .identity-img img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .name {
+    font-size: clamp(1.1rem, 4.5vw, 1.15rem);
+  }
+
+  .title {
+    font-size: clamp(0.85rem, 3.5vw, 0.9rem);
+  }
+
+  .section-header {
+    font-size: 2.5rem;
+  }
+
+  .section-subheading {
+    font-size: 1.1rem;
+    max-width: 600px;
+  }
+
+  .view-all {
+    padding: 1rem 3rem;
+  }
+}
+</style>
+
+<script>
+document.getElementById('view-all-btn').addEventListener('click', function () {
+  const hiddenMentors = document.querySelectorAll('.identity.hidden');
+  hiddenMentors.forEach((mentor, index) => {
+    mentor.classList.remove('hidden');
+    mentor.style.animation = `slideIn 0.6s cubic-bezier(0.4, 0.8, 0.2, 1) ${0.1 * (index + 1)}s both`;
+  });
+  this.style.display = 'none';
+  this.setAttribute('aria-expanded', 'true');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+   <section class="stats-section">
+    <div class="stats-section-title">Premium Content</div>
+    <a href="https://example.com/project1" class="stats-section-card" tabindex="0" role="link" aria-label="Project One card, redirects to external site">
+        <div class="stats-section-card--text">
+            <div class="stats-section-card--title">Course Assets</div>
+            <div class="stats-section-card--subtitle">Tap to view Course Assets</div>
+        </div>
+        <div class="stats-section-card--image-container">
+            <img alt="Folder icon" class="stats-section-card--image" loading="lazy" width="171" height="93.25" decoding="async" src="https://www.growthschool.io/images/course-diff/folder.svg">
+            <img alt="Folder hover icon" class="stats-section-card--hover-image" loading="lazy" width="171" height="93.25" decoding="async" src="https://www.growthschool.io/images/course-diff/folder-hover.svg">
+        </div>
+    </a>
+    <a href="https://example.com/project2" class="stats-section-card" tabindex="0" role="link" aria-label="Project Two card, redirects to external site">
+        <div class="stats-section-card--text">
+            <div class="stats-section-card--title">Course Resourses</div>
+            <div class="stats-section-card--subtitle">Tap to view Course Resourses</div>
+        </div>
+        <div class="stats-section-card--image-container">
+            <img alt="Folder icon" class="stats-section-card--image" loading="lazy" width="171" height="93.25" decoding="async" src="https://www.growthschool.io/images/course-diff/folder.svg">
+            <img alt="Folder hover icon" class="stats-section-card--hover-image" loading="lazy" width="171" height="93.25" decoding="async" src="https://www.growthschool.io/images/course-diff/folder-hover.svg">
+        </div>
+    </a>
+</section>
+<style>
+    .stats-section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    color: #0A1122;
+    font-weight: 700;
+    text-align: left;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px 16px;
+}
+        .stats-section {
             display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
             justify-content: center;
-            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 0px 32px 0px;
+        }
+
+        .stats-section-card {
+            position: relative;
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s cubic-bezier(0.36, 0, 0.66, -0.56), box-shadow 0.4s cubic-bezier(0.36, 0, 0.66, -0.56);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-sizing: border-box;
             overflow: hidden;
-            color: #ffffff;
-            position: relative;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://quiz.growthschool.io/large.jpeg') no-repeat center center/cover;
-            z-index: 1;
-            filter: brightness(0.65) contrast(1.1);
+        /* Desktop: Side by side */
+        @media (min-width: 769px) {
+            .stats-section-card {
+                flex: 1 1 calc(50% - 12px);
+                max-width: calc(50% - 12px);
+                padding: 24px;
+            }
         }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-            z-index: 2;
-        }
-
-        .container {
-            text-align: center;
-            position: relative;
-            z-index: 3;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0;
-            transform: translateX(-100vw);
-            filter: blur(12px);
-            display: inline-flex;
-            align-items: center;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .new-text {
-            font-size: 2.5rem;
-            font-weight: 700;
-            opacity: 0;
-            transform: translateY(50px);
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .speed-trail {
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, rgba(51, 204, 255, 0), rgba(51, 204, 255, 0.8));
-            opacity: 0;
-            transform: translateX(-100vw);
-            border-radius: 2px;
-            z-index: 3;
-        }
-
-        .spark {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 12px rgba(51, 204, 255, 0.5);
-            animation: sparkle 1.8s infinite ease-in-out;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0.4); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* Responsive Design */
+        /* Mobile: Stacked vertically */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-                letter-spacing: 0.03em;
-            }
-            .new-text {
-                font-size: 1.5rem;
-            }
-            .speed-trail {
-                width: 60px;
-                height: 3px;
+            .stats-section-card {
+                flex: 1 1 100%;
+                width: 100%;
+                padding: 16px;
+                border-radius: 16px;
             }
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.2rem;
+        .stats-section-card:hover, .stats-section-card:focus {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 122, 255, 0.25);
+        }
+
+        .stats-section-card.is-above-midpoint {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 122, 255, 0.25);
+        }
+
+        .stats-section-card--text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stats-section-card--title {
+            font-size: clamp(1.25rem, 5vw, 1.5rem);
+            color: #0A1122;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .stats-section-card--subtitle {
+            font-size: clamp(0.875rem, 4vw, 1rem);
+            color: #4B5EAA;
+            line-height: 1.5;
+        }
+
+        .stats-section-card--image-container {
+            position: relative;
+            width: clamp(120px, 40vw, 171px);
+            height: clamp(65px, 20vw, 93.25px);
+            align-self: flex-end;
+            will-change: transform;
+        }
+
+        .stats-section-card--image,
+        .stats-section-card--hover-image {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: -10px;
+            margin-bottom: -20px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Desktop: Show normal image by default, hover image on hover */
+        @media (min-width: 769px) {
+            .stats-section-card--image {
+                opacity: 1;
             }
-            .new-text {
-                font-size: 1.2rem;
+            .stats-section-card--hover-image {
+                opacity: 0;
             }
-            .speed-trail {
-                width: 40px;
-                height: 2px;
+            .stats-section-card:hover .stats-section-card--image,
+            .stats-section-card:focus .stats-section-card--image {
+                opacity: 0;
             }
+            .stats-section-card:hover .stats-section-card--hover-image,
+            .stats-section-card:focus .stats-section-card--hover-image {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile: Control image visibility based on midpoint */
+        @media (max-width: 768px) {
+            .stats-section-card--image {
+                opacity: 0;
+            }
+            .stats-section-card--hover-image {
+                opacity: 0;
+            }
+            .stats-section-card.is-visible:not(.is-above-midpoint) .stats-section-card--hover-image {
+                opacity: 1;
+            }
+            .stats-section-card.is-visible.is-above-midpoint .stats-section-card--image {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .stats-section-card--image-container {
+                margin-right: -8px;
+                margin-bottom: -15px;
+            }
+        }
+
+        /* Accessibility */
+        .stats-section-card:focus {
+            outline: 2px solid #007AFF;
+            outline-offset: 2px;
         }
     </style>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-        // Initialize audio
-        const whooshSound = document.getElementById('whooshSound');
-        whooshSound.volume = 0.9; // Subtle volume for professional feel
+        // Only run Intersection Observers on mobile devices (≤ 768px)
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            const cards = document.querySelectorAll(".stats-section-card");
 
-        // GSAP Animations for racing effect with speed trail
-        gsap.to("h1", {
-            opacity: 1,
-            x: 0,
-            filter: "blur(0px)",
-            duration: 1.3,
-            ease: "power3.out",
-            delay: 0.2,
-            onComplete: () => {
-                gsap.to("h1", {
-                    opacity: 0,
-                    duration: 0.5,
-                    ease: "power2.in",
-                    delay: 0.5,
-                    onComplete: () => {
-                        gsap.to(".new-text", {
-                            opacity: 1,
-                            y: 0,
-                            duration: 1,
-                            ease: "power3.out"
+            cards.forEach((card) => {
+                // Observer 1: Track visibility in viewport
+                const visibilityObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            card.classList.toggle("is-visible", entry.isIntersecting);
                         });
+                    },
+                    {
+                        root: null,
+                        threshold: 0.1 // Trigger when 10% of card is visible
                     }
+                );
+
+                // Observer 2: Track when card's top edge crosses viewport midpoint
+                const midpointObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            // When the card's top is above the midpoint, show normal image
+                            card.classList.toggle("is-above-midpoint", entry.isIntersecting);
+                        });
+                    },
+                    {
+                        root: null,
+                        rootMargin: "-50% 0px 50% 0px", // Trigger at viewport midpoint
+                        threshold: 0
+                    }
+                );
+
+                visibilityObserver.observe(card);
+                midpointObserver.observe(card);
+
+                // Cleanup observers on page unload
+                window.addEventListener("unload", () => {
+                    visibilityObserver.disconnect();
+                    midpointObserver.disconnect();
                 });
-            }
-        });
-
-        gsap.to(".speed-trail", {
-            opacity: 0.8,
-            x: 0,
-            duration: 1.3,
-            ease: "power3.out",
-            delay: 0.2,
-            onComplete: () => {
-                gsap.to(".speed-trail", {
-                    opacity: 0,
-                    duration: 0.4,
-                    ease: "power2.in"
-                });
-            }
-        });
-
-        // Spark Effect
-        const container = document.querySelector('.container');
-        const sparkCount = 15;
-
-        for (let i = 0; i < sparkCount; i++) {
-            const spark = document.createElement('div');
-            spark.classList.add('spark');
-            spark.style.left = `${Math.random() * 60 - 30}vw`;
-            spark.style.top = `${Math.random() * 40 - 20}vh`;
-            spark.style.animationDelay = `${Math.random() * 1.2}s`;
-            container.appendChild(spark);
+            });
         }
     </script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="wrap section__container--small">
+        <div class="left-section">
+            <h2 class="section-header" style="text-align: left; margin: 10px;">10 Days to AI Expertise</h2>
+<p class="section-subheading" style="text-align: left; margin: 10px;">
+  Explore your personalized learning path, with daily lessons and activities designed to build your AI skills and professional profile.
+</p>
+
+
+            <div class="accordion-section" role="region" aria-label="Course Curriculum">
+                <h3>Your Course Curriculum</h3>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day1-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 1</span>
+                                <span class="accordion-title-text">Intro to AI & LLMs</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day1-content">
+                            <ul>
+                                <li>Understand AI, ML, DL – differences & real-world use cases</li>
+                                <li>Introduction to LLMs (GPT, Claude, Gemini, etc.)</li>
+                                <li>Tools: ChatGPT, Claude, Perplexity</li>
+                                <li>Video: Simplilearn / freeCodeCamp AI basics</li>
+                                <li>Activity: Try a prompt in ChatGPT, explore outputs</li>
+                            </ul>
+                            <a href="course-day1.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day2-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 2</span>
+                                <span class="accordion-title-text">Prompt Engineering & Use Cases</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day2-content">
+                            <ul>
+                                <li>Prompt structure: clarity, context, roles, examples</li>
+                                <li>Use LLMs for writing, research, summarization, and coding</li>
+                                <li>Tools: ChatGPT Playground, Gemini Advanced</li>
+                                <li>Activity: Create 3 prompts for different use cases</li>
+                            </ul>
+                            <a href="course-day2.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day3-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 3</span>
+                                <span class="accordion-title-text">AI Tools - Video & Audio Generation</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day3-content">
+                            <ul>
+                                <li>Video Tools: Pika Labs, Sora (overview), RunwayML</li>
+                                <li>Audio Tools: ElevenLabs, Murf.ai, Play.ht</li>
+                                <li>Video demo: RunwayML + ElevenLabs</li>
+                                <li>Activity: Generate a voice sample using Murf.ai</li>
+                            </ul>
+                            <a href="course-day3.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day4-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 4</span>
+                                <span class="accordion-title-text">Image Generation & Design AI Tools</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day4-content">
+                            <ul>
+                                <li>Tools: Midjourney, DALL·E, Canva AI, Leonardo</li>
+                                <li>Use AI for thumbnails, posters, reels</li>
+                                <li>Tutorial: Midjourney basics or Canva AI</li>
+                                <li>Activity: Create a poster using Canva AI</li>
+                            </ul>
+                            <a href="course-day4.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day5-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 5</span>
+                                <span class="accordion-title-text">Google AI Tools & Extensions</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day5-content">
+                            <ul>
+                                <li>Tools: NotebookLM, Google Gemini, Docs + AI</li>
+                                <li>Add-ons: YouTube Summary with AI, Compose AI</li>
+                                <li>Explore: NotebookLM / Gemini tips</li>
+                                <li>Activity: Summarize a YouTube video using an AI extension</li>
+                            </ul>
+                            <a href="course-day5.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day6-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 6</span>
+                                <span class="accordion-title-text">Automating Workflows with AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day6-content">
+                            <ul>
+                                <li>Tools: Zapier, Bardeen, ChatGPT + Code Interpreter</li>
+                                <li>Concepts: Integrating AI into productivity & projects</li>
+                                <li>Activity: Create a basic automation (Zapier or ChatGPT plugin)</li>
+                            </ul>
+                            <a href="course-day6.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day7-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 7</span>
+                                <span class="accordion-title-text">Resume Fundamentals</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day7-content">
+                            <ul>
+                                <li>ATS-friendly formats, sections (summary, skills, experience)</li>
+                                <li>Tools: Canva resume templates, Novoresume, Rezi.ai</li>
+                                <li>Tutorial: Modern resume building (by career coach)</li>
+                                <li>Activity: Choose a template, draft your resume in Canva/Word</li>
+                            </ul>
+                            <a href="course-day7.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day8-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 8</span>
+                                <span class="accordion-title-text">Tailoring Resume with AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day8-content">
+                            <ul>
+                                <li>Tools: ChatGPT resume prompt for job-specific resumes</li>
+                                <li>Upload JD → generate tailored bullet points</li>
+                                <li>Tools: Jobscan, Teal HQ (for keywords)</li>
+                                <li>Activity: Refine resume using AI</li>
+                            </ul>
+                            <a href="course-day8.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day9-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 9</span>
+                                <span class="accordion-title-text">Creating/Optimizing LinkedIn Profile</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day9-content">
+                            <ul>
+                                <li>Sections: Banner, About, Experience, Skills</li>
+                                <li>Tools: ChatGPT to write summary + headlines</li>
+                                <li>Guide: LinkedIn profile tips (2024 edition)</li>
+                                <li>Activity: Update your profile picture + write a new headline & summary</li>
+                            </ul>
+                            <a href="course-day9.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <div class="accordion-header" role="button" aria-expanded="false" aria-controls="day10-content">
+                            <div class="accordion-header-text">
+                                <span class="accordion-day">Day 10</span>
+                                <span class="accordion-title-text">Growing Your LinkedIn Presence</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="accordion-content" id="day10-content">
+                            <ul>
+                                <li>Creating content using AI (ideas, formatting)</li>
+                                <li>AI tools: Taplio (for posts), ChatGPT post drafts</li>
+                                <li>Strategy: Engage with 5 posts</li>
+                                <li>Activity: Post your first AI-generated LinkedIn post</li>
+                            </ul>
+                            <a href="course-day10.html" class="view-course-button">View Course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h3 class="section-header">Need Support?</h3>
+                <p class="para">Our team is here to help you succeed. Reach out at <a href="mailto:support@ailearningplatform.com">support@ailearningplatform.com</a> for any course-related questions.</p>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="learners-block">
+                <h3 class="section-header">Your Learning Benefits</h3>
+                <ul>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Access to hands-on projects with cutting-edge AI tools
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Expert-led lessons updated for 2025
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                            <path d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Community support and networking opportunities
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-to-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"></path>
+        </svg>
+    </button>
+
+
+    <style>
+      /* Global box-sizing to prevent padding/border overflow */
+* {
+    box-sizing: border-box;
+}
+
+/* Body styles */
+
+
+/* Container for the main content */
+.wrap.section__container--small {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 0px;
+    gap: 48px;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Left section (main content) */
+.left-section {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Right section (sidebar) */
+.right-section {
+    width: 40%;
+}
+
+/* Section header (e.g., "10 Days to AI Expertise") */
+.left-section .section-header {
+    color: #1F2937;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    padding-left: 16px; /* Adjusted left padding */
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+}
+
+/* Section subheading */
+.section-subheading {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 400;
+    color: #4B5563;
+    max-width: 550px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    padding-left: 16px; /* Adjusted left padding */
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+/* Accordion section */
+.accordion-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.accordion-section:hover {
+    transform: translateY(-4px);
+}
+
+.accordion-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #001f5b;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+/* Accordion item */
+.accordion-item {
+    margin-bottom: 16px;
+}
+
+.accordion-title {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    background: #FFFFFF;
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-title:hover {
+    background: #F1F5F9;
+    border-color: #4F46E5;
+}
+
+.accordion-header {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.accordion-day {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.accordion-title-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.accordion-header svg {
+    width: 24px;
+    height: 24px;
+    stroke: #005fd1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-item.active .accordion-header svg {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 24px;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 600px;
+    padding: 16px 24px;
+    opacity: 1;
+}
+
+.accordion-content p, .accordion-content ul {
+    font-size: 1rem;
+    color: #4B5563;
+}
+
+.accordion-content ul {
+    list-style: none;
+    padding-left: 16px;
+}
+
+.accordion-content li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+}
+
+.accordion-content li::before {
+    content: '•';
+    color: #001f5b;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -2px;
+}
+
+.view-course-button {
+    background: linear-gradient(135deg, #005fd1 0%, #001f5b 100%);
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 16px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.view-course-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Contact section */
+.contact-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.contact-section:hover {
+    transform: translateY(-4px);
+}
+
+.contact-section .section-header {
+    color: #1F2937;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+.contact-section a {
+    color: #001f5b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+}
+
+.para {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 400;
+    color: #4B5563;
+    max-width: 550px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.5s;
+}
+
+/* Learners block (right section) */
+.learners-block {
+    position: sticky;
+    top: 80px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.learners-block:hover {
+    transform: translateY(-4px);
+}
+
+.learners-block .section-header {
+    color: #1F2937;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+.learners-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.learners-block li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: #4B5563;
+}
+
+.learners-block li svg {
+    stroke: #001f5b;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Scroll-to-top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4F46E5;
+    color: #FFFFFF;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-4px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wrap.section__container--small,
+    .section-header,
+    .section-subheading,
+    .accordion-section,
+    .accordion-title,
+    .accordion-content,
+    .contact-section,
+    .learners-block,
+    .scroll-to-top {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Tablet and mobile adjustments */
+@media (max-width: 992px) {
+    body {
+        padding: 16px; /* Reduce body padding on tablet/mobile */
+    }
+
+    .wrap.section__container--small {
+        flex-direction: column;
+        padding: 24px 0px; /* Adjust container padding */
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+    }
+
+    .right-section {
+        display: none; /* Hide right section on mobile */
+    }
+
+    .left-section .section-header {
+        font-size: clamp(1.6rem, 4vw, 2rem);
+        padding-left: 8px; /* Reduce left padding */
+    }
+
+    .section-subheading {
+        font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+        padding-left: 8px; /* Reduce left padding */
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+    body {
+        padding: 8px; /* Further reduce body padding */
+    }
+
+    .accordion-section, .contact-section {
+        padding: 16px; /* Adjust padding to prevent overflow */
+    }
+
+    .accordion-section h3 {
+        font-size: 0.875rem;
+    }
+
+    .left-section .section-header {
+        font-size: clamp(1.4rem, 3.5vw, 1.6rem);
+        padding-left: 0; /* Remove left padding to prevent overflow */
+    }
+
+    .section-subheading {
+        padding-left: 0; /* Remove left padding to prevent overflow */
+    }
+
+    .accordion-content ul {
+        padding-left: 8px; /* Reduce padding for list items */
+    }
+
+    .accordion-content li {
+        padding-left: 12px; /* Adjust bullet point padding */
+    }
+}
+        </style>
+
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Scroll-to-top button
+        const scrollToTop = document.querySelector('.scroll-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTop.classList.add('visible');
+            } else {
+                scrollToTop.classList.remove('visible');
+            }
+        });
+
+        scrollToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 <script type="module">
