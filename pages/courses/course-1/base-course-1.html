@@ -2217,49 +2217,8 @@ function logout() {
             </div>
         </div>
     </div>
-     <style>
-         /* For Read More and Accordion */
-#key-outcomes-list {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.accordion-content {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.read-more-link svg path,
-.accordion-title svg path {
-    transition: transform 0.3s ease;
-}
-
-/* For Marquee */
-.marquee-container {
-    overflow: hidden;
-    position: relative;
-    height: 150px; /* Adjust based on content height */
-}
-
-.marquee-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    transition: transform 0.3s linear; /* Smooth scrolling */
-}
-
-.marquee-container ul li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-}
-         </style>
-     </style>
 <script>
-   // Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('DOMContentLoaded', () => {
     // Handle "Read More" button for key outcomes
     const readMoreButton = document.querySelector('.read-more-link');
     const outcomesList = document.querySelector('#key-outcomes-list');
@@ -2268,17 +2227,14 @@ document.addEventListener('DOMContentLoaded', () => {
         readMoreButton.addEventListener('click', () => {
             const isHidden = outcomesList.getAttribute('aria-hidden') === 'true';
             
-            // Toggle visibility
             outcomesList.setAttribute('aria-hidden', !isHidden);
             outcomesList.style.maxHeight = isHidden ? `${outcomesList.scrollHeight}px` : '0';
             outcomesList.style.opacity = isHidden ? '1' : '0';
             outcomesList.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
             
-            // Update button text and aria-label
             readMoreButton.textContent = isHidden ? 'Read Less' : 'Read More';
             readMoreButton.setAttribute('aria-label', isHidden ? 'Hide key outcomes' : 'Show key outcomes');
             
-            // Rotate SVG icon
             const svgPath = readMoreButton.querySelector('svg path');
             svgPath.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
             svgPath.style.transition = 'transform 0.3s ease';
@@ -2294,7 +2250,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = title.nextElementSibling;
             const svgPath = title.querySelector('svg path');
 
-            // Close all other accordions
             accordionTitles.forEach(otherTitle => {
                 if (otherTitle !== title) {
                     otherTitle.setAttribute('aria-expanded', 'false');
@@ -2305,7 +2260,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Toggle current accordion
             title.setAttribute('aria-expanded', !isExpanded);
             content.style.maxHeight = isExpanded ? '0' : `${content.scrollHeight}px`;
             content.style.opacity = isExpanded ? '0' : '1';
@@ -2315,53 +2269,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Handle marquee animation for learners-block
-    const marqueeContainer = document.querySelector('.marquee-container');
-    const marqueeList = marqueeContainer?.querySelector('ul');
+    // Handle sticky right section
+    const rightSection = document.querySelector('.right-section');
+    const wrapContainer = document.querySelector('.wrap');
     
-    if (marqueeList) {
-        // Duplicate list items to create a seamless loop
-        const items = marqueeList.querySelectorAll('li');
-        const clone = marqueeList.innerHTML;
-        marqueeList.innerHTML += clone; // Duplicate for continuous scrolling
-
-        // Set up animation
-        let animationFrame;
-        let position = 0;
-        const speed = 1; // Pixels per frame
-        const itemHeight = items[0].offsetHeight;
-        const totalHeight = itemHeight * items.length;
-
-        function animateMarquee() {
-            position -= speed;
-            if (Math.abs(position) >= totalHeight) {
-                position = 0; // Reset to create loop
+    if (rightSection && wrapContainer) {
+        const handleSticky = () => {
+            const wrapRect = wrapContainer.getBoundingClientRect();
+            const rightRect = rightSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const wrapBottom = wrapRect.bottom;
+            const rightHeight = rightRect.height;
+            
+            // Calculate when to stop sticking (when right section bottom reaches container bottom)
+            const stopStickyPoint = wrapRect.top + wrapContainer.offsetHeight - rightHeight;
+            
+            if (window.scrollY >= wrapRect.top && window.scrollY < stopStickyPoint) {
+                rightSection.style.position = 'fixed';
+                rightSection.style.top = '0';
+                rightSection.style.width = `${rightRect.width}px`;
+            } else if (window.scrollY >= stopStickyPoint) {
+                rightSection.style.position = 'absolute';
+                rightSection.style.top = `${wrapContainer.offsetHeight - rightHeight}px`;
+                rightSection.style.width = `${rightRect.width}px`;
+            } else {
+                rightSection.style.position = 'static';
+                rightSection.style.top = 'auto';
+                rightSection.style.width = 'auto';
             }
-            marqueeList.style.transform = `translateY(${position}px)`;
-            animationFrame = requestAnimationFrame(animateMarquee);
-        }
+        };
 
-        // Start animation
-        animationFrame = requestAnimationFrame(animateMarquee);
-
-        // Pause on hover
-        marqueeContainer.addEventListener('mouseenter', () => {
-            cancelAnimationFrame(animationFrame);
-        });
-
-        marqueeContainer.addEventListener('mouseleave', () => {
-            animationFrame = requestAnimationFrame(animateMarquee);
-        });
-
-        // Accessibility: Allow keyboard focus to pause animation
-        marqueeContainer.setAttribute('tabindex', '0');
-        marqueeContainer.addEventListener('focus', () => {
-            cancelAnimationFrame(animationFrame);
-        });
-
-        marqueeContainer.addEventListener('blur', () => {
-            animationFrame = requestAnimationFrame(animateMarquee);
-        });
+        // Run on scroll and resize
+        window.addEventListener('scroll', handleSticky);
+        window.addEventListener('resize', handleSticky);
+        
+        // Initial call to set correct state
+        handleSticky();
     }
 });
 </script>
