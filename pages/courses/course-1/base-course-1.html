@@ -2218,7 +2218,7 @@ function logout() {
         </div>
     </div>
 <script>
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Handle "Read More" button for key outcomes
     const readMoreButton = document.querySelector('.read-more-link');
     const outcomesList = document.querySelector('#key-outcomes-list');
@@ -2271,40 +2271,42 @@ function logout() {
 
     // Handle sticky right section
     const rightSection = document.querySelector('.right-section');
-    const wrapContainer = document.querySelector('.wrap');
+    const parentContainer = document.querySelector('.wrap.section__container--small');
     
-    if (rightSection && wrapContainer) {
-        const handleSticky = () => {
-            const wrapRect = wrapContainer.getBoundingClientRect();
+    if (rightSection && parentContainer) {
+        const handleScroll = () => {
+            const parentRect = parentContainer.getBoundingClientRect();
             const rightRect = rightSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const wrapBottom = wrapRect.bottom;
-            const rightHeight = rightRect.height;
-            
-            // Calculate when to stop sticking (when right section bottom reaches container bottom)
-            const stopStickyPoint = wrapRect.top + wrapContainer.offsetHeight - rightHeight;
-            
-            if (window.scrollY >= wrapRect.top && window.scrollY < stopStickyPoint) {
-                rightSection.style.position = 'fixed';
-                rightSection.style.top = '0';
-                rightSection.style.width = `${rightRect.width}px`;
-            } else if (window.scrollY >= stopStickyPoint) {
-                rightSection.style.position = 'absolute';
-                rightSection.style.top = `${wrapContainer.offsetHeight - rightHeight}px`;
-                rightSection.style.width = `${rightRect.width}px`;
+            const windowScrollY = window.scrollY;
+            const parentBottom = parentRect.bottom + windowScrollY;
+            const stopPoint = parentBottom - rightRect.height - 75; // Stop 75px before parent bottom
+
+            if (windowScrollY >= parentRect.top + windowScrollY) {
+                if (windowScrollY <= stopPoint) {
+                    // Stick to top
+                    rightSection.style.position = 'fixed';
+                    rightSection.style.top = '0';
+                    rightSection.style.bottom = 'auto';
+                } else {
+                    // Stop at 75px before parent bottom
+                    rightSection.style.position = 'absolute';
+                    rightSection.style.top = 'auto';
+                    rightSection.style.bottom = '75px';
+                }
             } else {
+                // Reset to original position
                 rightSection.style.position = 'static';
                 rightSection.style.top = 'auto';
-                rightSection.style.width = 'auto';
+                rightSection.style.bottom = 'auto';
             }
         };
 
         // Run on scroll and resize
-        window.addEventListener('scroll', handleSticky);
-        window.addEventListener('resize', handleSticky);
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
         
-        // Initial call to set correct state
-        handleSticky();
+        // Initial call to set position
+        handleScroll();
     }
 });
 </script>
