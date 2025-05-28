@@ -1175,7 +1175,247 @@ function logout() {
       </div>
     </div>
   </section>
-
+<style>
+    /* Existing Section-image-left Styles */
+    .section-image-left {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(135deg, #001918 0%, #002d2b 100%);
+      margin: 0 auto;
+      border-radius: 16px;
+      color: white;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      padding: 1rem;
+    }
+    .section-image-left__container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .section-image-left__image-wrapper {
+      width: 100%;
+      position: relative;
+    }
+    .seo-image-box__image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 5/3;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .seo-image-box__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .section-image-left__buttons-mobile {
+      display: block;
+      margin-top: 1rem;
+    }
+    .section-image-left__buttons-desktop {
+      display: none;
+    }
+    .seo-btn {
+      width: 100%;
+      height: 56px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .seo-btn--apply {
+      background: #2caa65;
+      color: white;
+    }
+    .seo-btn--download {
+      background: #fffaf1;
+      color: #2d2d2d;
+      border: 1px solid rgba(45, 45, 45, 0.1);
+    }
+    .btn-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+    .section-image-left__content {
+      padding: 0;
+    }
+    .seo-course-title label {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.8px;
+      background: linear-gradient(135deg, #fff 0%, #e5e7eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .seo-course-description p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #e5e7eb;
+      margin-bottom: 1.5rem;
+    }
+    .seo-course-date-time {
+      margin-bottom: 2rem;
+    }
+    .seo-course-date-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #9ca3af;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.375rem;
+    }
+    .seo-course-date-value {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .seo-course-date-value svg {
+      width: 18px;
+      height: 18px;
+      stroke: #2caa65;
+    }
+    .seo-course-mentor-heading {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #fff;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .seo-course-mentor-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+    .mentor-image-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    .seo-course-mentor-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .seo-course-mentor-name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      letter-spacing: 0.25px;
+    }
+    .seo-course-mentor-role {
+      font-size: 0.8125rem;
+      color: #9ca3af;
+      letter-spacing: 0.25px;
+    }
+    @media (min-width: 768px) {
+      .section-image-left__container {
+        flex-direction: row;
+        gap: 2rem;
+      }
+      .section-image-left__image-wrapper {
+        flex: 0 0 50%;
+      }
+      .section-image-left__buttons-mobile {
+        display: none;
+      }
+      .section-image-left__buttons-desktop {
+        display: block;
+        margin-top: 1rem;
+      }
+      .seo-image-box__buttons {
+        flex-direction: row;
+      }
+      .seo-btn {
+        width: 50%;
+        height: 60px;
+      }
+      .section-image-left__content {
+        padding: 0 0 0 1.5rem;
+      }
+      .seo-course-title label {
+        font-size: 2.25rem;
+      }
+      .seo-course-description p {
+        font-size: 0.9375rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .section-image-left {
+        padding: 2rem;
+      }
+      .section-image-left__container {
+        gap: 3rem;
+      }
+      .seo-image-box__image {
+        height: 300px;
+      }
+      .seo-course-title label {
+        font-size: 2.5rem;
+      }
+    }
+    @media (max-width: 767px) {
+      .section-image-left__container {
+        display: grid;
+        grid-template-rows: auto auto auto;
+      }
+      .seo-image-box__image {
+        grid-row: 1;
+      }
+      .section-image-left__content {
+        grid-row: 2;
+      }
+      .section-image-left__buttons-mobile {
+        grid-row: 3;
+      }
+    }
+    @media (max-width: 480px) {
+      .seo-course-mentor-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .mentor-image-wrapper {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    @media (hover: hover) {
+      .seo-btn:hover {
+        transform: translateY(-2px);
+      }
+      .seo-btn--apply:hover {
+        background: #239a55;
+        box-shadow: 0 8px 16px rgba(44, 170, 101, 0.3);
+      }
+      .seo-btn--download:hover {
+        background: #fffdf8;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+    }
+    </style>
 
 
 
