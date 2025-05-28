@@ -2278,26 +2278,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const parentRect = parentContainer.getBoundingClientRect();
             const rightRect = rightSection.getBoundingClientRect();
             const windowScrollY = window.scrollY;
+            const parentTop = parentRect.top + windowScrollY;
             const parentBottom = parentRect.bottom + windowScrollY;
             const stopPoint = parentBottom - rightRect.height - 75; // Stop 75px before parent bottom
+            const rightOffset = window.innerWidth - (parentRect.right); // Calculate right offset
 
-            if (windowScrollY >= parentRect.top + windowScrollY) {
+            if (windowScrollY >= parentTop - 75) {
                 if (windowScrollY <= stopPoint) {
-                    // Stick to top
+                    // Stick to top-right with 75px gap
                     rightSection.style.position = 'fixed';
-                    rightSection.style.top = '0';
+                    rightSection.style.top = '75px';
+                    rightSection.style.right = `${rightOffset}px`;
                     rightSection.style.bottom = 'auto';
+                    rightSection.style.width = `${rightRect.width}px`; // Maintain original width
                 } else {
                     // Stop at 75px before parent bottom
                     rightSection.style.position = 'absolute';
                     rightSection.style.top = 'auto';
+                    rightSection.style.right = '0'; // Align to parent's right edge
                     rightSection.style.bottom = '75px';
+                    rightSection.style.width = `${rightRect.width}px`; // Maintain original width
                 }
             } else {
                 // Reset to original position
                 rightSection.style.position = 'static';
                 rightSection.style.top = 'auto';
+                rightSection.style.right = 'auto';
                 rightSection.style.bottom = 'auto';
+                rightSection.style.width = 'auto';
             }
         };
 
