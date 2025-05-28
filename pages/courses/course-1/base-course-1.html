@@ -2217,9 +2217,67 @@ function logout() {
             </div>
         </div>
     </div>
-<style>
+<script>
+    // Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Handle "Read More" button for key outcomes
+    const readMoreButton = document.querySelector('.read-more-link');
+    const outcomesList = document.querySelector('#key-outcomes-list');
+    
+    if (readMoreButton && outcomesList) {
+        readMoreButton.addEventListener('click', () => {
+            const isHidden = outcomesList.getAttribute('aria-hidden') === 'true';
+            
+            // Toggle visibility
+            outcomesList.setAttribute('aria-hidden', !isHidden);
+            outcomesList.style.maxHeight = isHidden ? `${outcomesList.scrollHeight}px` : '0';
+            outcomesList.style.opacity = isHidden ? '1' : '0';
+            outcomesList.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+            
+            // Update button text and aria-label
+            readMoreButton.textContent = isHidden ? 'Read Less' : 'Read More';
+            readMoreButton.setAttribute('aria-label', isHidden ? 'Hide key outcomes' : 'Show key outcomes');
+            
+            // Rotate SVG icon
+            const svgPath = readMoreButton.querySelector('svg path');
+            svgPath.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+            svgPath.style.transition = 'transform 0.3s ease';
+        });
+    }
 
-  </style>
+    // Handle accordion functionality
+    const accordionTitles = document.querySelectorAll('.accordion-title');
+    
+    accordionTitles.forEach(title => {
+        title.addEventListener('click', () => {
+            const isExpanded = title.getAttribute('aria-expanded') === 'true';
+            const content = title.nextElementSibling;
+            const svgPath = title.querySelector('svg path');
+
+            // Close all other accordions
+            accordionTitles.forEach(otherTitle => {
+                if (otherTitle !== title) {
+                    otherTitle.setAttribute('aria-expanded', 'false');
+                    otherTitle.nextElementSibling.style.maxHeight = '0';
+                    otherTitle.nextElementSibling.style.opacity = '0';
+                    const otherSvgPath = otherTitle.querySelector('svg path');
+                    otherSvgPath.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current accordion
+            title.setAttribute('aria-expanded', !isExpanded);
+            content.style.maxHeight = isExpanded ? '0' : `${content.scrollHeight}px`;
+            content.style.opacity = isExpanded ? '0' : '1';
+            content.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+            svgPath.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            svgPath.style.transition = 'transform 0.3s ease';
+        });
+    });
+});
+</script>
+
+
 
 
 
