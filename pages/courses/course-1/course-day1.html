@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1: Your AI-Powered Learning Tools</title>
+    <style>
+        body {
+            background: #F6F8FA;
+            margin: 0;
+            padding: 32px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .wrap.section__container--small {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 0px;
+            gap: 48px;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .left-section {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tool-info-panel {
+            width: 35%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(10px);
+            visibility: hidden;
+            position: absolute;
+            left: calc(60% + 78px); /* 60% (left-section) + 48px (gap) + (40% - 35%) / 2 */
+            min-height: 200px;
+            box-sizing: border-box;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tool-info-panel.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .tool-info-panel .tool-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .tool-info-panel h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0;
+        }
+
+        .tool-info-panel .tool-use {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4B5563;
+            margin: 0;
+        }
+
+        .tool-info-panel .tool-description {
+            font-size: 0.95rem;
+            color: #6B7280;
+            line-height: 1.5;
+            margin: 0 0 16px 0;
+        }
+
+        .left-section .section-header {
+            color: #1F2937;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .section-subheading {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 400;
+            color: #4B5563;
+            max-width: 550px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            padding-left: 16px;
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .accordion-section {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+        }
+
+        .accordion-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .accordion-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #001f5b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .accordion-item {
+            margin-bottom: 16px;
+        }
+
+        .accordion-title {
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            background: #FFFFFF;
+            transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-title:hover {
+            background: #F1F5F9;
+            border-color: #4F46E5;
+        }
+
+        .accordion-header {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .accordion-header-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .accordion-day {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        .accordion-header svg {
+            width: 24px;
+            height: 24px;
+            stroke: #005fd1;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.active .accordion-header svg {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 24px;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            padding: 16px 24px;
+            opacity: 1;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .tool-icon, .header-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .tool-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tool-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .tool-use {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+
+        .tool-description {
+            font-size: 0.9rem;
+            color: #6B7280;
+            line-height: 1.5;
+        }
+
+        .view-course-button {
+            background: linear-gradient(135deg, #005fd1 0%, #001f5b 100%);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-course-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #007bff 0%, #003087 100%);
+        }
+
+        .view-course-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-course-button::after {
+            content: '→';
+            font-size: 1rem;
+        }
+
+        .contact-section {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .contact-section .section-header {
+            color: #1F2937;
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .contact-section a {
+            color: #001f5b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+
+        .para {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 400;
+            color: #4B5563;
+            max-width: 550px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4F46E5;
+            color: #FFFFFF;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wrap.section__container--small,
+            .section-header,
+            .section-subheading,
+            .accordion-section,
+            .accordion-title,
+            .accordion-content,
+            .contact-section,
+            .scroll-to-top,
+            .tool-info-panel {
+                animation: none;
+                transition: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            body {
+                padding: 16px;
+            }
+
+            .wrap.section__container--small {
+                flex-direction: column;
+                padding: 24px 0px;
+            }
+
+            .left-section {
+                width: 100%;
+            }
+
+            .tool-info-panel {
+                display: none;
+            }
+
+            .left-section .section-header {
+                font-size: clamp(1.6rem, 4vw, 2rem);
+                padding-left: 8px;
+            }
+
+            .section-subheading {
+                font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+                padding-left: 8px;
+            }
+
+            .view-course-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+            }
+
+            .view-course-button:hover {
+                transform: scale(1.02);
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .view-course-button:active {
+                transform: scale(0.98);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+
+            .accordion-section, .contact-section {
+                padding: 16px;
+            }
+
+            .accordion-section h3 {
+                font-size: 0.875rem;
+            }
+
+            .left-section .section-header {
+                font-size: clamp(1.4rem, 3.5vw, 1.6rem);
+                padding-left: 0;
+            }
+
+            .section-subheading {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap section__container--small">
+        <div class="left-section">
+            <h1 class="section-header">Day 1: Your AI-Powered Learning Tools</h1>
+            <p class="section-subheading">
+                Welcome to Day 1 of your AI expertise journey! Explore one AI tool per category below to supercharge your learning, creativity, and productivity. On desktop, click a tool to view details on the right; on mobile, details appear below. Add more tools as needed.
+            </p>
+            <div class="accordion-section">
+                <h3>Smart Study & Note-Taking Tools</h3>
+                <div class="accordion-item" data-tool='{
+                    "name": "NotebookLM (by Google)",
+                    "use": "Learn from your PDFs & docs",
+                    "description": "AI-powered learning notebook — upload notes, books, articles, and ask questions directly.",
+                    "url": "https://notebooklm.google.com",
+                    "icon": "https://www.google.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://www.google.com/favicon.ico" alt="NotebookLM Icon" class="header-icon" data-emoji="📓">
+                                <span class="accordion-day">NotebookLM (by Google)</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://www.google.com/favicon.ico" alt="NotebookLM Icon" class="tool-icon" data-emoji="📓">
+                                <div class="tool-content">
+                                    <div class="tool-name">NotebookLM (by Google)</div>
+                                    <div class="tool-use">Learn from your PDFs & docs</div>
+                                    <div class="tool-description">
+                                        AI-powered learning notebook — upload notes, books, articles, and ask questions directly.
+                                    </div>
+                                    <a href="https://notebooklm.google.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" data-tool='{
+                    "name": "NotebookLM (by Google)",
+                    "use": "Learn from your PDFs & docs",
+                    "description": "AI-powered learning notebook — upload notes, books, articles, and ask questions directly.",
+                    "url": "https://notebooklm.google.com",
+                    "icon": "https://www.google.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://www.google.com/favicon.ico" alt="NotebookLM Icon" class="header-icon" data-emoji="📓">
+                                <span class="accordion-day">NotebookLM (by Google)</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://www.google.com/favicon.ico" alt="NotebookLM Icon" class="tool-icon" data-emoji="📓">
+                                <div class="tool-content">
+                                    <div class="tool-name">NotebookLM (by Google)</div>
+                                    <div class="tool-use">Learn from your PDFs & docs</div>
+                                    <div class="tool-description">
+                                        AI-powered learning notebook — upload notes, books, articles, and ask questions directly.
+                                    </div>
+                                    <a href="https://notebooklm.google.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-section">
+                <h3>Creative & Visual Content Tools</h3>
+                <div class="accordion-item" data-tool='{
+                    "name": "Canva AI",
+                    "use": "Design posters, presentations, resumes",
+                    "description": "Drag-and-drop design with AI-generated text and visuals — ideal for academic and portfolio work.",
+                    "url": "https://www.canva.com",
+                    "icon": "https://www.canva.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://www.canva.com/favicon.ico" alt="Canva AI Icon" class="header-icon" data-emoji="🎨">
+                                <span class="accordion-day">Canva AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://www.canva.com/favicon.ico" alt="Canva AI Icon" class="tool-icon" data-emoji="🎨">
+                                <div class="tool-content">
+                                    <div class="tool-name">Canva AI</div>
+                                    <div class="tool-use">Design posters, presentations, resumes</div>
+                                    <div class="tool-description">
+                                        Drag-and-drop design with AI-generated text and visuals — ideal for academic and portfolio work.
+                                    </div>
+                                    <a href="https://www.canva.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" data-tool='{
+                    "name": "Canva AI",
+                    "use": "Design posters, presentations, resumes",
+                    "description": "Drag-and-drop design with AI-generated text and visuals — ideal for academic and portfolio work.",
+                    "url": "https://www.canva.com",
+                    "icon": "https://www.canva.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://www.canva.com/favicon.ico" alt="Canva AI Icon" class="header-icon" data-emoji="🎨">
+                                <span class="accordion-day">Canva AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://www.canva.com/favicon.ico" alt="Canva AI Icon" class="tool-icon" data-emoji="🎨">
+                                <div class="tool-content">
+                                    <div class="tool-name">Canva AI</div>
+                                    <div class="tool-use">Design posters, presentations, resumes</div>
+                                    <div class="tool-description">
+                                        Drag-and-drop design with AI-generated text and visuals — ideal for academic and portfolio work.
+                                    </div>
+                                    <a href="https://www.canva.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-section">
+                <h3>Writing, Content & AI Co-Pilot Tools</h3>
+                <div class="accordion-item" data-tool='{
+                    "name": "Jenni AI",
+                    "use": "Long-form writing assistance",
+                    "description": "Ideal for writing essays, research papers, or blogs with AI suggestions.",
+                    "url": "https://jenni.ai",
+                    "icon": "https://jenni.ai/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://jenni.ai/favicon.ico" alt="Jenni AI Icon" class="header-icon" data-emoji="🦾">
+                                <span class="accordion-day">Jenni AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://jenni.ai/favicon.ico" alt="Jenni AI Icon" class="tool-icon" data-emoji="🦾">
+                                <div class="tool-content">
+                                    <div class="tool-name">Jenni AI</div>
+                                    <div class="tool-use">Long-form writing assistance</div>
+                                    <div class="tool-description">
+                                        Ideal for writing essays, research papers, or blogs with AI suggestions.
+                                    </div>
+                                    <a href="https://jenni.ai" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" data-tool='{
+                    "name": "Jenni AI",
+                    "use": "Long-form writing assistance",
+                    "description": "Ideal for writing essays, research papers, or blogs with AI suggestions.",
+                    "url": "https://jenni.ai",
+                    "icon": "https://jenni.ai/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://jenni.ai/favicon.ico" alt="Jenni AI Icon" class="header-icon" data-emoji="🦾">
+                                <span class="accordion-day">Jenni AI</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://jenni.ai/favicon.ico" alt="Jenni AI Icon" class="tool-icon" data-emoji="🦾">
+                                <div class="tool-content">
+                                    <div class="tool-name">Jenni AI</div>
+                                    <div class="tool-use">Long-form writing assistance</div>
+                                    <div class="tool-description">
+                                        Ideal for writing essays, research papers, or blogs with AI suggestions.
+                                    </div>
+                                    <a href="https://jenni.ai" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-section">
+                <h3>Career, Productivity & Self-Improvement</h3>
+                <div class="accordion-item" data-tool='{
+                    "name": "Rezi",
+                    "use": "Build AI-optimized resumes",
+                    "description": "Free resume builder with real-time feedback and ATS optimization.",
+                    "url": "https://rezi.ai",
+                    "icon": "https://rezi.ai/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://rezi.ai/favicon.ico" alt="Rezi Icon" class="header-icon" data-emoji="📄">
+                                <span class="accordion-day">Rezi</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://rezi.ai/favicon.ico" alt="Rezi Icon" class="tool-icon" data-emoji="📄">
+                                <div class="tool-content">
+                                    <div class="tool-name">Rezi</div>
+                                    <div class="tool-use">Build AI-optimized resumes</div>
+                                    <div class="tool-description">
+                                        Free resume builder with real-time feedback and ATS optimization.
+                                    </div>
+                                    <a href="https://rezi.ai" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" data-tool='{
+                    "name": "Rezi",
+                    "use": "Build AI-optimized resumes",
+                    "description": "Free resume builder with real-time feedback and ATS optimization.",
+                    "url": "https://rezi.ai",
+                    "icon": "https://rezi.ai/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://rezi.ai/favicon.ico" alt="Rezi Icon" class="header-icon" data-emoji="📄">
+                                <span class="accordion-day">Rezi</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://rezi.ai/favicon.ico" alt="Rezi Icon" class="tool-icon" data-emoji="📄">
+                                <div class="tool-content">
+                                    <div class="tool-name">Rezi</div>
+                                    <div class="tool-use">Build AI-optimized resumes</div>
+                                    <div class="tool-description">
+                                        Free resume builder with real-time feedback and ATS optimization.
+                                    </div>
+                                    <a href="https://rezi.ai" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-section">
+                <h3>Bonus: Skill-Building & Coding Tools</h3>
+                <div class="accordion-item" data-tool='{
+                    "name": "DeepSeek",
+                    "use": "Code + Math assistant",
+                    "description": "Strong GPT-style free model for coding help, especially for Python, Java, etc.",
+                    "url": "https://deepseek.com",
+                    "icon": "https://deepseek.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://deepseek.com/favicon.ico" alt="DeepSeek Icon" class="header-icon" data-emoji="🧪">
+                                <span class="accordion-day">DeepSeek</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://deepseek.com/favicon.ico" alt="DeepSeek Icon" class="tool-icon" data-emoji="🧪">
+                                <div class="tool-content">
+                                    <div class="tool-name">DeepSeek</div>
+                                    <div class="tool-use">Code + Math assistant</div>
+                                    <div class="tool-description">
+                                        Strong GPT-style free model for coding help, especially for Python, Java, etc.
+                                    </div>
+                                    <a href="https://deepseek.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item" data-tool='{
+                    "name": "DeepSeek",
+                    "use": "Code + Math assistant",
+                    "description": "Strong GPT-style free model for coding help, especially for Python, Java, etc.",
+                    "url": "https://deepseek.com",
+                    "icon": "https://deepseek.com/favicon.ico"
+                }'>
+                    <div class="accordion-title">
+                        <div class="accordion-header">
+                            <div class="accordion-header-text">
+                                <img src="https://deepseek.com/favicon.ico" alt="DeepSeek Icon" class="header-icon" data-emoji="🧪">
+                                <span class="accordion-day">DeepSeek</span>
+                            </div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="tool-item">
+                                <img src="https://deepseek.com/favicon.ico" alt="DeepSeek Icon" class="tool-icon" data-emoji="🧪">
+                                <div class="tool-content">
+                                    <div class="tool-name">DeepSeek</div>
+                                    <div class="tool-use">Code + Math assistant</div>
+                                    <div class="tool-description">
+                                        Strong GPT-style free model for coding help, especially for Python, Java, etc.
+                                    </div>
+                                    <a href="https://deepseek.com" class="view-course-button">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-section">
+                <h2 class="section-header">Need Help?</h2>
+                <p class="para">
+                    Have questions about using these tools? 
+                    <a href="mailto:support@example.com">Contact our team</a> for support.
+                </p>
+            </div>
+        </div>
+        <div class="tool-info-panel" id="tool-info-panel">
+            <img src="" alt="Tool Icon" class="tool-icon" id="tool-icon">
+            <h4 id="tool-name"></h4>
+            <div class="tool-use" id="tool-use"></div>
+            <div class="tool-description" id="tool-description"></div>
+            <a href="#" class="view-course-button" id="tool-url">Visit</a>
+        </div>
+    </div>
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+    <script>
+        document.querySelectorAll('.accordion-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const item = title.parentNode;
+                const section = item.closest('.accordion-section');
+                
+                if (window.innerWidth > 768) {
+                    // Desktop: Update tool info panel only
+                    const toolData = JSON.parse(item.getAttribute('data-tool'));
+                    const panel = document.getElementById('tool-info-panel');
+                    document.getElementById('tool-icon').src = toolData.icon;
+                    document.getElementById('tool-icon').alt = `${toolData.name} Icon`;
+                    document.getElementById('tool-name').textContent = toolData.name;
+                    document.getElementById('tool-use').textContent = toolData.use;
+                    document.getElementById('tool-description').textContent = toolData.description;
+                    const link = document.getElementById('tool-url');
+                    link.href = toolData.url;
+                    link.textContent = 'Visit';
+                    
+                    // Position panel to align with accordion header
+                    const header = title.querySelector('.accordion-header');
+                    const wrapper = document.querySelector('.wrap.section__container--small');
+                    const headerRect = header.getBoundingClientRect();
+                    const wrapperRect = wrapper.getBoundingClientRect();
+                    const topPosition = headerRect.top - wrapperRect.top + wrapper.scrollTop;
+                    panel.style.top = `${topPosition}px`;
+                    panel.classList.add('active');
+
+                    // Remove active class from all accordions to prevent expansion
+                    document.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.accordion-content').style.maxHeight = '0';
+                        i.querySelector('.accordion-content').style.padding = '0 24px';
+                        i.querySelector('.accordion-content').style.opacity = '0';
+                    });
+                } else {
+                    // Mobile: Toggle accordion content
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all accordions in the section
+                    section.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.accordion-content').style.maxHeight = '0';
+                        i.querySelector('.accordion-content').style.padding = '0 24px';
+                        i.querySelector('.accordion-content').style.opacity = '0';
+                    });
+                    
+                    // Open clicked accordion
+                    if (!isActive) {
+                        item.classList.add('active');
+                        const content = item.querySelector('.accordion-content');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.padding = '16px 24px';
+                        content.style.opacity = '1';
+                    }
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
