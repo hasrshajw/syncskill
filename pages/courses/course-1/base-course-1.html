@@ -1103,7 +1103,7 @@ function logout() {
 
 
   
- <section class="section-image-left">
+<section class="section-image-left">
     <div class="section-image-left__container">
       <div class="section-image-left__image-wrapper">
         <img src="https://d3kl8zsmmx4oop.cloudfront.net/SEO_4be34a6ed1_07b92bff39.webp" alt="SEO Course" class="seo-image-box__image">
@@ -1113,7 +1113,11 @@ function logout() {
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-              <span>Apply Now</span>
+              <span class="btn-text">Apply Now</span>
+              <svg class="btn-spinner" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="4" opacity="0.3"/>
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+              </svg>
             </button>
             <button class="seo-btn seo-btn--download">
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
@@ -1158,7 +1162,11 @@ function logout() {
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-              <span>Apply Now</span>
+              <span class="btn-text">Apply Now</span>
+              <svg class="btn-spinner" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="4" opacity="0.3"/>
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+              </svg>
             </button>
             <button class="seo-btn seo-btn--download">
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none">
@@ -1171,6 +1179,30 @@ function logout() {
       </div>
     </div>
   </section>
+<script>
+function startRazorpayPayment() {
+  // Get all Apply Now buttons
+  const applyButtons = document.querySelectorAll('.seo-btn--apply');
+  
+  // Show loading spinner on all Apply Now buttons
+  applyButtons.forEach(button => {
+    button.classList.add('loading');
+    button.disabled = true; // Disable button during loading
+  });
+
+  // Simulate Razorpay loading (replace with actual Razorpay script loading)
+  setTimeout(() => {
+    // Mock Razorpay popup (replace with actual Razorpay initialization)
+    console.log('Razorpay payment popup initiated');
+    
+    // Hide loading spinner after Razorpay is ready
+    applyButtons.forEach(button => {
+      button.classList.remove('loading');
+      button.disabled = false; // Re-enable button
+    });
+  }, 2000); // Simulated 2-second delay for demo; adjust based on actual Razorpay loading
+}
+</script>
 <style>
    /* Main Section Styles */
     .section-image-left {
@@ -1243,7 +1275,7 @@ function logout() {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.3rem; /* Reduced gap for tighter icon-text alignment */
+      gap: 0.3rem; /* Tighter gap for icon-text alignment */
       position: relative;
       overflow: hidden;
     }
@@ -1267,12 +1299,36 @@ function logout() {
     .seo-btn--apply {
       background: #007aff;
       color: #ffffff;
+      position: relative;
     }
 
     .seo-btn--apply:hover {
       background: #0062cc;
       box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
       transform: translateY(-2px);
+    }
+
+    .seo-btn--apply.loading .btn-icon,
+    .seo-btn--apply.loading .btn-text {
+      opacity: 0; /* Hide icon and text during loading */
+    }
+
+    .seo-btn--apply.loading .btn-spinner {
+      opacity: 1;
+      animation: spin 1s linear infinite; /* Spinning animation */
+    }
+
+    .seo-btn--apply .btn-spinner {
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .seo-btn--download {
@@ -1288,11 +1344,15 @@ function logout() {
     }
 
     .btn-icon {
-      width: 16px; /* Slightly smaller icon for better proportion */
+      width: 16px;
       height: 16px;
       stroke: currentColor;
       stroke-width: 2;
-      flex-shrink: 0; /* Prevent icon from shrinking */
+      flex-shrink: 0;
+    }
+
+    .btn-text {
+      transition: opacity 0.2s ease;
     }
 
     .section-image-left__content {
@@ -1367,7 +1427,7 @@ function logout() {
     }
 
     .seo-course-pricing-original {
-      color: #8e8e93; /* Apple-style muted gray */
+      color: #8e8e93;
       text-decoration: line-through;
       font-size: 1rem;
       font-weight: 400;
@@ -1375,14 +1435,14 @@ function logout() {
     }
 
     .seo-course-pricing-discounted {
-      color: #00d084; /* Apple-inspired vibrant green */
+      color: #00d084;
       font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: -0.015em;
     }
 
     .seo-course-pricing-save {
-      background: #ff2d55; /* Apple-inspired red */
+      background: #ff2d55;
       color: #ffffff;
       font-size: 0.8rem;
       font-weight: 600;
@@ -1422,7 +1482,7 @@ function logout() {
 
       .seo-image-box__buttons {
         flex-direction: row;
-        gap: 1rem; /* Reduced gap between buttons for desktop */
+        gap: 1rem;
         justify-content: center;
         max-width: 600px;
         margin: 0 auto;
@@ -1432,7 +1492,7 @@ function logout() {
         width: 200px;
         height: 56px;
         font-size: 1.1rem;
-        gap: 0.4rem; /* Tighter gap for desktop view */
+        gap: 0.4rem;
       }
 
       .section-image-left__content {
@@ -1491,7 +1551,7 @@ function logout() {
         width: 220px;
         height: 60px;
         font-size: 1.2rem;
-        gap: 0.4rem; /* Consistent gap for desktop */
+        gap: 0.4rem;
       }
 
       .seo-course-pricing-original {
