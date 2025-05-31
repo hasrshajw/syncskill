@@ -336,114 +336,84 @@ html, body {
             transform: rotate(-180deg);
         }
 
-      /* Define CSS variables for consistency */
-:root {
-    --card-bg: #ffffff;
-    --border: #e2e8f0;
-    --primary: #002726;
-    --text: #1a202c;
-    --text-secondary: #4a5568;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --easing: cubic-bezier(0.4, 0, 0.2, 1);
-    --spacing-unit: 8px;
-}
+        /* Accordion */
+        .accordion-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s var(--easing);
+        }
 
-/* Accordion */
-.accordion-section {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: calc(var(--spacing-unit) * 4);
-    box-shadow: var(--shadow);
-    transition: transform 0.3s var(--easing);
-}
+        .accordion-section:hover {
+            transform: translateY(-8px);
+        }
 
-.accordion-section:hover {
-    transform: translateY(-8px);
-}
+        .accordion-item {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
 
-.accordion-item {
-    margin-bottom: calc(var(--spacing-unit) * 2);
-}
+        .accordion-title {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--card-bg);
+            transition: background 0.3s var(--easing), border-color 0.3s var(--easing), transform 0.3s var(--easing);
+        }
 
-.accordion-title {
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: var(--card-bg);
-    transition: background 0.3s var(--easing), border-color 0.3s var(--easing), transform 0.3s var(--easing);
-}
+        .accordion-title:hover {
+            background: #F1F5F9;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
 
-.accordion-title:hover {
-    background: #F1F5F9;
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
+        .accordion-header {
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
 
-.accordion-header {
-    padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
+        .accordion-header-text label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
 
-.accordion-header-text label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--primary);
-    text-transform: uppercase;
-}
+        .accordion-header-text h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+        }
 
-.accordion-header-text h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text);
-}
+        .accordion-header svg {
+            transition: transform 0.3s var(--easing);
+        }
 
-.accordion-header-text p {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-top: 0.5rem;
-}
+        .accordion-item.active .accordion-header svg {
+            transform: rotate(180deg);
+        }
 
-.accordion-header svg {
-    transition: transform 0.3s var(--easing);
-}
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 calc(var(--spacing-unit) * 3);
+            transition: max-height 0.5s var(--easing), padding 0.5s var(--easing), opacity 0.5s var(--easing);
+            opacity: 0;
+        }
 
-.accordion-item.active .accordion-header svg {
-    transform: rotate(180deg);
-}
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
+            opacity: 1;
+        }
 
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 calc(var(--spacing-unit) * 3);
-    transition: max-height 0.5s var(--easing), padding 0.5s var(--easing), opacity 0.5s var(--easing);
-    opacity: 0;
-}
+        .accordion-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
 
-.accordion-item.active .accordion-content {
-    max-height: 800px; /* Increased to accommodate bullet points */
-    padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
-    opacity: 1;
-}
-
-.accordion-content ul {
-    list-style-type: disc;
-    margin-left: 1.5rem;
-    font-size: 1rem;
-    color: var(--text-secondary);
-}
-
-.accordion-content li {
-    margin-bottom: 0.5rem;
-}
-
-.accordion-content p.why-matters {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-top: 1rem;
-}
         /* Crash Course Section */
         .crash-course-wrap {
             background: #FFF7ED;
@@ -1945,156 +1915,174 @@ function logout() {
                     </svg>
                 </button>
             </div>
-
-
-
-
-
-
-
-
-
-            
             <div class="accordion-section">
-    <p class="pre-header">Curriculum</p>
-    <h2 class="section-header">What You’ll Learn</h2>
-    <div class="accordion">
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 1</label>
-                        <h4>Intro to AI & LLMs</h4>
+                <p class="pre-header">Curriculum</p>
+                <h2 class="section-header">What You’ll Learn</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 1</label>
+                                    <h4>SEO Fundamentals & Algorithms</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Explore how search engines work, key ranking factors, and algorithm updates.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 2</label>
+                                    <h4>SEO-Optimized Content</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Learn to create engaging, keyword-rich content that ranks high.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 3</label>
+                                    <h4>Technical SEO Basics</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Master website structure, speed, and technical optimizations.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 4</label>
+                                    <h4>Advanced Technical SEO</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Dive into schema markup, crawlability, and advanced techniques.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 5</label>
+                                    <h4>Link Building Strategies</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Build authority with ethical link-building methods.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 6</label>
+                                    <h4>E-Commerce & Local SEO</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Optimize for online stores and local visibility.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 7</label>
+                                    <h4>International SEO</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Target global markets with multilingual SEO.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 8</label>
+                                    <h4>SEO Implementation</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Apply SEO through audits and real-world projects.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-title" aria-expanded="false">
+                            <div class="accordion-header">
+                                <div class="accordion-header-text">
+                                    <label>Module 9</label>
+                                    <h4>Future of SEO</h4>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Discover AI-driven SEO and voice search trends.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="accordion-content">
-                <p>Understand the tech that's replacing traditional jobs. Learn the basics of Artificial Intelligence and Large Language Models (LLMs) like ChatGPT, Gemini, Claude. How companies are using AI in real-world products. Career paths in AI—even for non-coders. Why it matters: Once you understand the landscape, you’ll stop fearing AI—and start mastering it.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 2</label>
-                        <h4>Prompt Engineering</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Talk to AI like a pro. Learn the psychology of prompting AI to get exactly what you want. Craft prompts that generate job-winning content, code, and strategies. Real-world examples from marketing, software dev, and research. Why it matters: Prompting is the new coding. Learn it now or get left behind.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 3</label>
-                        <h4>AI Agents</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Go beyond ChatGPT—build smart workflows. What are AI agents & why are companies investing in them. Tools like AutoGPT, AgentGPT, LangChain. Build your first AI agent that solves real problems. Why it matters: Hiring managers are seeking builders. Be the person who makes AI do the work.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 4</label>
-                        <h4>Advanced AI Tools</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Master the tools that 6-figure freelancers use. Midjourney, Notion AI, Fireflies, ElevenLabs, Runway, and more. Combine tools to automate content, coding, and design. Speed = Superpower. Learn how to build faster than your peers. Why it matters: Employers love productivity. You’ll do 10x work in 1/10th time.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 5</label>
-                        <h4>LinkedIn Profile Setup</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Turn your LinkedIn into a job magnet. GrowthSchool-style LinkedIn optimization. Craft a killer headline & summary. Profile SEO for recruiters and algorithms. Why it matters: 80% of job offers today start with a LinkedIn search. Be visible, be desirable.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 6</label>
-                        <h4>LinkedIn Connections & Growth Hacks</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Build your tribe. Multiply your reach. Smart ways to connect with industry leaders. Psychology-based DM writing. Growth hacks to go viral and stay top-of-mind. Why it matters: Jobs don’t go to the best candidates—they go to the best-connected.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 7</label>
-                        <h4>Portfolio Building & Deployment</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Your AI project portfolio = your new resume. What to include, how to showcase. Deploy projects on GitHub, Notion, and personal websites. Get feedback from mentors & industry folks. Why it matters: Proof of skill beats marksheets. Your portfolio makes you unforgettable.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 8</label>
-                        <h4>Resume Mastery (Basic to Advanced)</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Craft resumes that beat ATS and impress humans. Format that top tech companies prefer. How to tailor for different job roles. AI-powered resume boosters. Why it matters: Your resume should get you the interview. This module makes it happen.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 9</label>
-                        <h4>Live Industry Sessions + Real Networking</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Get inside insights. Build real-world connections. Fireside chats with engineers, PMs, and hiring managers from top companies. Ask questions, get career advice, and connect live. Build your professional network while you learn. Why it matters: It’s not just what you know—it’s who knows you.</p>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <div class="accordion-title" aria-expanded="false">
-                <div class="accordion-header">
-                    <div class="accordion-header-text">
-                        <label>Module 10</label>
-                        <h4>Capstone Project</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-content">
-                <p>Turn your learning into a job-ready project. Solve a real-world problem using AI tools. Work in teams or solo. Present it live to mentors and receive reviews. Why it matters: This is your “showpiece” for interviews, LinkedIn, and your portfolio.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-            
             <div class="crash-course-section">
                 <p class="pre-header">Target Audience</p>
                 <h2 class="section-header">Who’s This For?</h2>
