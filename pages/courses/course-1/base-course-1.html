@@ -1097,12 +1097,6 @@ function logout() {
      
 
 
-
-
-
-
-
-  
 <section class="section-image-left">
     <div class="section-image-left__container">
       <div class="section-image-left__image-wrapper">
@@ -1177,32 +1171,7 @@ function logout() {
       </svg>
     </div>
   </section>
-<script>
-function startRazorpayPayment() {
-  // Get all Apply Now buttons and the loading overlay
-  const applyButtons = document.querySelectorAll('.seo-btn--apply');
-  const loadingOverlay = document.querySelector('.loading-overlay');
-
-  // Show loading overlay and disable buttons
-  loadingOverlay.classList.add('active');
-  applyButtons.forEach(button => {
-    button.disabled = true; // Disable button during loading
-  });
-
-  // Simulate Razorpay loading (replace with actual Razorpay script loading)
-  setTimeout(() => {
-    // Mock Razorpay popup (replace with actual Razorpay initialization)
-    console.log('Razorpay payment popup initiated');
-
-    // Hide loading overlay and re-enable buttons
-    loadingOverlay.classList.remove('active');
-    applyButtons.forEach(button => {
-      button.disabled = false; // Re-enable button
-    });
-  }, 2000); // Simulated 2-second delay for demo; adjust based on actual Razorpay loading
-}
-</script>
-<style>
+    <style>
    /* Main Section Styles */
     .section-image-left {
       width: 100%;
@@ -1217,7 +1186,7 @@ function startRazorpayPayment() {
       padding: 2rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      position: relative; /* For positioning loading overlay */
+      position: relative;
     }
 
     .section-image-left__container {
@@ -1343,7 +1312,7 @@ function startRazorpayPayment() {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      background: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1661,6 +1630,12 @@ function startRazorpayPayment() {
       }
     }
 </style>
+
+
+
+
+  
+
 
 
 
@@ -2486,13 +2461,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
   import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
   import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
 
-  // 🔧 Firebase config
+  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
     authDomain: "syncskilll.firebaseapp.com",
@@ -2509,7 +2483,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentUser = null;
 
-  // 🔁 Redirect if already paid
+  // Redirect if already paid
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       window.location.href = "/pages/verify/login.html";
@@ -2529,7 +2503,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 👤 Update user UI
+  // Update user UI
   const elements = {
     userAvatar: document.getElementById('userAvatar'),
     mobileUserAvatar: document.getElementById('mobileUserAvatar'),
@@ -2578,19 +2552,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 💳 Razorpay Payment Integration with Orders API
-  const startRazorpayPayment = async () => {
+  // Razorpay Payment Integration with Orders API and Loading Overlay
+  window.startRazorpayPayment = async () => {
+    const applyButtons = document.querySelectorAll('.seo-btn--apply');
+    const loadingOverlay = document.querySelector('.loading-overlay');
+
     if (!currentUser) {
       alert("Please login to continue.");
+      loadingOverlay.classList.remove('active');
+      applyButtons.forEach(button => button.disabled = false);
       return;
     }
+
+    // Show loading overlay and disable buttons
+    loadingOverlay.classList.add('active');
+    applyButtons.forEach(button => button.disabled = true);
 
     try {
       // Call Netlify function to create order
       const response = await fetch('/.netlify/functions/createOrder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: 100 }) // ₹1 in paise
+        body: JSON.stringify({ amount: 1651700 }) // ₹16,517 in paise
       });
 
       if (!response.ok) {
@@ -2607,7 +2590,7 @@ document.addEventListener('DOMContentLoaded', () => {
         name: 'SyncSkill Academy',
         description: 'Premium Course Access',
         image: '/assets/logo-i.png',
-        order_id: order.id, // Important: pass the order ID here
+        order_id: order.id,
         handler: async function (response) {
           try {
             // Save payment details to Firestore
@@ -2631,18 +2614,36 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         theme: {
           color: "#0f172a"
+        },
+        modal: {
+          ondismiss: () => {
+            // Hide loading overlay if the Razorpay modal is closed
+            loadingOverlay.classList.remove('active');
+            applyButtons.forEach(button => button.disabled = false);
+          }
         }
       };
 
       const rzp = new Razorpay(options);
+      rzp.on('payment.pending', () => {
+        // Keep loading overlay active during pending state
+        loadingOverlay.classList.add('active');
+      });
+      rzp.on('payment.error', () => {
+        // Hide loading overlay on error
+        loadingOverlay.classList.remove('active');
+        applyButtons.forEach(button => button.disabled = false);
+      });
       rzp.open();
+      // Hide loading overlay when Razorpay popup opens
+      loadingOverlay.classList.remove('active');
+      applyButtons.forEach(button => button.disabled = false);
     } catch (err) {
       alert("Payment initialization failed: " + err.message);
+      loadingOverlay.classList.remove('active');
+      applyButtons.forEach(button => button.disabled = false);
     }
   };
-
-  // Expose globally for button
-  window.startRazorpayPayment = startRazorpayPayment;
 </script>
 
 
