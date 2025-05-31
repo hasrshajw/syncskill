@@ -2380,18 +2380,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const leftSection = document.querySelector('.left-section');
     
     if (rightSection && parentContainer && leftSection) {
+        // Calculate initial offset for centering
+        const parentRect = parentContainer.getBoundingClientRect();
+        const leftRect = leftSection.getBoundingClientRect();
+        const rightRect = rightSection.getBoundingClientRect();
+        const availableSpace = parentRect.width - (leftRect.right - parentRect.left);
+        const leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
+
         const handleScroll = () => {
             const parentRect = parentContainer.getBoundingClientRect();
-            const leftRect = leftSection.getBoundingClientRect();
             const rightRect = rightSection.getBoundingClientRect();
             const windowScrollY = window.scrollY;
             const parentTop = parentRect.top + windowScrollY;
             const parentBottom = parentRect.bottom + windowScrollY;
             const stopPoint = parentBottom - rightRect.height - 75;
-
-            // Calculate the left offset to center the right section in the available space
-            const availableSpace = parentRect.width - (leftRect.right - parentRect.left);
-            const leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
 
             if (windowScrollY >= parentTop - 75) {
                 if (windowScrollY <= stopPoint) {
@@ -2424,7 +2426,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Run on scroll and resize
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
+        window.addEventListener('resize', () => {
+            // Recalculate leftOffset on resize to handle layout changes
+            const parentRect = parentContainer.getBoundingClientRect();
+            const leftRect = leftSection.getBoundingClientRect();
+            const rightRect = rightSection.getBoundingClientRect();
+            const availableSpace = parentRect.width - (leftRect.right - parentRect.left);
+            leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
+            handleScroll();
+        });
         
         // Initial call to set position
         handleScroll();
