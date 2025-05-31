@@ -1139,9 +1139,9 @@ function logout() {
             <div class="seo-course-pricing">
               <div class="seo-course-pricing-heading">Pricing</div>
               <div class="seo-course-pricing-details">
-                <span class="seo-course-pricing-original"><s>₹41,417</s></span>
-                <span class="seo-course-pricing-discounted">₹16,517</span>
-                <span class="seo-course-pricing-save">Save 60%</span>
+                <span class="seo-course-pricing-original"><s>₹499</s></span>
+                <span class="seo-course-pricing-discounted">₹1</span>
+                <span class="seo-course-pricing-save">Save 99%</span>
               </div>
             </div>
           </div>
@@ -2573,7 +2573,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/.netlify/functions/createOrder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: 1651700 }) // ₹16,517 in paise
+        body: JSON.stringify({ amount: 100 }) // ₹1 in paise
       });
 
       if (!response.ok) {
