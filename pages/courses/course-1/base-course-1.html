@@ -2380,12 +2380,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const leftSection = document.querySelector('.left-section');
     
     if (rightSection && parentContainer && leftSection) {
-        // Calculate initial offset for centering
+        // Calculate initial offset to ensure 32px padding from right edge
         let parentRect = parentContainer.getBoundingClientRect();
         let leftRect = leftSection.getBoundingClientRect();
         let rightRect = rightSection.getBoundingClientRect();
-        let availableSpace = parentRect.width - (leftRect.right - parentRect.left);
-        let leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
+        const rightPadding = 32; // Desired padding from right edge
+        // Position right section so its right edge is 32px from parent container's right edge
+        let leftOffset = parentRect.width - rightRect.width - rightPadding;
 
         const handleScroll = () => {
             parentRect = parentContainer.getBoundingClientRect();
@@ -2397,15 +2398,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (windowScrollY >= parentTop - 75) {
                 if (windowScrollY <= stopPoint) {
-                    // Stick to top, centered in available space
+                    // Stick to top, maintaining 32px right padding
                     rightSection.style.position = 'fixed';
                     rightSection.style.top = '75px';
-                    rightSection.style.left = `${leftOffset}px`;
+                    rightSection.style.left = `${parentRect.left + leftOffset}px`;
                     rightSection.style.right = 'auto';
                     rightSection.style.bottom = 'auto';
                     rightSection.style.width = `${rightRect.width}px`;
                 } else {
-                    // Stop at 75px before parent bottom, centered in available space
+                    // Stop at 75px before parent bottom, maintaining 32px right padding
                     rightSection.style.position = 'absolute';
                     rightSection.style.top = 'auto';
                     rightSection.style.left = `${leftOffset}px`;
@@ -2427,12 +2428,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Run on scroll and resize
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', () => {
-            // Recalculate leftOffset on resize to handle layout changes
+            // Recalculate leftOffset on resize to maintain 32px right padding
             parentRect = parentContainer.getBoundingClientRect();
-            leftRect = leftSection.getBoundingClientRect();
             rightRect = rightSection.getBoundingClientRect();
-            availableSpace = parentRect.width - (leftRect.right - parentRect.left);
-            leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
+            leftOffset = parentRect.width - rightRect.width - rightPadding;
             handleScroll();
         });
         
