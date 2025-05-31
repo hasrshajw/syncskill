@@ -1142,16 +1142,12 @@ function logout() {
                 <span>15th Nov, 2025</span>
               </div>
             </div>
-            <div class="seo-course-mentor">
-              <div class="seo-course-mentor-heading">Mentors</div>
-              <div class="seo-course-mentor-card">
-                <div class="mentor-image-wrapper">
-                  <img class="seo-course-mentor-image" src="https://d3kl8zsmmx4oop.cloudfront.net/mentor_1_b79d7d7c5b.webp" alt="Mentor">
-                </div>
-                <div class="seo-course-mentor-details">
-                  <div class="seo-course-mentor-name">John Doe</div>
-                  <div class="seo-course-mentor-role">SEO Specialist at Google</div>
-                </div>
+            <div class="seo-course-pricing">
+              <div class="seo-course-pricing-heading">Pricing</div>
+              <div class="seo-course-pricing-details">
+                <span class="seo-course-pricing-original"><s>₹41,417</s></span>
+                <span class="seo-course-pricing-discounted">₹16,517</span>
+                <span class="seo-course-pricing-save">Save 60%</span>
               </div>
             </div>
           </div>
@@ -1189,6 +1185,7 @@ function logout() {
       overflow: hidden;
       padding: 2rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     .section-image-left__container {
@@ -1246,7 +1243,7 @@ function logout() {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.3rem; /* Reduced gap for tighter icon-text alignment */
       position: relative;
       overflow: hidden;
     }
@@ -1291,10 +1288,11 @@ function logout() {
     }
 
     .btn-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px; /* Slightly smaller icon for better proportion */
+      height: 16px;
       stroke: currentColor;
       stroke-width: 2;
+      flex-shrink: 0; /* Prevent icon from shrinking */
     }
 
     .section-image-left__content {
@@ -1302,7 +1300,7 @@ function logout() {
     }
 
     .seo-course-title label {
-      font-size: 2.25rem;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 1.2;
       letter-spacing: -0.02em;
@@ -1312,7 +1310,7 @@ function logout() {
     }
 
     .seo-course-description p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.6;
       color: #515154;
       margin-bottom: 1.5rem;
@@ -1320,11 +1318,11 @@ function logout() {
     }
 
     .seo-course-date-time {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .seo-course-date-label {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: #86868b;
       letter-spacing: 0.02em;
@@ -1335,68 +1333,70 @@ function logout() {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #1d1d1f;
     }
 
     .seo-course-date-value svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       stroke: #007aff;
     }
 
-    .seo-course-mentor-heading {
+    .seo-course-pricing-heading {
       font-size: 1rem;
       font-weight: 600;
       color: #1d1d1f;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       padding-bottom: 0.5rem;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      letter-spacing: -0.01em;
     }
 
-    .seo-course-mentor-card {
+    .seo-course-pricing-details {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0.75rem;
-      border-radius: 12px;
-      transition: background 0.3s ease, transform 0.3s ease;
+      position: relative;
+      transition: transform 0.3s ease;
     }
 
-    .seo-course-mentor-card:hover {
-      background: rgba(0, 0, 0, 0.03);
+    .seo-course-pricing-details:hover {
       transform: translateY(-2px);
     }
 
-    .mentor-image-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      transition: border-color 0.3s ease;
-    }
-
-    .seo-course-mentor-card:hover .mentor-image-wrapper {
-      border-color: #007aff;
-    }
-
-    .seo-course-mentor-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .seo-course-mentor-name {
-      font-weight: 600;
+    .seo-course-pricing-original {
+      color: #8e8e93; /* Apple-style muted gray */
+      text-decoration: line-through;
       font-size: 1rem;
-      color: #1d1d1f;
+      font-weight: 400;
+      opacity: 0.6;
     }
 
-    .seo-course-mentor-role {
-      font-size: 0.875rem;
-      color: #86868b;
+    .seo-course-pricing-discounted {
+      color: #00d084; /* Apple-inspired vibrant green */
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .seo-course-pricing-save {
+      background: #ff2d55; /* Apple-inspired red */
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      line-height: 1;
+      transform: translateY(-0.2rem);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .seo-course-pricing-save:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
     }
 
     /* Medium Devices (Tablets, 768px and up) */
@@ -1422,7 +1422,7 @@ function logout() {
 
       .seo-image-box__buttons {
         flex-direction: row;
-        gap: 1.5rem;
+        gap: 1rem; /* Reduced gap between buttons for desktop */
         justify-content: center;
         max-width: 600px;
         margin: 0 auto;
@@ -1432,6 +1432,7 @@ function logout() {
         width: 200px;
         height: 56px;
         font-size: 1.1rem;
+        gap: 0.4rem; /* Tighter gap for desktop view */
       }
 
       .section-image-left__content {
@@ -1439,11 +1440,28 @@ function logout() {
       }
 
       .seo-course-title label {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
       }
 
       .seo-course-description p {
+        font-size: 1rem;
+      }
+
+      .seo-course-pricing-heading {
         font-size: 1.1rem;
+      }
+
+      .seo-course-pricing-original {
+        font-size: 1.1rem;
+      }
+
+      .seo-course-pricing-discounted {
+        font-size: 1.75rem;
+      }
+
+      .seo-course-pricing-save {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.9rem;
       }
     }
 
@@ -1462,17 +1480,31 @@ function logout() {
       }
 
       .seo-course-title label {
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
 
       .seo-image-box__buttons {
-        gap: 2rem;
+        gap: 1.5rem;
       }
 
       .seo-btn {
         width: 220px;
         height: 60px;
         font-size: 1.2rem;
+        gap: 0.4rem; /* Consistent gap for desktop */
+      }
+
+      .seo-course-pricing-original {
+        font-size: 1.2rem;
+      }
+
+      .seo-course-pricing-discounted {
+        font-size: 2rem;
+      }
+
+      .seo-course-pricing-save {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
       }
     }
 
@@ -1494,6 +1526,25 @@ function logout() {
       .section-image-left__buttons-mobile {
         grid-row: 3;
       }
+
+      .seo-course-pricing-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .seo-course-pricing-original {
+        font-size: 0.9rem;
+      }
+
+      .seo-course-pricing-discounted {
+        font-size: 1.25rem;
+      }
+
+      .seo-course-pricing-save {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.7rem;
+      }
     }
 
     /* Extra Small Devices (Small Mobile, below 480px) */
@@ -1503,21 +1554,28 @@ function logout() {
       }
 
       .seo-course-title label {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
       }
 
       .seo-course-description p {
+        font-size: 0.85rem;
+      }
+
+      .seo-course-pricing-heading {
         font-size: 0.9rem;
       }
 
-      .seo-course-mentor-card {
-        flex-direction: column;
-        align-items: flex-start;
+      .seo-course-pricing-original {
+        font-size: 0.8rem;
       }
 
-      .mentor-image-wrapper {
-        width: 40px;
-        height: 40px;
+      .seo-course-pricing-discounted {
+        font-size: 1.1rem;
+      }
+
+      .seo-course-pricing-save {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.6rem;
       }
     }
 
@@ -1528,7 +1586,7 @@ function logout() {
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.06);
       }
     }
-    </style>
+</style>
 
 
 
