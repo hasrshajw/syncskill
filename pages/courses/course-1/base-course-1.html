@@ -336,6 +336,158 @@ html, body {
             transform: rotate(-180deg);
         }
 
+         /* Layout Container */
+        .section__container--small {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 8) 24px;
+            gap: calc(var(--spacing-unit) * 6);
+            position: relative;
+        }
+        
+        .left-section {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 10);
+        }
+        
+        .right-section {
+            width: 40%;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        /* Typography */
+        .pre-header {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+        
+        .section-header {
+            color: var(--text);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+        
+        .section-subheading, .para {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+        
+        /* Key Outcomes */
+        .key-outcomes {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing);
+        }
+        
+        .key-outcomes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            opacity: 0.8;
+        }
+        
+        .key-outcomes:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .outcomes-list {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s var(--easing), opacity 0.5s var(--easing), padding 0.5s var(--easing);
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+        
+        .outcomes-list.visible {
+            max-height: 600px;
+            opacity: 1;
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+        }
+        
+        .outcomes-list ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+        
+        .outcomes-list li {
+            font-size: 1rem;
+            color: var(--text);
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 3);
+        }
+        
+        .outcomes-list li::before {
+            content: '•';
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        
+        /* Read More Button */
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+            background: var(--gradient);
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.3s var(--easing), box-shadow 0.3s var(--easing), background 0.3s var(--easing);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .read-more-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 91, 87, 0.3);
+            background: linear-gradient(135deg, #004744, #2BAF66);
+        }
+        
+        .read-more-link:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 91, 87, 0.4);
+        }
+        
+        .read-more-link svg {
+            transition: transform 0.3s var(--easing);
+        }
+        
+        .read-more-link.read-more-link-open svg {
+            transform: rotate(-180deg);
+        }
+        
         /* Accordion */
         .accordion-section {
             background: var(--card-bg);
@@ -344,77 +496,117 @@ html, body {
             box-shadow: var(--shadow);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .accordion-section:hover {
             transform: translateY(-8px);
         }
-
+        
         .accordion-item {
             margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-
-        .accordion-title {
             border: 1px solid var(--border);
             border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .accordion-title {
             background: var(--card-bg);
             transition: background 0.3s var(--easing), border-color 0.3s var(--easing), transform 0.3s var(--easing);
+            cursor: pointer;
         }
-
+        
         .accordion-title:hover {
             background: #F1F5F9;
-            border-color: var(--primary);
-            transform: translateY(-2px);
         }
-
+        
         .accordion-header {
             padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
         }
-
+        
         .accordion-header-text label {
             font-size: 0.75rem;
             font-weight: 600;
             color: var(--primary);
             text-transform: uppercase;
         }
-
+        
         .accordion-header-text h4 {
             font-size: 1.125rem;
             font-weight: 600;
             color: var(--text);
+            margin: 4px 0;
         }
-
+        
+        .accordion-header-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
         .accordion-header svg {
             transition: transform 0.3s var(--easing);
+            flex-shrink: 0;
         }
-
+        
         .accordion-item.active .accordion-header svg {
             transform: rotate(180deg);
         }
-
+        
         .accordion-content {
             max-height: 0;
             overflow: hidden;
             padding: 0 calc(var(--spacing-unit) * 3);
             transition: max-height 0.5s var(--easing), padding 0.5s var(--easing), opacity 0.5s var(--easing);
             opacity: 0;
+            background: rgba(0, 91, 87, 0.03);
+            border-top: 1px solid var(--border);
         }
-
+        
         .accordion-item.active .accordion-content {
             max-height: 600px;
             padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
             opacity: 1;
         }
-
-        .accordion-content p {
-            font-size: 1rem;
-            color: var(--text-secondary);
+        
+        .accordion-content ul {
+            list-style: none;
+            padding-left: 16px;
+            margin-bottom: 16px;
         }
-
+        
+        .accordion-content li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .accordion-content li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 20px;
+            line-height: 1;
+        }
+        
+        .why-matters {
+            background: rgba(0, 91, 87, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+        
         /* Crash Course Section */
+        .crash-course-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+        }
+        
         .crash-course-wrap {
             background: #FFF7ED;
             border-radius: 16px;
@@ -424,11 +616,11 @@ html, body {
             gap: calc(var(--spacing-unit) * 2);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .crash-course-wrap:hover {
             transform: translateY(-4px);
         }
-
+        
         .crash-course-wrap .items {
             display: flex;
             align-items: center;
@@ -438,16 +630,16 @@ html, body {
             color: var(--text);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .crash-course-wrap .items:hover {
             transform: translateX(8px);
         }
-
+        
         .crash-course-wrap .items svg {
             stroke: #33C375;
             flex-shrink: 0;
         }
-
+        
         /* Meet Mentors */
         .meet-mentors {
             background: var(--card-bg);
@@ -456,48 +648,66 @@ html, body {
             box-shadow: var(--shadow);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .meet-mentors:hover {
             transform: translateY(-8px);
         }
-
-        .meet-mentors .identity {
+        
+        .identity {
             display: flex;
             align-items: center;
             gap: calc(var(--spacing-unit) * 2);
             transition: transform 0.3s var(--easing);
         }
-
-        .meet-mentors .identity:hover {
+        
+        .identity:hover {
             transform: scale(1.02);
         }
-
+        
         .identity-img {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--border);
             transition: border-color 0.3s var(--easing);
         }
-
+        
         .identity-img:hover {
             border-color: var(--primary);
         }
-
-        .meet-mentors .name {
+        
+        .identity-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mentor {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mentor .name {
             font-size: 1.125rem;
             font-weight: 600;
             color: var(--text);
         }
-
-        .meet-mentors .title {
+        
+        .mentor .title {
             font-size: 0.875rem;
             font-weight: 400;
             color: var(--text-secondary);
         }
-
+        
         /* Certificate Image */
+        .before-you-ask-wrap {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: calc(var(--spacing-unit) * 4);
+            box-shadow: var(--shadow);
+        }
+        
         .certificate-img {
             margin-top: calc(var(--spacing-unit) * 4);
             border-radius: 16px;
@@ -505,18 +715,17 @@ html, body {
             box-shadow: var(--shadow);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .certificate-img:hover {
             transform: scale(1.02);
         }
-
+        
         .certificate-img img {
             width: 100%;
             height: auto;
             object-fit: cover;
-            loading: lazy;
         }
-
+        
         /* NSDC Certification */
         .faq-container {
             background: var(--card-bg);
@@ -525,27 +734,51 @@ html, body {
             box-shadow: var(--shadow);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .faq-container:hover {
             transform: translateY(-8px);
         }
-
+        
+        .faq-container a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .faq-container a:hover {
+            text-decoration: underline;
+        }
+        
         /* Learners Block */
         .learners-block {
-            position: sticky;
-            top: 100px;
             background: var(--card-bg);
             border-radius: 20px;
             padding: calc(var(--spacing-unit) * 3);
             box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
             transition: transform 0.3s var(--easing);
         }
-
+        
         .learners-block:hover {
             transform: translateY(-4px);
         }
-
+        
+        .marquee-container-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .marquee-container-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .marquee-container-header p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
         .learners-block ul {
             list-style: none;
             display: flex;
@@ -553,7 +786,7 @@ html, body {
             gap: calc(var(--spacing-unit) * 2);
             margin-top: calc(var(--spacing-unit) * 3);
         }
-
+        
         .learners-block ul li {
             display: flex;
             align-items: flex-start;
@@ -561,176 +794,91 @@ html, body {
             font-size: 0.875rem;
             color: var(--text-secondary);
         }
-
-        .marquee-container-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .marquee-container-header p {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .section__hero-lerners-marquee {
-            padding: calc(var(--spacing-unit) * 3) 0;
-            overflow: hidden;
-        }
-
-        .section__hero-lerners-marquee-slider {
-            display: flex;
-            gap: calc(var(--spacing-unit) * 3);
-            animation: scroll-left 25s linear infinite;
-        }
-
-        .section__hero-lerners-marquee-slider:hover {
-            animation-play-state: paused;
-        }
-
-        .section__hero-lerners-marquee-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 1.5);
-            min-width: 120px;
-            transition: transform 0.3s var(--easing);
-            perspective: 1000px;
-        }
-
-        .section__hero-lerners-marquee-card:hover {
-            transform: scale(1.1) rotate3d(0, 1, 0, 5deg);
-        }
-
-        .section__hero-lerners-marquee-card-img img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 12px;
-            loading: lazy;
-        }
-
-        .section__hero-lerners-marquee-card-brand img {
-            width: 80px;
-            height: 100px;
-            object-fit: contain;
-            loading: lazy;
-        }
-
-        /* Logo Section */
+        
         .logo-sec {
             display: flex;
             align-items: center;
             gap: calc(var(--spacing-unit) * 3);
             margin-top: calc(var(--spacing-unit) * 4);
         }
-
+        
         .w-divider {
+            flex: 1;
+            display: flex;
+            justify-content: center;
             border-right: 1px solid var(--border);
             padding-right: calc(var(--spacing-unit) * 3);
         }
-
+        
+        .w-divider img {
+            max-width: 120px;
+            height: auto;
+        }
+        
         .logo-sec-linkedin {
             display: flex;
             align-items: center;
             gap: calc(var(--spacing-unit));
         }
-
+        
         .logo-sec-linkedin-text {
             font-size: 0.875rem;
             font-weight: 500;
             color: var(--text);
         }
-
-        .logo-sec-linkedin-text span {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-100% - 24px)); }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .wrap.section__container--small,
-            .pre-header,
-            .section-header,
-            .section-subheading,
-            .key-outcomes,
-            .accordion-section,
-            .outcomes-list,
-            .read-more-link,
-            .accordion-title,
-            .accordion-content,
-            .crash-course-wrap,
-            .meet-mentors,
-            .certificate-img,
-            .faq-container,
-            .learners-block,
-            .section__hero-lerners-marquee-slider,
-            .section__hero-lerners-marquee-card {
-                animation: none;
-                transition: none;
-            }
-        }
-
+        
         /* Media Queries */
         @media (max-width: 992px) {
-            .wrap.section__container--small {
+            .section__container--small {
                 flex-direction: column;
-                padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 0);
+                padding: calc(var(--spacing-unit) * 4) 16px;
             }
-
+        
             .left-section, .right-section {
                 width: 100%;
             }
-
+        
             .right-section {
-                display: none;
+                position: static;
+                top: auto;
+                max-height: none;
             }
-
+        
             .section-header {
                 font-size: clamp(1.5rem, 4vw, 1.8rem);
             }
-
+        
             .section-subheading, .para {
                 font-size: 0.875rem;
             }
-
+        
             .crash-course-wrap {
                 grid-template-columns: 1fr;
             }
         }
-
+        
         @media (max-width: 640px) {
             .section-header {
                 font-size: clamp(1.2rem, 3.5vw, 1.5rem);
             }
-
+        
             .certificate-img {
                 border-radius: 12px;
             }
-
+        
             .key-outcomes, .accordion-section, .meet-mentors, .faq-container {
                 padding: calc(var(--spacing-unit) * 3);
-            }
-
-            .read-more-link {
-                width: 100%;
-                justify-content: center;
             }
         }
    </style>
@@ -1937,12 +2085,24 @@ function logout() {
                             <p>Explore how search engines work, key ranking factors, and algorithm updates.</p>
                         </div>
                     </div>
+
+
+
+
+
+
+                       <div class="accordion-section">
+                <p class="pre-header">Curriculum</p>
+                <h2 class="section-header">What You’ll Learn</h2>
+                <div class="accordion">
+                    <!-- Module 1 -->
                     <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
+                        <div class="accordion-title">
                             <div class="accordion-header">
                                 <div class="accordion-header-text">
-                                    <label>Module 2</label>
-                                    <h4>SEO-Optimized Content</h4>
+                                    <label>Module 1</label>
+                                    <h4>Intro to AI & LLMs</h4>
+                                    <p>Understand the tech that's replacing traditional jobs.</p>
                                 </div>
                                 <div class="w-10 h-10">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
@@ -1952,15 +2112,24 @@ function logout() {
                             </div>
                         </div>
                         <div class="accordion-content">
-                            <p>Learn to create engaging, keyword-rich content that ranks high.</p>
+                            <ul>
+                                <li>Learn the basics of Artificial Intelligence and Large Language Models (LLMs) like ChatGPT, Gemini, Claude</li>
+                                <li>How companies are using AI in real-world products</li>
+                                <li>Career paths in AI—even for non-coders</li>
+                            </ul>
+                            <p class="why-matters">📍 Why it matters: Once you understand the landscape, you’ll stop fearing AI—and start mastering it.</p>
                         </div>
                     </div>
+                    
+                    <!-- Additional modules would go here -->
+                    <!-- Module 10 -->
                     <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
+                        <div class="accordion-title">
                             <div class="accordion-header">
                                 <div class="accordion-header-text">
-                                    <label>Module 3</label>
-                                    <h4>Technical SEO Basics</h4>
+                                    <label>Module 10</label>
+                                    <h4>Capstone Project</h4>
+                                    <p>Turn your learning into a job-ready project.</p>
                                 </div>
                                 <div class="w-10 h-10">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
@@ -1970,119 +2139,18 @@ function logout() {
                             </div>
                         </div>
                         <div class="accordion-content">
-                            <p>Master website structure, speed, and technical optimizations.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 4</label>
-                                    <h4>Advanced Technical SEO</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Dive into schema markup, crawlability, and advanced techniques.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 5</label>
-                                    <h4>Link Building Strategies</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Build authority with ethical link-building methods.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 6</label>
-                                    <h4>E-Commerce & Local SEO</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Optimize for online stores and local visibility.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 7</label>
-                                    <h4>International SEO</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Target global markets with multilingual SEO.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 8</label>
-                                    <h4>SEO Implementation</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Apply SEO through audits and real-world projects.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <label>Module 9</label>
-                                    <h4>Future of SEO</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Discover AI-driven SEO and voice search trends.</p>
+                            <ul>
+                                <li>Solve a real-world problem using AI tools</li>
+                                <li>Work in teams or solo</li>
+                                <li>Present it live to mentors and receive reviews</li>
+                            </ul>
+                            <p class="why-matters">📍 Why it matters: This is your “showpiece” for interviews, LinkedIn, and your portfolio.</p>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Target Audience -->
             <div class="crash-course-section">
                 <p class="pre-header">Target Audience</p>
                 <h2 class="section-header">Who’s This For?</h2>
@@ -2120,6 +2188,8 @@ function logout() {
                     </div>
                 </div>
             </div>
+            
+            <!-- Instructor -->
             <div class="meet-mentors">
                 <p class="pre-header">Instructor</p>
                 <h2 class="section-header">Meet Your Mentor</h2>
@@ -2135,6 +2205,8 @@ function logout() {
                     </div>
                 </div>
             </div>
+            
+            <!-- Certification -->
             <div class="before-you-ask-wrap">
                 <p class="pre-header">Certification</p>
                 <h2 class="section-header">Certified Success</h2>
@@ -2143,6 +2215,8 @@ function logout() {
                     <img alt="Certificate" src="https://d3kl8zsmmx4oop.cloudfront.net/GS_certificate_d320778e2.png" loading="lazy">
                 </div>
             </div>
+            
+            <!-- NSDC Certification -->
             <div class="faq-container">
                 <p class="pre-header">Government Certified</p>
                 <h2 class="section-header">NSDC Certification</h2>
@@ -2157,15 +2231,18 @@ function logout() {
                     <span class="mt-6">Join now to gain industry-recognized skills.</span>
                     <span class="mt-2 text-gray-500">*Subject to evaluation and attendance</span>
                 </div>
-                <img alt="NSDC Certificate" src="/images/course-diff/nsdc-cert.png" class="mt-8" loading="lazy">
+                <img alt="NSDC Certificate" src="https://www.growthschool.io/_next/image?url=%2Fimages%2Fcourse-diff%2Fnsdc-cert.png&w=1080&q=75" class="mt-8" loading="lazy" style="max-width: 100%;">
                 <span>For details, visit: <a href="https://nsdcindia.org/" target="_blank" class="text-[#005B57] hover:underline">NSDC</a></span>
             </div>
+            
+            <!-- FAQ -->
             <div class="faq-container">
                 <p class="pre-header">FAQ</p>
                 <h2 class="section-header">Got Questions?</h2>
                 <div class="accordion">
+                    <!-- FAQ Item 1 -->
                     <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
+                        <div class="accordion-title">
                             <div class="accordion-header">
                                 <div class="accordion-header-text">
                                     <h4>Any prerequisites?</h4>
@@ -2181,93 +2258,11 @@ function logout() {
                             <p>No SEO experience needed; basic digital marketing knowledge helps.</p>
                         </div>
                     </div>
+                    
+                    <!-- Additional FAQ items would go here -->
+                    <!-- FAQ Item 7 -->
                     <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <h4>When are live sessions?</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Weekly live sessions, with recordings for flexibility.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <h4>Miss a live session?</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Access recordings anytime.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <h4>Access to Kaushal?</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Live Q&A and assignment feedback from Kaushal.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <h4>Weekly time commitment?</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>About 5-7 hours for videos, assignments, and sessions.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
-                            <div class="accordion-header">
-                                <div class="accordion-header-text">
-                                    <h4>When’s the certificate issued?</h4>
-                                </div>
-                                <div class="w-10 h-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                        <path d="M13.3333 17.1666L20 23.8333L26.6666 17.1666" stroke="#002726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Upon assignment completion.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-title" aria-expanded="false">
+                        <div class="accordion-title">
                             <div class="accordion-header">
                                 <div class="accordion-header-text">
                                     <h4>What’s included?</h4>
@@ -2286,6 +2281,8 @@ function logout() {
                 </div>
             </div>
         </div>
+        
+        <!-- Right Section (Sticky) -->
         <div class="right-section">
             <div class="learners-block">
                 <div class="marquee-container">
@@ -2294,148 +2291,108 @@ function logout() {
                         <p>Transformed their careers with us</p>
                     </div>
                     
-                <ul>
-                    <li>
-                        <img alt="tick" src="https://www.growthschool.io/images/new/tick.svg" loading="lazy">
-                        <p>Master cutting-edge skills with online sessions.</p>
-                    </li>
-                    <li>
-                        <img alt="tick" src="https://www.growthschool.io/images/new/tick.svg" loading="lazy">
-                        <p>Tackle real-world business challenges.</p>
-                    </li>
-                    <li>
-                        <img alt="tick" src="https://www.growthschool.io/images/new/tick.svg" loading="lazy">
-                        <p>Access exclusive career opportunities.</p>
-                    </li>
-                </ul>
+                    <ul>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink: 0;">
+                                <path d="M3.75 11.0227L7.76786 15L15 6.25" stroke="#33C375" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p>Master cutting-edge skills with online sessions.</p>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink: 0;">
+                                <path d="M3.75 11.0227L7.76786 15L15 6.25" stroke="#33C375" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p>Tackle real-world business challenges.</p>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink: 0;">
+                                <path d="M3.75 11.0227L7.76786 15L15 6.25" stroke="#33C375" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p>Access exclusive career opportunities.</p>
+                        </li>
+                    </ul>
+                </div>
                 <div class="logo-sec">
                     <div class="w-divider">
-                        <img alt="SYNCSKILL Logo" src="logoo.jpg" loading="lazy">
+                        <img alt="GrowthSchool Logo" src="https://www.growthschool.io/brand/growthschool-logo.svg" loading="lazy">
                     </div>
                     <div class="logo-sec-linkedin">
-                       
                         <div class="logo-sec-linkedin-text">
-                            BEST PLACE TO BECOME TOP 1
+                            BEST PLACE TO BECOME TOP 1%
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+                    
+ 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Handle "Read More" button for key outcomes
-    const readMoreButton = document.querySelector('.read-more-link');
-    const outcomesList = document.querySelector('#key-outcomes-list');
-    
-    if (readMoreButton && outcomesList) {
-        readMoreButton.addEventListener('click', () => {
-            const isHidden = outcomesList.getAttribute('aria-hidden') === 'true';
+ document.addEventListener('DOMContentLoaded', () => {
+            // Accordion functionality
+            const accordionTitles = document.querySelectorAll('.accordion-title');
             
-            outcomesList.setAttribute('aria-hidden', !isHidden);
-            outcomesList.style.maxHeight = isHidden ? `${outcomesList.scrollHeight}px` : '0';
-            outcomesList.style.opacity = isHidden ? '1' : '0';
-            outcomesList.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
-            
-            readMoreButton.textContent = isHidden ? 'Read Less' : 'Read More';
-            readMoreButton.setAttribute('aria-label', isHidden ? 'Hide key outcomes' : 'Show key outcomes');
-            
-            const svgPath = readMoreButton.querySelector('svg path');
-            svgPath.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-            svgPath.style.transition = 'transform 0.3s ease';
-        });
-    }
-
-    // Handle accordion functionality
-    const accordionTitles = document.querySelectorAll('.accordion-title');
-    
-    accordionTitles.forEach(title => {
-        title.addEventListener('click', () => {
-            const isExpanded = title.getAttribute('aria-expanded') === 'true';
-            const content = title.nextElementSibling;
-            const svgPath = title.querySelector('svg path');
-
-            accordionTitles.forEach(otherTitle => {
-                if (otherTitle !== title) {
-                    otherTitle.setAttribute('aria-expanded', 'false');
-                    otherTitle.nextElementSibling.style.maxHeight = '0';
-                    otherTitle.nextElementSibling.style.opacity = '0';
-                    const otherSvgPath = otherTitle.querySelector('svg path');
-                    otherSvgPath.style.transform = 'rotate(0deg)';
-                }
+            accordionTitles.forEach(title => {
+                title.addEventListener('click', () => {
+                    const accordionItem = title.closest('.accordion-item');
+                    const isActive = accordionItem.classList.contains('active');
+                    
+                    // Close all accordion items
+                    document.querySelectorAll('.accordion-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Toggle current item if not active
+                    if (!isActive) {
+                        accordionItem.classList.add('active');
+                    }
+                });
             });
-
-            title.setAttribute('aria-expanded', !isExpanded);
-            content.style.maxHeight = isExpanded ? '0' : `${content.scrollHeight}px`;
-            content.style.opacity = isExpanded ? '0' : '1';
-            content.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
-            svgPath.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-            svgPath.style.transition = 'transform 0.3s ease';
-        });
-    });
-
-    // Handle sticky right section
-    const rightSection = document.querySelector('.right-section');
-    const parentContainer = document.querySelector('.wrap.section__container--small');
-    
-    if (rightSection && parentContainer) {
-        // Calculate initial offset to ensure 32px padding from right edge
-        let parentRect = parentContainer.getBoundingClientRect();
-        let rightRect = rightSection.getBoundingClientRect();
-        const rightPadding = 8; // Desired padding from right edge
-        let leftOffset = parentRect.width - rightRect.width - rightPadding;
-
-        const handleScroll = () => {
-            parentRect = parentContainer.getBoundingClientRect();
-            rightRect = rightSection.getBoundingClientRect();
-            const windowScrollY = window.scrollY;
-            const parentTop = parentRect.top + windowScrollY;
-            const parentBottom = parentRect.bottom + windowScrollY;
-            const stopPoint = parentBottom - rightRect.height - 75;
-
-            if (windowScrollY >= parentTop - 75) {
-                if (windowScrollY <= stopPoint) {
-                    // Stick to top with 32px right padding
-                    rightSection.style.position = 'fixed';
-                    rightSection.style.top = '75px';
-                    rightSection.style.left = `${parentRect.left + leftOffset}px`;
-                    rightSection.style.right = 'auto';
-                    rightSection.style.bottom = 'auto';
-                    rightSection.style.width = `${rightRect.width}px`;
-                } else {
-                    // Stop 75px before parent bottom with 32px right padding
-                    rightSection.style.position = 'absolute';
-                    rightSection.style.top = 'auto';
-                    rightSection.style.left = `${leftOffset}px`;
-                    rightSection.style.right = 'auto';
-                    rightSection.style.bottom = '75px';
-                    rightSection.style.width = `${rightRect.width}px`;
-                }
-            } else {
-                // Reset to static position
-                rightSection.style.position = 'static';
-                rightSection.style.top = 'auto';
-                rightSection.style.left = 'auto';
-                rightSection.style.right = `${rightPadding}px`;
-                rightSection.style.bottom = 'auto';
-                rightSection.style.width = 'auto';
+            
+            // Read More functionality
+            const readMoreButton = document.querySelector('.read-more-link');
+            if (readMoreButton) {
+                readMoreButton.addEventListener('click', () => {
+                    const outcomesList = document.querySelector('.outcomes-list');
+                    outcomesList.classList.toggle('visible');
+                    
+                    // Toggle button text
+                    if (outcomesList.classList.contains('visible')) {
+                        readMoreButton.textContent = 'Read Less';
+                        readMoreButton.classList.add('read-more-link-open');
+                    } else {
+                        readMoreButton.textContent = 'Read More';
+                        readMoreButton.classList.remove('read-more-link-open');
+                    }
+                });
             }
-        };
-
-        // Run on scroll and resize
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', () => {
-            // Recalculate leftOffset on resize to maintain 32px right padding
-            parentRect = parentContainer.getBoundingClientRect();
-            rightRect = rightSection.getBoundingClientRect();
-            leftOffset = parentRect.width - rightRect.width - rightPadding;
-            handleScroll();
+            
+            // Add animation to elements on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.8s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections
+            document.querySelectorAll('.accordion-section, .crash-course-section, .meet-mentors, .before-you-ask-wrap, .faq-container').forEach(section => {
+                observer.observe(section);
+            });
         });
-
-        // Initial call to set position
-        handleScroll();
-    }
-});
 </script>
 
 
