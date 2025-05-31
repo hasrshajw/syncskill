@@ -2377,30 +2377,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle sticky right section
     const rightSection = document.querySelector('.right-section');
     const parentContainer = document.querySelector('.wrap.section__container--small');
+    const leftSection = document.querySelector('.left-section'); // Assuming left-section class exists
     
-    if (rightSection && parentContainer) {
+    if (rightSection && parentContainer && leftSection) {
         const handleScroll = () => {
             const parentRect = parentContainer.getBoundingClientRect();
+            const leftRect = leftSection.getBoundingClientRect();
             const rightRect = rightSection.getBoundingClientRect();
             const windowScrollY = window.scrollY;
             const parentTop = parentRect.top + windowScrollY;
             const parentBottom = parentRect.bottom + windowScrollY;
             const stopPoint = parentBottom - rightRect.height - 75; // Stop 75px before parent bottom
-            const rightOffset = window.innerWidth - (parentRect.right); // Calculate right offset
+
+            // Calculate available space between left section's right edge and parent container's right edge
+            const availableSpace = parentRect.right - leftRect.right;
+            const rightOffset = (availableSpace - rightRect.width) / 2; // Center in available space
 
             if (windowScrollY >= parentTop - 75) {
                 if (windowScrollY <= stopPoint) {
-                    // Stick to top-right with 75px gap
+                    // Stick to top, centered in available space
                     rightSection.style.position = 'fixed';
                     rightSection.style.top = '75px';
-                    rightSection.style.right = `${rightOffset}px`;
+                    rightSection.style.left = `${leftRect.right + rightOffset}px`;
+                    rightSection.style.right = 'auto';
                     rightSection.style.bottom = 'auto';
                     rightSection.style.width = `${rightRect.width}px`; // Maintain original width
                 } else {
-                    // Stop at 75px before parent bottom
+                    // Stop at 75px before parent bottom, centered in available space
                     rightSection.style.position = 'absolute';
                     rightSection.style.top = 'auto';
-                    rightSection.style.right = '0'; // Align to parent's right edge
+                    rightSection.style.left = `${leftRect.right + rightOffset}px`;
+                    rightSection.style.right = 'auto';
                     rightSection.style.bottom = '75px';
                     rightSection.style.width = `${rightRect.width}px`; // Maintain original width
                 }
@@ -2408,6 +2415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reset to original position
                 rightSection.style.position = 'static';
                 rightSection.style.top = 'auto';
+                rightSection.style.left = 'auto';
                 rightSection.style.right = 'auto';
                 rightSection.style.bottom = 'auto';
                 rightSection.style.width = 'auto';
