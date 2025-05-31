@@ -2382,7 +2382,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Calculate initial offset to ensure 32px padding from right edge
         let parentRect = parentContainer.getBoundingClientRect();
         let rightRect = rightSection.getBoundingClientRect();
-        const rightPadding = 32; // Desired padding from right edge
+        const rightPadding = 8; // Desired padding from right edge
         let leftOffset = parentRect.width - rightRect.width - rightPadding;
 
         const handleScroll = () => {
