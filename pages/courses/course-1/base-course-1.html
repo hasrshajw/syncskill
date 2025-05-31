@@ -2381,15 +2381,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (rightSection && parentContainer && leftSection) {
         // Calculate initial offset for centering
-        const parentRect = parentContainer.getBoundingClientRect();
-        const leftRect = leftSection.getBoundingClientRect();
-        const rightRect = rightSection.getBoundingClientRect();
-        const availableSpace = parentRect.width - (leftRect.right - parentRect.left);
-        const leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
+        let parentRect = parentContainer.getBoundingClientRect();
+        let leftRect = leftSection.getBoundingClientRect();
+        let rightRect = rightSection.getBoundingClientRect();
+        let availableSpace = parentRect.width - (leftRect.right - parentRect.left);
+        let leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
 
         const handleScroll = () => {
-            const parentRect = parentContainer.getBoundingClientRect();
-            const rightRect = rightSection.getBoundingClientRect();
+            parentRect = parentContainer.getBoundingClientRect();
+            rightRect = rightSection.getBoundingClientRect();
             const windowScrollY = window.scrollY;
             const parentTop = parentRect.top + windowScrollY;
             const parentBottom = parentRect.bottom + windowScrollY;
@@ -2400,7 +2400,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Stick to top, centered in available space
                     rightSection.style.position = 'fixed';
                     rightSection.style.top = '75px';
-                    rightSection.style.left = `${parentRect.left + leftOffset}px`;
+                    rightSection.style.left = `${leftOffset}px`;
                     rightSection.style.right = 'auto';
                     rightSection.style.bottom = 'auto';
                     rightSection.style.width = `${rightRect.width}px`;
@@ -2428,10 +2428,10 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', () => {
             // Recalculate leftOffset on resize to handle layout changes
-            const parentRect = parentContainer.getBoundingClientRect();
-            const leftRect = leftSection.getBoundingClientRect();
-            const rightRect = rightSection.getBoundingClientRect();
-            const availableSpace = parentRect.width - (leftRect.right - parentRect.left);
+            parentRect = parentContainer.getBoundingClientRect();
+            leftRect = leftSection.getBoundingClientRect();
+            rightRect = rightSection.getBoundingClientRect();
+            availableSpace = parentRect.width - (leftRect.right - parentRect.left);
             leftOffset = leftRect.right - parentRect.left + (availableSpace - rightRect.width) / 2;
             handleScroll();
         });
