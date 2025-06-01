@@ -3,62 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base Course 1 - Free</title>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-
-
-
-   <style>
-
-
-     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      overflow-x: hidden;
-      padding: 1rem;
-      padding-top: 82px;
-      font-family: 'IBM Plex Sans', sans-serif;
-      color: #1A1A1A;
-      line-height: 1.6;
-      background: #Ffffff;
-    }
-    
-    @media (max-width: 768px) {
-      .desktop-only { display: none !important; }
-      .mobile-menu-button { display: block !important; }
-    }
-    @media (min-width: 769px) {
-      .mobile-only { display: none !important; }
-    }
-
-html, body {
-    overflow-x: hidden;
-}
-:root {
-            --primary-900: #37be72;
-            --secondary-900: #1A1A1A;
-            --surface-100: #F8F9FA;
-            --text-primary: #1A1A1A;
-            --text-inverse: #FFFFFF;
-            --transition: cubic-bezier(0.33, 1, 0.68, 1);
-            --shadow-lg: 0 24px 48px -12px rgba(0,0,0,0.18);
-            --radius-2xl: 24px;
-        }
-
+    <title>Student+ base</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
-
-
-    <!-- NAVBAR STYLES -->
+        
+        :root {
+            --primary: #005B57;
+            --primary-light: #33C375;
+            --primary-dark: #004744;
+            --accent: #FF6B35;
+            --accent-light: #FF9E58;
+            --background: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #4B5563;
+            --border: #E5E7EB;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9f8 0%, #e6f4f1 100%);
+            min-height: 100vh;
+        }
+        
+        
+         <!-- NAVBAR STYLES -->
        #featured-program * {
             all: unset;
             box-sizing: border-box;
@@ -148,54 +129,6 @@ html, body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               :root {
-            --primary: #005B57;
-            --primary-light: #33C375;
-            --primary-dark: #004744;
-            --accent: #FF6B35;
-            --accent-light: #FF9E58;
-            --background: #F9FAFB;
-            --card-bg: #FFFFFF;
-            --text: #1A1A1A;
-            --text-secondary: #4B5563;
-            --border: #E5E7EB;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-            padding: 20px;
-            background: linear-gradient(135deg, #f0f9f8 0%, #e6f4f1 100%);
-            min-height: 100vh;
-        }
-        
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -214,9 +147,10 @@ html, body {
         
         .right-section {
             width: 380px;
+            position: sticky;
+            top: 80px;
             height: fit-content;
             align-self: flex-start;
-            transition: var(--transition);
         }
         
         .section-block {
@@ -743,10 +677,12 @@ html, body {
                 font-size: 12px;
             }
         }
-   </style>
+    </style>
 </head>
 <body>
-  <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); height: 72px; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
+  
+  
+   <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); height: 72px; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
     <nav style="max-width: 1440px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; justify-content: space-between; align-items: center;">
       <a href="/" style="display: flex; align-items: center;">
         <img src="/assets/logo.jpg" alt="Logo" style="height: 28px;">
@@ -1065,48 +1001,10 @@ function logout() {
     document.body.appendChild(fileInput);
     */
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
+  
+  
+  
+  
 <section class="section-image-left">
     <div class="section-image-left__container">
       <div class="section-image-left__image-wrapper">
@@ -1186,14 +1084,14 @@ function logout() {
     .section-image-left {
       width: 100%;
       max-width: 1280px;
-      margin: 0rem auto;
+       margin: 75px auto 0 auto;
       background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
       border-radius: 18px;
       color: #1d1d1f;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      padding: 2rem;
+      padding: 75px 2rem 2rem 2rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       position: relative;
@@ -1643,21 +1541,7 @@ function logout() {
 
 
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
- <section class="stats-section">
+<section class="stats-section">
     <div class="stats-section-title">Premium Content</div>
     <a href="https://example.com/project1" class="stats-section-card" tabindex="0" role="link" aria-label="Project One card, redirects to external site">
         <div class="stats-section-card--text">
@@ -1882,24 +1766,7 @@ function logout() {
 
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-  
-<div class="container">
+    <div class="container">
         <!-- Left Section -->
         <div class="left-section">
             <!-- Curriculum Section -->
@@ -2230,6 +2097,7 @@ function logout() {
                         <li><img alt="tick" src="https://www.growthschool.io/images/new/tick.svg" loading="lazy"> <p>Access exclusive career opportunities.</p></li>
                     </ul>
                     <div class="logo-sec">
+                        
                         <img alt="SYNCSKILL Logo" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/vn.webp" loading="lazy">
                         <p>BEST PLACE TO BECOME TOP 1</p>
                     </div>
@@ -2253,48 +2121,25 @@ function logout() {
                     }
                 });
             });
-
-            // Enhanced sticky behavior for right section
-            const rightSection = document.querySelector('.right-section');
-            const container = document.querySelector('.container');
-            const leftSection = document.querySelector('.left-section');
-
-            const updateRightSectionPosition = () => {
+            
+            // Simplified sticky behavior for right section
+            const handleSticky = () => {
+                const rightSection = document.querySelector('.right-section');
                 if (window.innerWidth > 992) {
-                    // Desktop: Use position: fixed
-                    const containerRect = container.getBoundingClientRect();
-                    const bodyRect = document.body.getBoundingClientRect();
-                    const offsetTop = containerRect.top - bodyRect.top; // Absolute top position of container
-                    const offsetLeft = containerRect.left; // Left position of container
-                    const containerWidth = containerRect.width;
-                    const leftSectionWidth = leftSection.offsetWidth;
-                    const gap = 40; // Gap between left and right sections (from CSS)
-
-                    // Calculate the position for right-section
-                    const rightSectionLeft = offsetLeft + leftSectionWidth + gap;
-
-                    rightSection.style.position = 'fixed';
-                    rightSection.style.top = '20px'; // Align with body padding
-                    rightSection.style.left = `${rightSectionLeft}px`;
-                    rightSection.style.width = '380px';
+                    rightSection.style.position = 'sticky';
+                    rightSection.style.top = '80px';
                     rightSection.style.bottom = '';
                 } else {
-                    // Mobile: Use position: static
                     rightSection.style.position = 'static';
                     rightSection.style.top = '';
-                    rightSection.style.left = '';
-                    rightSection.style.width = '100%';
                     rightSection.style.bottom = '';
                 }
             };
 
-            // Initial positioning
-            updateRightSectionPosition();
-
-            // Update position on resize and scroll
-            window.addEventListener('resize', updateRightSectionPosition);
-            window.addEventListener('scroll', updateRightSectionPosition);
-
+            // Run on load and on resize
+            handleSticky();
+            window.addEventListener('resize', handleSticky);
+            
             // Intersection Observer for animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2304,7 +2149,7 @@ function logout() {
                     }
                 });
             }, { threshold: 0.1 });
-
+            
             document.querySelectorAll('.section-block, .learners-block').forEach(el => {
                 el.style.opacity = 0;
                 el.style.transform = 'translateY(30px)';
@@ -2313,32 +2158,6 @@ function logout() {
             });
         });
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2538,4 +2357,6 @@ function logout() {
 
 
 
+</body>
 </html>
+
