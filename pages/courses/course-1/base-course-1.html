@@ -13,6 +13,11 @@
             font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
+        @media (max-width: 768px) {
+    body {
+        padding: 10px; /* 👈 less padding on smaller screens */
+    }
+}
         :root {
             --primary: #005B57;
             --primary-light: #33C375;
@@ -628,9 +633,6 @@
             .mentors-grid {
                 grid-template-columns: 1fr;
             }
-            .body {
-                  padding: 10px;
-             }
         }
         
         @media (max-width: 768px) {
@@ -679,9 +681,6 @@
             .mentor-desc {
                 font-size: 12px;
             }
-            .body {
-                  padding: 10px;
-             }
         }
     </style>
 </head>
