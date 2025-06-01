@@ -13,11 +13,7 @@
             font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
-        @media (max-width: 768px) {
-    body {
-        padding: 10px; /* 👈 less padding on smaller screens */
-    }
-}
+
         :root {
             --primary: #005B57;
             --primary-light: #33C375;
@@ -42,7 +38,11 @@
             background: linear-gradient(135deg, #f0f9f8 0%, #e6f4f1 100%);
             min-height: 100vh;
         }
-        
+            @media (max-width: 768px) {
+    body {
+        padding: 10px; /* 👈 less padding on smaller screens */
+    }
+}
         
          <!-- NAVBAR STYLES -->
        #featured-program * {
