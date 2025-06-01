@@ -1530,54 +1530,49 @@
         </svg>
     </div>
 
-    <script>
-        // Accordion functionality
-        document.querySelectorAll('.ai-learning-accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const isActive = item.classList.contains('active');
-                
-                // Close all accordion items
-                document.querySelectorAll('.ai-learning-accordion-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.ai-learning-accordion-header').setAttribute('aria-expanded', 'false');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                    header.setAttribute('aria-expanded', 'true');
-                }
+<script>
+    // Accordion functionality
+    document.querySelectorAll('.ai-learning-accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.ai-learning-accordion-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.ai-learning-accordion-header').setAttribute('aria-expanded', 'false');
             });
-
-            // Keyboard navigation
-            header.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    header.click();
-                }
-            });
-        });
-
-        // Scroll-to-top button
-        const scrollToTop = document.querySelector('.ai-learning-scroll-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                scrollToTop.classList.add('visible');
-            } else {
-                scrollToTop.classList.remove('visible');
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
             }
         });
 
-        scrollToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Keyboard navigation
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
         });
+    });
 
-        // Open first module by default
-        const firstAccordion = document.querySelector('.ai-learning-accordion-item');
-        firstAccordion.classList.add('active');
-        firstAccordion.querySelector('.ai-learning-accordion-header').setAttribute('aria-expanded', 'true');
-    </script>
+    // Scroll-to-top button
+    const scrollToTop = document.querySelector('.ai-learning-scroll-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollToTop.classList.add('visible');
+        } else {
+            scrollToTop.classList.remove('visible');
+        }
+    });
+
+    scrollToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 
 
 
