@@ -104,175 +104,137 @@
 
 
 
-      <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); height: 72px; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
-        <nav style="max-width: 1440px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; justify-content: space-between; align-items: center;">
-            <a href="/" style="display: flex; align-items: center;">
-                <img src="/assets/logo.jpg" alt="Logo" style="height: 28px;">
-            </a>
-            <div class="desktop-only" style="display: flex; align-items: center; gap: 40px;">
-                <div class="profile-menu" style="position: relative;">
-                    <div class="profile-trigger" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); background: transparent;"
-                         onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
-                        <img id="userAvatar" src="https://via.placeholder.com/36" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
-                        <span id="userName" style="font-weight: 500; color: #1e293b; font-size: 14px; position: relative; padding-right: 20px;">Loading...
-                            <span style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); transition: transform 0.2s ease; font-size: 18px;">▾</span>
-                        </span>
-                    </div>
-                    <div class="profile-dropdown" style="position: absolute; right: 0; top: calc(100% + 8px); width: 280px; background: #ffffff; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 24px; opacity: 0; transform: translateY(-10px); visibility: hidden; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000;">
-                        <div style="text-align: center; margin-bottom: 20px;">
-                            <img id="dropdownAvatar" src="https://via.placeholder.com/60" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #e2e8f0; margin-bottom: 16px; transition: transform 0.2s ease;"
-                                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            <div id="dropdownName" style="font-weight: 600; font-size: 18px; color: #1e293b; margin-bottom: 4px; line-height: 1.4;">Loading...</div>
-                            <div id="dropdownEmail" style="font-size: 14px; color: #64748b; margin-bottom: 16px; word-break: break-all;">Loading...</div>
-                        </div>
-                        <div style="height: 1px; background: #f1f5f9; margin: 16px 0;"></div>
-                        <div class="logout-btn" onclick="logout()" style="padding: 12px; text-align: center; border-radius: 8px; background: #fff; border: 1px solid #f1f5f9; color: #dc2626; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px;"
-                             onmouseover="this.style.background='#fef2f2'; this.style.borderColor='#fecaca'"
-                             onmouseout="this.style.background='#fff'; this.style.borderColor='#f1f5f9'">
-                            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                            </svg>
-                            <span>Sign Out</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="mobile-menu-button" id="mobileMenuButton" style="display: none; padding: 8px; border-radius: 8px; border: none; background: transparent; transition: transform 0.2s ease, background 0.2s ease;"
-                    onmouseover="this.style.background='rgba(0,0,0,0.05)'; this.style.transform='scale(1.1)'"
-                    onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
-                <svg style="width: 24px; height: 24px; color: #4b5563;" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
-                <div style="flex-shrink: 0; border-top: 1px solid #f1f5f9; padding: 16px; background: #ffffff; box-shadow: 0 -4px 12px rgba(0,0,0,0.05); z-index: 1002;">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
-                        <img id="mobileUserAvatar" src="https://via.placeholder.com/56" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
-                        <div style="flex-grow: 1; min-width: 0;">
-                            <div id="mobileUserName" style="font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Loading...</div>
-                            <div id="mobileUserEmail" style="font-size: 14px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Loading...</div>
-                        </div>
-                    </div>
-                    <div onclick="logout()" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: linear-gradient(to right, #fff1f2, #ffe4e6); border-radius: 8px; color: #dc2626; font-weight: 500; cursor: pointer; border: 1px solid #fecaca;">
-                        <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                        </svg>
-                        <span>Sign Out</span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <style>
-            header nav .desktop-only {
-                display: flex !important;
-            }
-            #featured-program * {
-                all: unset;
-                box-sizing: border-box;
-                font-family: inherit;
-            }
-            #featured-program {
-                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-                border-radius: 12px;
-                padding: 16px;
-                color: white;
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-            }
-            #featured-program .label {
-                font-size: 12px;
-                font-weight: 700;
-                margin-bottom: 8px;
-                opacity: 0.9;
-                display: block;
-            }
-            #featured-program .title {
-                font-size: 16px;
-                font-weight: 700;
-                margin: 0 0 12px 0;
-                display: block;
-            }
-            #featured-program .description {
-                font-size: 14px;
-                opacity: 0.9;
-                margin-bottom: 24px;
-                line-height: 1.5;
-                display: block;
-                overflow-wrap: break-word;
-            }
-            #featured-program .cta-button {
-                width: 100%;
-                padding: 12px 16px;
-                background: rgba(255, 255, 255, 0.15);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 8px;
-                color: white;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.25s ease;
-                text-align: center;
-                display: block;
-            }
-            #featured-program .cta-button:hover {
-                background: rgba(255, 255, 255, 0.25);
-            }
-            .page-container {
-                margin-left: 130px;
-                margin-right: 130px;
-            }
-            button:focus, a:focus {
-                outline: 2px solid #1e40af;
-                outline-offset: 2px;
-            }
-            @media (max-width: 768px) {
-                .page-container {
-                    margin-left: 3px;
-                    margin-right: 3px;
-                }
-                header nav .desktop-only {
-                    display: none !important;
-                }
-                header nav .mobile-menu-button {
-                    display: block !important;
-                }
-            }
-            @media (min-width: 769px) {
-                .mobile-only {
-                    display: none !important;
-                }
-            }
-        </style>
-        <script>
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
+    <header style="background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); height: 72px; position: fixed; top: 0; left: 0; width: 100%; z-index: 100;">
+  <nav style="max-width: 1440px; margin: 0 auto; padding: 0 20px; height: 100%; display: flex; justify-content: space-between; align-items: center;">
+    <a href="/" style="display: flex; align-items: center;">
+      <img src="/assets/logo.jpg" alt="Logo" style="height: 28px;">
+    </a>
+    <div class="desktop-only" style="display: flex; align-items: center; gap: 40px;">
+      <div class="profile-menu" style="position: relative;">
+        <div class="profile-trigger" onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); background: transparent;"
+             onmouseover="this.style.background='#f8f9fa'" onmouseout="this.style.background='transparent'">
+          <img id="userAvatar" src="https://via.placeholder.com/36" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+          <span id="userName" style="font-weight: 500; color: #1e293b; font-size: 14px; position: relative; padding-right: 20px;">
+            Loading...
+            <span style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); transition: transform 0.2s ease; font-size: 18px;">▾</span>
+          </span>
+        </div>
+        <div class="profile-dropdown" style="position: absolute; left: 0; top: calc(100% + 8px); width: 280px; background: #ffffff; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); padding: 24px; opacity: 0; transform: translateY(-10px); visibility: hidden; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img id="dropdownAvatar" src="https://via.placeholder.com/60" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #e2e8f0; margin-bottom: 16px; transition: transform 0.2s ease;"
+                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <div id="dropdownName" style="font-weight: 600; font-size: 18px; color: #1e293b; margin-bottom: 4px; line-height: 1.4;">Loading...</div>
+            <div id="dropdownEmail" style="font-size: 14px; color: #64748b; margin-bottom: 16px; word-break: break-all;">Loading...</div>
+          </div>
+          <div style="height: 1px; background: #f1f5f9; margin: 16px 0;"></div>
+          <div class="logout-btn" onclick="logout()" style="padding: 12px; text-align: center; border-radius: 8px; background: #fff; border: 1px solid #f1f5f9; color: #dc2626; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px;"
+               onmouseover="this.style.background='#fef2f2'; this.style.borderColor='#fecaca'"
+               onmouseout="this.style.background='#fff'; this.style.borderColor='#f1f5f9'">
+            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            <span>Sign Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="mobile-menu-button" id="mobileMenuButton" style="display: none; padding: 8px; border-radius: 8px; border: none; background: transparent; transition: transform 0.2s ease, background 0.2s ease;"
+            onmouseover="this.style.background='rgba(0,0,0,0.05)'; this.style.transform='scale(1.1)'"
+            onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+      <svg style="width: 24px; height: 24px; color: #4b5563;" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <div id="mobileMenu" style="position: fixed; top: 0; right: 0; bottom: 0; width: 85vw; max-width: 300px; background: #ffffff; display: flex; flex-direction: column; z-index: 1000; transform: translateX(100%); box-shadow: -4px 0 16px rgba(0,0,0,0.1);">
+      <div style="flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px 16px;">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 24px;">
+          <button id="mobileMenuClose" style="padding: 8px; border-radius: 8px; border: none; background: transparent; transition: background 0.2s ease, transform 0.2s ease;"
+                  onmouseover="this.style.background='rgba(0,0,0,0.05)'; this.style.transform='scale(1.1)'"
+                  onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+            <svg style="width: 24px; height: 24px; color: #4b5563;" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div style="flex-shrink: 0; border-top: 1px solid #f1f5f9; padding: 16px; background: #ffffff; box-shadow: 0 -4px 12px rgba(0,0,0,0.05); z-index: 1002;">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+          <img id="mobileUserAvatar" src="https://via.placeholder.com/56" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+          <div style="flex-grow: 1; min-width: 0;">
+            <div id="mobileUserName" style="font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Loading...</div>
+            <div id="mobileUserEmail" style="font-size: 14px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Loading...</div>
+          </div>
+        </div>
+        <div onclick="logout()" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: linear-gradient(to right, #fff1f2, #ffe4e6); border-radius: 8px; color: #dc2626; font-weight: 500; cursor: pointer; border: 1px solid #fecaca;">
+          <svg style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
 
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.style.transform = 'translateX(0)';
-            });
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuButton = document.getElementById('mobileMenuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-            mobileMenuClose.addEventListener('click', () => {
-                mobileMenu.style.transform = 'translateX(100%)';
-            });
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.style.transform = 'translateX(0)';
+  });
 
-            // Profile Dropdown Toggle
-            function toggleDropdown() {
-                const dropdown = document.querySelector('.profile-dropdown');
-                const isVisible = dropdown.style.opacity === '1';
-                dropdown.style.opacity = isVisible ? '0' : '1';
-                dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
-                dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
-            }
+  mobileMenuClose.addEventListener('click', () => {
+    mobileMenu.style.transform = 'translateX(100%)';
+  });
 
-            // Logout Function
-            function logout() {
-                console.log('User logged out');
-                // Add actual logout logic here
-            }
-        </script>
-    </header>
+  // Profile Dropdown Toggle
+  function toggleDropdown() {
+    const dropdown = document.querySelector('.profile-dropdown');
+    const isVisible = dropdown.style.opacity === '1';
+    dropdown.style.opacity = isVisible ? '0' : '1';
+    dropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
+    dropdown.style.visibility = isVisible ? 'hidden' : 'visible';
+  }
 
+  // Logout Function (Placeholder)
+  function logout() {
+    console.log('Logout clicked');
+  }
+</script>
+
+<style>
+  .page-container {
+    margin-left: 130px;
+    margin-right: 130px;
+  }
+
+  button:focus, a:focus {
+    outline: 2px solid #1e40af;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .page-container {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+    .desktop-only {
+      display: none !important;
+    }
+    .mobile-menu-button {
+      display: block !important;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .mobile-only {
+      display: none !important;
+    }
+  }
+</style>
 
 
 
