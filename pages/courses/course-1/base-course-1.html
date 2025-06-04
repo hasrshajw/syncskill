@@ -171,6 +171,35 @@
 </header>
 
 <script>
+  // Mock user data (replace with actual data from authentication system)
+  const userData = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    avatar: "https://via.placeholder.com/60?text=JD" // Replace with actual avatar URL
+  };
+
+  // Load user details
+  function loadUserDetails() {
+    const userAvatar = document.getElementById('userAvatar');
+    const mobileUserAvatar = document.getElementById('mobileUserAvatar');
+    const dropdownAvatar = document.getElementById('dropdownAvatar');
+    const userName = document.getElementById('userName');
+    const mobileUserName = document.getElementById('mobileUserName');
+    const dropdownName = document.getElementById('dropdownName');
+    const dropdownEmail = document.getElementById('dropdownEmail');
+
+    // Update avatar images
+    if (userAvatar) userAvatar.src = userData.avatar;
+    if (mobileUserAvatar) mobileUserAvatar.src = userData.avatar;
+    if (dropdownAvatar) dropdownAvatar.src = userData.avatar;
+
+    // Update name and email
+    if (userName) userName.firstChild.textContent = userData.name;
+    if (mobileUserName) mobileUserName.firstChild.textContent = userData.name;
+    if (dropdownName) dropdownName.textContent = userData.name;
+    if (dropdownEmail) dropdownEmail.textContent = userData.email;
+  }
+
   // Close dropdowns
   function closeDropdowns() {
     const dropdowns = document.querySelectorAll('.profile-dropdown');
@@ -213,6 +242,9 @@
   function logout() {
     console.log('Logout clicked');
   }
+
+  // Initialize user details on page load
+  document.addEventListener('DOMContentLoaded', loadUserDetails);
 
   // Add event listeners
   document.addEventListener('click', handleOutsideInteraction);
