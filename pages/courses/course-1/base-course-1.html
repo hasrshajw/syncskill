@@ -6,6 +6,7 @@
     <title>GenAI Master</title>
     <link rel="icon" href="/assets/logo-i.png" type="image/png">
     <link rel="stylesheet" href="style.css" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style type="text/css" data-styled-jsx="">
         @-webkit-keyframes marquee {
             0% {
@@ -654,12 +655,13 @@ function logout() {
                             </div>
                             <div class="flex mb-4 items-center"><span
                                     class="text-gray-900 text-xl font-semibold mr-2">Now at ₹ 199</span><span
-                                    class="text-gray-500 line-through text-base">₹499</span></div><a
-                                href="https://payments.growthschool.io/pay/309/a98abbe1-8fa5-49d2-bb38-07fe3205f26d/INR"
-                                target="_blank" rel="noopener noreferrer"
-                                class="bg-[#33C375] border-2 border-[#0027264D]/30 text-base hover:bg-[#43a047] text-black font-medium py-3 rounded-lg flex items-center justify-center w-full transition-colors">Register
-                                Now<img class="ml-2"
-                                    src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/btnar.svg"></a>
+                                    class="text-gray-500 line-through text-base">₹499</span></div>
+                            <a href="#" onclick="event.preventDefault(); startRazorpayPayment()" 
+   class="bg-[#33C375] hover:bg-[#43a047] text-xl border-2 border-[#0027264D]/30 text-black font-medium px-4 py-3 rounded-lg inline-flex items-center justify-center w-full transition-colors seo-btn--apply">
+   Register Now
+   <img class="ml-3" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/btnar.svg">
+</a>
+
                         </div>
                     </div>
                 </div>
