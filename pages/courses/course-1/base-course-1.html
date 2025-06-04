@@ -188,16 +188,55 @@
     const dropdownName = document.getElementById('dropdownName');
     const dropdownEmail = document.getElementById('dropdownEmail');
 
+    // Debug logging to verify elements
+    console.log('Elements found:', {
+      userAvatar: !!userAvatar,
+      mobileUserAvatar: !!mobileUserAvatar,
+      dropdownAvatar: !!dropdownAvatar,
+      userName: !!userName,
+      mobileUserName: !!mobileUserName,
+      dropdownName: !!dropdownName,
+      dropdownEmail: !!dropdownEmail
+    });
+
     // Update avatar images
-    if (userAvatar) userAvatar.src = userData.avatar;
-    if (mobileUserAvatar) mobileUserAvatar.src = userData.avatar;
-    if (dropdownAvatar) dropdownAvatar.src = userData.avatar;
+    if (userAvatar) {
+      userAvatar.src = userData.avatar;
+    } else {
+      console.error('userAvatar element not found');
+    }
+    if (mobileUserAvatar) {
+      mobileUserAvatar.src = userData.avatar;
+    } else {
+      console.error('mobileUserAvatar element not found');
+    }
+    if (dropdownAvatar) {
+      dropdownAvatar.src = userData.avatar;
+    } else {
+      console.error('dropdownAvatar element not found');
+    }
 
     // Update name and email
-    if (userName) userName.firstChild.textContent = userData.name;
-    if (mobileUserName) mobileUserName.firstChild.textContent = userData.name;
-    if (dropdownName) dropdownName.textContent = userData.name;
-    if (dropdownEmail) dropdownEmail.textContent = userData.email;
+    if (userName && userName.firstChild) {
+      userName.firstChild.textContent = userData.name;
+    } else {
+      console.error('userName element or its firstChild not found');
+    }
+    if (mobileUserName && mobileUserName.firstChild) {
+      mobileUserName.firstChild.textContent = userData.name;
+    } else {
+      console.error('mobileUserName element or its firstChild not found');
+    }
+    if (dropdownName) {
+      dropdownName.textContent = userData.name;
+    } else {
+      console.error('dropdownName element not found');
+    }
+    if (dropdownEmail) {
+      dropdownEmail.textContent = userData.email;
+    } else {
+      console.error('dropdownEmail element not found');
+    }
   }
 
   // Close dropdowns
@@ -244,12 +283,32 @@
   }
 
   // Initialize user details on page load
-  document.addEventListener('DOMContentLoaded', loadUserDetails);
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded triggered, loading user details');
+    loadUserDetails();
+  });
 
   // Add event listeners
   document.addEventListener('click', handleOutsideInteraction);
   document.addEventListener('touchstart', handleOutsideInteraction);
   window.addEventListener('scroll', handleScroll);
+
+  // Example Firebase integration (uncomment and configure for production)
+  /*
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userData.name = user.displayName || "User";
+      userData.email = user.email || "user@example.com";
+      userData.avatar = user.photoURL || "https://via.placeholder.com/60";
+      console.log('Firebase user data loaded:', userData);
+      loadUserDetails();
+    } else {
+      console.error('No user is signed in');
+    }
+  });
+  */
 </script>
 
 <style>
@@ -290,10 +349,6 @@
     }
   }
 </style>
-
-
-
-
 
 
 
