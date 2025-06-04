@@ -3096,3 +3096,23 @@ body {
   left: auto !important;
   top: auto !important;
 }
+
+
+
+.custom-margin {
+  margin-left: 25px; /* Default for mobile */
+  margin-bottom: 0px; /* equivalent to mb-6 in Tailwind */
+  margin-top: 75px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* equivalent to gap-2 in Tailwind */
+}
+
+/* Desktop: min-width 768px and up */
+@media (min-width: 768px) {
+  .custom-margin {
+    margin-left: 75px;
+    margin-top: 75;
+    margin-bottom: 0px;
+  }
+}
