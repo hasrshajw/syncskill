@@ -1,38 +1,23 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNCSKILL | Learn from Top Industry Experts</title>
-    <meta name="description" content="Whether it's Product, Growth, Design, Business, Tech, or Data, Syncskill is the place to learn from top experts and join the elite.">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    </noscript>
-
+    <title>SYNCSKILL</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/footer-styles.css">
+ <link rel="canonical" href="https://syncskill.in/">
     <style>
-        /* --- ROOT VARIABLES & GLOBAL STYLES --- */
         :root {
-            --spacing: 0.25rem;
-            --color-dark-teal: #012726;
-            --color-teal-hover: #004D4B;
-            --color-accent-green: #33C375;
-            --color-accent-green-hover: #2CAC66;
-            --color-highlight-red: #FF6666;
-            --color-white: #fff;
-            --color-black: #000;
-            --color-text-heading: #111827;
-            --color-text-body: #4B5563;
-            --color-background-light: #F8F9FA;
-            --color-border-subtle: #eef2f7;
-            --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-            --radius-md: 0.5rem;
-            --radius-lg: 1rem;
-            --shadow-soft: 0 8px 16px rgba(17, 17, 26, 0.05);
-            --transition-default: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-900: #37be72;
+            --secondary-900: #1A1A1A;
+            --surface-100: #F8F9FA;
+            --text-primary: #1A1A1A;
+            --text-inverse: #FFFFFF;
+            --transition: cubic-bezier(0.33, 1, 0.68, 1);
+            --shadow-lg: 0 24px 48px -12px rgba(0,0,0,0.18);
+            --radius-2xl: 24px;
         }
 
         * {
@@ -41,766 +26,2079 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            overflow-x: hidden;
-        }
-
         body {
-            font-family: var(--font-sans);
+            font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            background-color: var(--color-white);
-            color: var(--color-text-body);
-            padding-top: 72px; /* For fixed header */
         }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
+html, body {
+    overflow-x: hidden;
+}
+</style>
+</head>
+
+<body style="margin: 0; margin-top: 72px; ">
+
+<header class="header">
+    <div class="header-container">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="#">
+                    <img class="logo" src="assets/logo.jpg" alt="Logo" style="height: 32px; width: auto;">
+                </a>
+                <div class="nav-links">
+                    <div class="relative">
+                        <button class="learn-button" id="learningPathsBtn">
+                            <span>Learning Paths</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <div id="megaMenu" class="mega-menu">
+                            <div class="mega-menu-content">
+                                <div class="mega-menu-section">
+                                    <div class="mega-menu-header">
+                                        <h3>Career Accelerators</h3>
+                                    </div>
+                                    <ul class="mega-menu-list">
+                                        <li>
+                                            <a href="#" class="mega-menu-item">
+                                                <div class="mega-menu-item-icon career">
+                                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="mega-menu-item-text">
+                                                    <div class="mega-menu-item-title">Data Science Pro</div>
+                                                    <div class="mega-menu-item-description">12 Courses · 98 Hours</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="mega-menu-item">
+                                                <div class="mega-menu-item-icon career">
+                                                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="mega-menu-item-text">
+                                                    <div class="mega-menu-item-title">AI & ML Foundation</div>
+                                                    <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a href="#" class="mega-menu-item">
+                                                <div class="mega-menu-item-icon career">
+                                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                                </div>
+                                                <div class="mega-menu-item-text">
+                                                    <div class="mega-menu-item-title">Full Stack Development</div>
+                                                    <div class="mega-menu-item-description">10 Courses · 80 Hours</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-section">
+                                    <div class="mega-menu-header">
+                                        <h3>Certifications</h3>
+                                    </div>
+                                    <ul class="mega-menu-list">
+                                        <li>
+                                            <a href="#" class="mega-menu-item">
+                                                <div class="mega-menu-item-icon certification">
+                                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                                                </div>
+                                                <div class="mega-menu-item-text">
+                                                    <div class="mega-menu-item-title">Cloud Architect</div>
+                                                    <div class="mega-menu-item-description">AWS · Azure · GCP</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                               <div class="mega-menu-section featured-program">
+                                    <span class="label">FEATURED PROGRAM</span>
+                                    <h3 class="title">GenAI Mastery</h3>
+                                    <p class="description">Master LLMs, Diffusion Models, and Production Deployment</p>
+                                    <a href="#" class="cta-button">Explore Program</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="menu-button" id="mobileMenuButton">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+                <div class="auth-buttons">
+                    <a class="auth-button" href="/pages/verify/login.html">Log in</a>
+                    <a class="auth-button submit" href="/pages/verify/signup.html">Join free</a>
+                </div>
+            </div>
+        </nav>
+        <div id="mobileMenu">
+            <div class="mobile-menu-close" id="mobileMenuClose">
+                <svg viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </div>
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-section">
+                    <div class="mobile-menu-group">
+                        <h3 class="mobile-menu-header" onclick="(function(c){c.classList.toggle('active'); this.classList.toggle('active');})(this.nextElementSibling)">
+                            <span>Popular Courses</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </h3>
+                        <div class="mobile-menu-list">
+                           <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon career">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">Data Science Pro</div>
+                                    <div class="mobile-menu-item-description">12 Courses · 98 Hours</div>
+                                </div>
+                            </a>
+                            <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon career">
+                                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">AI & ML Foundation</div>
+                                    <div class="mobile-menu-item-description">8 Courses · 64 Hours</div>
+                                </div>
+                            </a>
+                             <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon career">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">Full Stack Development</div>
+                                    <div class="mobile-menu-item-description">10 Courses · 80 Hours</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-group">
+                        <h3 class="mobile-menu-header" onclick="(function(c){c.classList.toggle('active'); this.classList.toggle('active');})(this.nextElementSibling)">
+                            <span>Certifications</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="ml-1 transition-transform duration-200">
+                                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </h3>
+                        <div class="mobile-menu-list">
+                            <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon certification">
+                                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">Cloud Architect</div>
+                                    <div class="mobile-menu-item-description">AWS · Azure · GCP</div>
+                                </div>
+                            </a>
+                             <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon certification">
+                                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">Cybersecurity Expert</div>
+                                    <div class="mobile-menu-item-description">3 Badges</div>
+                                </div>
+                            </a>
+                             <a href="#" class="mobile-menu-item">
+                                <div class="mobile-menu-item-icon certification">
+                                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                                </div>
+                                <div class="mobile-menu-item-text">
+                                    <div class="mobile-menu-item-title">Data Analytics</div>
+                                    <div class="mobile-menu-item-description">5 Badges</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                     <div class="mobile-menu-group featured-program-mobile">
+                         <div class="featured-program">
+                            <span class="label">FEATURED PROGRAM</span>
+                            <h3 class="title">GenAI Mastery</h3>
+                            <p class="description">Master LLMs, Diffusion Models, and Production Deployment</p>
+                            <a href="#" class="cta-button">Explore Program</a>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu-auth">
+                <div class="mobile-menu-auth-buttons">
+                    <a href="/pages/verify/signup.html" class="mobile-menu-auth-button submit">Join free</a>
+                    <a href="/pages/verify/login.html" class="mobile-menu-auth-button join">Log in</a>
+                </div>
+            </div>
+        </div>
+        <div id="menuOverlay"></div>
+        <div class="divider"></div>
+    </div>
+</header>
+
+<style>
+    /* Universal box-sizing & Root Variables */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    :root {
+        --spacing: 0.25rem;
+        --color-gray-200: oklch(92.8% 0.006 264.531);
+        --color-white: #fff;
+        --color-black: #000;
+        --color-dark-teal: #7c3aed; /* Adjusted to new brand color */
+        --color-teal-hover: #6d28d9; /* Adjusted to new brand color */
+        --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --font-weight-medium: 500;
+        --font-weight-normal: 400;
+        --font-weight-bold: 700;
+        --text-base: 1rem;
+        --text-base--line-height: 1.5;
+        --radius-md: 0.375rem;
+        --default-transition-duration: 0.15s;
+        --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body {
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        padding-top: 72px;
+    }
+
+    /* Header & Navigation */
+    .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 50;
+        transition-property: all;
+        transition-duration: 0.3s;
+        transition-timing-function: var(--default-transition-timing-function);
+        background-color: var(--color-white);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .header-container {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .nav {
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-left, .nav-right {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 6);
+    }
+    .logo {
+        height: 32px;
+        width: auto;
+        color: transparent;
+    }
+    .nav-links {
+        display: none;
+        align-items: center;
+        gap: calc(var(--spacing) * 4);
+    }
+
+    /* Learn Button & Mega Menu */
+    .learn-button {
+        display: flex;
+        align-items: center;
+        padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-medium);
+        color: #333;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--default-transition-duration) var(--default-transition-timing-function);
+    }
+    .learn-button:hover {
+        background-color: #f3f4f6;
+    }
+    .learn-button svg {
+        margin-left: calc(var(--spacing) * 2);
+        transition: transform var(--default-transition-duration) var(--default-transition-timing-function);
+    }
+    #megaMenu {
+        position: fixed;
+        top: 72px;
+        left: 50%;
+        width: min(800px, 90vw);
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+        padding: 32px;
+        opacity: 0;
+        transform: translate(-50%, 8px);
+        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        pointer-events: none;
+        z-index: 100;
+    }
+    #megaMenu.active {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        pointer-events: auto;
+    }
+    .mega-menu-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .mega-menu-section { display: flex; flex-direction: column; }
+    .mega-menu-header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #e9ecef; }
+    .mega-menu-header h3 { font-size: 14px; font-weight: 700; color: #2d3436; letter-spacing: 0.25px; text-transform: uppercase; }
+    .mega-menu-list { list-style: none; display: grid; gap: 12px; }
+    .mega-menu-item { display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .mega-menu-item:hover { transform: translateY(-2px); background: #fff; }
+    .mega-menu-item-icon { width: 32px; height: 32px; border-radius: 6px; margin-right: 12px; display: flex; align-items: center; justify-content: center; }
+    .mega-menu-item-icon.career { background: #6366f1; }
+    .mega-menu-item-icon.certification { background: #10b981; }
+    .mega-menu-item-icon svg { width: 16px; height: 16px; color: white; }
+    .mega-menu-item-text { display: flex; flex-direction: column; }
+    .mega-menu-item-title { font-size: 14px; font-weight: 600; color: #2d3436; }
+    .mega-menu-item-description { font-size: 12px; color: #6c757d; margin-top: 4px; }
+    
+    /* Featured Program Specific Styles */
+    .featured-program { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 12px; padding: 24px; color: white; display: flex; flex-direction: column; }
+    .featured-program .label { font-size: 12px; font-weight: 700; opacity: 0.9; margin-bottom: 8px; text-transform: uppercase; }
+    .featured-program .title { font-size: 18px; font-weight: 700; margin: 0 0 12px 0; }
+    .featured-program .description { font-size: 14px; opacity: 0.9; margin: 0 0 24px 0; line-height: 1.5; flex-grow: 1; }
+    .featured-program .cta-button { padding: 12px 16px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; transition: all 0.25s ease; text-align: center; text-decoration: none; }
+    .featured-program .cta-button:hover { background: rgba(255,255,255,0.25); }
+
+
+    /* Auth Buttons */
+    .auth-buttons { display: none; align-items: center; gap: calc(var(--spacing) * 3); }
+    .auth-button { padding: calc(var(--spacing) * 2) calc(var(--spacing) * 5); font-size: var(--text-base); font-weight: var(--font-weight-medium); border: 1px solid #d1d5db; border-radius: var(--radius-md); color: #4b5563; transition: all var(--default-transition-duration) var(--default-transition-timing-function); text-decoration: none; }
+    .auth-button.submit { background-color: var(--color-dark-teal); color: var(--color-white); border-color: var(--color-dark-teal); }
+    .auth-button:hover { background-color: #f3f4f6; }
+    .auth-button.submit:hover { background-color: var(--color-teal-hover); border-color: var(--color-teal-hover); }
+
+    /* Mobile Menu */
+    .menu-button { display: flex; border: none; background: transparent; cursor: pointer; }
+    #mobileMenu { position: fixed; top: 0; right: 0; bottom: 0; width: 75vw; max-width: 320px; background: #fff; padding: 24px 16px; transform: translateX(100%); transition: transform 0.3s ease; box-shadow: -2px 0 8px rgba(0,0,0,0.1); z-index: 1000; border-top-left-radius: 16px; display: flex; flex-direction: column; }
+    #mobileMenu.active { transform: translateX(0); }
+    #menuOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
+    #menuOverlay.active { display: block; }
+    .mobile-menu-close { padding: 8px; border-radius: 8px; border: none; background: transparent; transition: background 0.2s ease; align-self: flex-end; margin-bottom: 24px; }
+    .mobile-menu-close svg { width: 24px; height: 24px; color: #4b5563; }
+    .mobile-menu-content { flex-grow: 1; overflow-y: auto; }
+    .mobile-menu-section { display: flex; flex-direction: column; gap: 16px; }
+    .mobile-menu-group { border-bottom: 1px solid #e5e7eb; padding-bottom: 16px; }
+    .mobile-menu-group:last-child { border-bottom: none; }
+    .mobile-menu-header { font-size: 16px; font-weight: 700; color: #2d3436; margin: 0; padding: 12px 0; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .mobile-menu-header svg { transition: transform var(--default-transition-duration); }
+    .mobile-menu-header.active svg { transform: rotate(180deg); }
+    .mobile-menu-list { display: none; flex-direction: column; gap: 12px; padding-top: 16px; }
+    .mobile-menu-list.active { display: flex; }
+    .mobile-menu-item { display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; }
+    .mobile-menu-item-icon { width: 24px; height: 24px; border-radius: 6px; margin-right: 12px; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-item-icon svg { width: 14px; height: 14px; color: white; }
+    .mobile-menu-auth { flex-shrink: 0; padding-top: 20px; }
+    .mobile-menu-auth-buttons { display: flex; flex-direction: column; gap: 12px; }
+    .mobile-menu-auth-button { padding: 12px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: 600; }
+    .mobile-menu-auth-button.submit { background: var(--color-dark-teal); color: var(--color-white); }
+    .mobile-menu-auth-button.join { border: 1px solid #d1d5db; color: #4b5563; }
+    .featured-program-mobile { border-bottom: none; padding-bottom: 0; }
+    .featured-program-mobile .featured-program { padding: 16px; }
+
+
+    /* Responsive Breakpoints */
+    @media (min-width: 48rem) {
+        .header-container { width: 80%; }
+        .nav-links, .auth-buttons { display: flex; }
+        .menu-button { display: none; }
+    }
+    @media (max-width: 768px) {
+        .header-container { padding: 0 16px; width: 100%; }
+    }
+</style>
+
+<script>
+    // Desktop Mega Menu
+    const learningPathsBtn = document.getElementById('learningPathsBtn');
+    const megaMenu = document.getElementById('megaMenu');
+    const learnChevron = learningPathsBtn.querySelector('svg');
+    let isMenuOpen = false;
+
+    function showLearnMegaMenu() {
+        megaMenu.classList.add('active');
+        learnChevron.style.transform = 'rotate(180deg)';
+    }
+
+    function hideLearnMegaMenu() {
+        megaMenu.classList.remove('active');
+        learnChevron.style.transform = 'rotate(0deg)';
+    }
+
+    learningPathsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (megaMenu.classList.contains('active')) {
+            hideLearnMegaMenu();
+        } else {
+            showLearnMegaMenu();
         }
-        
-        /* --- HEADER --- */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 50;
-            transition: all var(--transition-default);
-            background-color: var(--color-white);
-            border-bottom: 1px solid var(--color-border-subtle);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (megaMenu.classList.contains('active') && !megaMenu.contains(e.target) && !learningPathsBtn.contains(e.target)) {
+            hideLearnMegaMenu();
         }
-        .header-container {
-            width: 90%;
-            margin: 0 auto;
+    });
+    
+    // Mobile Menu
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    function toggleMobileMenu() {
+        mobileMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    }
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    mobileMenuClose.addEventListener('click', toggleMobileMenu);
+    menuOverlay.addEventListener('click', toggleMobileMenu);
+    
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+             if (mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+             if (megaMenu.classList.contains('active')) {
+                hideLearnMegaMenu();
+            }
         }
-        .nav {
-            padding: calc(var(--spacing) * 3) 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 72px;
-        }
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing) * 6);
-        }
-        .logo {
-            height: 32px;
-            width: auto;
-        }
-        .nav-links {
-            display: none; /* Hidden on mobile */
-            align-items: center;
-            gap: calc(var(--spacing) * 4);
-        }
-        .nav-link-btn {
-            display: flex;
-            align-items: center;
-            padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-dark-teal);
-            transition: background-color 0.2s, color 0.2s;
-            background-color: transparent;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-        }
-        .nav-link-btn svg {
-            margin-left: calc(var(--spacing) * 2);
-            transition: transform var(--transition-default);
-        }
-        .nav-link-btn:hover, .nav-link-btn.active {
-            background-color: var(--color-background-light);
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-        }
-        .auth-buttons {
-            display: none; /* Hidden on mobile */
-            align-items: center;
-            gap: calc(var(--spacing) * 4);
-        }
-        .auth-button {
-            padding: calc(var(--spacing) * 2) calc(var(--spacing) * 5);
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: var(--radius-md);
-            transition: all var(--transition-default);
-            text-decoration: none;
-        }
-        .auth-button.primary {
-            background-color: var(--color-dark-teal);
-            color: var(--color-white);
-            border: 1px solid var(--color-dark-teal);
-        }
-        .auth-button.primary:hover {
-            background-color: var(--color-teal-hover);
-        }
-        .auth-button.secondary {
-            background-color: transparent;
-            color: var(--color-dark-teal);
-            border: 1px solid var(--color-dark-teal);
-        }
-        .auth-button.secondary:hover {
-            background-color: var(--color-dark-teal);
-            color: var(--color-white);
-        }
-        .menu-button {
-            display: block; /* Shown on mobile */
-            padding: calc(var(--spacing) * 1.5);
-            border: 1px solid var(--color-dark-teal);
-            border-radius: var(--radius-md);
-            color: var(--color-dark-teal);
-            background-color: transparent;
-            cursor: pointer;
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page-container">
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/1.png">
+                    <source media="(min-width: 1025px)" srcset="assets/11.png">
+                    <img src="fallback-1.jpg" alt="Innovation" class="slide-media" loading="lazy" decoding="async">
+                </picture>
+                <div class="slide-content">
+                    <h1 class="slide-title">Next-Gen Solutions</h1>
+                    <p class="slide-description">Innovative approaches for modern challenges</p>
+                    <a href="#" class="slide-cta">
+                        Explore Now
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <picture>
+                    <source media="(max-width: 1024px)" srcset="assets/2.png">
+                    <source media="(min-width: 1025px)" srcset="assets/images/22.png">
+                    <img src="fallback-2.jpg" alt="Sustainability" class="slide-media" loading="lazy" decoding="async">
+                </picture>
+               <div class="slide-content">
+                    <h1 class="slide-title">Eco Innovation</h1>
+                    <p class="slide-description">Innovative approaches for modern challenges</p>
+                    <a href="#" class="slide-cta">
+                        Explore Now
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <div class="controls-group">
+                <button class="control-button prev" aria-label="Previous slide">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="control-button next" aria-label="Next slide">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="pagination">
+                <div class="pagination-dot active" aria-label="Slide 1"></div>
+                <div class="pagination-dot" aria-label="Slide 2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+:root {
+    --primary-900: #1a3c34;
+    --primary-700: #2a5a4e;
+    --text-primary: #1a1a1a;
+    --text-inverse: #ffffff;
+    --radius-2xl: 16px;
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-container {
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-container {
+    max-width: 1920px;
+    margin: 0 auto;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    isolation: isolate;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0));
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.8s var(--transition);
+}
+
+.carousel-slide {
+    position: relative;
+    min-width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.slide-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.5s var(--transition);
+}
+
+.carousel-slide:hover .slide-media {
+    transform: scale(1.02);
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 12%;
+    left: 8%;
+    max-width: min(600px, 45%);
+    color: var(--text-primary);
+    z-index: 2;
+    background: rgba(255,255,255,0.95);
+    padding: 2rem;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s var(--transition) 0.2s;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.carousel-slide.active .slide-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.slide-description {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    max-width: 36ch;
+    line-height: 1.5;
+}
+
+.slide-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--primary-900);
+    color: var(--text-inverse);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s var(--transition);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.slide-cta:hover {
+    background: var(--primary-700);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 8%;
+    right: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    z-index: 3;
+}
+
+.controls-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.control-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: all 0.3s var(--transition);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-button:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+}
+
+.pagination {
+    display: flex;
+    gap: 0.75rem;
+    position: relative;
+    right: 24px;
+}
+
+.pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s var(--transition);
+}
+
+.pagination-dot.active {
+    background: var(--primary-900);
+    transform: scale(1.3);
+}
+
+.pagination-dot:hover {
+    background: var(--primary-700);
+}
+
+/* Large Desktop */
+@media (min-width: 1441px) {
+    .carousel-container {
+        max-width: 2560px;
+        margin-top: 32px;
+    }
+    .slide-title {
+        font-size: clamp(2.5rem, 3.5vw + 1rem, 4.5rem);
+    }
+    .slide-description {
+        font-size: clamp(1.125rem, 1vw + 0.5rem, 1.5rem);
+    }
+    .slide-cta {
+        padding: 1.25rem 2.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .carousel-slide {
+        aspect-ratio: 4/3;
+    }
+    .slide-content {
+        max-width: min(600px, 70%);
+        left: 6%;
+        bottom: 11%;
+        padding: 1.75rem;
+    }
+    .slide-cta {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9rem;
+    }
+    .carousel-controls {
+        bottom: 12%;
+        right: 6%;
+    }
+    .control-button {
+        width: 44px;
+        height: 44px;
+    }
+    .pagination {
+        right: 22px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 1024px) {
+    .carousel-slide {
+        aspect-ratio: 3/4;
+    }
+    .slide-content {
+        max-width: min(600px, 80%);
+        left: 5%;
+        bottom: 10%;
+        padding: 1.5rem;
+    }
+    .carousel-controls {
+        bottom: 15%;
+        right: 5%;
+    }
+    .pagination {
+        right: 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    .carousel-container {
+        margin-top: 16px;
+    }
+    .slide-content {
+        max-width: min(600px, 90%);
+        left: 5%;
+        bottom: 5%;
+        padding: 1.25rem;
+    }
+    .slide-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+    }
+    .slide-cta {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.85rem;
+    }
+    .carousel-controls {
+        bottom: 10%;
+        right: 5%;
+        gap: 16px;
+    }
+    .control-button {
+        width: 40px;
+        height: 40px;
+    }
+    .pagination {
+        right: 20px;
+        gap: 0.5rem;
+    }
+    .pagination-dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-only { display: none !important; }
+    .mobile-menu-button { display: block !important; }
+}
+
+@media (min-width: 769px) {
+    .mobile-only { display: none !important; }
+}
+</style>
+<script>
+class PremiumCarousel {
+    constructor(container) {
+        this.DOM = {
+            container,
+            track: container.querySelector('.carousel-track'),
+            slides: Array.from(container.querySelectorAll('.carousel-slide')),
+            prevBtn: container.querySelector('.prev'),
+            nextBtn: container.querySelector('.next'),
+            dots: Array.from(container.querySelectorAll('.pagination-dot'))
+        };
+
+        this.state = {
+            currentIndex: 0,
+            isAnimating: false,
+            totalSlides: this.DOM.slides.length,
+            autoPlayInterval: null,
+            autoPlayDelay: 8000
+        };
+
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.startAutoPlay();
+    }
+
+    setupEventListeners() {
+        this.DOM.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.DOM.nextBtn.addEventListener('click', () => this.nextSlide());
+
+        this.DOM.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        let touchStartX = 0;
+        this.DOM.container.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        this.DOM.container.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? this.nextSlide() : this.prevSlide();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+    }
+
+    updateUI() {
+        this.DOM.slides.forEach(slide => slide.classList.remove('active'));
+        this.DOM.dots.forEach(dot => dot.classList.remove('active'));
+
+        this.DOM.slides[this.state.currentIndex].classList.add('active');
+        this.DOM.dots[this.state.currentIndex].classList.add('active');
+    }
+
+    nextSlide() {
+        if (this.state.isAnimating) return;
+        this.state.isAnimating = true;
+        this.state.currentIndex = (this.state.currentIndex + 1) % this.state.totalSlides;
+        this.animateTransition();
+    }
+
+    prevSlide() {
+        if (this.state.isAnimating) return;
+        this.state.isAnimating = true;
+        this.state.currentIndex = (this.state.currentIndex - 1 + this.state.totalSlides) % this.state.totalSlides;
+        this.animateTransition();
+    }
+
+    goToSlide(index) {
+        if (this.state.isAnimating || index === this.state.currentIndex) return;
+        this.state.isAnimating = true;
+        this.state.currentIndex = index;
+        this.animateTransition();
+    }
+
+    animateTransition() {
+        this.DOM.track.style.transform = `translateX(-${this.state.currentIndex * 100}%)`;
+        this.updateUI();
+
+        setTimeout(() => {
+            this.state.isAnimating = false;
+        }, 800);
+    }
+
+    startAutoPlay() {
+        this.state.autoPlayInterval = setInterval(() => {
+            if (!this.state.isAnimating) this.nextSlide();
+        }, this.state.autoPlayDelay);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        new PremiumCarousel(carouselContainer);
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="syncskill-container">
+    <div class="syncskill-inner">
+      <div class="syncskill-content">
+        <h1 class="syncskill-title">Become Top 1% in the AI-First World</h1>
+        <p class="syncskill-description">Whether it's Product, Growth, Design, Business, Tech, or Data, Syncskill is the place to learn from top experts and join the elite.</p>
+        <button class="syncskill-button">
+          Explore Programs
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" class="syncskill-button-icon">
+            <path d="M1 7.11108L6 12L11 7.11108" stroke="#012726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1 1L6 5.88889L11 1" stroke="#012726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+</div>
+
+<style>
+/* Import IBM Plex Sans font */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+/* Container styles */
+.syncskill-container {
+  font-family: 'IBM Plex Sans', sans-serif;
+  width: 100%;
+  padding: 0 150px;
+  box-sizing: border-box;
+}
+
+/* Inner wrapper */
+.syncskill-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Content wrapper */
+.syncskill-content {
+  text-align: left;
+}
+
+/* Title styles */
+.syncskill-title {
+  font-size: 48px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+}
+
+/* Description styles */
+.syncskill-description {
+  font-size: 24px;
+  font-weight: 400;
+  color: #4a4a4a;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+/* Button styles */
+.syncskill-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #33C375;
+  color: #012726;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 39, 38, 0.2);
+  transition: all 0.3s ease;
+}
+
+.syncskill-button:hover {
+  background-color: #2CAC66;
+  box-shadow: 0 4px 12px rgba(0, 39, 38, 0.3);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.syncskill-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 39, 38, 0.2);
+}
+
+/* Button icon styles */
+.syncskill-button-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.syncskill-button:hover .syncskill-button-icon {
+  transform: translateY(2px);
+}
+
+/* Tablet (768px and below) */
+@media screen and (max-width: 768px) {
+  .syncskill-container {
+    padding: 0 50px;
+  }
+  
+  .syncskill-title {
+    font-size: 36px;
+  }
+  
+  .syncskill-description {
+    font-size: 20px;
+  }
+  
+  .syncskill-button {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+  
+  .syncskill-inner {
+    padding: 30px 0;
+  }
+}
+
+/* Mobile (576px and below) */
+@media screen and (max-width: 576px) {
+  .syncskill-container {
+    padding: 0 20px;
+  }
+  
+  .syncskill-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  
+  .syncskill-description {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .syncskill-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+  
+  .syncskill-inner {
+    padding: 20px 0;
+  }
+}
+
+/* Small mobile (360px and below) */
+@media screen and (max-width: 360px) {
+  .syncskill-container {
+    padding: 0 15px;
+  }
+  
+  .syncskill-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .syncskill-description {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .syncskill-button {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+}
+</style>
+
+
+
+
+
+
+
+<div class="showcase-container">
+    <div class="showcase-columns">
+        <!-- Learners Card -->
+        <div class="learners-card">
+            <div class="card-content">
+                <div class="learners-count">
+                    <div class="learners-number">6.5M+</div>
+                    <div class="learners-text">Learners</div>
+                </div>
+                
+                <div class="ticker-section">
+                    <h3 class="ticker-header">Powered by :</h3>
+                    <div class="ticker-container">
+                        <div class="ticker-track">
+                            <!-- Ticker items -->
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google" loading="lazy">
+                            </div>
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Microsoft" loading="lazy">
+                            </div>
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google" loading="lazy">
+                            </div>
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Apple" loading="lazy">
+                            </div>
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google" loading="lazy">
+                            </div>
+                            <div class="ticker-item">
+                                <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Amazon" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Card -->
+        <div class="reviews-card">
+            <div class="card-content">
+                <div class="reviews-content">
+                    <h2 class="reviews-title">What Learners Are Saying</h2>
+                    
+                    <div class="rating-container">
+                        <img src="https://www.guvi.in/assets/BWZD7RpZ-google-logo.webp" alt="Google Reviews" class="rating-logo">
+                        <div class="rating-text">
+                            <div class="rating-value">4.3/5.0</div>
+                            <p class="rating-count">From Google reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.showcase-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 30px 150px 30px 150px;
+}
+
+.showcase-columns {
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+
+@media (min-width: 992px) {
+    .showcase-columns {
+        flex-direction: row;
+    }
+}
+
+.learners-card, .reviews-card {
+    background: #ffffff;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.learners-card:hover, .reviews-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+}
+
+.learners-card {
+    background: #fffaf1;
+    border: 1px solid #e2e8f0;
+    flex: 2;
+}
+
+.reviews-card {
+    flex: 1;
+    border: 1px solid #e2e8f0;
+}
+
+.card-content {
+    padding: 1.75rem;
+}
+
+.learners-count {
+    margin-bottom: 1.5rem;
+}
+
+.learners-number {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #002726;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.learners-text {
+    font-size: 1.15rem;
+    color: #1a3c3a;
+    font-weight: 600;
+}
+
+.learners-desc {
+    color: #64748b;
+    margin-top: 0.5rem;
+    max-width: 400px;
+    font-size: 0.95rem;
+}
+
+.ticker-header {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.ticker-container {
+    background: #fffaf1;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s ease;
+    filter: grayscale(100%) opacity(0.7);
+    display: flex;
+    align-items: center;
+}
+
+.ticker-item:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+}
+
+.ticker-item img {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+    max-width: 100px;
+}
+
+.reviews-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.reviews-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a3c3a;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.rating-container {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 0px 24px 0px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.rating-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.rating-logo {
+    height: 5rem;
+    margin-bottom: 1.25rem;
+}
+
+.rating-text {
+    text-align: center;
+}
+
+.rating-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 0.2rem;
+}
+
+.rating-count {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Mobile-specific styles for the rating section */
+@media (max-width: 768px) {
+    .showcase-container {
+         padding: 20px 16px 0px 165px;
+    }
+    .rating-container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .rating-logo {
+        margin-bottom: 0;
+        margin-right: 1.25rem;
+        height: 4.2rem;
+    }
+    
+    .rating-text {
+        text-align: left;
+    }
+    
+    .rating-value {
+        font-size: 1.3rem;
+        margin-bottom: 0.1rem;
+    }
+}
+
+/* Mobile optimization for both cards */
+@media (max-width: 768px) {
+    .showcase-container {
+        padding: 16px 20px 20px 16px;
+    }
+    .showcase-columns {
+        gap: 1.25rem;
+    }
+    
+    .card-content {
+        padding: 1.25rem;
+    }
+    
+    .learners-count {
+        margin-bottom: 1.25rem;
+    }
+    
+    .learners-number {
+        font-size: 2.25rem;
+    }
+    
+    .learners-text {
+        font-size: 1rem;
+    }
+    
+    .learners-desc {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+    
+    .ticker-header {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .ticker-container {
+        padding: 0.5rem;
+    }
+    
+    .ticker-item {
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .ticker-item img {
+        height: 1.6rem;
+    }
+    
+    .reviews-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .rating-container {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .learners-number {
+        font-size: 2rem;
+    }
+    
+    .ticker-item {
+        padding: 0.3rem 0.7rem;
+    }
+    
+    .ticker-item img {
+        height: 1.4rem;
+    }
+    
+    .card-content {
+        padding: 1rem;
+    }
+    
+    .rating-logo {
+        height: 3rem;
+        margin-right: 1rem;
+    }
+    
+    .rating-value {
+        font-size: 1.2rem;
+    }
+    
+    .rating-count {
+        font-size: 0.85rem;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+
+ <div style="width: 100%; height: 0.5px; background-color: #E0E0E0; margin: 16px 0;"></div>
+
+
+    <style>
+        :root {
+            --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
+            --color-dark-teal: #012726;
+            --color-white: #fff;
         }
 
-        /* --- MEGA MENU --- */
-        #megaMenu {
-            position: fixed;
-            top: 72px; /* Header height */
-            left: 50%;
-            width: min(800px, 90vw);
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.12);
-            padding: 32px;
-            opacity: 0;
-            transform: translate(-50%, 8px);
-            transition: all var(--transition-default);
-            pointer-events: none;
-            z-index: 100;
-        }
-        #megaMenu.active {
-            opacity: 1;
-            transform: translate(-50%, 0);
-            pointer-events: auto;
-        }
-        .mega-menu-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .mega-menu-section h3 { font-size: 14px; font-weight: 700; color: var(--color-text-heading); letter-spacing: 0.25px; margin: 0 0 24px; text-transform: uppercase; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 16px; }
-        .mega-menu-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-        .mega-menu-item { display: flex; align-items: center; padding: 12px 16px; border-radius: 8px; background: linear-gradient(95deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #f1f3f5; text-decoration: none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
-        .mega-menu-item:hover { transform: translateY(-2px); }
-        .mega-menu-item-icon { width: 32px; height: 32px; border-radius: 6px; margin-right: 12px; display: flex; align-items: center; justify-content: center; }
-        .mega-menu-item-icon.career { background: #6366f1; }
-        .mega-menu-item-icon.certification { background: var(--color-accent-green); }
-        .mega-menu-item-icon svg { width: 16px; height: 16px; color: white; }
-        .mega-menu-item-title { font-size: 14px; font-weight: 600; color: var(--color-text-heading); }
-        .mega-menu-item-description { font-size: 12px; color: var(--color-text-body); margin-top: 4px; }
-        #featured-program { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 12px; padding: 24px; color: white; }
-        #featured-program .label { font-size: 12px; font-weight: 700; margin-bottom: 8px; opacity: 0.9; display: block; }
-        #featured-program .title { font-size: 18px; font-weight: 700; margin: 0 0 12px 0; display: block; }
-        #featured-program .description { font-size: 14px; opacity: 0.9; margin-bottom: 24px; line-height: 1.5; display: block; }
-        #featured-program .cta-button { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; transition: all 0.25s ease; text-align: center; }
-        #featured-program .cta-button:hover { background: rgba(255,255,255,0.25); }
-
-
-        /* --- MOBILE MENU --- */
-        #mobileMenu { position: fixed; top: 0; right: 0; bottom: 0; width: 75vw; max-width: 320px; background: #ffffff; padding: 24px 16px; transform: translateX(100%); transition: transform 0.3s ease; box-shadow: -2px 0 8px rgba(0,0,0,0.1); z-index: 1000; border-top-left-radius: 16px; display: flex; flex-direction: column; }
-        #mobileMenu.active { transform: translateX(0); }
-        #menuOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
-        #menuOverlay.active { display: block; }
-        #mobileMenuClose { padding: 8px; border-radius: 8px; border: none; background: transparent; transition: background 0.2s ease, transform 0.2s ease; align-self: flex-end; margin-bottom: 24px; }
-        #mobileMenuClose svg { width: 24px; height: 24px; color: #4b5563; }
-        .mobile-menu-content { flex-grow: 1; overflow-y: auto; }
-        .mobile-menu-group { border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
-        .mobile-menu-header { font-size: 16px; font-weight: 700; color: #2d3436; margin: 0; padding: 12px 0; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .mobile-menu-header svg { transition: transform var(--transition-default); }
-        .mobile-menu-header.active svg { transform: rotate(180deg); }
-        .mobile-menu-list { display: none; flex-direction: column; gap: 12px; padding: 8px 0; }
-        .mobile-menu-list.active { display: flex; }
-        .mobile-menu-auth { flex-shrink: 0; padding-top: 20px; }
-        .mobile-menu-auth-buttons { display: flex; flex-direction: column; gap: 12px; }
-        
-        /* --- RESPONSIVE HEADER --- */
-        @media (min-width: 769px) {
-            .nav-links, .auth-buttons { display: flex; }
-            .menu-button, #mobileMenu, #menuOverlay { display: none !important; }
-        }
-        @media (max-width: 768px) {
-            .nav-links, .auth-buttons { display: none !important; }
-            .header-container { width: 100%; padding: 0 16px; }
-        }
-
-
-        /* --- HERO SECTION --- */
-        .hero-section {
-            background-color: var(--color-white);
-            padding: 4rem 0;
-        }
-        .hero-container {
-            width: 90%;
-            margin: 0 auto;
-            max-width: 1280px;
+        /* Scope all styles to .section-workshops */
+        .section-workshops .wc-workshop-card {
+            width: 320px;
+            height: 450px;
+            flex: 0 0 auto;
+            cursor: grab;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            border: 0.5px solid #000000;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 48px;
-        }
-        .hero-text {
-            max-width: 540px;
-            width: 100%;
-        }
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 3rem);
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--color-text-heading);
-            margin: 0 0 24px 0;
-        }
-        .hero-description {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            color: var(--color-text-body);
-            margin: 0 0 32px 0;
-        }
-        .hero-button {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--color-accent-green);
-            color: var(--color-dark-teal);
-            font-size: 18px;
-            font-weight: 600;
-            padding: 14px 28px;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 39, 38, 0.2);
-            transition: all 0.3s ease;
-        }
-        .hero-button:hover {
-            background-color: var(--color-accent-green-hover);
-            box-shadow: 0 4px 12px rgba(0, 39, 38, 0.3);
-            transform: translateY(-2px) scale(1.05);
-        }
-        .hero-button-icon {
-            margin-left: 10px;
-            transition: transform 0.3s ease;
-        }
-        .hero-button:hover .hero-button-icon {
-            transform: translateY(2px);
-        }
-        .hero-image-wrapper {
-            max-width: 560px;
-            width: 100%;
-            aspect-ratio: 560 / 360;
-            position: relative;
+            flex-direction: column;
             overflow: hidden;
-            border-radius: var(--radius-lg);
         }
-        .hero-image {
+
+        .section-workshops .wc-workshop-card:active {
+            cursor: grabbing;
+        }
+
+        .section-workshops .wc-workshop-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section-workshops .wc-workshop-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: var(--radius-lg);
-        }
-        @media (max-width: 768px) {
-            .hero-container { flex-direction: column; text-align: center; }
-            .hero-text { order: 2; }
-            .hero-image-wrapper { order: 1; margin-bottom: 2rem; }
-            .hero-title { font-size: 2rem; }
-            .hero-description { font-size: 1rem; }
+            display: block;
         }
 
-        /* --- TRUSTED BY / LOGO SCROLLER SECTION --- */
-        .trusted-section { padding: 4rem 0; }
-        .trusted-container { width: 90%; margin: 0 auto; max-width: 1280px; }
-        .trusted-section h2 { font-size: 1.3rem; font-weight: 600; margin-bottom: 2rem; color: #444; letter-spacing: 0.3px; text-align: center; }
-        .logo-row { overflow: hidden; white-space: nowrap; margin-bottom: 1.5rem; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
-        .logos { display: inline-block; animation: scroll-left 40s linear infinite; }
-        .logos.reverse { animation: scroll-right 40s linear infinite; }
-        .logos img { width: 110px; height: 50px; object-fit: contain; margin: 0 24px; vertical-align: middle; transition: transform 0.3s ease, opacity 0.3s ease; filter: grayscale(100%) brightness(0.9); }
-        .logos img:hover { transform: scale(1.05); filter: grayscale(0%) brightness(1); }
-        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-        @media (max-width: 768px) {
-            .trusted-section h2 { font-size: 1.1rem; }
-            .logos img { width: 80px; margin: 0 16px; }
+        .section-workshops .wc-custom-button {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            padding: 10px 0;
+            width: 130px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
-        
-        /* --- WORKSHOPS SECTION --- */
-        .section-workshops { padding: 4rem 0; background-color: var(--color-background-light); }
-        .workshops-container { width: 100%; margin: 0 auto; }
-        .workshops-header { padding: 0 5%; margin-bottom: 2rem; max-width: 1280px; margin-left: auto; margin-right: auto; }
-        .workshops-header-title { color: var(--color-dark-teal); font-size: 1.125rem; font-weight: 500; text-transform: uppercase; }
-        .workshops-header-subtitle { color: var(--color-text-heading); font-size: 2rem; font-weight: 600; }
-        .wc-scrollable-container { display: flex; gap: 20px; padding: 16px 5%; user-select: none; overflow-x: auto; scrollbar-width: none; }
-        .wc-scrollable-container::-webkit-scrollbar { display: none; }
-        .wc-workshop-card { width: 320px; flex: 0 0 auto; cursor: grab; background-color: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--color-border-subtle); display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-soft); transition: all var(--transition-default); }
-        .wc-workshop-card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(46, 60, 90, 0.1); }
-        .wc-workshop-card:active { cursor: grabbing; }
-        .wc-workshop-image { height: 200px; overflow: hidden; }
-        .wc-workshop-image img { width: 100%; height: 100%; object-fit: cover; }
-        .wc-workshop-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .wc-workshop-title { font-size: 1.25rem; font-weight: 600; color: var(--color-text-heading); margin-bottom: 0.5rem; }
-        .wc-workshop-subtitle { font-size: 1rem; color: var(--color-text-body); margin-bottom: 1rem; }
-        .wc-workshop-details { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
-        .wc-detail-item { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 500; color: var(--color-dark-teal); }
-        .wc-detail-item svg { width: 20px; height: 20px; }
-        .wc-workshop-buttons { display: flex; gap: 1rem; margin-top: auto; }
-        .wc-nav-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
-        .wc-nav-button { background-color: var(--color-dark-teal); color: var(--color-white); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease; border: none; }
-        .wc-nav-button:hover { background-color: var(--color-teal-hover); }
 
-        /* --- WHY CHOOSE US SECTION --- */
-        #business-section { width: 100%; max-width: 1280px; margin: 4rem auto; padding: 0 5%; }
-        .why-choose-title { font-size: 2rem; font-weight: 700; color: var(--color-text-heading); margin-bottom: 2.5rem; text-align: center; }
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-        .benefit-card { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background-color: #FFFFFF; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); transition: all var(--transition-default); border: 1px solid var(--color-border-subtle); }
-        .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07); }
-        .benefit-icon { flex-shrink: 0; width: 4rem; height: 4rem; border-radius: var(--radius-md); background-color: #e0f2f1; display: flex; align-items: center; justify-content: center; }
-        .benefit-icon img { width: 2.25rem; height: 2.25rem; object-fit: contain; }
-        .benefit-content h4 { font-size: 1.125rem; font-weight: 600; color: var(--color-text-heading); margin-bottom: 0.3rem; }
-        .benefit-content p { color: var(--color-text-body); font-size: 0.938rem; line-height: 1.5; margin: 0; }
-        .card-hidden { opacity: 0; transform: translateY(20px); }
-        .card-visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
-
-        /* --- TEXT SCROLL ANIMATION --- */
-        #lbx_animated_section { width: 90%; max-width: 1200px; margin: 4rem auto; display: flex; justify-content: center; }
-        #lbx_text { font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; display: flex; gap: clamp(0.5rem, 2vw, 1rem); }
-        #lbx_text span { color: #ccc; transition: color 0.2s ease; }
-        
-        /* --- PROMO BANNER --- */
-        .banner-wrapper { padding: 4rem 5%; }
-        .promo-banner-link:hover .promo-banner { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transform: scale(1.01); }
-        .promo-banner { width: 100%; max-width: 1024px; margin: 0 auto; height: auto; background: var(--color-dark-teal); border-radius: var(--radius-lg); display: flex; align-items: center; padding: 2rem; transition: all var(--transition-default); }
-        .promo-content { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-        .promo-text { color: var(--color-white); }
-        .promo-text h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .promo-text p { font-size: 1.125rem; opacity: 0.9; }
-        .promo-text .arrow { color: var(--color-accent-green); transition: transform 0.3s; display: inline-block; }
-        .promo-banner-link:hover .arrow { transform: translateX(5px); }
-        .promo-image img { height: 135px; width: auto; }
-        @media (max-width: 768px) {
-            .promo-banner { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
-            .promo-image { order: -1; margin-bottom: 1.5rem; }
-            .promo-image img { height: 100px; }
-            .promo-text h1 { font-size: 1.5rem; }
+        .section-workshops .wc-custom-button:hover {
+            background-color: #024a47;
         }
-        
-        /* --- FOOTER --- */
-        .main-footer { width: 100%; background-color: var(--color-dark-teal); color: var(--color-white); padding: 4rem 0; font-family: var(--font-sans); }
-        .footer-container { width: 90%; max-width: 1280px; margin: 0 auto; }
-        .footer-top { display: flex; flex-direction: column; md:flex-direction: row; gap: 2.5rem; md:gap: 5rem; margin-bottom: 3rem; }
-        .footer-about { md:width: 40%; }
-        .footer-logo { margin-bottom: 2rem; }
-        .footer-logo img { height: 3rem; md:height: 4.5rem; width: auto; }
-        .footer-socials { display: flex; gap: 1.5rem; }
-        .footer-socials a:hover { opacity: 0.8; }
-        .footer-socials img { width: 2.5rem; height: 2.5rem; }
-        .footer-newsletter { md:width: 60%; md:max-width: 28rem; margin-left: auto; }
-        .footer-newsletter h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem; }
-        .footer-newsletter p { color: #ccc; margin-bottom: 1rem; font-size: 0.875rem; }
-        .newsletter-form { display: flex; flex-direction: column; sm:flex-direction: row; gap: 0.75rem; }
-        .newsletter-form input { flex-grow: 1; padding: 0.75rem 1rem; border-radius: var(--radius-md); background-color: #0B3837; border: 1px solid #1A4544; color: var(--color-white); outline: none; }
-        .newsletter-form button { padding: 0.75rem 1.5rem; background-color: var(--color-accent-green); color: var(--color-dark-teal); font-weight: 500; border-radius: var(--radius-md); transition: background-color var(--transition-default); border: none; cursor: pointer; }
-        .newsletter-form button:hover { background-color: var(--color-accent-green-hover); }
-        .footer-divider { width: 100%; height: 1px; background-color: #1A4544; margin: 2.5rem 0; }
-        .footer-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); md:grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3.5rem; }
-        .footer-column h4 { font-size: 1.125rem; font-weight: 500; margin-bottom: 1.25rem; }
-        .footer-column ul { list-style: none; space-y: 0.75rem; }
-        .footer-column a { color: #ccc; transition: color var(--transition-default); }
-        .footer-column a:hover { color: var(--color-white); }
-        .footer-bottom { display: flex; flex-direction: column; md:flex-direction: row; justify-content: space-between; align-items: center; font-size: 0.875rem; color: #aaa; gap: 1rem; }
-        .footer-bottom-links { display: flex; flex-wrap: wrap; gap: 1rem; md:gap: 1.5rem; }
-        .footer-bottom-links a:hover { color: var(--color-white); }
-        
-        /* --- POPUP --- */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); z-index: 1000; display: none; }
-        .popup-container { background: white; border-radius: 20px; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15); width: 400px; max-width: 90%; position: fixed; top: 50%; left: 50%; z-index: 1001; display: none; opacity: 0; transform: translate(-50%, -50%) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .popup-container.active { opacity: 1; transform: translate(-50%, -50%) scale(1); display: block; }
-        .popup-content { padding: 32px; position: relative; }
-        .close-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #5f6368; transition: all 0.3s ease; line-height: 1; padding: 4px; }
-        .close-btn:hover { color: #202124; transform: rotate(90deg); }
-        .popup-content h2 { font-size: 1.75rem; font-weight: 600; color: #202124; margin-bottom: 24px; }
-        .popup-content .description { font-size: 1rem; color: #5f6368; margin-bottom: 32px; }
-        .google-btn { display: flex; align-items: center; justify-content: center; gap: 16px; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 14px; width: 100%; font-size: 1rem; font-weight: 500; color: #202124; }
-        .google-btn:hover { background: #f8f9fa; border-color: #c4c7cc; }
-        .google-btn img { width: 24px; height: 24px; }
-        
+
+        .section-workshops .wc-scrollable-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            padding: 16px 16px 16px 150px;
+            user-select: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .section-workshops .wc-scrollable-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .section-workshops .wc-nav-button {
+            background-color: var(--color-dark-teal);
+            color: var(--color-white);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+Newsletter
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .section-workshops .wc-nav-button:hover {
+            background-color: #024a47;
+        }
+
+        .section-workshops .wc-flex {
+            display: flex;
+        }
+
+        .section-workshops .wc-flex-col {
+            flex-direction: column;
+        }
+
+        .section-workshops .wc-flex-grow {
+            flex-grow: 1;
+        }
+
+        .section-workshops .wc-justify-center {
+            justify-content: center;
+        }
+
+        .section-workshops .wc-items-center {
+            align-items: center;
+        }
+
+        .section-workshops .wc-gap-2 {
+            gap: 0.5rem;
+        }
+
+        .section-workshops .wc-gap-4 {
+            gap: 1rem;
+        }
+
+        .section-workshops .wc-mt-auto {
+            margin-top: auto;
+        }
+
+        .section-workshops .wc-mt-4 {
+            margin-top: 1rem;
+        }
+
+        .section-workshops .wc-mb-12 {
+            margin-bottom: 1rem;
+            padding-left: 150px;
+        }
+
+        .section-workshops .wc-font-semibold {
+            font-weight: 600;
+        }
+
+        .section-workshops .wc-font-normal {
+            font-weight: 400;
+        }
+
+        .section-workshops .wc-font-medium {
+            font-weight: 500;
+        }
+
+        .section-workshops .wc-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-dark-teal);
+        }
+
+        .section-workshops .wc-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-dark-teal);
+        }
+
+        .section-workshops .wc-header-title {
+            color: var(--color-dark-teal);
+            font-size: 1.125rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section-workshops .wc-header-subtitle {
+            color: var(--color-dark-teal);
+            font-size: 1.75rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section-workshops .wc-duration-price {
+            margin-bottom: 0.75rem;
+        }
+
+        .section-workshops .wc-price {
+            margin-bottom: 1rem;
+        }
+
+        .section-workshops .wc-duration-price .wc-duration-text {
+            font-size: 1.25rem;
+            color: var(--color-dark-teal);
+        }
+
+        .section-workshops .wc-price .wc-price-text {
+            font-size: 1.25rem;
+            color: var(--color-dark-teal);
+        }
+
+        .section-workshops .wc-p-6 {
+            padding: 1rem;
+        }
+
+        /* Tablet (768px - 1023px) */
+        @media (max-width: 1023px) {
+            .section-workshops .wc-workshop-card {
+                width: 300px;
+                height: 420px;
+            }
+
+            .section-workshops .wc-workshop-image {
+                height: 220px;
+            }
+
+            .section-workshops .wc-custom-button {
+                width: 120px;
+                font-size: 1rem;
+                padding: 10px 0;
+            }
+
+            .section-workshops .wc-scrollable-container {
+                flex-direction: row;
+                gap: 16px;
+                padding: 14px;
+            }
+
+            .section-workshops .wc-mb-12 {
+                padding-left: 16px;
+            }
+
+            .section-workshops .wc-nav-button {
+                width: 44px;
+                height: 44px;
+            }
+
+            .section-workshops .wc-title {
+                font-size: 1.25rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-subtitle {
+                font-size: 0.875rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .section-workshops .wc-header-title {
+                font-size: 0.875rem;
+            }
+
+            .section-workshops .wc-header-subtitle {
+                font-size: 2rem;
+            }
+
+            .section-workshops .wc-duration-price {
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-price {
+                margin-bottom: 0.75rem;
+            }
+
+            .section-workshops .wc-duration-price .wc-duration-text {
+                font-size: 1.125rem;
+            }
+
+            .section-workshops .wc-price .wc-price-text {
+                font-size: 1.125rem;
+            }
+
+            .section-workshops .wc-p-6 {
+                padding: 0.875rem;
+            }
+        }
+
+        /* Mobile (375px - 767px) */
+        @media (max-width: 767px) {
+            .section-workshops .wc-workshop-card {
+                width: 260px;
+                height: 380px;
+            }
+
+            .section-workshops .wc-workshop-image {
+                height: 220px;
+            }
+
+            .section-workshops .wc-custom-button {
+                width: 100px;
+                font-size: 0.875rem;
+                padding: 8px 0;
+            }
+
+            .section-workshops .wc-scrollable-container {
+                flex-direction: row;
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .section-workshops .wc-mb-12 {
+                padding-left: 20px;
+            }
+
+            .section-workshops .wc-nav-button {
+                width: 40px;
+                height: 40px;
+            }
+
+            .section-workshops .wc-title {
+                font-size: 1.125rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-subtitle {
+                font-size: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .section-workshops .wc-header-title {
+                font-size: 0.875rem;
+            }
+
+            .section-workshops .wc-header-subtitle {
+                font-size: 1.75rem;
+            }
+
+            .section-workshops .wc-duration-price {
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-price {
+                margin-bottom: 0.75rem;
+            }
+
+            .section-workshops .wc-duration-price .wc-duration-text {
+                font-size: 1rem;
+            }
+
+            .section-workshops .wc-price .wc-price-text {
+                font-size: 1rem;
+            }
+
+            .section-workshops .wc-p-6 {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Small-screen mobile (< 375px) */
+        @media (max-width: 374px) {
+            .section-workshops .wc-workshop-card {
+                width: 220px;
+                height: 330px;
+            }
+
+            .section-workshops .wc-workshop-image {
+                height: 200px;
+            }
+
+            .section-workshops .wc-custom-button {
+                width: 90px;
+                font-size: 0.75rem;
+                padding: 6px 0;
+            }
+
+            .section-workshops .wc-scrollable-container {
+                flex-direction: row;
+                gap: 8px;
+                padding: 20px;
+            }
+
+            .section-workshops .wc-mb-12 {
+                padding-left: 20px;
+            }
+
+            .section-workshops .wc-nav-button {
+                width: 36px;
+                height: 36px;
+            }
+
+            .section-workshops .wc-title {
+                font-size: 1rem;
+                margin-bottom: 0.375rem;
+            }
+
+            .section-workshops .wc-subtitle {
+                font-size: 0.675rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-header-title {
+                font-size: 0.875rem;
+            }
+
+            .section-workshops .wc-header-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .section-workshops .wc-duration-price {
+                margin-bottom: 0.375rem;
+            }
+
+            .section-workshops .wc-price {
+                margin-bottom: 0.5rem;
+            }
+
+            .section-workshops .wc-duration-price .wc-duration-text {
+                font-size: 0.875rem;
+            }
+
+            .section-workshops .wc-price .wc-price-text {
+                font-size: 0.875rem;
+            }
+
+            .section-workshops .wc-p-6 {
+                padding: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-container">
-            <nav class="nav">
-                <div class="nav-left">
-                    <a href="/">
-                        <img class="logo" src="assets/logo.jpg" alt="Syncskill Logo">
-                    </a>
-                    <div class="nav-links">
-                        <button id="learningPathsBtn" class="nav-link-btn">
-                            <span>Learning Paths</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
+    <div class="section-workshops wc-container">
+        <div class="wc-mb-12">
+            <h2 class="wc-header-title">
+                <span class="wc-header-title-text">EXPLORE YOUR POSSIBILITIES</span>
+            </h2>
+            <h3 class="wc-header-subtitle">
+                <span class="wc-header-subtitle-text">Your Industry, Your Path</span>
+            </h3>
+        </div>
+        <div class="wc-scrollable-container" id="scrollableContainer">
+            <!-- Card 1 -->
+            <div class="wc-workshop-card wc-card-1">
+                <div class="wc-workshop-image">
+                    <img 
+                        alt="Generative AI Marketing Mastermind" 
+                        loading="lazy" 
+                        decoding="async" 
+                        class="wc-image" 
+                        src="https://d3kl8zsmmx4oop.cloudfront.net/Digital_Marketing_1_8685ca0861_33723a1767.webp"
+                    >
                 </div>
-                <div class="nav-right">
-                    <div class="auth-buttons">
-                        <a class="auth-button secondary" href="/pages/verify/login.html">Log in</a>
-                        <a class="auth-button primary" href="/pages/verify/signup.html">Join Free</a>
-                    </div>
-                    <button class="menu-button" id="mobileMenuButton">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                <div class="wc-p-6 wc-flex wc-flex-col wc-flex-grow">
+                    <h2 class="wc-font-semibold wc-title">
+                        <span class="wc-title-text">Generative AI Marketing Mastermind</span>
+                    </h2>
+                    <h3 class="wc-font-normal wc-subtitle">
+                        <span class="wc-subtitle-text">Learn the Basics of Digital Marketing in One Day</span>
+                    </h3>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-duration-price">
+                        <svg class="wc-duration-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="var(--color-dark-teal)" stroke-width="2"></path>
+                            <path d="M12 6V12L15 15" stroke="var(--color-dark-teal)" stroke-width="2" stroke-linecap="round"></path>
                         </svg>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- MEGA MENU (Desktop) -->
-    <div id="megaMenu">
-        <div class="mega-menu-content">
-            <div class="mega-menu-section">
-                <h3>Career Accelerators</h3>
-                <ul class="mega-menu-list">
-                    <li>
-                        <a href="#" class="mega-menu-item">
-                            <div class="mega-menu-item-icon career">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            </div>
-                            <div>
-                                <div class="mega-menu-item-title">Data Science Pro</div>
-                                <div class="mega-menu-item-description">12 Courses · 98 Hours</div>
-                            </div>
-                        </a>
-                    </li>
-                     <li>
-                        <a href="#" class="mega-menu-item">
-                            <div class="mega-menu-item-icon career">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                            </div>
-                            <div>
-                                <div class="mega-menu-item-title">AI & ML Foundation</div>
-                                <div class="mega-menu-item-description">8 Courses · 64 Hours</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="mega-menu-section">
-                <h3>Certifications</h3>
-                <ul class="mega-menu-list">
-                    <li>
-                        <a href="#" class="mega-menu-item">
-                            <div class="mega-menu-item-icon certification">
-                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div>
-                                <div class="mega-menu-item-title">Cloud Architect</div>
-                                <div class="mega-menu-item-description">AWS · Azure · GCP</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div id="featured-program">
-                <span class="label">FEATURED PROGRAM</span>
-                <h3 class="title">GenAI Mastery</h3>
-                <p class="description">Master LLMs, Diffusion Models, and Production Deployment</p>
-                <button class="cta-button">Explore Program</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MOBILE MENU -->
-    <div id="mobileMenu">
-        <button id="mobileMenuClose">
-            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-        <div class="mobile-menu-content">
-            <div class="mobile-menu-group">
-                <h3 class="mobile-menu-header" onclick="(function(c, b){ c.classList.toggle('active'); b.classList.toggle('active'); })(this, this.nextElementSibling)">
-                    <span>Popular Courses</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </h3>
-                <div class="mobile-menu-list">
-                    <!-- Mobile menu items here -->
-                </div>
-            </div>
-        </div>
-        <div class="mobile-menu-auth">
-            <div class="mobile-menu-auth-buttons">
-                <a class="auth-button secondary" href="/pages/verify/login.html">Log in</a>
-                <a class="auth-button primary" href="/pages/verify/signup.html">Join Free</a>
-            </div>
-        </div>
-    </div>
-    <div id="menuOverlay"></div>
-
-
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-text">
-                <h1 class="hero-title">Become Top 1% in the AI-First World</h1>
-                <p class="hero-description">Whether it's Product, Growth, Design, Business, Tech, or Data, Syncskill is the place to learn from top experts and join the elite.</p>
-                <button class="hero-button">
-                  Explore Programs
-                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" class="hero-button-icon">
-                    <path d="M1 7.11108L6 12L11 7.11108" stroke="#012726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M1 1L6 5.88889L11 1" stroke="#012726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
-                </button>
-            </div>
-            <div class="hero-image-wrapper">
-                <img src="https://ihtnas.com/assets/paper.webp" alt="Innovative technology solutions" class="hero-image" loading="eager">
-            </div>
-        </div>
-    </section>
-    
-    <!-- TRUSTED BY SECTION -->
-    <section class="trusted-section">
-        <div class="trusted-container">
-            <h2>Trusted by Professionals From</h2>
-            <div class="logo-row">
-                <div class="logos">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Microsoft">
-                    <!-- Repeat logos for seamless scroll -->
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Microsoft">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Microsoft">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Google_c2d8e527c7.svg" alt="Google">
-                    <img src="https://d3kl8zsmmx4oop.cloudfront.net/Mask_group_4_f997505a34.png" alt="Microsoft">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WORKSHOPS SECTION -->
-    <section class="section-workshops">
-        <div class="workshops-container">
-            <div class="workshops-header">
-                <h3 class="workshops-header-title">EXPLORE YOUR POSSIBILITIES</h3>
-                <h2 class="workshops-header-subtitle">Your Industry, Your Path</h2>
-            </div>
-            <div class="wc-scrollable-container" id="scrollableContainer">
-                <!-- Workshop Card 1 -->
-                <div class="wc-workshop-card">
-                    <div class="wc-workshop-image"><img src="https://d3kl8zsmmx4oop.cloudfront.net/Digital_Marketing_1_8685ca0861_33723a1767.webp" alt="Generative AI Marketing"></div>
-                    <div class="wc-workshop-content">
-                        <h2 class="wc-workshop-title">Generative AI Marketing Mastermind</h2>
-                        <h3 class="wc-workshop-subtitle">Learn the Basics of Digital Marketing in One Day</h3>
-                        <div class="wc-workshop-details">
-                            <div class="wc-detail-item">
-                                <svg viewBox="0 0 24 24" fill="none"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="currentColor" stroke-width="2"></path><path d="M12 6V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
-                                <span>2 Days</span>
-                            </div>
-                            <div class="wc-detail-item">
-                                <svg viewBox="0 0 24 24" fill="none"><text x="12" y="16" font-size="20" font-weight="bold" text-anchor="middle" fill="currentColor">₹</text></svg>
-                                <span>499</span>
-                            </div>
-                        </div>
-                        <div class="wc-workshop-buttons">
-                            <a class="auth-button secondary openPopup">Syllabus</a>
-                            <a class="auth-button primary openPopup">Know More</a>
-                        </div>
+                        <span class="wc-font-medium wc-duration-text">2 Days</span>
                     </div>
-                </div>
-                <!-- Add more cards as needed -->
-            </div>
-            <div class="wc-nav-controls">
-                <button id="wc-scrollLeft" class="wc-nav-button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"/></svg></button>
-                <button id="wc-scrollRight" class="wc-nav-button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2"/></svg></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US SECTION -->
-    <section id="business-section">
-        <h3 class="why-choose-title">Why Choose Syncskill?</h3>
-        <div class="benefits-grid">
-            <div class="benefit-card card-hidden">
-                <div class="benefit-icon"><img alt="Self-paced" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg"></div>
-                <div class="benefit-content"><h4>Self-Paced Learning</h4><p>Learn at your own pace with flexible, high-quality video content.</p></div>
-            </div>
-            <div class="benefit-card card-hidden">
-                <div class="benefit-icon"><img alt="Mentor" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg"></div>
-                <div class="benefit-content"><h4>Mentor Support</h4><p>Get personalized guidance with dedicated mentor office hours.</p></div>
-            </div>
-            <div class="benefit-card card-hidden">
-                <div class="benefit-icon"><img alt="Projects" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg"></div>
-                <div class="benefit-content"><h4>Project-Based Learning</h4><p>Achieve real-world results with hands-on projects.</p></div>
-            </div>
-            <div class="benefit-card card-hidden">
-                <div class="benefit-icon"><img alt="Community" src="https://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg"></div>
-                <div class="benefit-content"><h4>Vibrant Community</h4><p>Connect with a network of over 1000+ learners.</p></div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- LEARN GROW EXCEL SECTION -->
-    <section id="lbx_animated_section">
-        <p id="lbx_text">
-            <span>LEARN</span>
-            <span>GROW</span>
-            <span>EXCEL</span>
-        </p>
-    </section>
-    
-    <!-- PROMO BANNER -->
-    <div class="banner-wrapper">
-        <a href="#" class="promo-banner-link">
-            <div class="promo-banner">
-                <div class="promo-content">
-                    <div class="promo-text">
-                        <h1>Still Unsure?</h1>
-                        <p>Find your next Career Move <span class="arrow">→</span></p>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-price">
+                        <svg class="wc-price-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="12" y="16" font-size="20" font-weight="bold" text-anchor="middle" fill="var(--color-dark-teal)" font-family="var(--font-ibm-plex-sans)">₹</text>
+                        </svg>
+                        <span class="wc-font-medium wc-price-text">499</span>
                     </div>
-                    <div class="promo-image">
-                        <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/footgs.svg" alt="Career Move" />
+                    <div class="wc-flex wc-justify-center wc-gap-4 wc-mt-auto">
+                      <a  class="wc-custom-button wc-syllabus-button openPopup">Syllabus</a>
+                      <a  class="wc-custom-button wc-know-more-button openPopup">Know More</a>
+                    </div>
+  
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="wc-workshop-card wc-card-2">
+                <div class="wc-workshop-image">
+                    <img 
+                        alt="Generative AI Marketing Mastermind" 
+                        loading="lazy" 
+                        decoding="async" 
+                        class="wc-image" 
+                        src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/work2.png"
+                    >
+                </div>
+                <div class="wc-p-6 wc-flex wc-flex-col wc-flex-grow">
+                    <h2 class="wc-font-semibold wc-title">
+                        <span class="wc-title-text">Generative AI Marketing Mastermind</span>
+                    </h2>
+                    <h3 class="wc-font-normal wc-subtitle">
+                        <span class="wc-subtitle-text">Learn the Basics of Digital Marketing in One Day</span>
+                    </h3>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-duration-price">
+                        <svg class="wc-duration-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="var(--color-dark-teal)" stroke-width="2"></path>
+                            <path d="M12 6V12L15 15" stroke="var(--color-dark-teal)" stroke-width="2" stroke-linecap="round"></path>
+                        </svg>
+                        <span class="wc-font-medium wc-duration-text">2 Days</span>
+                    </div>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-price">
+                        <svg class="wc-price-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="12" y="16" font-size="20" font-weight="bold" text-anchor="middle" fill="var(--color-dark-teal)" font-family="var(--font-ibm-plex-sans)">₹</text>
+                        </svg>
+                        <span class="wc-font-medium wc-price-text">499</span>
+                    </div>
+                    <div class="wc-flex wc-justify-center wc-gap-4 wc-mt-auto">
+                      <a  class="wc-custom-button wc-syllabus-button openPopup">Syllabus</a>
+                      <a  class="wc-custom-button wc-know-more-button openPopup">Know More</a>
                     </div>
                 </div>
             </div>
-        </a>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-about">
-                    <div class="footer-logo"><img src="assets/logoo.jpg" alt="Syncskill Logo"></div>
-                    <div class="footer-socials">
-                        <!-- Add social links here -->
+            <!-- Card 3 -->
+            <div class="wc-workshop-card wc-card-3">
+                <div class="wc-workshop-image">
+                    <img 
+                        alt="Generative AI Marketing Mastermind" 
+                        loading="lazy" 
+                        decoding="async" 
+                        class="wc-image" 
+                        src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/work2.png"
+                    >
+                </div>
+                <div class="wc-p-6 wc-flex wc-flex-col wc-flex-grow">
+                    <h2 class="wc-font-semibold wc-title">
+                        <span class="wc-title-text">Generative AI Marketing Mastermind</span>
+                    </h2>
+                    <h3 class="wc-font-normal wc-subtitle">
+                        <span class="wc-subtitle-text">Learn the Basics of Digital Marketing in One Day</span>
+                    </h3>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-duration-price">
+                        <svg class="wc-duration-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="var(--color-dark-teal)" stroke-width="2"></path>
+                            <path d="M12 6V12L15 15" stroke="var(--color-dark-teal)" stroke-width="2" stroke-linecap="round"></path>
+                        </svg>
+                        <span class="wc-font-medium wc-duration-text">2 Days</span>
                     </div>
-                </div>
-                <div class="footer-newsletter">
-                    <h3>Stay Ahead of the Curve ✨</h3>
-                    <p>Be the first to know about new courses, workshops, and exclusive offers.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-divider"></div>
-            <div class="footer-links-grid">
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Policies</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">Become an Instructor</a></li>
-                        <li><a href="#">Free Courses</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Help Center</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-divider"></div>
-            <div class="footer-bottom">
-                <div>© 2025 SyncSkill</div>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms & Conditions</a>
+                    <div class="wc-flex wc-items-center wc-gap-2 wc-price">
+                        <svg class="wc-price-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="12" y="16" font-size="20" font-weight="bold" text-anchor="middle" fill="var(--color-dark-teal)" font-family="var(--font-ibm-plex-sans)">₹</text>
+                        </svg>
+                        <span class="wc-font-medium wc-price-text">499</span>
+                    </div>
+                    <div class="wc-flex wc-justify-center wc-gap-4 wc-mt-auto">
+                      <a  class="wc-custom-button wc-syllabus-button openPopup">Syllabus</a>
+                      <a  class="wc-custom-button wc-know-more-button openPopup">Know More</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
-    
-    <!-- POPUP -->
-    <div class="overlay"></div>
-    <div class="popup-container">
-        <div class="popup-content">
-            <button class="close-btn" onclick="closePopup()">×</button>
-            <h2>Login to View Course</h2>
-            <p class="description">Sign in with your account to unlock exclusive course content.</p>
-            <button class="google-btn" id="loginBtn">
-                <img src="https://www.google.com/favicon.ico" alt="Google Icon">
-                <span class="btn-text">Click to Signin</span>
+        <div class="wc-flex wc-justify-center wc-gap-4 wc-mt-4">
+            <button id="wc-scrollLeft" class="wc-nav-button wc-scroll-left">
+                <svg class="wc-nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="var(--color-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button id="wc-scrollRight" class="wc-nav-button wc-scroll-right">
+                <svg class="wc-nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="var(--color-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
         </div>
     </div>
 
-<script>
-    // --- HEADER SCRIPT ---
-    document.addEventListener('DOMContentLoaded', () => {
-        const learningPathsBtn = document.getElementById('learningPathsBtn');
-        const megaMenu = document.getElementById('megaMenu');
-        const chevron = learningPathsBtn.querySelector('svg');
-        let isMenuOpen = false;
-
-        function showMegaMenu() {
-            megaMenu.classList.add('active');
-            learningPathsBtn.classList.add('active');
-            chevron.style.transform = 'rotate(180deg)';
-            isMenuOpen = true;
-        }
-
-        function hideMegaMenu() {
-            megaMenu.classList.remove('active');
-            learningPathsBtn.classList.remove('active');
-            chevron.style.transform = 'rotate(0deg)';
-            isMenuOpen = false;
-        }
-
-        learningPathsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isMenuOpen ? hideMegaMenu() : showMegaMenu();
-        });
-
-        document.addEventListener('click', (e) => {
-            if (isMenuOpen && !megaMenu.contains(e.target)) {
-                hideMegaMenu();
-            }
-        });
-
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        function toggleMobileMenu(show) {
-            if(show) {
-                mobileMenu.classList.add('active');
-                menuOverlay.classList.add('active');
-            } else {
-                mobileMenu.classList.remove('active');
-                menuOverlay.classList.remove('active');
-            }
-        }
-
-        mobileMenuButton.addEventListener('click', () => toggleMobileMenu(true));
-        mobileMenuClose.addEventListener('click', () => toggleMobileMenu(false));
-        menuOverlay.addEventListener('click', () => toggleMobileMenu(false));
-    });
-
-    // --- WORKSHOP SCROLLER SCRIPT ---
-    (function() {
+    <script>
         const container = document.getElementById('scrollableContainer');
-        if (!container) return;
-        let isDragging = false, startX, scrollLeft;
+        let isDragging = false;
+        let startX, startY;
+        let scrollLeft;
 
         container.addEventListener('mousedown', (e) => {
             isDragging = true;
@@ -809,36 +2107,638 @@
             container.style.cursor = 'grabbing';
         });
 
-        ['mouseleave', 'mouseup'].forEach(event => 
-            container.addEventListener(event, () => {
-                isDragging = false;
-                container.style.cursor = 'grab';
-            })
-        );
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+        });
 
         container.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
             e.preventDefault();
             const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 1.5; // multiplier for faster scroll
+            const walk = (x - startX) * 0.5;
             container.scrollLeft = scrollLeft - walk;
         });
 
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - container.offsetLeft;
+            startY = e.touches[0].pageY;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - container.offsetLeft;
+            const y = e.touches[0].pageY;
+            const deltaX = Math.abs(x - startX);
+            const deltaY = Math.abs(y - startY);
+
+            if (deltaX > deltaY) {
+                e.preventDefault();
+                const walk = (x - startX) * 1.5;
+                container.scrollLeft = scrollLeft - walk;
+            }
+        });
+
         document.getElementById('wc-scrollLeft').addEventListener('click', () => {
-            container.scrollBy({ left: -340, behavior: 'smooth' });
+            container.scrollBy({ left: -320, behavior: 'smooth' });
         });
 
         document.getElementById('wc-scrollRight').addEventListener('click', () => {
-            container.scrollBy({ left: 340, behavior: 'smooth' });
+            container.scrollBy({ left: 320, behavior: 'smooth' });
         });
-    })();
+    </script>
+</body>
+</html>
+
+ <div style="width: 100%; height: 0.5px; background-color: #E0E0E0; margin: 16px 0;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-    // --- WHY CHOOSE US SCROLL EFFECT ---
-    (function() {
-        const cards = document.querySelectorAll('.benefit-card');
-        if(cards.length === 0) return;
-        
-        const observer = new IntersectionObserver((entries) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="banner-wrapper">
+  <a href="https://d31bwppm8yl9g2.cloudfront.net/learner/website/footgs.svg" class="promo-banner-link">
+    <div class="promo-banner">
+      <div class="promo-content">
+        <div class="promo-text">
+          <h1>Still Unsure?</h1>
+          <p>Find your next Career Move <span class="arrow">→</span></p>
+        </div>
+        <div class="promo-image">
+          <img src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/footgs.sg" alt="Demo" />
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+<STYLE>
+  /* RESET DEFAULT MARGINS/PADDING */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* WRAPPER PADDING */
+.banner-wrapper {
+  padding-left: 150px;
+  padding-right: 150px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+/* MOBILE WRAPPER PADDING */
+@media (max-width: 768px) {
+  .banner-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/* MAKE BANNER CLICKABLE */
+.promo-banner-link {
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.promo-banner-link:hover .promo-banner {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transform: scale(1.01);
+}
+
+/* MAIN BANNER */
+.promo-banner {
+  width: 100%;
+  max-width: 948px;
+  height: 202px;
+  background: linear-gradient(to right, rgb(0, 10, 38), rgb(1, 45, 152));
+  border-radius: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* FLEX LAYOUT */
+.promo-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* TEXT SECTION */
+.promo-text {
+  margin-left: 56px;
+  text-align: left;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.promo-text h1 {
+  font-size: 29px;
+  line-height: 34px;
+  margin: 0;
+  padding: 0;
+}
+
+.promo-text p {
+  font-size: 14px;
+  line-height: 19px;
+  margin: 12px 0 0 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.promo-text .arrow {
+  color: #2acc71;
+  font-size: 16px;   /* Slightly increased */
+  line-height: 22px;
+  margin-left: 6px;
+}
+
+/* IMAGE SECTION */
+.promo-image {
+  margin-right: 56px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-image img {
+  height: 135px;
+  width: auto;
+}
+
+/* ✅ MOBILE-SPECIFIC STYLES */
+@media (max-width: 768px) {
+  .promo-banner {
+    height: 120px;            /* Shrunk from 160px */
+    border-radius: 18px;      /* Reduced for less pill-like appearance */
+  }
+
+  .promo-text {
+    margin-left: 16px;
+  }
+
+  .promo-text h1 {
+    font-size: 15px;
+    line-height: 18px;
+  }
+
+  .promo-text p {
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .promo-text .arrow {
+    font-size: 20px;         /* Increased slightly from 8px */
+    line-height: 14px;
+    margin-left: 4px;
+  }
+
+  .promo-image {
+    margin-right: 16px;
+  }
+
+  .promo-image img {
+    height: 60px;            /* Smaller image on mobile */
+  }
+}
+
+</STYLE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="business-section">
+    <!-- Why Learn Section -->
+    <div class="section-content">
+        <h3 class="why-choose-title animate-fadeInUp">Why Choose Syncskill?</h3>
+        <div class="benefits-grid">
+            <div class="benefit-card-1 card-hidden">
+                <div class="icon-self-paced">
+                    <img alt="Self-paced video content" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Movie_e70fcd3f84.svg" style="color: transparent;">
+                </div>
+                <div class="content-self-paced">
+                    <h4>Self-Paced Learning</h4>
+                    <p>Learn at your own pace with flexible, high-quality video content.</p>
+                </div>
+            </div>
+            <div class="benefit-card-2 card-hidden">
+                <div class="icon-mentor">
+                    <img alt="Office hours with Mentors" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Target_c6f22015fa.svg" style="color: transparent;">
+                </div>
+                <div class="content-mentor">
+                    <h4>Mentor Support</h4>
+                    <p>Get personalized guidance with dedicated mentor office hours.</p>
+                </div>
+            </div>
+            <div class="benefit-card-3 card-hidden">
+                <div class="icon-project">
+                    <img alt="Project driven approach" src="https://d3kl8zsmmx4oop.cloudfront.net/si_Copy_alt_6d34ac6c00.svg" style="color: transparent;">
+                </div>
+                <div class="content-project">
+                    <h4>Project-Based Learning</h4>
+                    <p>Achieve real-world results with hands-on projects.</p>
+                </div>
+            </div>
+            <div class="benefit-card-4 card-hidden">
+                <div class="icon-community">
+                    <img alt="Access to network" src="https U://d3kl8zsmmx4oop.cloudfront.net/si_User_alt_cc0bd5ef2f.svg" style="color: transparent;">
+                </div>
+                <div class="content-community">
+                    <h4>Vibrant Community</h4>
+                    <p>Connect with a network of over 1000+ learners.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+/* Section styles */
+#business-section {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+    background-color: #fffaf1;
+    box-sizing: border-box;
+}
+
+/* Why Learn Section */
+.section-content {
+    margin-bottom: 2.5rem;
+}
+
+.why-choose-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 2rem;
+    text-align: left;
+    letter-spacing: -0.025em;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.why-choose-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    border-radius: 2px;
+}
+
+@media (min-width: 640px) {
+    .why-choose-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+    .why-choose-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Grid layout */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .benefits-grid {
+        gap: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Card styles */
+.benefit-card-1, .benefit-card-2, .benefit-card-3, .benefit-card-4 {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid #E5E7EB;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card-1::before, .benefit-card-2::before, .benefit-card-3::before, .benefit-card-4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.benefit-card-1.active, .benefit-card-1:hover,
+.benefit-card-2.active, .benefit-card-2:hover,
+.benefit-card-3.active, .benefit-card-3:hover,
+.benefit-card-4.active, .benefit-card-4:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(79, 70, 229, 0.5);
+}
+
+.benefit-card-1:hover::before, .benefit-card-2:hover::before, .benefit-card-3:hover::before, .benefit-card-4:hover::before {
+    opacity: 0.03;
+}
+
+.card-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Icon container styles */
+.icon-self-paced, .icon-mentor, .icon-project, .icon-community {
+    flex-shrink: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.75rem;
+    background-color: #EEF2FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-card-1:hover .icon-self-paced,
+.benefit-card-2:hover .icon-mentor,
+.benefit-card-3:hover .icon-project,
+.benefit-card-4:hover .icon-community {
+    background-color: #E0E7FF;
+    transform: scale(1.05);
+}
+
+.icon-self-paced img, .icon-mentor img, .icon-project img, .icon-community img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card-1:hover .icon-self-paced img,
+.benefit-card-2:hover .icon-mentor img,
+.benefit-card-3:hover .icon-project img,
+.benefit-card-4:hover .icon-community img {
+    transform: scale(1.1);
+}
+
+@media (min-width: 640px) {
+    .icon-self-paced, .icon-mentor, .icon-project, .icon-community {
+        width: 4rem;
+        height: 4rem;
+    }
+    .icon-self-paced img, .icon-mentor img, .icon-project img, .icon-community img {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
+/* Card text styles */
+.content-self-paced, .content-mentor, .content-project, .content-community {
+    position: relative;
+    z-index: 1;
+}
+
+.content-self-paced h4, .content-mentor h4, .content-project h4, .content-community h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.benefit-card-1:hover .content-self-paced h4,
+.benefit-card-2:hover .content-mentor h4,
+.benefit-card-3:hover .content-project h4,
+.benefit-card-4:hover .content-community h4 {
+    color: #4f46e5;
+}
+
+.content-self-paced p, .content-mentor p, .content-project p, .content-community p {
+    color: #6B7280;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.benefit-card-1:hover .content-self-paced p,
+.benefit-card-2:hover .content-mentor p,
+.benefit-card-3:hover .content-project p,
+.benefit-card-4:hover .content-community p {
+    color: #4B5563;
+}
+
+@media (min-width: 640px) {
+    .content-self-paced h4, .content-mentor h4, .content-project h4, .content-community h4 {
+        font-size: 1.25rem;
+    }
+    .content-self-paced p, .content-mentor p, .content-project p, .content-community p {
+        font-size: 0.938rem;
+    }
+}
+
+/* Animation for title */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Responsive padding */
+@media (min-width: 768px) {
+    #business-section {
+        padding: 4.5rem 1.5rem;
+    }
+    .benefit-card-1, .benefit-card-2, .benefit-card-3, .benefit-card-4 {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    #business-section {
+        padding: 6.5rem 2rem;
+    }
+    .why-choose-title {
+        margin-bottom: 3rem;
+    }
+}
+
+/* Section subtitle (if used) */
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.125rem;
+    color: #4B5563;
+    line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+    .section-subtitle {
+        font-size: 1.25rem;
+    }
+}
+</style>
+<script>
+  // Enhanced scroll effect with staggered animations
+function initScrollEffect() {
+    const cards = document.querySelectorAll('.benefit-card-1, .benefit-card-2, .benefit-card-3, .benefit-card-4');
+
+    // Reset card states
+    cards.forEach((card, index) => {
+        card.classList.remove('active', 'card-visible');
+        card.classList.add('card-hidden');
+        card.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Intersection Observer for visibility with staggered effect
+    const observer = new IntersectionObserver(
+        (entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
@@ -847,78 +2747,748 @@
                     }, index * 100);
                 }
             });
-        }, { threshold: 0.15 });
-
-        cards.forEach(card => observer.observe(card));
-    })();
-    
-    // --- LEARN GROW EXCEL SCROLL EFFECT ---
-    (function() {
-        const section = document.getElementById('lbx_animated_section');
-        const p = document.getElementById('lbx_text');
-        if(!section || !p) return;
-        
-        const spans = Array.from(p.querySelectorAll('span'));
-        const total = spans.length;
-        let startOffset, endOffset;
-
-        function updateOffsets() {
-            const vh = window.innerHeight;
-            const h = section.offsetHeight;
-            startOffset = vh / 2;
-            endOffset = (vh / 2) - h;
+        },
+        {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15,
         }
-        updateOffsets();
-        window.addEventListener('resize', updateOffsets, { passive: true });
+    );
 
-        function onScroll() {
-            const rect = section.getBoundingClientRect();
-            let prog = (startOffset - rect.top) / (startOffset - endOffset);
-            prog = Math.min(Math.max(prog, 0), 1);
-            const count = Math.floor(prog * total);
-            spans.forEach((span, i) => {
-                span.style.color = i < count ? 'var(--color-accent-green)' : '#ccc';
-            });
+    // Observe each card
+    cards.forEach((card) => observer.observe(card));
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', initScrollEffect);
+
+// Re-run on window resize
+window.addEventListener('resize', initScrollEffect);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="lbx_animated_section">
+        <p id="lbx_text">
+            <span>LEARN</span>
+            <span>GROW</span>
+            <span>EXCEL</span>
+        </p>
+    </section>
+    <style>
+        #lbx_animated_section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: clamp(0.75rem, 2vw, 1.5rem);
+            font-family: 'IBM Plex Sans', sans-serif;
+            display: flex;
+            justify-content: center;
         }
 
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                ticking = true;
-                requestAnimationFrame(() => {
-                    onScroll();
-                    ticking = false;
+        #lbx_text {
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.4;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            hyphens: auto;
+            letter-spacing: -0.02em;
+            word-spacing: 0.05em;
+            display: flex;
+            flex-direction: row;
+            gap: clamp(0.5rem, 2vw, 1rem);
+        }
+
+        #lbx_text span {
+            color: #000;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+            display: inline-block;
+            padding-left: 0;
+            margin-right: 0.25em;
+        }
+
+        /* Tablet (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            #lbx_text {
+                font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+                font-weight: 700;
+                gap: clamp(0.4rem, 1.5vw, 0.8rem);
+            }
+        }
+
+        /* Mobile (max-width: 768px) */
+        @media (max-width: 768px) {
+            #lbx_text {
+                font-size: clamp(2.5rem, 5.5vw, 4rem);
+                font-weight: 700;
+                gap: clamp(0.3rem, 1.2vw, 0.6rem);
+            }
+        }
+
+        /* Small Mobile (max-width: 480px) */
+        @media (max-width: 480px) {
+            #lbx_text {
+                font-size: clamp(1.50rem, 4.0vw, 4.0rem);
+                font-weight: 700;
+                gap: clamp(0.2rem, 1vw, 0.4rem);
+            }
+        }
+    </style>
+    <script>
+        (function() {
+            const section = document.getElementById('lbx_animated_section');
+            const p = document.getElementById('lbx_text');
+            const spans = Array.from(p.querySelectorAll('span'));
+            const total = spans.length;
+
+            let startOffset, endOffset;
+            function updateOffsets() {
+                const vh = window.innerHeight;
+                const h = section.offsetHeight;
+                startOffset = vh / 2;
+                endOffset = (vh / 2) - h;
+            }
+            updateOffsets();
+            window.addEventListener('resize', updateOffsets);
+
+            function onScroll() {
+                const rect = section.getBoundingClientRect();
+                let prog = (startOffset - rect.top) / (startOffset - endOffset);
+                prog = Math.min(Math.max(prog, 0), 1);
+                const count = Math.floor(prog * total);
+                spans.forEach((span, i) => {
+                    span.style.color = i < count ? '#ff0000' : '#000';
                 });
             }
-        }, { passive: true });
-        onScroll();
-    })();
 
-    // --- POPUP SCRIPT ---
-    const openBtns = document.querySelectorAll('.openPopup');
-    const overlay = document.querySelector('.overlay');
-    const popup = document.querySelector('.popup-container');
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(() => {
+                        onScroll();
+                        ticking = false;
+                    });
+                }
+            });
 
-    function showPopup() {
-        overlay.style.display = 'block';
-        popup.style.display = 'block';
-        setTimeout(() => popup.classList.add('active'), 10);
+            onScroll();
+        })();
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="fotter-padding">
+
+
+    <footer class="aquilla-footer footer css-lt94f6">
+      <div class="aquilla-gridcontainer gridcontainer css-13i3ch5">
+        <div class="aquilla-griditem griditem css-18w0bx7">
+          <div class="css-jxgq5w">
+            <img src="assets/logoo.jpg"
+            alt="Syncskill" loading="lazy" class=
+            "css-1owqn1u">
+            <div class=
+            "p2_variant aquilla-typography typography css-66jn11">
+            Empowering every Student with real-world experience. Join the revolution—launch your future on India's leading platform.
+            </div>
+          </div>
+          <hr class="css-lm9dzg">
+          <div class="css-194ohqz">
+            <h5 class=
+            "h5_variant aquilla-typography typography css-jbioe5">
+            Reach out to us</h5>
+            <p class=
+            "p2_variant aquilla-typography typography css-66jn11">
+            Get your questions answered about learning with
+            Sync.</p><a href="tel:+91%207799181716" class=
+            "css-1f7ozwz">
+            <svg class="css-a1vwta" fill="none" xmlns=
+            "http://www.w3.org/2000/svg" width="18" height="18"
+            viewbox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d=
+            "M10.0479 14.2293C8.87792 13.0593 7.99592 11.7493 7.40992 10.4203C7.28592 10.1393 7.35892 9.81032 7.57592 9.59332L8.39492 8.77432C9.06592 8.10332 9.06592 7.15432 8.47992 6.56832L7.30592 5.39532C6.52492 4.61432 5.25892 4.61432 4.47792 5.39532L3.82592 6.04632C3.08492 6.78732 2.77592 7.85632 2.97592 8.91632C3.46992 11.5293 4.98792 14.3903 7.43692 16.8393C9.88592 19.2883 12.7469 20.8063 15.3599 21.3003C16.4199 21.5003 17.4889 21.1913 18.2299 20.4503L18.8809 19.7993C19.6619 19.0183 19.6619 17.7523 18.8809 16.9713L17.7079 15.7983C17.1219 15.2123 16.1719 15.2123 15.5869 15.7983L14.6839 16.7023C14.4669 16.9193 14.1379 16.9923 13.8569 16.8683C12.5279 16.2813 11.2179 15.3983 10.0479 14.2293Z"
+            stroke="currentcolor" stroke-width="1.125"
+            stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12.9198 5.53043V3.19043" stroke=
+            "currentcolor" stroke-width="1.125" stroke-linecap=
+            "round" stroke-linejoin="round"></path>
+            <path d="M17.0897 7.18053L18.7397 5.54053" stroke=
+            "currentcolor" stroke-width="1.125" stroke-linecap=
+            "round" stroke-linejoin="round"></path>
+            <path d="M18.7499 11.3604H21.0799" stroke=
+            "currentcolor" stroke-width="1.125" stroke-linecap=
+            "round" stroke-linejoin="round"></path></svg> 
+            <div class=
+            "h5_variant aquilla-typography typography css-1uhb9xi">
+            Call +91 7799181716
+            </div></a>
+          </div>
+        </div>
+        <div class="aquilla-griditem griditem css-612a3e">
+          <div class="css-1k6cs3k">
+            <h5 class=
+            "h5_variant aquilla-typography typography css-bshnsn">
+            Company & Support</h5>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/about" rel="" target="_blank">About Us</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/careers" rel="" target="_blank">Careers</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/contact" rel=
+              "noopener noreferrer" target="_blank">Contact Us</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/faq" rel="" target="_blank">FAQs</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/partnership" rel="" target="_blank">Partnership Program</a>
+            </div>
+          </div>
+          <div class="css-1k6cs3k">
+            <h5 class=
+            "h5_variant aquilla-typography typography css-bshnsn">
+           Policies & Legal</h5>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/privacy-policy" rel="" target="_blank">Privacy Policy</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/terms-and-conditions.html" rel="" target="_blank">Terms & Conditions</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/refund-policy" rel="" target="_blank">Refund Policy</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/user-agreement" rel="" target="_blank">User Agreements</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/cookie-policy" rel="" target="_blank">Cookie Policy</a>
+            </div>
+          </div>
+            <div class="css-1k6cs3k">
+            <h5 class=
+            "h5_variant aquilla-typography typography css-bshnsn">
+           Resources</h5>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/become-instructor" rel="" target="_blank">Become an Instructor</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/free-courses" rel="" target="_blank">Free Courses</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/#" rel="" target="_blank">Learning Resources</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/social-links" rel="" target="_blank">Social Links</a>
+            </div>
+            <div class="css-1gygzac">
+              <a class="css-wcnz4c-StyledAnchor e1hrbfz00" href=
+              "/pages/footer/#" rel="" target="_blank">Student Success Stories</a>
+            </div>
+          </div>   
+        </div>
+      </div>
+      <hr class="css-nf35w8">
+      <div class="css-wxpek7">
+        <div class="css-12au0dw">
+          <div class=
+          "p2_variant aquilla-typography typography css-1lbru7d">
+             <!-- -->2025<!-- --> SyncSkill
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+<!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Popup Container -->
+  <div class="popup-container">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closePopup()">×</button>
+      <h2>Login to View Course</h2>
+      <p class="description">Sign in with your account to unlock exclusive course content.</p>
+       
+      <!-- Updated button with spinner -->
+      <button class="google-btn" id="loginBtn">
+        <img src="https://www.google.com/favicon.ico" alt="Google Icon">
+        <span class="btn-text" style="color: black;">Click to Signin</span>
+        <div class="loading-spinner"></div>
+      </button>
+      
+      <!-- Status message container -->
+      <div id="status"></div>
+    </div>
+  </div>
+<style>
+    
+
+    #openPopup {
+      padding: 14px 28px;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    function closePopup() {
-        popup.classList.remove('active');
-        setTimeout(() => {
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
-        }, 300);
+    #openPopup:hover {
+      background: #1557b0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
-    openBtns.forEach(btn => btn.addEventListener('click', showPopup));
-    overlay.addEventListener('click', closePopup);
-    document.getElementById('loginBtn').addEventListener('click', () => {
-        window.location.href = "/pages/verify/login.html";
-    });
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+    }
 
+    .popup-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+      width: 400px;
+      max-width: 90%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 101;
+      display: none;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .popup-container.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      display: block;
+    }
+
+    .popup-content {
+      padding: 32px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #5f6368;
+      transition: all 0.3s ease;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .close-btn:hover {
+      color: #202124;
+      transform: rotate(90deg);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #202124;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #5f6368;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #202124;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .google-btn:hover {
+      background: #f8f9fa;
+      border-color: #c4c7cc;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .google-btn img {
+      width: 24px;
+      height: 24px;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .popup-container {
+        width: 90%;
+      }
+      
+      .popup-content {
+        padding: 24px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 0.875rem;
+        margin-bottom: 24px;
+      }
+
+      .google-btn {
+        padding: 12px;
+        font-size: 0.875rem;
+      }
+
+      .close-btn {
+        top: 16px;
+        right: 16px;
+        font-size: 24px;
+      }
+    }
+     /* Add these new styles for spinner and status messages */
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      position: absolute;
+    }
+
+    #status {
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    #status.visible {
+      display: block;
+    }
+
+    #status.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #a5d6a7;
+    }
+
+    #status.error {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #ef9a9a;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+
+<script>
+  // Handle popup opening/closing (keep this part)
+  const openBtns = document.querySelectorAll('.openPopup');
+  const overlay = document.querySelector('.overlay');
+  const popup = document.querySelector('.popup-container');
+
+  openBtns.forEach(btn => btn.addEventListener('click', showPopup));
+  overlay.addEventListener('click', closePopup);
+
+  function showPopup() {
+    overlay.style.display = 'block';
+    popup.style.display = 'block';
+    setTimeout(() => popup.classList.add('active'), 10);
+  }
+
+  function closePopup() {
+    popup.classList.remove('active');
+    setTimeout(() => {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    }, 300);
+  }
+
+  // 🚀 Redirect to login page when clicking Sign in button
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    window.location.href = "/pages/verify/login.html"; // Change this to your actual login page
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CHECK USER SIGNIN -->
+    <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvqzYTaepJn-WvWMPSZJe26Ydkw-7MXLE",
+    authDomain: "syncskilll.firebaseapp.com",
+    projectId: "syncskilll",
+    storageBucket: "syncskilll.firebasestorage.app",
+    messagingSenderId: "203322315096",
+    appId: "1:203322315096:web:958fc7d94806ef9a98552d",
+    measurementId: "G-JWWWM2ZQSK"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Auto-redirect if user is signed in
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, redirect to user.html
+      window.location.href = 'user.html';
+    } else {
+      // Optional: if you only want to redirect signed-in users
+      console.log("No user is signed in.");
+    }
+  });
 </script>
 </body>
 </html>
