@@ -51,14 +51,15 @@
 
         /* Marquee Effect Styling */
         .marquee-wrapper {
-            perspective: 1200px; /* A higher value makes the 3D effect more pronounced */
+            perspective: 1500px; /* A higher value is better for extreme rotations */
             width: 100%;
-            padding: 10vh 0;
+            padding: 20vh 0; /* More vertical space to see the full effect */
         }
 
         .marquee-inner {
             transform-style: preserve-3d;
             /* The transform is now fully controlled by JavaScript */
+            will-change: transform, opacity; /* Performance optimization */
         }
 
         .marquee {
@@ -113,7 +114,7 @@
 
 <div class="content-section">
     <h1>Scroll Down</h1>
-    <p>The marquee starts flat, tilts into view, and then straightens out as it reaches the center. It will stay straight after that.</p>
+    <p>The marquee starts "sleeping" (tilted flat) and will "stand up" as you scroll. Once it's straight, it will stay straight.</p>
     <div class="arrow">↓</div>
 </div>
 
@@ -127,16 +128,12 @@
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a101c0f1368d96e0b4c_vector_Store_Pinecone_svg_53b9355d44.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a056b782256dbbb14c0_Group_f538a48daf.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f6a68fbe0cbedc9ca2ddb3_mailchimp_svg_574c2a4641.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7ce9b227a3194696e89_automizy_png_6c4c2ae7c0.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cd45de65d9d01bbec5_agile_Crm_png_ab0a6823a4.svg" alt="Logo"></span>
                 <!-- Duplicate Row 1 -->
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a0637fe4700cbc94571_Vector_1_70ecbab421.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a05be2624ab9ba447bb_my_Sql_svg_d9740ad4f9.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a101c0f1368d96e0b4c_vector_Store_Pinecone_svg_53b9355d44.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f57a056b782256dbbb14c0_Group_f538a48daf.png" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f6a68fbe0cbedc9ca2ddb3_mailchimp_svg_574c2a4641.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7ce9b227a3194696e89_automizy_png_6c4c2ae7c0.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cd45de65d9d01bbec5_agile_Crm_png_ab0a6823a4.svg" alt="Logo"></span>
             </div>
         </div>
         <div class="marquee reverse">
@@ -147,16 +144,12 @@
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cdc905e0766217414a_ai_Transform_svg_295de265a2.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cc51d72b9903df9fde_amqp_svg_ebc4c3b32a.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cc7710ca11e9ff79c3_affinity_svg_bfb77106bf.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cdeb6560b7c1ec0f6a_asana_svg_55712e4bc0.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66e3d729c77b48f5c03da73d_Group_2_58ad425d58.svg" alt="Logo"></span>
                 <!-- Duplicate Row 2 -->
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cdeb6560b7c1ec0fc4_airtable_svg_3260e9a572.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cc8fbc5fb41664b4ba_aggregate_svg_920d36c8b1.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cdc905e0766217414a_ai_Transform_svg_295de265a2.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cc51d72b9903df9fde_amqp_svg_ebc4c3b32a.svg" alt="Logo"></span>
                 <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cc7710ca11e9ff79c3_affinity_svg_bfb77106bf.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66f4d7cdeb6560b7c1ec0f6a_asana_svg_55712e4bc0.svg" alt="Logo"></span>
-                <span class="marquee-item"><img src="https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-prod/assets/66e3d729c77b48f5c03da73d_Group_2_58ad425d58.svg" alt="Logo"></span>
             </div>
         </div>
     </div>
@@ -172,61 +165,69 @@
         const marqueeInner = document.querySelector('.marquee-inner');
         const marqueeWrapper = document.querySelector('.marquee-wrapper');
 
-        // Maximum rotation values for the tilt effect
-        const maxRotateX = 25; // Increased for a more noticeable effect
-        const maxRotateY = 8;
+        const maxRotateX = 80; // Start almost flat ("sleeping")
+        const maxRotateY = 5;  
         
-        let hasStraightened = false; // Flag to make the effect one-way
+        let hasStraightened = false;
+        let ticking = false;
 
         const updateMarqueeTransform = () => {
             if (hasStraightened) {
-                // If it has straightened once, keep it straight forever.
-                marqueeInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                marqueeInner.style.opacity = 1;
+                ticking = false;
                 return;
             }
 
             const rect = marqueeWrapper.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
             
-            // Define the scroll zone where the animation happens
-            const animationStartPoint = viewportHeight; // Starts when the top of the element hits the bottom of the viewport
-            const animationEndPoint = viewportHeight / 2; // Ends when the top of the element hits the center of the viewport
-            const animationMidPoint = (animationStartPoint + animationEndPoint) / 2; // The point of maximum tilt
+            // Define the point where the marquee should be perfectly straight.
+            // Let's make it a bit above the center for a better feel.
+            const straightPoint = viewportHeight * 0.45;
 
+            // Define when the animation starts.
+            const animationStartPoint = viewportHeight;
+
+            // Calculate the total distance over which the animation will occur.
+            const animationDistance = animationStartPoint - straightPoint;
+            
             const elementTop = rect.top;
-            let progress = 0;
 
-            if (elementTop <= animationStartPoint && elementTop > animationMidPoint) {
-                // First half of the animation: from flat (0) to max tilt (1)
-                progress = (animationStartPoint - elementTop) / (animationStartPoint - animationMidPoint);
-            } else if (elementTop <= animationMidPoint && elementTop > animationEndPoint) {
-                // Second half of the animation: from max tilt (1) back to flat (0)
-                progress = 1 - ((animationMidPoint - elementTop) / (animationMidPoint - animationEndPoint));
-            } else if (elementTop <= animationEndPoint) {
-                // Once it passes the end point, lock it to straight
-                progress = 0;
-                hasStraightened = true; // Set the flag
+            // Check if the element has scrolled past the straight point.
+            if (elementTop < straightPoint) {
+                hasStraightened = true;
+                marqueeInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                marqueeInner.style.opacity = 1;
+                ticking = false;
+                return;
             }
 
-            // Ensure progress is always between 0 and 1
+            // Calculate progress from 0 (start) to 1 (end).
+            let progress = (animationStartPoint - elementTop) / animationDistance;
             progress = Math.max(0, Math.min(1, progress));
 
-            // Calculate current rotation. When progress is 0, rotation is 0. When progress is 1, rotation is max.
-            const currentRotateX = progress * maxRotateX;
-            const currentRotateY = progress * maxRotateY;
+            // Interpolate values from max rotation down to 0.
+            // This creates the "standing up" effect.
+            const currentRotateX = maxRotateX * (1 - progress);
+            const currentRotateY = maxRotateY * (1 - progress);
+            
+            // Fade in as it straightens up.
+            const currentOpacity = 0.3 + (0.7 * progress);
 
-            // Opacity can also be tied to the animation
-            const currentOpacity = 0.7 + (progress * 0.3);
-
-            // Apply the transform and opacity
+            // Apply the transform and opacity.
             marqueeInner.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
             marqueeInner.style.opacity = currentOpacity;
+            
+            ticking = false;
         };
 
-        window.addEventListener('scroll', updateMarqueeTransform, { passive: true });
-        
-        // Run once on load to set the initial state (which should be flat)
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateMarqueeTransform);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Run once on load to set the initial tilted state.
         updateMarqueeTransform();
     });
 </script>
