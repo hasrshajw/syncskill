@@ -1079,7 +1079,8 @@
             function getOrdersCollectionRef() {
                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 // IMPORTANT: Changed to public path for shared data
-                return collection(db, `artifacts/${appId}/public/data/upvc_orders`);
+                // The rules should match this path: match /upvc_orders/{document=**}
+                return collection(db, `upvc_orders`); // Changed to top-level collection
             }
 
             let unsubscribe;
