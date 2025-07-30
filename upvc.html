@@ -190,6 +190,9 @@
             gap: 1rem;
             align-items: center; /* Vertically align items */
         }
+        @media (min-width: 768px) {
+            .window-entry { grid-template-columns: 1fr 1fr; }
+        }
         .window-entry-header {
             grid-column: span 2; display: flex; justify-content: space-between; align-items: center;
             padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--light-border);
@@ -244,9 +247,7 @@
 
         /* --- 7. MODAL & OVERLAY STYLES --- */
         .modal {
-            display: none; /* Changed to none */
-            position: fixed;
-            z-index: 1000;
+            display: none; position: fixed; z-index: 1000;
             inset: 0; width: 100%; height: 100%;
             background-color: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px);
             align-items: center;
@@ -1001,17 +1002,7 @@
             // --- FIREBASE & CORE LOGIC ---
             async function initializeFirebase() {
                 try {
-                    // ** THIS IS WHERE YOUR FIREBASE CONFIGURATION IS PLACED **
-                    const firebaseConfig = {
-                      apiKey: "AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E", // <-- IMPORTANT: REPLACE WITH YOUR ACTUAL API KEY
-                      authDomain: "harsha-jw.firebaseapp.com",
-                      projectId: "harsha-jw",
-                      storageBucket: "harsha-jw.firebasestorage.app",
-                      messagingSenderId: "471408120499",
-                      appId: "1:471408120499:web:91e61514ad3703ce3b16c6",
-                      measurementId: "G-NBC16X4R1T"
-                    };
-
+                    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
                     const app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
@@ -1022,9 +1013,8 @@
                             await fetchOrCreateUserProfile(user.uid);
                             listenForOrders();
                         } else {
-                            // The original code had a placeholder for a custom token.
-                            // Since we don't have one, we will proceed with anonymous sign-in.
-                            await signInAnonymously(auth);
+                            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                            await (initialAuthToken ? signInWithCustomToken(auth, initialAuthToken) : signInAnonymously(auth));
                         }
                     });
                 } catch (error) {
@@ -1034,30 +1024,26 @@
             }
 
             async function fetchOrCreateUserProfile(userId) {
-                // This value is used in the Firestore path. 'default-app-id' works fine.
-                const appId = 'default-app-id';
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const userProfileRef = doc(db, `artifacts/${appId}/user_profiles`, userId);
                 try {
                     const userDoc = await getDoc(userProfileRef);
                     if (userDoc.exists() && userDoc.data().userName) {
                         currentUserName = userDoc.data().userName;
                     } else {
-                        // Use a custom modal for name input instead of a disruptive prompt
+                        // Use a custom modal for name input instead of prompt
                         await new Promise(resolve => {
                             const namePromptModal = document.createElement('div');
                             namePromptModal.className = 'modal';
-                            namePromptModal.style.display = 'flex'; // Make it visible
                             namePromptModal.innerHTML = `
                                 <div class="modal-content">
                                     <p class="modal-message">Welcome! Please enter your name:</p>
-                                    <div class="input-group">
-                                        <input type="text" id="user-name-input" class="input-field" placeholder=" " required>
-                                        <label for="user-name-input" class="input-label">Your Name</label>
-                                    </div>
+                                    <input type="text" id="user-name-input" class="input-field" placeholder="Your Name" required>
                                     <button id="save-user-name-btn" class="btn-primary" style="margin-top: 1rem; width: 100%;">Save Name</button>
                                 </div>
                             `;
                             document.body.appendChild(namePromptModal);
+                            namePromptModal.style.display = 'flex';
 
                             const userNameInput = namePromptModal.querySelector('#user-name-input');
                             const saveUserNameBtn = namePromptModal.querySelector('#save-user-name-btn');
@@ -1091,8 +1077,7 @@
             }
 
             function getOrdersCollectionRef() {
-                // This must match the variable used in `fetchOrCreateUserProfile`.
-                const appId = 'default-app-id'; 
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 return collection(db, `artifacts/${appId}/users/${currentUserId}/upvc_orders`);
             }
 
@@ -1132,9 +1117,9 @@
                     address: customerAddressInput.value.trim(),
                     mobileNumber: customerMobileInput.value.trim(),
                     dueDate: dueDateInput.value,
-                    windows: JSON.stringify(windowsData), // Storing as a JSON string
-                    updatedAt: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdAt: serverTimestamp(), createdBy: currentUserName })
+                    windows: JSON.stringify(windowsData),
+                    [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
+                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
                 };
 
                 try {
@@ -1154,16 +1139,13 @@
                 }
             }
             
-             const hideConfirmationModal = () => {
-                confirmationModal.style.display = 'none';
-            };
-            
             async function performConfirmedAction() {
                 hideConfirmationModal();
                 showLoading();
 
                 try {
-                    const docRef = doc(getOrdersCollectionRef(), currentAction.id);
+                    const collectionRef = getOrdersCollectionRef();
+                    const docRef = doc(collectionRef, currentAction.id);
                     await currentAction.callback(docRef); // Execute the stored callback
                 } catch (error) {
                     console.error(`Error performing action '${currentAction.type}':`, error);
@@ -1188,15 +1170,14 @@
             orderFilterSelect.addEventListener('change', renderOrderList);
 
             detailEditBtn.addEventListener('click', (e) => {
-                const order = orders.find(o => o.id === e.target.closest('[data-id]').dataset.id);
+                const order = orders.find(o => o.id === e.target.dataset.id);
                 if (order) setupFormForEdit(order);
             });
             
             detailDeleteBtn.addEventListener('click', (e) => {
-                const orderId = e.target.closest('[data-id]').dataset.id;
                 showConfirmationModal(
                     'Are you sure you want to delete this order? This action is permanent.', 
-                    'btn-danger', 'Delete Order', 'delete', orderId,
+                    'btn-danger', 'Delete Order', 'delete', e.target.dataset.id,
                     async (docRef) => {
                         await deleteDoc(docRef);
                         showMessageModal('Order deleted successfully.');
@@ -1206,22 +1187,20 @@
             });
 
             detailCompleteBtn.addEventListener('click', (e) => {
-                const orderId = e.target.closest('[data-id]').dataset.id;
-                const order = orders.find(o => o.id === orderId);
-
-                if (order?.status === 'completed') {
+                const order = orders.find(o => o.id === e.target.dataset.id);
+                if (order?.status === 'completed') { // Added null check for order
                     showConfirmationModal(
                         'This will mark the order as pending again. Are you sure?',
-                        'btn-reopen', 'Reopen Order', 'reopen_to_edit', orderId,
+                        'btn-reopen', 'Reopen Order', 'reopen_to_edit', e.target.dataset.id,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'pending', completedAt: deleteField(), completedBy: deleteField() });
                             showMessageModal('Order has been reopened.');
                         }
                     );
-                } else if (order) {
+                } else if (order) { // Added else if to ensure order is not null
                     showConfirmationModal(
                         'Mark this order as complete?',
-                        'btn-success', 'Mark Complete', 'complete', orderId,
+                        'btn-success', 'Mark Complete', 'complete', e.target.dataset.id,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'completed', completedAt: serverTimestamp(), completedBy: currentUserName });
                             showMessageModal('Order marked as complete!');
@@ -1229,13 +1208,14 @@
                     );
                 } else {
                     showMessageModal('Error: Order details not found for this action.');
+                    console.error("Order not found for complete/reopen action. ID:", e.target.dataset.id);
                 }
             });
 
-            detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.target.closest('[data-id]').dataset.id));
+            detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.target.dataset.id));
             
             messageOkBtn.addEventListener('click', () => messageModal.style.display = 'none');
-            cancelActionBtn.addEventListener('click', hideConfirmationModal);
+            cancelActionBtn.addEventListener('click', () => confirmationModal.style.display = 'none');
             confirmActionBtn.addEventListener('click', performConfirmedAction);
 
             // --- INITIALIZATION ---
