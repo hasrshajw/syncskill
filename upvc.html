@@ -540,7 +540,7 @@
     </div>
     
     <script type="module">
-        // Import Firebase modules directly into this script module
+        // Import Firebase modules directly from CDN
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -1165,6 +1165,52 @@
                     width: entry.querySelector('.window-width-input').value,
                 }));
 
+                // Basic validation for customer name, mobile, address, due date
+                if (!customerNameInput.value.trim()) {
+                    showMessageModal("Customer Name is required.");
+                    hideLoading();
+                    return;
+                }
+                if (!customerAddressInput.value.trim()) {
+                    showMessageModal("Customer Address is required.");
+                    hideLoading();
+                    return;
+                }
+                // Mobile number pattern validation (already in HTML, but double-check here)
+                const mobilePattern = /^[0-9]{10}$/;
+                if (!mobilePattern.test(customerMobileInput.value.trim())) {
+                    showMessageModal("Please enter a valid 10-digit mobile number.");
+                    hideLoading();
+                    return;
+                }
+                if (!dueDateInput.value) {
+                    showMessageModal("Due Date is required.");
+                    hideLoading();
+                    return;
+                }
+
+                // Validate window dimensions
+                let allWindowsValid = true;
+                if (windowsData.length === 0) {
+                    allWindowsValid = false;
+                    showMessageModal("Please add at least one window entry.");
+                    hideLoading();
+                    return;
+                }
+                for (const win of windowsData) {
+                    if (isNaN(parseFloat(win.height)) || parseFloat(win.height) <= 0 ||
+                        isNaN(parseFloat(win.width)) || parseFloat(win.width) <= 0) {
+                        allWindowsValid = false;
+                        showMessageModal("Please ensure all window height and width values are positive numbers.");
+                        hideLoading();
+                        return;
+                    }
+                }
+                if (!allWindowsValid) { // Redundant if checks above return, but good for safety
+                    return;
+                }
+
+
                 const orderData = {
                     name: customerNameInput.value.trim(),
                     address: customerAddressInput.value.trim(),
@@ -1172,7 +1218,7 @@
                     dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
                     [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
+                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName, createdByUid: currentUserId }) // Store createdByUid
                 };
 
                 try {
