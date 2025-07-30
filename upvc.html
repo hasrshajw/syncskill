@@ -74,15 +74,15 @@
             margin: 0;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Align content to the top */
             justify-content: center;
             padding: 1rem;
         }
         .app-container {
             max-width: 72rem; /* 1152px */
             margin: 2rem auto;
-            padding: 1.5rem;
-            width: 100%; /* Ensure it takes full width on small screens */
+            padding: 0;
+            width: 100%;
         }
         h1, h2, h3 { font-weight: 600; color: var(--light-text-primary); margin: 0; }
         h1 { font-size: 1.875rem; line-height: 2.25rem; }
@@ -100,7 +100,7 @@
         /* --- 3. GLOBAL COMPONENTS (Buttons, Tags) --- */
         button, .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            padding: 0.625rem 1.25rem; /* 10px 20px */
+            padding: 0.75rem 1.25rem;
             border-radius: var(--radius-md);
             font-weight: 600; font-size: 0.875rem;
             transition: all 0.2s var(--ease);
@@ -144,10 +144,7 @@
         /* --- 4. LAYOUT & CARDS --- */
         .page-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 2rem;
-        }
-        .page-header-left {
-            display: flex; align-items: center; gap: 1rem;
+            margin-bottom: 2rem; padding: 0 1.5rem;
         }
         .card {
             background-color: var(--light-bg-primary);
@@ -157,7 +154,7 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* --- 5. FORM & INPUT STYLES (with Floating Labels) --- */
+        /* --- 5. FORM & INPUT STYLES --- */
         .form-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media (min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .grid-col-span-2 { grid-column: span 2 / span 2; } }
         
@@ -172,12 +169,11 @@
             position: absolute; top: 1rem; left: 1rem;
             color: var(--light-text-secondary); pointer-events: none;
             transition: all 0.2s var(--ease);
-            background-color: var(--light-bg-primary);
-            padding: 0 0.25rem;
+            background-color: var(--light-bg-primary); padding: 0 0.25rem;
         }
         .input-field:focus + .input-label,
         .input-field:not(:placeholder-shown) + .input-label {
-            top: -0.625rem; font-size: 0.75rem; color: var(--light-text-primary);
+            top: -0.625rem; font-size: 0.75rem; color: var(--color-primary);
         }
         .input-field:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-focus-ring); }
         
@@ -185,13 +181,8 @@
             border: 1px solid var(--light-border); padding: 1.5rem;
             margin-bottom: 1rem; border-radius: var(--radius-md);
             background-color: var(--light-bg-secondary); position: relative;
-            display: grid; /* Use grid for layout */
-            grid-template-columns: 1fr 1fr; /* Two columns for height and width */
-            gap: 1rem;
-            align-items: center; /* Vertically align items */
-        }
-        @media (min-width: 768px) {
-            .window-entry { grid-template-columns: 1fr 1fr; }
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+            align-items: center;
         }
         .window-entry-header {
             grid-column: span 2; display: flex; justify-content: space-between; align-items: center;
@@ -203,18 +194,13 @@
             color: var(--light-text-muted); cursor: pointer; border-radius: 9999px;
             display: flex; align-items: center; justify-content: center;
             transition: color 0.2s, background-color 0.2s;
-            position: absolute; /* Position absolutely within the grid item */
-            top: 0.5rem;
-            right: 0.5rem;
-            z-index: 10; /* Ensure it's above inputs if needed */
+            position: absolute; top: 0.5rem; right: 0.5rem; z-index: 10;
         }
         .remove-window-btn:hover { background-color: var(--light-bg-tertiary); color: var(--color-danger); }
         
         /* --- 6. ORDER LIST & SKELETON LOADER --- */
         .order-list-container {
-            display: flex; /* Changed to flex */
-            flex-direction: column; /* Stack vertically */
-            gap: 1.5rem;
+            display: flex; flex-direction: column; gap: 1.5rem; padding: 0 1rem;
         }
         .order-card {
             background-color: white; border: 1px solid var(--light-border);
@@ -224,6 +210,7 @@
             display: flex; flex-direction: column; gap: 1rem;
         }
         .order-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--light-border-hover); }
+        
         .order-card-header { display: flex; flex-direction: column; gap: 0.25rem; }
         .order-card-customer { font-size: 1.125rem; font-weight: 600; color: var(--light-text-primary); }
         .order-card-mobile { font-size: 0.875rem; color: var(--light-text-secondary); }
@@ -232,12 +219,10 @@
 
         .skeleton-card {
             background-color: var(--light-bg-primary); border: 1px solid var(--light-border);
-            border-radius: var(--radius-md); padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-sm);
         }
         .skeleton {
-            background-color: var(--light-bg-tertiary);
-            border-radius: var(--radius-sm);
+            background-color: var(--light-bg-tertiary); border-radius: var(--radius-sm);
             animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         @keyframes pulse { 50% { opacity: .5; } }
@@ -247,18 +232,16 @@
 
         /* --- 7. MODAL & OVERLAY STYLES --- */
         .modal {
-            display: none; position: fixed; z-index: 1000;
-            inset: 0; width: 100%; height: 100%;
+            display: none; position: fixed; z-index: 1000; inset: 0;
+            width: 100%; height: 100%;
             background-color: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
+            align-items: center; justify-content: center;
             animation: fadeIn 0.3s var(--ease);
         }
         .modal-content {
-            background-color: white; padding: 2rem;
-            border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
-            width: 90%; max-width: 420px; text-align: center;
-            animation: popIn 0.3s var(--ease);
+            background-color: white; padding: 2rem; border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg); width: 90%; max-width: 420px;
+            text-align: center; animation: popIn 0.3s var(--ease);
         }
         .modal-message { font-size: 1.125rem; font-weight: 500; margin-bottom: 1.5rem; color: var(--light-text-primary); }
         .modal-buttons { display: flex; justify-content: center; gap: 1rem; }
@@ -266,9 +249,7 @@
         .loading-overlay {
             position: fixed; inset: 0; width: 100%; height: 100%;
             background-color: rgba(255, 255, 255, 0.9); z-index: 1001;
-            /* Changed to flex to be visible on page load */
-            display: flex; 
-            align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
         .spinner {
             border: 6px solid var(--light-bg-tertiary); border-top: 6px solid var(--color-primary);
@@ -277,43 +258,100 @@
         }
 
         /* --- 8. HISTORY MODAL STYLES --- */
-        .history-item {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-border);
-        }
-        .history-item:last-child {
-            border-bottom: none;
-        }
-        .history-item-meta {
-            font-size: 0.8rem;
-            color: var(--light-text-muted);
-            margin-bottom: 0.25rem;
-        }
-        .history-item-action {
-            font-weight: 500;
-            color: var(--light-text-primary);
-        }
+        .history-item { padding: 1rem; border-bottom: 1px solid var(--light-border); }
+        .history-item:last-child { border-bottom: none; }
+        .history-item-meta { font-size: 0.8rem; color: var(--light-text-muted); margin-bottom: 0.25rem; }
+        .history-item-action { font-weight: 500; color: var(--light-text-primary); }
         .history-detail {
-            font-size: 0.85rem;
-            color: var(--light-text-secondary);
-            padding-left: 1rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem; color: var(--light-text-secondary);
+            padding-left: 1rem; margin-top: 0.5rem;
         }
         
-        /* --- 9. RESPONSIVE ADJUSTMENTS --- */
+        /* --- 9. ADVANCED RESPONSIVE ADJUSTMENTS (MOBILE-FIRST REFINEMENTS) --- */
         @media (max-width: 640px) {
-            .app-container { margin: 0; padding: 1rem; }
-            .page-header { flex-direction: column; gap: 1rem; align-items: stretch; }
-            .card { padding: 1.5rem; }
-            .order-list-container { grid-template-columns: 1fr; }
+            body { padding: 0; background-color: var(--light-bg-primary); }
+            .app-container { margin: 0; padding: 0; }
+            
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+            h3 { font-size: 1.1rem; }
+
+            .page-header {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.5rem;
+                background-color: var(--light-bg-secondary);
+                border-bottom: 1px solid var(--light-border);
+            }
+             .page-header h2 {
+                text-align: left;
+            }
+            .page-header .btn-secondary {
+                width: auto;
+                padding: 0.5rem; /* Make back button smaller */
+            }
+
+            .card {
+                padding: 1.5rem;
+                border-radius: 0; /* Edge-to-edge cards */
+                border-left: 0;
+                border-right: 0;
+                box-shadow: none;
+            }
+            .card:first-of-type { border-top: 0; }
+            
             .modal-content { width: calc(100% - 2rem); }
+            
+            /* Login & Main Menu Specifics */
+            #login-screen, #main-menu { padding: 1.5rem; }
+            #main-menu .card { border-radius: var(--radius-lg); } /* Re-add radius for nested cards */
+            .main-menu-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+             .main-menu-actions .btn {
+                width: 100%;
+            }
+
+            /* Form Specifics */
+            #form-screen .card { padding-top: 0; }
+            .form-grid { grid-template-columns: 1fr; }
+            .window-entry { grid-template-columns: 1fr 1fr; } /* Keep H/W side-by-side */
+            .window-entry-header { grid-column: span 2; }
+             #order-form button[type="submit"] {
+                width: calc(100% - 3rem);
+                position: fixed;
+                bottom: 1.5rem;
+                left: 1.5rem;
+                right: 1.5rem;
+                z-index: 10;
+            }
+             #order-form { padding-bottom: 6rem; } /* Add padding to prevent overlap with fixed button */
+            
+            /* View Orders Specifics */
+            #view-orders-screen .card { margin-bottom: 0; }
+            .order-list-container { padding: 1rem 0; gap: 1rem; background-color: var(--light-bg-secondary); }
+            .order-card { margin: 0 1.5rem; }
+
+
+            /* Order Details Specifics */
+            #detail-info-grid { grid-template-columns: 1fr !important; }
+            .details-action-buttons {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 0.75rem;
+            }
+            .details-action-buttons .btn { width: 100%; margin: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Login Screen (Initial View) - active class removed -->
+        <!-- Login Screen (Initial View) -->
         <div id="login-screen" class="screen text-center">
             <h1 style="margin-bottom: 0.5rem;">Welcome to uPVC Pro</h1>
             <p style="margin-bottom: 2rem; color: var(--light-text-muted);">Sign in to manage your orders.</p>
@@ -329,16 +367,13 @@
             <p style="margin-bottom: 2rem; color: var(--light-text-muted);">
                 Logged in as: <span id="user-id-display" class="font-mono" style="color: var(--color-primary);">Loading...</span>
             </p>
-            <!-- Upcoming & Overdue Orders Summary -->
             <div id="due-date-summary" class="card" style="margin-bottom: 2rem; text-align: left;">
                 <h3 style="margin-bottom: 1rem;">Upcoming & Overdue Orders</h3>
                 <ul id="upcoming-overdue-list" style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                    <!-- Summary items will be rendered here -->
                     <li style="color: var(--light-text-secondary);">No critical orders.</li>
                 </ul>
             </div>
-            
-            <div style="display: flex; justify-content: center; gap: 1rem;">
+            <div class="main-menu-actions">
                 <button id="add-new-btn" class="btn-primary">
                     <span class="material-symbols-outlined">add_circle</span>
                     Add New Order
@@ -354,19 +389,18 @@
             </div>
         </div>
 
-        <!-- Add/Edit Order Screen (Reusable Form) -->
+        <!-- Add/Edit Order Screen -->
         <div id="form-screen" class="screen">
             <div class="page-header">
-                <h2 id="form-title">Create New Order</h2>
-                <button class="back-to-main btn-secondary">
+                 <button class="back-to-main btn-secondary">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    Back
                 </button>
+                <h2 id="form-title">Create New Order</h2>
             </div>
             <div class="card">
                 <form id="order-form">
                     <input type="hidden" id="order-id">
-                    <h3 style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-border);">Customer Information</h3>
+                    <h3 style="margin-top: 1.5rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-border);">Customer Information</h3>
                     <div class="form-grid">
                         <div class="input-group">
                             <input type="text" id="customer-name" class="input-field" placeholder=" " required>
@@ -385,16 +419,12 @@
                             <label for="due-date" class="input-label">Due Date</label>
                         </div>
                     </div>
-
                     <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">Window Details</h3>
-                    <div id="windows-container">
-                        <!-- Window entries will be added here by JS -->
-                    </div>
+                    <div id="windows-container"></div>
                     <button type="button" id="add-window-btn" class="btn-secondary" style="width: 100%; margin: 1rem 0;">
                         <span class="material-symbols-outlined">add</span>
                         Add Another Window
                     </button>
-                    
                     <div style="display: flex; justify-content: flex-end; margin-top: 2rem; border-top: 1px solid var(--light-border); padding-top: 2rem;">
                         <button type="submit" id="save-order-btn" class="btn-success">
                             <span class="material-symbols-outlined">save</span>
@@ -408,18 +438,16 @@
         <!-- View Existing Orders Screen -->
         <div id="view-orders-screen" class="screen">
             <div class="page-header">
-                <h2>All Orders</h2>
                 <button class="back-to-main btn-secondary">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    Back
                 </button>
+                <h2>All Orders</h2>
             </div>
-            
             <div class="card" style="margin-bottom: 1.5rem;">
                 <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <div class="input-group">
                         <input type="text" id="order-search" class="input-field" placeholder=" ">
-                        <label for="order-search" class="input-label">Search by name, address, or mobile...</label>
+                        <label for="order-search" class="input-label">Search by name, mobile, etc...</label>
                     </div>
                     <div class="input-group">
                         <select id="order-filter" class="input-field" style="padding-top: 1rem; padding-bottom: 1rem;">
@@ -429,104 +457,62 @@
                             <option value="overdue">Overdue</option>
                             <option value="upcoming-due">Upcoming Due</option>
                         </select>
-                        <label for="order-filter" class="input-label">Filter by Status</label>
                     </div>
                 </div>
             </div>
-
-            <div id="order-list-container" class="order-list-container">
-                <!-- Order cards or skeleton loaders will be listed here by JS -->
-            </div>
+            <div id="order-list-container" class="order-list-container"></div>
             <div id="order-list-empty" class="text-center" style="display: none; padding: 3rem; background: var(--light-bg-tertiary); border-radius: var(--radius-lg);">
                 <span class="material-symbols-outlined" style="font-size: 3rem; color: var(--light-text-muted);">folder_off</span>
-                <p style="margin-top: 1rem; color: var(--light-text-secondary);">No orders found matching your criteria.</p>
+                <p style="margin-top: 1rem; color: var(--light-text-secondary);">No orders found.</p>
             </div>
         </div>
         
         <!-- Order Details Screen -->
         <div id="order-details-screen" class="screen">
             <div class="page-header">
-                <h2>Order Details</h2>
                 <button class="back-to-view-orders btn-secondary">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    Back
                 </button>
+                 <h2>Order Details</h2>
             </div>
             <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
                     <div>
                         <p id="detail-customer-name" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);"></p>
                         <p id="detail-customer-address" style="color: var(--light-text-secondary);"></p>
                     </div>
-                    <div id="detail-status-tag" class="status-tag"></div>
+                    <div id="detail-status-tag" class="status-tag" style="align-self: flex-start;"></div>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.875rem;">
+                <div id="detail-info-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.875rem;">
                     <p><strong>Mobile:</strong> <span id="detail-customer-mobile"></span></p>
-                    <p><strong>Order Placed:</strong> <span id="detail-order-taken-date"></span></p>
+                    <p><strong>Placed:</strong> <span id="detail-order-taken-date"></span></p>
                     <p><strong>Due Date:</strong> <span id="detail-due-date"></span></p>
                     <p id="detail-completed-date-row" style="display: none;"><strong>Completed:</strong> <span id="detail-completed-date"></span></p>
                     <p id="detail-created-by-row" style="display: none;"><strong>Created By:</strong> <span id="detail-created-by"></span></p>
                     <p id="detail-completed-by-row" style="display: none;"><strong>Completed By:</strong> <span id="detail-completed-by"></span></p>
                 </div>
-
                 <h3 style="margin-bottom: 1rem;">Windows (<span id="detail-window-count"></span>)</h3>
-                <ul id="detail-windows-list" style="list-style-type: none; padding-left: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                    <!-- Window details -->
-                </ul>
-
+                <ul id="detail-windows-list" style="list-style-type: none; padding-left: 0; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.5rem;"></ul>
                 <div style="background: var(--light-bg-secondary); padding: 1rem; border-radius: var(--radius-md); text-align: center; font-weight: 600;">
-                    Total Size - Width: <span id="detail-total-width" style="color: var(--color-primary);"></span> cm, Height: <span id="detail-total-height" style="color: var(--color-primary);"></span> cm
+                    Total Size - W: <span id="detail-total-width" style="color: var(--color-primary);"></span> cm, H: <span id="detail-total-height" style="color: var(--color-primary);"></span> cm
                 </div>
-
-                <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; margin-top: 2rem; border-top: 1px solid var(--light-border); padding-top: 2rem;">
-                    <button id="detail-show-history-btn" class="btn-secondary"><span class="material-symbols-outlined">history</span>Show History</button>
-                    <button id="detail-generate-pdf-btn" class="btn-secondary"><span class="material-symbols-outlined">picture_as_pdf</span>Generate PDF</button>
-                    <button id="detail-delete-btn" class="btn-danger"><span class="material-symbols-outlined">delete</span>Delete</button>
-                    <button id="detail-edit-btn" class="btn-primary"><span class="material-symbols-outlined">edit</span>Edit Order</button>
+                <div class="details-action-buttons" style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; margin-top: 2rem; border-top: 1px solid var(--light-border); padding-top: 2rem;">
                     <button id="detail-complete-btn" class="btn-success"><span class="material-symbols-outlined">check_circle</span>Mark as Complete</button>
+                    <button id="detail-edit-btn" class="btn-primary"><span class="material-symbols-outlined">edit</span>Edit Order</button>
+                    <button id="detail-generate-pdf-btn" class="btn-secondary"><span class="material-symbols-outlined">picture_as_pdf</span>Generate PDF</button>
+                    <button id="detail-show-history-btn" class="btn-secondary"><span class="material-symbols-outlined">history</span>Show History</button>
+                    <button id="detail-delete-btn" class="btn-danger"><span class="material-symbols-outlined">delete</span>Delete</button>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmation-modal" class="modal">
-        <div class="modal-content">
-            <p id="modal-message" class="modal-message"></p>
-            <div class="modal-buttons">
-                <button id="cancel-action-btn" class="btn-secondary">Cancel</button>
-                <button id="confirm-action-btn" class="btn-danger">Confirm</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Custom Message Modal -->
-    <div id="message-modal" class="modal">
-        <div class="modal-content">
-            <p id="message-text" class="modal-message"></p>
-            <button id="message-ok-btn" class="btn-primary" style="min-width: 120px;">OK</button>
-        </div>
-    </div>
-
-    <!-- History Modal -->
-    <div id="history-modal" class="modal">
-        <div class="modal-content" style="max-width: 600px; text-align: left;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h3 id="history-modal-title">Order History</h3>
-                <button id="history-close-btn" class="remove-window-btn" style="position: static; border-radius: 50%;"><span class="material-symbols-outlined">close</span></button>
-            </div>
-            <ul id="history-list" style="list-style-type: none; padding: 0; max-height: 60vh; overflow-y: auto;">
-                <!-- History items will be rendered here -->
-            </ul>
-        </div>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="spinner"></div>
-    </div>
+    <!-- Modals -->
+    <div id="confirmation-modal" class="modal"><div class="modal-content"><p id="modal-message" class="modal-message"></p><div class="modal-buttons"><button id="cancel-action-btn" class="btn-secondary">Cancel</button><button id="confirm-action-btn" class="btn-danger">Confirm</button></div></div></div>
+    <div id="message-modal" class="modal"><div class="modal-content"><p id="message-text" class="modal-message"></p><button id="message-ok-btn" class="btn-primary" style="min-width: 120px;">OK</button></div></div>
+    <div id="history-modal" class="modal"><div class="modal-content" style="max-width: 600px; text-align: left;"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;"><h3 id="history-modal-title">Order History</h3><button id="history-close-btn" class="remove-window-btn" style="position: static; border-radius: 50%;"><span class="material-symbols-outlined">close</span></button></div><ul id="history-list" style="list-style-type: none; padding: 0; max-height: 60vh; overflow-y: auto;"></ul></div></div>
+    <div id="loading-overlay" class="loading-overlay"><div class="spinner"></div></div>
     
     <script type="module">
         // Import Firebase modules directly into this script module
@@ -640,7 +626,6 @@
             const showScreen = (screenToShow) => {
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
                 screenToShow.classList.add('active');
-                // Special handling for main menu to re-render critical alerts
                 if (screenToShow === mainMenuScreen) {
                     populateUpcomingOverdueList();
                 }
@@ -655,7 +640,7 @@
 
             const showSkeletonLoaders = (count = 6) => {
                 orderListContainer.innerHTML = Array(count).fill(createSkeletonCard()).join('');
-                orderListContainer.style.display = 'grid';
+                orderListContainer.style.display = 'flex';
                 orderListEmpty.style.display = 'none';
             };
 
@@ -671,11 +656,9 @@
                         <input type="number" class="window-height-input input-field" value="${height}" min="0.1" step="0.1" placeholder=" " required>
                         <label class="input-label">Height (cm)</label>
                     </div>
-                    <div>
-                        <div class="input-group">
-                            <input type="number" class="window-width-input input-field" value="${width}" min="0.1" step="0.1" placeholder=" " required>
-                            <label class="input-label">Width (cm)</label>
-                        </div>
+                    <div class="input-group">
+                        <input type="number" class="window-width-input input-field" value="${width}" min="0.1" step="0.1" placeholder=" " required>
+                        <label class="input-label">Width (cm)</label>
                     </div>
                 `;
                 container.appendChild(windowEntryDiv);
@@ -731,7 +714,7 @@
                 if (order.status === 'completed') {
                     return { text: 'Completed', className: 'completed' };
                 }
-                const dueDate = order.dueDate ? new Date(order.dueDate + 'T00:00:00') : null; // Ensure date is parsed correctly
+                const dueDate = order.dueDate ? new Date(order.dueDate + 'T00:00:00') : null; 
                 if (dueDate && dueDate < today) {
                     return { text: 'Overdue', className: 'overdue' };
                 }
@@ -758,16 +741,11 @@
 
                     const statusInfo = getStatusInfo(order, today);
                     let matchesFilter = false;
-                    if (filterStatus === 'all') {
-                        matchesFilter = true;
-                    } else if (filterStatus === 'pending') {
-                        matchesFilter = statusInfo.className === 'pending';
-                    } else if (filterStatus === 'completed') {
-                        matchesFilter = statusInfo.className === 'completed';
-                    } else if (filterStatus === 'overdue') {
-                        matchesFilter = statusInfo.className === 'overdue';
-                    } else if (filterStatus === 'upcoming-due') {
-                        matchesFilter = statusInfo.className === 'upcoming-due';
+                    if (filterStatus === 'all') { matchesFilter = true;
+                    } else if (filterStatus === 'pending') { matchesFilter = statusInfo.className === 'pending';
+                    } else if (filterStatus === 'completed') { matchesFilter = statusInfo.className === 'completed';
+                    } else if (filterStatus === 'overdue') { matchesFilter = statusInfo.className === 'overdue';
+                    } else if (filterStatus === 'upcoming-due') { matchesFilter = statusInfo.className === 'upcoming-due';
                     }
                     return matchesSearch && matchesFilter;
                 });
@@ -781,7 +759,6 @@
 
                 orderListEmpty.style.display = 'none';
                 orderListContainer.style.display = 'flex'; 
-                orderListContainer.style.flexDirection = 'column';
 
                 filteredOrders
                     .sort((a, b) => {
@@ -789,13 +766,10 @@
                         const dateB = b.dueDate ? new Date(b.dueDate) : null;
                         const statusA = getStatusInfo(a, today).className;
                         const statusB = getStatusInfo(b, today).className;
-
-                        // Custom sorting logic: Overdue -> Upcoming -> Pending -> Completed
                         const statusOrder = { 'overdue': 1, 'upcoming-due': 2, 'pending': 3, 'completed': 4 };
                         if (statusOrder[statusA] !== statusOrder[statusB]) {
                             return statusOrder[statusA] - statusOrder[statusB];
                         }
-                        // Then by date
                         return (dateA?.getTime() || 0) - (dateB?.getTime() || 0);
                     })
                     .forEach(order => {
@@ -819,7 +793,7 @@
                         orderListContainer.appendChild(card);
                     });
                 
-                populateUpcomingOverdueList(); // Always update critical list based on all orders
+                populateUpcomingOverdueList();
             };
 
             const populateUpcomingOverdueList = () => {
@@ -925,17 +899,14 @@
 
             const generateOrderPdf = (orderId) => {
                 const order = orders.find(o => o.id === orderId);
-                if (!order) { showMessageModal('Order not found for PDF generation.'); return; }
-                
+                if (!order) { showMessageModal('Order not found.'); return; }
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                
                 let yPos = 20, margin = 15, lineHeight = 8;
                 doc.setFont("IBM Plex Sans", "bold").setFontSize(20).text("uPVC Order Confirmation", 105, yPos, { align: 'center' });
                 yPos += lineHeight * 2;
                 doc.setLineWidth(0.5).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
-
                 doc.setFont("IBM Plex Sans", "bold").setFontSize(12).text("Customer:", margin, yPos);
                 doc.setFont("IBM Plex Sans", "normal").text(order.name, margin + 40, yPos);
                 yPos += lineHeight;
@@ -945,41 +916,25 @@
                 doc.setFont("IBM Plex Sans", "bold").text("Mobile:", margin, yPos);
                 doc.setFont("IBM Plex Sans", "normal").text(order.mobileNumber || 'N/A', margin + 40, yPos);
                 yPos += lineHeight * 2;
-
                 doc.setFont("IBM Plex Sans", "bold").text("Order Date:", margin, yPos);
                 doc.setFont("IBM Plex Sans", "normal").text(order.createdAt?.toDate ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
                 doc.setFont("IBM Plex Sans", "bold").text("Due Date:", margin, yPos);
                 doc.setFont("IBM Plex Sans", "normal").text(order.dueDate || 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
-
                 if (order.status === 'completed' && order.completedAt) {
                     doc.setFont("IBM Plex Sans", "bold").text("Completed Date:", margin, yPos);
                     doc.setFont("IBM Plex Sans", "normal").text(new Date(order.completedAt.toDate()).toLocaleDateString(), margin + 40, yPos);
                     yPos += lineHeight;
                 }
-                if (order.createdBy) {
-                    doc.setFont("IBM Plex Sans", "bold").text("Created By:", margin, yPos);
-                    doc.setFont("IBM Plex Sans", "normal").text(order.createdBy, margin + 40, yPos);
-                    yPos += lineHeight;
-                }
-                if (order.completedBy && order.status === 'completed') {
-                    doc.setFont("IBM Plex Sans", "bold").text("Completed By:", margin, yPos);
-                    doc.setFont("IBM Plex Sans", "normal").text(order.completedBy, margin + 40, yPos);
-                    yPos += lineHeight;
-                }
-                yPos += lineHeight; // Extra space before window details
-
+                yPos += lineHeight;
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
-
                 doc.setFont("IBM Plex Sans", "bold").setFontSize(14).text("Window Specifications", margin, yPos);
                 yPos += lineHeight;
-
                 let windowsForPdf = [];
                 if (typeof order.windows === 'string') { try { windowsForPdf = JSON.parse(order.windows); } catch(e){} }
                 else if (Array.isArray(order.windows)) { windowsForPdf = order.windows; }
-                
                 let orderTotalWidth = 0, orderTotalHeight = 0;
                 windowsForPdf.forEach((win, index) => {
                     doc.setFont("IBM Plex Sans", "normal").setFontSize(12);
@@ -991,37 +946,23 @@
                     orderTotalHeight += parseFloat(win.height || 0);
                     if (yPos > 270) { doc.addPage(); yPos = 20; }
                 });
-
                 yPos += lineHeight;
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
-                
                 doc.setFont("IBM Plex Sans", "bold").setFontSize(14);
                 doc.text(`Total Width: ${orderTotalWidth.toFixed(1)} cm`, margin, yPos);
                 yPos += lineHeight;
                 doc.text(`Total Height: ${orderTotalHeight.toFixed(1)} cm`, margin, yPos);
-
                 doc.save(`Order_${order.name.replace(/\s/g, '_')}.pdf`);
             };
 
             // --- FIREBASE & CORE LOGIC ---
             async function initializeFirebase() {
                 try {
-                    // Your web app's Firebase configuration
-                    const firebaseConfig = {
-                        apiKey: "AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E",
-                        authDomain: "harsha-jw.firebaseapp.com",
-                        projectId: "harsha-jw",
-                        storageBucket: "harsha-jw.appspot.com",
-                        messagingSenderId: "471408120499",
-                        appId: "1:471408120499:web:91e61514ad3703ce3b16c6",
-                        measurementId: "G-NBC16X4R1T"
-                    };
-
+                    const firebaseConfig = {"apiKey":"AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E","authDomain":"harsha-jw.firebaseapp.com","projectId":"harsha-jw","storageBucket":"harsha-jw.appspot.com","messagingSenderId":"471408120499","appId":"1:471408120499:web:91e61514ad3703ce3b16c6","measurementId":"G-NBC16X4R1T"};
                     const app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
-                    
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
@@ -1029,21 +970,17 @@
                             listenForOrders();
                             showScreen(mainMenuScreen);
                         } else {
-                            // If no user, clear data and show login screen
                             if(unsubscribe) unsubscribe();
-                            orders = [];
-                            currentUserId = null;
-                            currentUserName = "Unknown User";
+                            orders = []; currentUserId = null; currentUserName = "Unknown User";
                             renderOrderList();
                             populateUpcomingOverdueList();
                             showScreen(loginScreen);
                         }
-                        // Hide the main loading overlay after the auth check is complete
                         hideLoading();
                     });
                 } catch (error) {
                     console.error("Firebase Initialization Error:", error);
-                    showMessageModal("Critical error initializing the application. Please refresh.");
+                    showMessageModal("Critical error initializing application.");
                     hideLoading();
                 }
             }
@@ -1052,18 +989,11 @@
                 showLoading();
                 const provider = new GoogleAuthProvider();
                 try {
-                    const result = await signInWithPopup(auth, provider);
-                    // onAuthStateChanged will handle the UI transition
+                    await signInWithPopup(auth, provider);
                 } catch (error) {
                     console.error("Google Sign-In Error:", error);
-                    if (error.code === 'auth/popup-closed-by-user') {
-                        showMessageModal("Sign-in cancelled. Please try again.");
-                    } else if (error.code === 'auth/cancelled-popup-request') {
-                         showMessageModal("Sign-in already in progress. Please wait.");
-                    } else {
-                        showMessageModal(`Sign-in failed: ${error.message}`);
-                    }
-                    hideLoading(); // Hide loading only on error, as success is handled by onAuthStateChanged
+                    showMessageModal(`Sign-in failed: ${error.message}`);
+                    hideLoading();
                 }
             }
 
@@ -1071,10 +1001,9 @@
                 showLoading();
                 try {
                     await signOut(auth);
-                    // onAuthStateChanged will handle the UI transition
                 } catch (error) {
                     console.error("Sign Out Error:", error);
-                    showMessageModal("Failed to sign out. Please try again.");
+                    showMessageModal("Failed to sign out.");
                     hideLoading();
                 }
             }
@@ -1089,117 +1018,78 @@
                         currentUserName = googleDisplayName || "Anonymous User";
                         await setDoc(userProfileRef, { userName: currentUserName, createdAt: serverTimestamp() }, { merge: true });
                     }
-                } catch (error) {
-                    console.error("User Profile Error:", error);
-                    showMessageModal("Could not load user profile. Please check Firebase security rules for 'user_profiles' collection.");
-                } finally {
-                    userIdDisplay.textContent = currentUserName;
-                }
+                } catch (error) { console.error("User Profile Error:", error);
+                } finally { userIdDisplay.textContent = currentUserName; }
             }
 
-            function getOrdersCollectionRef() {
-                return collection(db, `upvc_orders`);
-            }
+            function getOrdersCollectionRef() { return collection(db, `upvc_orders`); }
 
             async function logHistory(orderId, action, details = {}) {
                 if (!orderId) return;
                 try {
                     const historyCollectionRef = collection(db, `upvc_orders/${orderId}/history`);
-                    await addDoc(historyCollectionRef, {
-                        action,
-                        details,
-                        modifiedBy: currentUserName,
-                        timestamp: serverTimestamp()
-                    });
-                } catch (error) {
-                    console.error("Error logging history:", error);
-                }
+                    await addDoc(historyCollectionRef, { action, details, modifiedBy: currentUserName, timestamp: serverTimestamp() });
+                } catch (error) { console.error("Error logging history:", error); }
             }
 
             let unsubscribe;
             function listenForOrders() {
                 if(unsubscribe) unsubscribe(); 
                 showSkeletonLoaders();
-                if (currentUserId) {
-                    const ordersCollectionRef = getOrdersCollectionRef();
-                    unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
-                        orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                        renderOrderList();
-                        if (currentViewedOrderId) {
-                            const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
-                            if (updatedOrder) showOrderDetails(currentViewedOrderId);
-                            else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
-                        }
-                    }, (error) => {
-                        console.error("Firestore Snapshot Error:", error);
-                        showMessageModal("Error fetching real-time data.");
-                    });
-                } else {
-                    orders = [];
+                const ordersCollectionRef = getOrdersCollectionRef();
+                unsubscribe = onSnapshot(query(ordersCollectionRef, orderBy('createdAt', 'desc')), (snapshot) => {
+                    orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     renderOrderList();
-                    populateUpcomingOverdueList();
-                }
+                    if (currentViewedOrderId) {
+                        const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
+                        if (updatedOrder) showOrderDetails(currentViewedOrderId);
+                        else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
+                    }
+                }, (error) => {
+                    console.error("Firestore Snapshot Error:", error);
+                    showMessageModal("Error fetching real-time data.");
+                });
             }
-
-            /**
-             * Compares old and new window arrays and returns a detailed object of changes.
-             * @param {Array} oldWindows - The original array of window objects.
-             * @param {Array} newWindows - The new array of window objects.
-             * @returns {Object} An object describing the changes.
-             */
+            
             function compareWindowChanges(oldWindows, newWindows) {
                 const changes = {};
-                
-                // Check for modifications and deletions by iterating through old windows
                 oldWindows.forEach((oldWin, i) => {
                     const winNum = i + 1;
                     if (newWindows[i]) {
-                        // Window at this index still exists, check for modifications
                         const newWin = newWindows[i];
                         const heightChanged = oldWin.height !== newWin.height;
                         const widthChanged = oldWin.width !== newWin.width;
-
                         if (heightChanged || widthChanged) {
                             let details = [];
-                            if (heightChanged) details.push(`Height: ${oldWin.height}cm → ${newWin.height}cm`);
-                            if (widthChanged) details.push(`Width: ${oldWin.width}cm → ${newWin.width}cm`);
+                            if (heightChanged) details.push(`H: ${oldWin.height}→${newWin.height}`);
+                            if (widthChanged) details.push(`W: ${oldWin.width}→${newWin.width}`);
                             changes[`Window ${winNum}`] = details.join(', ');
                         }
                     } else {
-                        // Window at this index no longer exists, it was deleted
-                        changes[`Window ${winNum} Deleted`] = `(was H: ${oldWin.height}cm, W: ${oldWin.width}cm)`;
+                        changes[`Window ${winNum} Deleted`] = `(was H:${oldWin.height}, W:${oldWin.width})`;
                     }
                 });
-
-                // Check for additions
                 if (newWindows.length > oldWindows.length) {
                     for (let i = oldWindows.length; i < newWindows.length; i++) {
-                        const winNum = i + 1;
                         const newWin = newWindows[i];
-                        changes[`Window ${winNum} Added`] = `(H: ${newWin.height}cm, W: ${newWin.width}cm)`;
+                        changes[`Window ${i + 1} Added`] = `(H: ${newWin.height}, W: ${newWin.width})`;
                     }
                 }
-
                 return changes;
             }
 
             async function handleFormSubmit(e) {
                 e.preventDefault();
                 showLoading();
-                
                 const orderId = orderIdInput.value;
                 const isUpdating = !!orderId;
-                
                 const windowsData = Array.from(windowsContainer.querySelectorAll('.window-entry')).map(entry => ({
                     height: entry.querySelector('.window-height-input').value,
                     width: entry.querySelector('.window-width-input').value,
                 }));
-
                 const orderData = {
-                    name: customerNameInput.value.trim(),
-                    address: customerAddressInput.value.trim(),
-                    mobileNumber: customerMobileInput.value.trim(),
-                    dueDate: dueDateInput.value,
+                    name: customerNameInput.value.trim(), address: customerAddressInput.value.trim(),
+                    mobileNumber: customerMobileInput.value.trim(), dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
                 };
 
@@ -1208,26 +1098,18 @@
                     if(isUpdating) {
                         const originalOrder = orders.find(o => o.id === orderId);
                         const updateData = { ...orderData, updatedAt: serverTimestamp() };
-                        
                         const changes = {};
-                        if (originalOrder.name !== updateData.name) changes.name = `from "${originalOrder.name}" to "${updateData.name}"`;
+                        if (originalOrder.name !== updateData.name) changes.name = `"${originalOrder.name}" → "${updateData.name}"`;
                         if (originalOrder.address !== updateData.address) changes.address = "updated";
-                        if (originalOrder.mobileNumber !== updateData.mobileNumber) changes.mobileNumber = `from "${originalOrder.mobileNumber}" to "${updateData.mobileNumber}"`;
-                        if (originalOrder.dueDate !== updateData.dueDate) changes.dueDate = `from "${originalOrder.dueDate}" to "${updateData.dueDate}"`;
-                        
-                        // Get detailed window changes
+                        if (originalOrder.mobileNumber !== updateData.mobileNumber) changes.mobileNumber = `"${originalOrder.mobileNumber}" → "${updateData.mobileNumber}"`;
+                        if (originalOrder.dueDate !== updateData.dueDate) changes.dueDate = `"${originalOrder.dueDate}" → "${updateData.dueDate}"`;
                         const originalWindows = JSON.parse(originalOrder.windows || '[]');
                         const windowChanges = compareWindowChanges(originalWindows, windowsData);
-
-                        // Combine all changes into one object
                         const allChanges = { ...changes, ...windowChanges };
-
-                        // Only update and log if there are actual changes
                         if (Object.keys(allChanges).length > 0) {
                             await updateDoc(doc(collectionRef, orderId), updateData);
-                            await logHistory(orderId, 'Order Details Edited', allChanges);
+                            await logHistory(orderId, 'Order Edited', allChanges);
                         }
-                        
                     } else {
                         const newData = { ...orderData, status: 'pending', createdBy: currentUserName, createdAt: serverTimestamp() };
                         const newDocRef = await addDoc(collectionRef, newData);
@@ -1237,23 +1119,17 @@
                     showScreen(viewOrdersScreen);
                 } catch (error) {
                     console.error("Error saving order: ", error);
-                    showMessageModal("Failed to save order. Please check console and try again.");
-                } finally {
-                    hideLoading();
-                }
+                    showMessageModal("Failed to save order.");
+                } finally { hideLoading(); }
             }
             
             async function performConfirmedAction() {
-                hideConfirmationModal();
-                showLoading();
-
+                hideConfirmationModal(); showLoading();
                 try {
-                    const collectionRef = getOrdersCollectionRef();
-                    const docRef = doc(collectionRef, currentAction.id);
-                    await currentAction.callback(docRef);
+                    await currentAction.callback(doc(getOrdersCollectionRef(), currentAction.id));
                 } catch (error) {
                     console.error(`Error performing action '${currentAction.type}':`, error);
-                    showMessageModal(`Action failed. Please try again.`);
+                    showMessageModal(`Action failed.`);
                 } finally {
                     currentAction = { type: null, id: null, callback: null };
                     hideLoading();
@@ -1269,19 +1145,12 @@
                     const q = query(historyCollectionRef, orderBy('timestamp', 'desc'));
                     const snapshot = await getDocs(q);
                     const historyData = snapshot.docs.map(doc => doc.data());
-
-                    if (historyData.length === 0) {
-                        historyList.innerHTML = '<li>No history found for this order.</li>';
-                        return;
-                    }
-
+                    if (historyData.length === 0) { historyList.innerHTML = '<li>No history found.</li>'; return; }
                     historyList.innerHTML = '';
                     historyData.forEach(entry => {
                         const li = document.createElement('li');
                         li.className = 'history-item';
-                        
                         const timestamp = entry.timestamp?.toDate ? entry.timestamp.toDate().toLocaleString() : 'Just now';
-                        
                         let detailsHtml = '';
                         if (entry.details && Object.keys(entry.details).length > 0) {
                             detailsHtml += '<ul class="history-detail">';
@@ -1290,107 +1159,50 @@
                             }
                             detailsHtml += '</ul>';
                         }
-
-                        li.innerHTML = `
-                            <div class="history-item-meta">${timestamp} by <strong>${entry.modifiedBy || 'System'}</strong></div>
-                            <div class="history-item-action">${entry.action}</div>
-                            ${detailsHtml}
-                        `;
+                        li.innerHTML = `<div class="history-item-meta">${timestamp} by <strong>${entry.modifiedBy || 'System'}</strong></div><div class="history-item-action">${entry.action}</div>${detailsHtml}`;
                         historyList.appendChild(li);
                     });
-
                 } catch (error) {
                     console.error("Error fetching history:", error);
                     historyList.innerHTML = '<li>Could not load history.</li>';
-                } finally {
-                    hideLoading();
-                }
+                } finally { hideLoading(); }
             }
 
             // --- EVENT LISTENERS ---
-            if (googleSignInBtn) {
-                googleSignInBtn.addEventListener('click', handleGoogleSignIn);
-            }
-            if (signOutBtn) {
-                signOutBtn.addEventListener('click', handleSignOut);
-            }
-
+            googleSignInBtn.addEventListener('click', handleGoogleSignIn);
+            signOutBtn.addEventListener('click', handleSignOut);
             addNewBtn.addEventListener('click', setupFormForCreate);
             viewOrdersBtn.addEventListener('click', () => showScreen(viewOrdersScreen));
             document.querySelectorAll('.back-to-main').forEach(btn => btn.addEventListener('click', () => showScreen(mainMenuScreen)));
             document.querySelectorAll('.back-to-view-orders').forEach(btn => btn.addEventListener('click', () => showScreen(viewOrdersScreen)));
-            
             addWindowBtn.addEventListener('click', () => addWindowInput(windowsContainer, windowsContainer.children.length + 1));
             orderForm.addEventListener('submit', handleFormSubmit);
-
             orderSearchInput.addEventListener('input', renderOrderList);
             orderFilterSelect.addEventListener('change', renderOrderList);
-
-            detailEditBtn.addEventListener('click', (e) => {
-                const orderId = e.currentTarget.dataset.id;
-                const order = orders.find(o => o.id === orderId);
-                if (order) setupFormForEdit(order);
-            });
-            
+            detailEditBtn.addEventListener('click', (e) => setupFormForEdit(orders.find(o => o.id === e.currentTarget.dataset.id)));
             detailDeleteBtn.addEventListener('click', (e) => {
-                const orderId = e.currentTarget.dataset.id;
-                showConfirmationModal(
-                    'Are you sure you want to delete this order? This action is permanent.', 
-                    'btn-danger', 'Delete Order', 'delete', orderId,
-                    async (docRef) => {
-                        await deleteDoc(docRef);
-                        showMessageModal('Order deleted successfully.');
-                        showScreen(viewOrdersScreen);
-                    }
-                );
+                showConfirmationModal('Delete this order permanently?', 'btn-danger', 'Delete Order', 'delete', e.currentTarget.dataset.id,
+                    async (docRef) => { await deleteDoc(docRef); showMessageModal('Order deleted.'); showScreen(viewOrdersScreen); });
             });
-
             detailCompleteBtn.addEventListener('click', (e) => {
                 const orderId = e.currentTarget.dataset.id;
                 const order = orders.find(o => o.id === orderId);
-                if (!order) {
-                    showMessageModal('Error: Order details not found.');
-                    return;
-                }
-
                 if (order.status === 'completed') {
-                    showConfirmationModal(
-                        'This will mark the order as pending again. Are you sure?',
-                        'btn-reopen', 'Reopen Order', 'reopen', orderId,
-                        async (docRef) => {
-                            await updateDoc(docRef, { status: 'pending', completedAt: deleteField(), completedBy: deleteField() });
-                            await logHistory(orderId, 'Order Reopened');
-                            showMessageModal('Order has been reopened.');
-                        }
-                    );
+                    showConfirmationModal('Reopen this order?', 'btn-reopen', 'Reopen Order', 'reopen', orderId,
+                        async (docRef) => { await updateDoc(docRef, { status: 'pending', completedAt: deleteField(), completedBy: deleteField() }); await logHistory(orderId, 'Order Reopened'); showMessageModal('Order reopened.'); });
                 } else {
-                    showConfirmationModal(
-                        'Mark this order as complete?',
-                        'btn-success', 'Mark Complete', 'complete', orderId,
-                        async (docRef) => {
-                            await updateDoc(docRef, { status: 'completed', completedAt: serverTimestamp(), completedBy: currentUserName });
-                            await logHistory(orderId, 'Order Marked as Complete');
-                            showMessageModal('Order marked as complete!');
-                        }
-                    );
+                    showConfirmationModal('Mark this order as complete?', 'btn-success', 'Mark Complete', 'complete', orderId,
+                        async (docRef) => { await updateDoc(docRef, { status: 'completed', completedAt: serverTimestamp(), completedBy: currentUserName }); await logHistory(orderId, 'Order Completed'); showMessageModal('Order marked as complete!'); });
                 }
             });
-
-            detailShowHistoryBtn.addEventListener('click', (e) => {
-                const orderId = e.currentTarget.dataset.id;
-                showHistoryModal(orderId);
-            });
-
+            detailShowHistoryBtn.addEventListener('click', (e) => showHistoryModal(e.currentTarget.dataset.id));
             detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.currentTarget.dataset.id));
-            
             messageOkBtn.addEventListener('click', () => messageModal.style.display = 'none');
             cancelActionBtn.addEventListener('click', () => confirmationModal.style.display = 'none');
             confirmActionBtn.addEventListener('click', performConfirmedAction);
             historyCloseBtn.addEventListener('click', () => historyModal.style.display = 'none');
 
             // --- INITIALIZATION ---
-            // Don't show any screen initially, wait for auth check.
-            // The loading overlay is visible by default via CSS.
             initializeFirebase();
             addWindowInput(windowsContainer, 1);
         })();
