@@ -1078,7 +1078,8 @@
 
             function getOrdersCollectionRef() {
                 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                return collection(db, `artifacts/${appId}/users/${currentUserId}/upvc_orders`);
+                // IMPORTANT: Changed to public path for shared data
+                return collection(db, `artifacts/${appId}/public/data/upvc_orders`);
             }
 
             let unsubscribe;
