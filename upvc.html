@@ -287,13 +287,23 @@
 <body>
 
     <div class="app-container">
-        <!-- Main Menu Screen (Simplified) -->
-        <div id="main-menu" class="screen active text-center">
+        <!-- Login Screen (Initial View) -->
+        <div id="login-screen" class="screen active text-center">
+            <h1 style="margin-bottom: 0.5rem;">Welcome to uPVC Pro</h1>
+            <p style="margin-bottom: 2rem; color: var(--light-text-muted);">Sign in to manage your orders.</p>
+            <button id="google-sign-in-btn" class="btn-primary">
+                <span class="material-symbols-outlined">account_circle</span>
+                Sign in with Google
+            </button>
+        </div>
+
+        <!-- Main Menu Screen (Hidden until login) -->
+        <div id="main-menu" class="screen text-center">
             <h1 style="margin-bottom: 0.5rem;">uPVC Pro Dashboard</h1>
             <p style="margin-bottom: 2rem; color: var(--light-text-muted);">
                 Logged in as: <span id="user-id-display" class="font-mono" style="color: var(--color-primary);">Loading...</span>
             </p>
-            <!-- Upcoming & Overdue Orders Summary - Moved to Main Menu -->
+            <!-- Upcoming & Overdue Orders Summary -->
             <div id="due-date-summary" class="card" style="margin-bottom: 2rem; text-align: left;">
                 <h3 style="margin-bottom: 1rem;">Upcoming & Overdue Orders</h3>
                 <ul id="upcoming-overdue-list" style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
@@ -528,7 +538,7 @@
     <script type="module">
         // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Use a self-executing anonymous function to encapsulate the script
@@ -538,8 +548,11 @@
             const formScreen = document.getElementById('form-screen');
             const viewOrdersScreen = document.getElementById('view-orders-screen');
             const orderDetailsScreen = document.getElementById('order-details-screen');
-            
-            const formTitle = document.getElementById('form-title');
+            const loginScreen = document.getElementById('login-screen'); // New: Login Screen
+
+            const addNewBtn = document.getElementById('add-new-btn');
+            const viewOrdersBtn = document.getElementById('view-orders-btn');
+
             const orderForm = document.getElementById('order-form');
             const orderIdInput = document.getElementById('order-id');
             const customerNameInput = document.getElementById('customer-name');
@@ -556,6 +569,9 @@
             const orderSearchInput = document.getElementById('order-search');
             const orderFilterSelect = document.getElementById('order-filter');
             const upcomingOverdueList = document.getElementById('upcoming-overdue-list');
+
+            const googleSignInBtn = document.getElementById('google-sign-in-btn'); // New
+            const mainMenuActionsDiv = document.getElementById('main-menu-actions'); // New
 
 
             // Order Details Screen Elements
@@ -638,8 +654,7 @@
 
             const showSkeletonLoaders = (count = 6) => {
                 orderListContainer.innerHTML = Array(count).fill(createSkeletonCard()).join('');
-                orderListContainer.style.display = 'flex';
-                orderListContainer.style.flexDirection = 'column';
+                orderListContainer.style.display = 'grid';
                 orderListEmpty.style.display = 'none';
             };
 
@@ -774,10 +789,12 @@
                         const statusA = getStatusInfo(a, today).className;
                         const statusB = getStatusInfo(b, today).className;
 
+                        // Custom sorting logic: Overdue -> Upcoming -> Pending -> Completed
                         const statusOrder = { 'overdue': 1, 'upcoming-due': 2, 'pending': 3, 'completed': 4 };
                         if (statusOrder[statusA] !== statusOrder[statusB]) {
                             return statusOrder[statusA] - statusOrder[statusB];
                         }
+                        // Then by date
                         return (dateA?.getTime() || 0) - (dateB?.getTime() || 0);
                     })
                     .forEach(order => {
@@ -801,7 +818,24 @@
                         orderListContainer.appendChild(card);
                     });
                 
-                populateUpcomingOverdueList();
+                // Update total width/height displays (these are for all orders, not filtered)
+                let totalWidthAll = 0;
+                let totalHeightAll = 0;
+                orders.forEach(order => {
+                    let currentWindows = order.windows;
+                    if (typeof currentWindows === 'string') {
+                        try { currentWindows = JSON.parse(currentWindows); } catch(e) { currentWindows = []; }
+                    }
+                    currentWindows.forEach(win => {
+                        totalWidthAll += parseFloat(win.width || 0);
+                        totalHeightAll += parseFloat(win.height || 0);
+                    });
+                });
+                // Ensure elements exist before setting textContent
+                if (document.getElementById('total-width-display')) document.getElementById('total-width-display').textContent = totalWidthAll.toFixed(1);
+                if (document.getElementById('total-height-display')) document.getElementById('total-height-display').textContent = totalHeightAll.toFixed(1);
+
+                populateUpcomingOverdueList(); // Always update critical list based on all orders
             };
 
             const populateUpcomingOverdueList = () => {
@@ -912,49 +946,49 @@
                 const doc = new jsPDF();
                 
                 let yPos = 20, margin = 15, lineHeight = 8;
-                doc.setFont("Helvetica", "bold").setFontSize(20).text("uPVC Order Confirmation", 105, yPos, { align: 'center' });
+                doc.setFont("IBM Plex Sans", "bold").setFontSize(20).text("uPVC Order Confirmation", 105, yPos, { align: 'center' });
                 yPos += lineHeight * 2;
                 doc.setLineWidth(0.5).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
 
-                doc.setFont("Helvetica", "bold").setFontSize(12).text("Customer:", margin, yPos);
-                doc.setFont("Helvetica", "normal").text(order.name, margin + 40, yPos);
+                doc.setFont("IBM Plex Sans", "bold").setFontSize(12).text("Customer:", margin, yPos);
+                doc.setFont("IBM Plex Sans", "normal").text(order.name, margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("Helvetica", "bold").text("Address:", margin, yPos);
-                doc.setFont("Helvetica", "normal").text(order.address, margin + 40, yPos);
+                doc.setFont("IBM Plex Sans", "bold").text("Address:", margin, yPos);
+                doc.setFont("IBM Plex Sans", "normal").text(order.address, margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("Helvetica", "bold").text("Mobile:", margin, yPos);
-                doc.setFont("Helvetica", "normal").text(order.mobileNumber || 'N/A', margin + 40, yPos);
+                doc.setFont("IBM Plex Sans", "bold").text("Mobile:", margin, yPos);
+                doc.setFont("IBM Plex Sans", "normal").text(order.mobileNumber || 'N/A', margin + 40, yPos);
                 yPos += lineHeight * 2;
 
-                doc.setFont("Helvetica", "bold").text("Order Date:", margin, yPos);
-                doc.setFont("Helvetica", "normal").text(order.createdAt?.toDate ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A', margin + 40, yPos);
+                doc.setFont("IBM Plex Sans", "bold").text("Order Date:", margin, yPos);
+                doc.setFont("IBM Plex Sans", "normal").text(order.createdAt?.toDate ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("Helvetica", "bold").text("Due Date:", margin, yPos);
-                doc.setFont("Helvetica", "normal").text(order.dueDate || 'N/A', margin + 40, yPos);
+                doc.setFont("IBM Plex Sans", "bold").text("Due Date:", margin, yPos);
+                doc.setFont("IBM Plex Sans", "normal").text(order.dueDate || 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
 
                 if (order.status === 'completed' && order.completedAt) {
-                    doc.setFont("Helvetica", "bold").text("Completed Date:", margin, yPos);
-                    doc.setFont("Helvetica", "normal").text(new Date(order.completedAt.toDate()).toLocaleDateString(), margin + 40, yPos);
+                    doc.setFont("IBM Plex Sans", "bold").text("Completed Date:", margin, yPos);
+                    doc.setFont("IBM Plex Sans", "normal").text(new Date(order.completedAt.toDate()).toLocaleDateString(), margin + 40, yPos);
                     yPos += lineHeight;
                 }
                 if (order.createdBy) {
-                    doc.setFont("Helvetica", "bold").text("Created By:", margin, yPos);
-                    doc.setFont("Helvetica", "normal").text(order.createdBy, margin + 40, yPos);
+                    doc.setFont("IBM Plex Sans", "bold").text("Created By:", margin, yPos);
+                    doc.setFont("IBM Plex Sans", "normal").text(order.createdBy, margin + 40, yPos);
                     yPos += lineHeight;
                 }
                 if (order.completedBy && order.status === 'completed') {
-                    doc.setFont("Helvetica", "bold").text("Completed By:", margin, yPos);
-                    doc.setFont("Helvetica", "normal").text(order.completedBy, margin + 40, yPos);
+                    doc.setFont("IBM Plex Sans", "bold").text("Completed By:", margin, yPos);
+                    doc.setFont("IBM Plex Sans", "normal").text(order.completedBy, margin + 40, yPos);
                     yPos += lineHeight;
                 }
-                yPos += lineHeight;
+                yPos += lineHeight; // Extra space before window details
 
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
 
-                doc.setFont("Helvetica", "bold").setFontSize(14).text("Window Specifications", margin, yPos);
+                doc.setFont("IBM Plex Sans", "bold").setFontSize(14).text("Window Specifications", margin, yPos);
                 yPos += lineHeight;
 
                 let windowsForPdf = [];
@@ -963,7 +997,7 @@
                 
                 let orderTotalWidth = 0, orderTotalHeight = 0;
                 windowsForPdf.forEach((win, index) => {
-                    doc.setFont("Helvetica", "normal").setFontSize(12);
+                    doc.setFont("IBM Plex Sans", "normal").setFontSize(12);
                     doc.text(`Window ${index + 1}:`, margin + 5, yPos);
                     doc.text(`Height: ${win.height} cm`, margin + 40, yPos);
                     doc.text(`Width: ${win.width} cm`, margin + 90, yPos);
@@ -977,7 +1011,7 @@
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
                 
-                doc.setFont("Helvetica", "bold").setFontSize(14);
+                doc.setFont("IBM Plex Sans", "bold").setFontSize(14);
                 doc.text(`Total Width: ${orderTotalWidth.toFixed(1)} cm`, margin, yPos);
                 yPos += lineHeight;
                 doc.text(`Total Height: ${orderTotalHeight.toFixed(1)} cm`, margin, yPos);
@@ -1006,12 +1040,12 @@
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
-                            // For simplicity, we'll use a generic user name prompt if not set.
-                            // The user profile part is simplified.
-                            await fetchOrCreateUserProfile(user.uid);
+                            // Use user.displayName from Google if available, otherwise fallback
+                            await fetchOrCreateUserProfile(user.uid, user.displayName); 
                             listenForOrders();
+                            showScreen(mainMenuScreen); // Show main menu after login
                         } else {
-                            await signInAnonymously(auth);
+                            showScreen(loginScreen); // Show login screen if not authenticated
                         }
                     });
                 } catch (error) {
@@ -1020,48 +1054,74 @@
                 }
             }
 
-            async function fetchOrCreateUserProfile(userId) {
-                // This is a simplified version. For production, use the more robust version from the first response.
+            // Handles Google Sign-In
+            async function handleGoogleSignIn() {
+                showLoading();
+                const provider = new GoogleAuthProvider();
+                try {
+                    const result = await signInWithPopup(auth, provider);
+                    // User signed in, onAuthStateChanged will handle the rest
+                    showMessageModal(`Welcome, ${result.user.displayName || result.user.email}!`);
+                } catch (error) {
+                    console.error("Google Sign-In Error:", error);
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        showMessageModal("Sign-in cancelled. Please try again.");
+                    } else if (error.code === 'auth/cancelled-popup-request') {
+                         showMessageModal("Sign-in already in progress. Please wait.");
+                    }
+                    else {
+                        showMessageModal(`Sign-in failed: ${error.message}`);
+                    }
+                } finally {
+                    hideLoading();
+                }
+            }
+
+
+            async function fetchOrCreateUserProfile(userId, googleDisplayName) {
+                // Use the hardcoded appId from your firebaseConfig for user_profiles access
+                // This matches your working security rule: match /artifacts/default-app-id/user_profiles/{userId}
                 const userProfileRef = doc(db, `artifacts/default-app-id/user_profiles`, userId);
                 try {
                     const userDoc = await getDoc(userProfileRef);
                     if (userDoc.exists() && userDoc.data().userName) {
                         currentUserName = userDoc.data().userName;
                     } else {
-                        const name = prompt("Welcome! Please enter your name:", "Operator");
-                        currentUserName = name || "Anonymous";
+                        // If profile doesn't exist, use Google display name or fallback
+                        currentUserName = googleDisplayName || "Anonymous User";
                         await setDoc(userProfileRef, { userName: currentUserName, createdAt: serverTimestamp() }, { merge: true });
+                        // showMessageModal("User profile created/updated!"); // Removed to avoid extra popup on login
                     }
                 } catch (error) {
                     console.error("User Profile Error:", error);
-                    currentUserName = "Operator"; // Fallback name
+                    showMessageModal("Could not load user profile. Please check Firebase security rules for 'user_profiles' collection.");
                 } finally {
                     userIdDisplay.textContent = currentUserName;
-                    hideLoading();
+                    // hideLoading() is now called in onAuthStateChanged for initial load
                 }
             }
 
             function getOrdersCollectionRef() {
                 // This path must match your Firestore security rules
-                return collection(db, `upvc_orders`); 
+                return collection(db, `upvc_orders`); // This matches your provided rule
             }
 
             let unsubscribe;
             function listenForOrders() {
-                if(unsubscribe) unsubscribe(); 
+                if(unsubscribe) unsubscribe(); // Unsubscribe from previous listener if any
                 showSkeletonLoaders();
                 const ordersCollectionRef = getOrdersCollectionRef();
                 unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
                     orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     renderOrderList();
-                    if (currentViewedOrderId) {
+                    if (currentViewedOrderId) { // Refresh details if viewing an order
                         const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
                         if (updatedOrder) showOrderDetails(currentViewedOrderId);
                         else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
                     }
                 }, (error) => {
                     console.error("Firestore Snapshot Error:", error);
-                    showMessageModal("Error fetching real-time data. Check Firestore rules.");
+                    showMessageModal("Error fetching real-time data.");
                 });
             }
 
@@ -1083,8 +1143,8 @@
                     mobileNumber: customerMobileInput.value.trim(),
                     dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
-                    updatedAt: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdAt: serverTimestamp(), createdBy: currentUserName })
+                    [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
+                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
                 };
 
                 try {
