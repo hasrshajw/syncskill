@@ -321,6 +321,10 @@
                     <span class="material-symbols-outlined">view_list</span>
                     View All Orders
                 </button>
+                <button id="sign-out-btn" class="btn-secondary">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sign Out
+                </button>
             </div>
         </div>
 
@@ -538,7 +542,7 @@
     <script type="module">
         // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Use a self-executing anonymous function to encapsulate the script
@@ -548,7 +552,7 @@
             const formScreen = document.getElementById('form-screen');
             const viewOrdersScreen = document.getElementById('view-orders-screen');
             const orderDetailsScreen = document.getElementById('order-details-screen');
-            const loginScreen = document.getElementById('login-screen'); // New: Login Screen
+            const loginScreen = document.getElementById('login-screen'); 
 
             const addNewBtn = document.getElementById('add-new-btn');
             const viewOrdersBtn = document.getElementById('view-orders-btn');
@@ -570,8 +574,8 @@
             const orderFilterSelect = document.getElementById('order-filter');
             const upcomingOverdueList = document.getElementById('upcoming-overdue-list');
 
-            const googleSignInBtn = document.getElementById('google-sign-in-btn'); // New
-            const mainMenuActionsDiv = document.getElementById('main-menu-actions'); // New
+            const googleSignInBtn = document.getElementById('google-sign-in-btn'); 
+            const signOutBtn = document.getElementById('sign-out-btn'); // New: Sign Out Button
 
 
             // Order Details Screen Elements
@@ -1077,6 +1081,21 @@
                 }
             }
 
+            // Handles Sign Out
+            async function handleSignOut() {
+                showLoading();
+                try {
+                    await signOut(auth);
+                    showMessageModal("You have been signed out.");
+                    // onAuthStateChanged will handle screen transition
+                } catch (error) {
+                    console.error("Sign Out Error:", error);
+                    showMessageModal("Failed to sign out. Please try again.");
+                } finally {
+                    hideLoading();
+                }
+            }
+
 
             async function fetchOrCreateUserProfile(userId, googleDisplayName) {
                 // Use the hardcoded appId from your firebaseConfig for user_profiles access
@@ -1182,6 +1201,15 @@
             }
 
             // --- EVENT LISTENERS ---
+            // Login button listener (only visible on login screen)
+            if (googleSignInBtn) {
+                googleSignInBtn.addEventListener('click', handleGoogleSignIn);
+            }
+            // Sign out button listener (only visible on main menu)
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', handleSignOut);
+            }
+
             document.getElementById('add-new-btn').addEventListener('click', setupFormForCreate);
             document.getElementById('view-orders-btn').addEventListener('click', () => showScreen(viewOrdersScreen));
             document.querySelectorAll('.back-to-main').forEach(btn => btn.addEventListener('click', () => showScreen(mainMenuScreen)));
