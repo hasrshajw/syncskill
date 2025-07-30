@@ -548,68 +548,17 @@
         // Use a self-executing anonymous function to encapsulate the script
         (function() {
             // --- CACHED DOM ELEMENTS ---
-            const mainMenuScreen = document.getElementById('main-menu');
-            const formScreen = document.getElementById('form-screen');
-            const viewOrdersScreen = document.getElementById('view-orders-screen');
-            const orderDetailsScreen = document.getElementById('order-details-screen');
-            const loginScreen = document.getElementById('login-screen'); 
+            // These are now initialized inside initializeFirebase or onAuthStateChanged
+            // to ensure they exist when accessed.
+            let mainMenuScreen, formScreen, viewOrdersScreen, orderDetailsScreen, loginScreen;
+            let formTitle, orderForm, orderIdInput, customerNameInput, customerAddressInput, customerMobileInput, dueDateInput, windowsContainer, addWindowBtn, saveOrderBtn;
+            let orderListContainer, orderListEmpty, userIdDisplay, orderSearchInput, orderFilterSelect, upcomingOverdueList;
+            let googleSignInBtn, signOutBtn;
+            let detailCustomerName, detailCustomerAddress, detailCustomerMobile, detailOrderTakenDate, detailDueDate, detailStatusTag, detailCompletedDateRow, detailCompletedDate, detailCreatedByRow, detailCreatedBy, detailCompletedByRow, detailCompletedBy, detailWindowsList, detailWindowCount, detailTotalWidth, detailTotalHeight, detailEditBtn, detailDeleteBtn, detailGeneratePdfBtn, detailCompleteBtn;
+            let confirmationModal, modalMessage, confirmActionBtn, cancelActionBtn;
+            let messageModal, messageText, messageOkBtn;
+            let loadingOverlay;
 
-            const addNewBtn = document.getElementById('add-new-btn');
-            const viewOrdersBtn = document.getElementById('view-orders-btn');
-
-            const orderForm = document.getElementById('order-form');
-            const orderIdInput = document.getElementById('order-id');
-            const customerNameInput = document.getElementById('customer-name');
-            const customerAddressInput = document.getElementById('customer-address');
-            const customerMobileInput = document.getElementById('customer-mobile');
-            const dueDateInput = document.getElementById('due-date');
-            const windowsContainer = document.getElementById('windows-container');
-            const addWindowBtn = document.getElementById('add-window-btn');
-            const saveOrderBtn = document.getElementById('save-order-btn');
-            
-            const orderListContainer = document.getElementById('order-list-container');
-            const orderListEmpty = document.getElementById('order-list-empty');
-            const userIdDisplay = document.getElementById('user-id-display');
-            const orderSearchInput = document.getElementById('order-search');
-            const orderFilterSelect = document.getElementById('order-filter');
-            const upcomingOverdueList = document.getElementById('upcoming-overdue-list');
-
-            const googleSignInBtn = document.getElementById('google-sign-in-btn'); 
-            const signOutBtn = document.getElementById('sign-out-btn'); 
-
-
-            // Order Details Screen Elements
-            const detailCustomerName = document.getElementById('detail-customer-name');
-            const detailCustomerAddress = document.getElementById('detail-customer-address');
-            const detailCustomerMobile = document.getElementById('detail-customer-mobile');
-            const detailOrderTakenDate = document.getElementById('detail-order-taken-date');
-            const detailDueDate = document.getElementById('detail-due-date');
-            const detailStatusTag = document.getElementById('detail-status-tag');
-            const detailCompletedDateRow = document.getElementById('detail-completed-date-row');
-            const detailCompletedDate = document.getElementById('detail-completed-date');
-            const detailCreatedByRow = document.getElementById('detail-created-by-row');
-            const detailCreatedBy = document.getElementById('detail-created-by');
-            const detailCompletedByRow = document.getElementById('detail-completed-by-row');
-            const detailCompletedBy = document.getElementById('detail-completed-by');
-            const detailWindowsList = document.getElementById('detail-windows-list');
-            const detailWindowCount = document.getElementById('detail-window-count');
-            const detailTotalWidth = document.getElementById('detail-total-width');
-            const detailTotalHeight = document.getElementById('detail-total-height');
-            const detailEditBtn = document.getElementById('detail-edit-btn');
-            const detailDeleteBtn = document.getElementById('detail-delete-btn');
-            const detailGeneratePdfBtn = document.getElementById('detail-generate-pdf-btn');
-            const detailCompleteBtn = document.getElementById('detail-complete-btn');
-
-            const confirmationModal = document.getElementById('confirmation-modal');
-            const modalMessage = document.getElementById('modal-message');
-            const confirmActionBtn = document.getElementById('confirm-action-btn');
-            const cancelActionBtn = document.getElementById('cancel-action-btn');
-
-            const messageModal = document.getElementById('message-modal');
-            const messageText = document.getElementById('message-text');
-            const messageOkBtn = document.getElementById('message-ok-btn');
-            const loadingOverlay = document.getElementById('loading-overlay');
-            
             // --- APP STATE ---
             let orders = [];
             let currentAction = { type: null, id: null, callback: null };
@@ -695,12 +644,12 @@
             };
 
             const setupFormForCreate = () => {
-                formTitle.textContent = 'Create New Order';
-                saveOrderBtn.innerHTML = '<span class="material-symbols-outlined">save</span> Save Order';
-                orderForm.reset();
-                orderIdInput.value = '';
-                windowsContainer.innerHTML = '';
-                addWindowInput(windowsContainer, 1);
+                if (formTitle) formTitle.textContent = 'Create New Order'; // Defensive check
+                if (saveOrderBtn) saveOrderBtn.innerHTML = '<span class="material-symbols-outlined">save</span> Save Order'; // Defensive check
+                if (orderForm) orderForm.reset(); // Defensive check
+                if (orderIdInput) orderIdInput.value = ''; // Defensive check
+                if (windowsContainer) windowsContainer.innerHTML = ''; // Defensive check
+                if (windowsContainer) addWindowInput(windowsContainer, 1); // Defensive check
                 showScreen(formScreen);
             };
 
@@ -1041,6 +990,66 @@
                     db = getFirestore(app);
                     auth = getAuth(app);
                     
+                    // Initialize DOM elements here, after Firebase app is created
+                    mainMenuScreen = document.getElementById('main-menu');
+                    formScreen = document.getElementById('form-screen');
+                    viewOrdersScreen = document.getElementById('view-orders-screen');
+                    orderDetailsScreen = document.getElementById('order-details-screen');
+                    loginScreen = document.getElementById('login-screen'); 
+
+                    formTitle = document.getElementById('form-title');
+                    orderForm = document.getElementById('order-form');
+                    orderIdInput = document.getElementById('order-id');
+                    customerNameInput = document.getElementById('customer-name');
+                    customerAddressInput = document.getElementById('customer-address');
+                    customerMobileInput = document.getElementById('customer-mobile');
+                    dueDateInput = document.getElementById('due-date');
+                    windowsContainer = document.getElementById('windows-container');
+                    addWindowBtn = document.getElementById('add-window-btn');
+                    saveOrderBtn = document.getElementById('save-order-btn');
+                    
+                    orderListContainer = document.getElementById('order-list-container');
+                    orderListEmpty = document.getElementById('order-list-empty');
+                    userIdDisplay = document.getElementById('user-id-display');
+                    orderSearchInput = document.getElementById('order-search');
+                    orderFilterSelect = document.getElementById('order-filter');
+                    upcomingOverdueList = document.getElementById('upcoming-overdue-list');
+
+                    googleSignInBtn = document.getElementById('google-sign-in-btn'); 
+                    signOutBtn = document.getElementById('sign-out-btn'); 
+
+                    detailCustomerName = document.getElementById('detail-customer-name');
+                    detailCustomerAddress = document.getElementById('detail-customer-address');
+                    detailCustomerMobile = document.getElementById('detail-customer-mobile');
+                    detailOrderTakenDate = document.getElementById('detail-order-taken-date');
+                    detailDueDate = document.getElementById('detail-due-date');
+                    detailStatusTag = document.getElementById('detail-status-tag');
+                    detailCompletedDateRow = document.getElementById('detail-completed-date-row');
+                    detailCompletedDate = document.getElementById('detail-completed-date');
+                    detailCreatedByRow = document.getElementById('detail-created-by-row');
+                    detailCreatedBy = document.getElementById('detail-created-by');
+                    detailCompletedByRow = document.getElementById('detail-completed-by-row');
+                    detailCompletedBy = document.getElementById('detail-completed-by');
+                    detailWindowsList = document.getElementById('detail-windows-list');
+                    detailWindowCount = document.getElementById('detail-window-count');
+                    detailTotalWidth = document.getElementById('detail-total-width');
+                    detailTotalHeight = document.getElementById('detail-total-height');
+                    detailEditBtn = document.getElementById('detail-edit-btn');
+                    detailDeleteBtn = document.getElementById('detail-delete-btn');
+                    detailGeneratePdfBtn = document.getElementById('detail-generate-pdf-btn');
+                    detailCompleteBtn = document.getElementById('detail-complete-btn');
+
+                    confirmationModal = document.getElementById('confirmation-modal');
+                    modalMessage = document.getElementById('modal-message');
+                    confirmActionBtn = document.getElementById('confirm-action-btn');
+                    cancelActionBtn = document.getElementById('cancel-action-btn');
+
+                    messageModal = document.getElementById('message-modal');
+                    messageText = document.getElementById('message-text');
+                    messageOkBtn = document.getElementById('message-ok-btn');
+                    loadingOverlay = document.getElementById('loading-overlay');
+
+
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
