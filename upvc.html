@@ -542,7 +542,7 @@
     <script type="module">
         // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Use a self-executing anonymous function to encapsulate the script
@@ -575,7 +575,7 @@
             const upcomingOverdueList = document.getElementById('upcoming-overdue-list');
 
             const googleSignInBtn = document.getElementById('google-sign-in-btn'); 
-            const signOutBtn = document.getElementById('sign-out-btn'); // New: Sign Out Button
+            const signOutBtn = document.getElementById('sign-out-btn'); 
 
 
             // Order Details Screen Elements
@@ -1129,19 +1129,28 @@
             function listenForOrders() {
                 if(unsubscribe) unsubscribe(); // Unsubscribe from previous listener if any
                 showSkeletonLoaders();
-                const ordersCollectionRef = getOrdersCollectionRef();
-                unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
-                    orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderOrderList();
-                    if (currentViewedOrderId) { // Refresh details if viewing an order
-                        const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
-                        if (updatedOrder) showOrderDetails(currentViewedOrderId);
-                        else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
-                    }
-                }, (error) => {
-                    console.error("Firestore Snapshot Error:", error);
-                    showMessageModal("Error fetching real-time data.");
-                });
+                // Only attempt to listen for orders if a user is logged in
+                if (currentUserId) {
+                    const ordersCollectionRef = getOrdersCollectionRef();
+                    unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
+                        orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                        renderOrderList();
+                        if (currentViewedOrderId) { // Refresh details if viewing an order
+                            const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
+                            if (updatedOrder) showOrderDetails(currentViewedOrderId);
+                            else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
+                        }
+                    }, (error) => {
+                        console.error("Firestore Snapshot Error:", error);
+                        showMessageModal("Error fetching real-time data.");
+                    });
+                } else {
+                    // If no user, clear orders and stop listening
+                    orders = [];
+                    renderOrderList(); // Render empty list
+                    populateUpcomingOverdueList(); // Clear critical alerts
+                    hideLoading(); // Ensure loading is hidden if no data to fetch
+                }
             }
 
             async function handleFormSubmit(e) {
