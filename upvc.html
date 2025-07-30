@@ -528,7 +528,7 @@
     <script type="module">
         // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Use a self-executing anonymous function to encapsulate the script
@@ -615,6 +615,10 @@
                 currentAction = { type: actionType, id: orderId, callback: callback };
                 confirmationModal.style.display = 'flex';
             };
+            
+            const hideConfirmationModal = () => {
+                confirmationModal.style.display = 'none';
+            };
 
             const showScreen = (screenToShow) => {
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -634,7 +638,8 @@
 
             const showSkeletonLoaders = (count = 6) => {
                 orderListContainer.innerHTML = Array(count).fill(createSkeletonCard()).join('');
-                orderListContainer.style.display = 'grid';
+                orderListContainer.style.display = 'flex';
+                orderListContainer.style.flexDirection = 'column';
                 orderListEmpty.style.display = 'none';
             };
 
@@ -710,7 +715,7 @@
                 if (order.status === 'completed') {
                     return { text: 'Completed', className: 'completed' };
                 }
-                const dueDate = order.dueDate ? new Date(order.dueDate) : null;
+                const dueDate = order.dueDate ? new Date(order.dueDate + 'T00:00:00') : null; // Ensure date is parsed correctly
                 if (dueDate && dueDate < today) {
                     return { text: 'Overdue', className: 'overdue' };
                 }
@@ -759,8 +764,8 @@
                 }
 
                 orderListEmpty.style.display = 'none';
-                orderListContainer.style.display = 'flex'; // Changed to flex
-                orderListContainer.style.flexDirection = 'column'; // Stack vertically
+                orderListContainer.style.display = 'flex'; 
+                orderListContainer.style.flexDirection = 'column';
 
                 filteredOrders
                     .sort((a, b) => {
@@ -769,12 +774,10 @@
                         const statusA = getStatusInfo(a, today).className;
                         const statusB = getStatusInfo(b, today).className;
 
-                        // Custom sorting logic: Overdue -> Upcoming -> Pending -> Completed
                         const statusOrder = { 'overdue': 1, 'upcoming-due': 2, 'pending': 3, 'completed': 4 };
                         if (statusOrder[statusA] !== statusOrder[statusB]) {
                             return statusOrder[statusA] - statusOrder[statusB];
                         }
-                        // Then by date
                         return (dateA?.getTime() || 0) - (dateB?.getTime() || 0);
                     })
                     .forEach(order => {
@@ -798,24 +801,7 @@
                         orderListContainer.appendChild(card);
                     });
                 
-                // Update total width/height displays (these are for all orders, not filtered)
-                let totalWidthAll = 0;
-                let totalHeightAll = 0;
-                orders.forEach(order => {
-                    let currentWindows = order.windows;
-                    if (typeof currentWindows === 'string') {
-                        try { currentWindows = JSON.parse(currentWindows); } catch(e) { currentWindows = []; }
-                    }
-                    currentWindows.forEach(win => {
-                        totalWidthAll += parseFloat(win.width || 0);
-                        totalHeightAll += parseFloat(win.height || 0);
-                    });
-                });
-                // Ensure elements exist before setting textContent
-                if (document.getElementById('total-width-display')) document.getElementById('total-width-display').textContent = totalWidthAll.toFixed(1);
-                if (document.getElementById('total-height-display')) document.getElementById('total-height-display').textContent = totalHeightAll.toFixed(1);
-
-                populateUpcomingOverdueList(); // Always update critical list based on all orders
+                populateUpcomingOverdueList();
             };
 
             const populateUpcomingOverdueList = () => {
@@ -824,7 +810,7 @@
 
                 const criticalOrders = orders.filter(order => {
                     if (order.status === 'completed') return false;
-                    const dueDate = order.dueDate ? new Date(order.dueDate) : null;
+                    const dueDate = order.dueDate ? new Date(order.dueDate + 'T00:00:00') : null;
                     if (!dueDate) return false;
                     const daysDiff = Math.ceil((dueDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
                     return (dueDate < today) || (daysDiff >= 0 && daysDiff <= 3);
@@ -862,7 +848,7 @@
                 detailCustomerName.textContent = order.name;
                 detailCustomerAddress.textContent = order.address;
                 detailCustomerMobile.textContent = order.mobileNumber || 'N/A';
-                detailOrderTakenDate.textContent = order.createdAt ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                detailOrderTakenDate.textContent = order.createdAt?.toDate ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A';
                 detailDueDate.textContent = order.dueDate || 'N/A';
                 
                 const today = new Date(); today.setHours(0,0,0,0);
@@ -871,7 +857,7 @@
                 detailStatusTag.textContent = statusInfo.text;
                 
                 detailCompletedDateRow.style.display = (order.status === 'completed' && order.completedAt) ? 'block' : 'none';
-                detailCompletedDate.textContent = (order.status === 'completed' && order.completedAt) ? new Date(order.completedAt.toDate()).toLocaleDateString() : '';
+                detailCompletedDate.textContent = (order.status === 'completed' && order.completedAt?.toDate) ? new Date(order.completedAt.toDate()).toLocaleDateString() : '';
 
                 detailCreatedByRow.style.display = order.createdBy ? 'block' : 'none';
                 detailCreatedBy.textContent = order.createdBy || '';
@@ -926,49 +912,49 @@
                 const doc = new jsPDF();
                 
                 let yPos = 20, margin = 15, lineHeight = 8;
-                doc.setFont("IBM Plex Sans", "bold").setFontSize(20).text("uPVC Order Confirmation", 105, yPos, { align: 'center' });
+                doc.setFont("Helvetica", "bold").setFontSize(20).text("uPVC Order Confirmation", 105, yPos, { align: 'center' });
                 yPos += lineHeight * 2;
                 doc.setLineWidth(0.5).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
 
-                doc.setFont("IBM Plex Sans", "bold").setFontSize(12).text("Customer:", margin, yPos);
-                doc.setFont("IBM Plex Sans", "normal").text(order.name, margin + 40, yPos);
+                doc.setFont("Helvetica", "bold").setFontSize(12).text("Customer:", margin, yPos);
+                doc.setFont("Helvetica", "normal").text(order.name, margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("IBM Plex Sans", "bold").text("Address:", margin, yPos);
-                doc.setFont("IBM Plex Sans", "normal").text(order.address, margin + 40, yPos);
+                doc.setFont("Helvetica", "bold").text("Address:", margin, yPos);
+                doc.setFont("Helvetica", "normal").text(order.address, margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("IBM Plex Sans", "bold").text("Mobile:", margin, yPos);
-                doc.setFont("IBM Plex Sans", "normal").text(order.mobileNumber || 'N/A', margin + 40, yPos);
+                doc.setFont("Helvetica", "bold").text("Mobile:", margin, yPos);
+                doc.setFont("Helvetica", "normal").text(order.mobileNumber || 'N/A', margin + 40, yPos);
                 yPos += lineHeight * 2;
 
-                doc.setFont("IBM Plex Sans", "bold").text("Order Date:", margin, yPos);
-                doc.setFont("IBM Plex Sans", "normal").text(order.createdAt ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A', margin + 40, yPos);
+                doc.setFont("Helvetica", "bold").text("Order Date:", margin, yPos);
+                doc.setFont("Helvetica", "normal").text(order.createdAt?.toDate ? new Date(order.createdAt.toDate()).toLocaleDateString() : 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
-                doc.setFont("IBM Plex Sans", "bold").text("Due Date:", margin, yPos);
-                doc.setFont("IBM Plex Sans", "normal").text(order.dueDate || 'N/A', margin + 40, yPos);
+                doc.setFont("Helvetica", "bold").text("Due Date:", margin, yPos);
+                doc.setFont("Helvetica", "normal").text(order.dueDate || 'N/A', margin + 40, yPos);
                 yPos += lineHeight;
 
                 if (order.status === 'completed' && order.completedAt) {
-                    doc.setFont("IBM Plex Sans", "bold").text("Completed Date:", margin, yPos);
-                    doc.setFont("IBM Plex Sans", "normal").text(new Date(order.completedAt.toDate()).toLocaleDateString(), margin + 40, yPos);
+                    doc.setFont("Helvetica", "bold").text("Completed Date:", margin, yPos);
+                    doc.setFont("Helvetica", "normal").text(new Date(order.completedAt.toDate()).toLocaleDateString(), margin + 40, yPos);
                     yPos += lineHeight;
                 }
                 if (order.createdBy) {
-                    doc.setFont("IBM Plex Sans", "bold").text("Created By:", margin, yPos);
-                    doc.setFont("IBM Plex Sans", "normal").text(order.createdBy, margin + 40, yPos);
+                    doc.setFont("Helvetica", "bold").text("Created By:", margin, yPos);
+                    doc.setFont("Helvetica", "normal").text(order.createdBy, margin + 40, yPos);
                     yPos += lineHeight;
                 }
                 if (order.completedBy && order.status === 'completed') {
-                    doc.setFont("IBM Plex Sans", "bold").text("Completed By:", margin, yPos);
-                    doc.setFont("IBM Plex Sans", "normal").text(order.completedBy, margin + 40, yPos);
+                    doc.setFont("Helvetica", "bold").text("Completed By:", margin, yPos);
+                    doc.setFont("Helvetica", "normal").text(order.completedBy, margin + 40, yPos);
                     yPos += lineHeight;
                 }
-                yPos += lineHeight; // Extra space before window details
+                yPos += lineHeight;
 
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
 
-                doc.setFont("IBM Plex Sans", "bold").setFontSize(14).text("Window Specifications", margin, yPos);
+                doc.setFont("Helvetica", "bold").setFontSize(14).text("Window Specifications", margin, yPos);
                 yPos += lineHeight;
 
                 let windowsForPdf = [];
@@ -977,7 +963,7 @@
                 
                 let orderTotalWidth = 0, orderTotalHeight = 0;
                 windowsForPdf.forEach((win, index) => {
-                    doc.setFont("IBM Plex Sans", "normal").setFontSize(12);
+                    doc.setFont("Helvetica", "normal").setFontSize(12);
                     doc.text(`Window ${index + 1}:`, margin + 5, yPos);
                     doc.text(`Height: ${win.height} cm`, margin + 40, yPos);
                     doc.text(`Width: ${win.width} cm`, margin + 90, yPos);
@@ -991,7 +977,7 @@
                 doc.setLineWidth(0.2).line(margin, yPos, 210 - margin, yPos);
                 yPos += lineHeight;
                 
-                doc.setFont("IBM Plex Sans", "bold").setFontSize(14);
+                doc.setFont("Helvetica", "bold").setFontSize(14);
                 doc.text(`Total Width: ${orderTotalWidth.toFixed(1)} cm`, margin, yPos);
                 yPos += lineHeight;
                 doc.text(`Total Height: ${orderTotalHeight.toFixed(1)} cm`, margin, yPos);
@@ -1002,7 +988,17 @@
             // --- FIREBASE & CORE LOGIC ---
             async function initializeFirebase() {
                 try {
-                    const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                    // Your web app's Firebase configuration
+                    const firebaseConfig = {
+                      apiKey: "AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E",
+                      authDomain: "harsha-jw.firebaseapp.com",
+                      projectId: "harsha-jw",
+                      storageBucket: "harsha-jw.appspot.com",
+                      messagingSenderId: "471408120499",
+                      appId: "1:471408120499:web:91e61514ad3703ce3b16c6",
+                      measurementId: "G-NBC16X4R1T"
+                    };
+
                     const app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
@@ -1010,11 +1006,12 @@
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
+                            // For simplicity, we'll use a generic user name prompt if not set.
+                            // The user profile part is simplified.
                             await fetchOrCreateUserProfile(user.uid);
                             listenForOrders();
                         } else {
-                            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                            await (initialAuthToken ? signInWithCustomToken(auth, initialAuthToken) : signInAnonymously(auth));
+                            await signInAnonymously(auth);
                         }
                     });
                 } catch (error) {
@@ -1024,52 +1021,20 @@
             }
 
             async function fetchOrCreateUserProfile(userId) {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const userProfileRef = doc(db, `artifacts/${appId}/user_profiles`, userId);
+                // This is a simplified version. For production, use the more robust version from the first response.
+                const userProfileRef = doc(db, `artifacts/default-app-id/user_profiles`, userId);
                 try {
                     const userDoc = await getDoc(userProfileRef);
                     if (userDoc.exists() && userDoc.data().userName) {
                         currentUserName = userDoc.data().userName;
                     } else {
-                        // Use a custom modal for name input instead of prompt
-                        await new Promise(resolve => {
-                            const namePromptModal = document.createElement('div');
-                            namePromptModal.className = 'modal';
-                            namePromptModal.innerHTML = `
-                                <div class="modal-content">
-                                    <p class="modal-message">Welcome! Please enter your name:</p>
-                                    <input type="text" id="user-name-input" class="input-field" placeholder="Your Name" required>
-                                    <button id="save-user-name-btn" class="btn-primary" style="margin-top: 1rem; width: 100%;">Save Name</button>
-                                </div>
-                            `;
-                            document.body.appendChild(namePromptModal);
-                            namePromptModal.style.display = 'flex';
-
-                            const userNameInput = namePromptModal.querySelector('#user-name-input');
-                            const saveUserNameBtn = namePromptModal.querySelector('#save-user-name-btn');
-
-                            saveUserNameBtn.addEventListener('click', async () => {
-                                const userName = userNameInput.value.trim();
-                                if (userName) {
-                                    try {
-                                        await setDoc(userProfileRef, { userName: userName, createdAt: serverTimestamp() }, { merge: true });
-                                        currentUserName = userName;
-                                        namePromptModal.remove();
-                                        showMessageModal("Your name has been saved!");
-                                        resolve();
-                                    } catch (error) {
-                                        console.error("Error saving user name:", error);
-                                        showMessageModal("Failed to save name. Please try again.");
-                                    }
-                                } else {
-                                    showMessageModal("Please enter a valid name.");
-                                }
-                            });
-                        });
+                        const name = prompt("Welcome! Please enter your name:", "Operator");
+                        currentUserName = name || "Anonymous";
+                        await setDoc(userProfileRef, { userName: currentUserName, createdAt: serverTimestamp() }, { merge: true });
                     }
                 } catch (error) {
                     console.error("User Profile Error:", error);
-                    showMessageModal("Could not load user profile. Please check Firebase security rules for 'user_profiles' collection.");
+                    currentUserName = "Operator"; // Fallback name
                 } finally {
                     userIdDisplay.textContent = currentUserName;
                     hideLoading();
@@ -1077,28 +1042,26 @@
             }
 
             function getOrdersCollectionRef() {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                // IMPORTANT: Changed to public path for shared data
-                // The rules should match this path: match /upvc_orders/{document=**}
-                return collection(db, `upvc_orders`); // Changed to top-level collection
+                // This path must match your Firestore security rules
+                return collection(db, `upvc_orders`); 
             }
 
             let unsubscribe;
             function listenForOrders() {
-                if(unsubscribe) unsubscribe(); // Unsubscribe from previous listener if any
+                if(unsubscribe) unsubscribe(); 
                 showSkeletonLoaders();
                 const ordersCollectionRef = getOrdersCollectionRef();
                 unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
                     orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     renderOrderList();
-                    if (currentViewedOrderId) { // Refresh details if viewing an order
+                    if (currentViewedOrderId) {
                         const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
                         if (updatedOrder) showOrderDetails(currentViewedOrderId);
                         else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
                     }
                 }, (error) => {
                     console.error("Firestore Snapshot Error:", error);
-                    showMessageModal("Error fetching real-time data.");
+                    showMessageModal("Error fetching real-time data. Check Firestore rules.");
                 });
             }
 
@@ -1120,8 +1083,8 @@
                     mobileNumber: customerMobileInput.value.trim(),
                     dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
-                    [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
+                    updatedAt: serverTimestamp(),
+                    ...(isUpdating ? {} : { status: 'pending', createdAt: serverTimestamp(), createdBy: currentUserName })
                 };
 
                 try {
@@ -1132,7 +1095,7 @@
                         await addDoc(collectionRef, orderData);
                     }
                     showMessageModal(`Order successfully ${isUpdating ? 'updated' : 'saved'}!`);
-                    showScreen(viewOrdersScreen); // Go back to view orders screen after save/update
+                    showScreen(viewOrdersScreen);
                 } catch (error) {
                     console.error("Error saving order: ", error);
                     showMessageModal("Failed to save order. Please check console and try again.");
@@ -1148,7 +1111,7 @@
                 try {
                     const collectionRef = getOrdersCollectionRef();
                     const docRef = doc(collectionRef, currentAction.id);
-                    await currentAction.callback(docRef); // Execute the stored callback
+                    await currentAction.callback(docRef);
                 } catch (error) {
                     console.error(`Error performing action '${currentAction.type}':`, error);
                     showMessageModal(`Action failed. Please try again.`);
@@ -1157,7 +1120,6 @@
                     hideLoading();
                 }
             }
-
 
             // --- EVENT LISTENERS ---
             document.getElementById('add-new-btn').addEventListener('click', setupFormForCreate);
@@ -1172,49 +1134,54 @@
             orderFilterSelect.addEventListener('change', renderOrderList);
 
             detailEditBtn.addEventListener('click', (e) => {
-                const order = orders.find(o => o.id === e.target.dataset.id);
+                const orderId = e.currentTarget.dataset.id;
+                const order = orders.find(o => o.id === orderId);
                 if (order) setupFormForEdit(order);
             });
             
             detailDeleteBtn.addEventListener('click', (e) => {
+                const orderId = e.currentTarget.dataset.id;
                 showConfirmationModal(
                     'Are you sure you want to delete this order? This action is permanent.', 
-                    'btn-danger', 'Delete Order', 'delete', e.target.dataset.id,
+                    'btn-danger', 'Delete Order', 'delete', orderId,
                     async (docRef) => {
                         await deleteDoc(docRef);
                         showMessageModal('Order deleted successfully.');
-                        showScreen(viewOrdersScreen); // Go back to list view after deleting
+                        showScreen(viewOrdersScreen);
                     }
                 );
             });
 
             detailCompleteBtn.addEventListener('click', (e) => {
-                const order = orders.find(o => o.id === e.target.dataset.id);
-                if (order?.status === 'completed') { // Added null check for order
+                const orderId = e.currentTarget.dataset.id;
+                const order = orders.find(o => o.id === orderId);
+                if (!order) {
+                    showMessageModal('Error: Order details not found.');
+                    return;
+                }
+
+                if (order.status === 'completed') {
                     showConfirmationModal(
                         'This will mark the order as pending again. Are you sure?',
-                        'btn-reopen', 'Reopen Order', 'reopen_to_edit', e.target.dataset.id,
+                        'btn-reopen', 'Reopen Order', 'reopen_to_edit', orderId,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'pending', completedAt: deleteField(), completedBy: deleteField() });
                             showMessageModal('Order has been reopened.');
                         }
                     );
-                } else if (order) { // Added else if to ensure order is not null
+                } else {
                     showConfirmationModal(
                         'Mark this order as complete?',
-                        'btn-success', 'Mark Complete', 'complete', e.target.dataset.id,
+                        'btn-success', 'Mark Complete', 'complete', orderId,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'completed', completedAt: serverTimestamp(), completedBy: currentUserName });
                             showMessageModal('Order marked as complete!');
                         }
                     );
-                } else {
-                    showMessageModal('Error: Order details not found for this action.');
-                    console.error("Order not found for complete/reopen action. ID:", e.target.dataset.id);
                 }
             });
 
-            detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.target.dataset.id));
+            detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.currentTarget.dataset.id));
             
             messageOkBtn.addEventListener('click', () => messageModal.style.display = 'none');
             cancelActionBtn.addEventListener('click', () => confirmationModal.style.display = 'none');
@@ -1222,7 +1189,7 @@
 
             // --- INITIALIZATION ---
             initializeFirebase();
-            addWindowInput(windowsContainer, 1); // Add initial window input for new order form
+            addWindowInput(windowsContainer, 1);
         })();
     </script>
 </body>
