@@ -273,8 +273,32 @@
             border-radius: 50%; width: 50px; height: 50px;
             animation: spin 1s linear infinite;
         }
+
+        /* --- 8. HISTORY MODAL STYLES --- */
+        .history-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-border);
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .history-item-meta {
+            font-size: 0.8rem;
+            color: var(--light-text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .history-item-action {
+            font-weight: 500;
+            color: var(--light-text-primary);
+        }
+        .history-detail {
+            font-size: 0.85rem;
+            color: var(--light-text-secondary);
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
         
-        /* --- 8. RESPONSIVE ADJUSTMENTS --- */
+        /* --- 9. RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 640px) {
             .app-container { margin: 0; padding: 1rem; }
             .page-header { flex-direction: column; gap: 1rem; align-items: stretch; }
@@ -454,6 +478,7 @@
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.75rem; margin-top: 2rem; border-top: 1px solid var(--light-border); padding-top: 2rem;">
+                    <button id="detail-show-history-btn" class="btn-secondary"><span class="material-symbols-outlined">history</span>Show History</button>
                     <button id="detail-generate-pdf-btn" class="btn-secondary"><span class="material-symbols-outlined">picture_as_pdf</span>Generate PDF</button>
                     <button id="detail-delete-btn" class="btn-danger"><span class="material-symbols-outlined">delete</span>Delete</button>
                     <button id="detail-edit-btn" class="btn-primary"><span class="material-symbols-outlined">edit</span>Edit Order</button>
@@ -483,6 +508,19 @@
         </div>
     </div>
 
+    <!-- History Modal -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content" style="max-width: 600px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 id="history-modal-title">Order History</h3>
+                <button id="history-close-btn" class="remove-window-btn" style="position: static; border-radius: 50%;"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <ul id="history-list" style="list-style-type: none; padding: 0; max-height: 60vh; overflow-y: auto;">
+                <!-- History items will be rendered here -->
+            </ul>
+        </div>
+    </div>
+
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay">
         <div class="spinner"></div>
@@ -492,7 +530,7 @@
         // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, addDoc, setDoc, getDoc, getDocs, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Use a self-executing anonymous function to encapsulate the script
         (function() {
@@ -550,6 +588,7 @@
             const detailDeleteBtn = document.getElementById('detail-delete-btn');
             const detailGeneratePdfBtn = document.getElementById('detail-generate-pdf-btn');
             const detailCompleteBtn = document.getElementById('detail-complete-btn');
+            const detailShowHistoryBtn = document.getElementById('detail-show-history-btn');
 
             const confirmationModal = document.getElementById('confirmation-modal');
             const modalMessage = document.getElementById('modal-message');
@@ -560,6 +599,11 @@
             const messageText = document.getElementById('message-text');
             const messageOkBtn = document.getElementById('message-ok-btn');
             const loadingOverlay = document.getElementById('loading-overlay');
+
+            // History Modal Elements
+            const historyModal = document.getElementById('history-modal');
+            const historyList = document.getElementById('history-list');
+            const historyCloseBtn = document.getElementById('history-close-btn');
             
             // --- APP STATE ---
             let orders = [];
@@ -773,23 +817,6 @@
                         orderListContainer.appendChild(card);
                     });
                 
-                // Update total width/height displays (these are for all orders, not filtered)
-                let totalWidthAll = 0;
-                let totalHeightAll = 0;
-                orders.forEach(order => {
-                    let currentWindows = order.windows;
-                    if (typeof currentWindows === 'string') {
-                        try { currentWindows = JSON.parse(currentWindows); } catch(e) { currentWindows = []; }
-                    }
-                    currentWindows.forEach(win => {
-                        totalWidthAll += parseFloat(win.width || 0);
-                        totalHeightAll += parseFloat(win.height || 0);
-                    });
-                });
-                // Ensure elements exist before setting textContent
-                if (document.getElementById('total-width-display')) document.getElementById('total-width-display').textContent = totalWidthAll.toFixed(1);
-                if (document.getElementById('total-height-display')) document.getElementById('total-height-display').textContent = totalHeightAll.toFixed(1);
-
                 populateUpcomingOverdueList(); // Always update critical list based on all orders
             };
 
@@ -879,6 +906,7 @@
                 detailDeleteBtn.dataset.id = order.id;
                 detailGeneratePdfBtn.dataset.id = order.id;
                 detailCompleteBtn.dataset.id = order.id;
+                detailShowHistoryBtn.dataset.id = order.id;
 
                 if (order.status === 'completed') {
                     detailCompleteBtn.innerHTML = '<span class="material-symbols-outlined">refresh</span>Reopen Order';
@@ -995,12 +1023,11 @@
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
-                            // Use user.displayName from Google if available, otherwise fallback
                             await fetchOrCreateUserProfile(user.uid, user.displayName); 
                             listenForOrders();
-                            showScreen(mainMenuScreen); // Show main menu after login
+                            showScreen(mainMenuScreen);
                         } else {
-                            showScreen(loginScreen); // Show login screen if not authenticated
+                            showScreen(loginScreen);
                         }
                     });
                 } catch (error) {
@@ -1009,13 +1036,11 @@
                 }
             }
 
-            // Handles Google Sign-In
             async function handleGoogleSignIn() {
                 showLoading();
                 const provider = new GoogleAuthProvider();
                 try {
                     const result = await signInWithPopup(auth, provider);
-                    // User signed in, onAuthStateChanged will handle the rest
                     showMessageModal(`Welcome, ${result.user.displayName || result.user.email}!`);
                 } catch (error) {
                     console.error("Google Sign-In Error:", error);
@@ -1032,13 +1057,11 @@
                 }
             }
 
-            // Handles Sign Out
             async function handleSignOut() {
                 showLoading();
                 try {
                     await signOut(auth);
                     showMessageModal("You have been signed out.");
-                    // onAuthStateChanged will handle screen transition
                 } catch (error) {
                     console.error("Sign Out Error:", error);
                     showMessageModal("Failed to sign out. Please try again.");
@@ -1047,46 +1070,53 @@
                 }
             }
 
-
             async function fetchOrCreateUserProfile(userId, googleDisplayName) {
-                // Use the hardcoded appId from your firebaseConfig for user_profiles access
-                // This matches your working security rule: match /artifacts/default-app-id/user_profiles/{userId}
                 const userProfileRef = doc(db, `artifacts/default-app-id/user_profiles`, userId);
                 try {
                     const userDoc = await getDoc(userProfileRef);
                     if (userDoc.exists() && userDoc.data().userName) {
                         currentUserName = userDoc.data().userName;
                     } else {
-                        // If profile doesn't exist, use Google display name or fallback
                         currentUserName = googleDisplayName || "Anonymous User";
                         await setDoc(userProfileRef, { userName: currentUserName, createdAt: serverTimestamp() }, { merge: true });
-                        // showMessageModal("User profile created/updated!"); // Removed to avoid extra popup on login
                     }
                 } catch (error) {
                     console.error("User Profile Error:", error);
                     showMessageModal("Could not load user profile. Please check Firebase security rules for 'user_profiles' collection.");
                 } finally {
                     userIdDisplay.textContent = currentUserName;
-                    // hideLoading() is now called in onAuthStateChanged for initial load
                 }
             }
 
             function getOrdersCollectionRef() {
-                // This path must match your Firestore security rules
-                return collection(db, `upvc_orders`); // This matches your provided rule
+                return collection(db, `upvc_orders`);
+            }
+
+            async function logHistory(orderId, action, details = {}) {
+                if (!orderId) return;
+                try {
+                    const historyCollectionRef = collection(db, `upvc_orders/${orderId}/history`);
+                    await addDoc(historyCollectionRef, {
+                        action,
+                        details,
+                        modifiedBy: currentUserName,
+                        timestamp: serverTimestamp()
+                    });
+                } catch (error) {
+                    console.error("Error logging history:", error);
+                }
             }
 
             let unsubscribe;
             function listenForOrders() {
-                if(unsubscribe) unsubscribe(); // Unsubscribe from previous listener if any
+                if(unsubscribe) unsubscribe(); 
                 showSkeletonLoaders();
-                // Only attempt to listen for orders if a user is logged in
                 if (currentUserId) {
                     const ordersCollectionRef = getOrdersCollectionRef();
                     unsubscribe = onSnapshot(ordersCollectionRef, (snapshot) => {
                         orders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                         renderOrderList();
-                        if (currentViewedOrderId) { // Refresh details if viewing an order
+                        if (currentViewedOrderId) {
                             const updatedOrder = orders.find(o => o.id === currentViewedOrderId);
                             if (updatedOrder) showOrderDetails(currentViewedOrderId);
                             else { currentViewedOrderId = null; showScreen(viewOrdersScreen); }
@@ -1096,11 +1126,10 @@
                         showMessageModal("Error fetching real-time data.");
                     });
                 } else {
-                    // If no user, clear orders and stop listening
                     orders = [];
-                    renderOrderList(); // Render empty list
-                    populateUpcomingOverdueList(); // Clear critical alerts
-                    hideLoading(); // Ensure loading is hidden if no data to fetch
+                    renderOrderList();
+                    populateUpcomingOverdueList();
+                    hideLoading();
                 }
             }
 
@@ -1122,16 +1151,29 @@
                     mobileNumber: customerMobileInput.value.trim(),
                     dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
-                    [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
                 };
 
                 try {
                     const collectionRef = getOrdersCollectionRef();
                     if(isUpdating) {
-                        await updateDoc(doc(collectionRef, orderId), orderData);
+                        const originalOrder = orders.find(o => o.id === orderId);
+                        const updateData = { ...orderData, updatedAt: serverTimestamp() };
+                        await updateDoc(doc(collectionRef, orderId), updateData);
+
+                        const changes = {};
+                        if (originalOrder.name !== updateData.name) changes.name = `from "${originalOrder.name}" to "${updateData.name}"`;
+                        if (originalOrder.address !== updateData.address) changes.address = "updated";
+                        if (originalOrder.mobileNumber !== updateData.mobileNumber) changes.mobileNumber = `from "${originalOrder.mobileNumber}" to "${updateData.mobileNumber}"`;
+                        if (originalOrder.dueDate !== updateData.dueDate) changes.dueDate = `from "${originalOrder.dueDate}" to "${updateData.dueDate}"`;
+                        if (originalOrder.windows !== updateData.windows) changes.windows = "updated";
+                        
+                        if (Object.keys(changes).length > 0) {
+                            await logHistory(orderId, 'Order Details Edited', changes);
+                        }
                     } else {
-                        await addDoc(collectionRef, orderData);
+                        const newData = { ...orderData, status: 'pending', createdBy: currentUserName, createdAt: serverTimestamp() };
+                        const newDocRef = await addDoc(collectionRef, newData);
+                        await logHistory(newDocRef.id, 'Order Created');
                     }
                     showMessageModal(`Order successfully ${isUpdating ? 'updated' : 'saved'}!`);
                     showScreen(viewOrdersScreen);
@@ -1160,12 +1202,57 @@
                 }
             }
 
+            async function showHistoryModal(orderId) {
+                showLoading();
+                historyList.innerHTML = '<li>Loading history...</li>';
+                historyModal.style.display = 'flex';
+                try {
+                    const historyCollectionRef = collection(db, `upvc_orders/${orderId}/history`);
+                    const q = query(historyCollectionRef, orderBy('timestamp', 'desc'));
+                    const snapshot = await getDocs(q);
+                    const historyData = snapshot.docs.map(doc => doc.data());
+
+                    if (historyData.length === 0) {
+                        historyList.innerHTML = '<li>No history found for this order.</li>';
+                        return;
+                    }
+
+                    historyList.innerHTML = '';
+                    historyData.forEach(entry => {
+                        const li = document.createElement('li');
+                        li.className = 'history-item';
+                        
+                        const timestamp = entry.timestamp?.toDate ? entry.timestamp.toDate().toLocaleString() : 'Just now';
+                        
+                        let detailsHtml = '';
+                        if (entry.details && Object.keys(entry.details).length > 0) {
+                            detailsHtml += '<ul class="history-detail">';
+                            for (const [key, value] of Object.entries(entry.details)) {
+                                detailsHtml += `<li><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${value}</li>`;
+                            }
+                            detailsHtml += '</ul>';
+                        }
+
+                        li.innerHTML = `
+                            <div class="history-item-meta">${timestamp} by <strong>${entry.modifiedBy || 'System'}</strong></div>
+                            <div class="history-item-action">${entry.action}</div>
+                            ${detailsHtml}
+                        `;
+                        historyList.appendChild(li);
+                    });
+
+                } catch (error) {
+                    console.error("Error fetching history:", error);
+                    historyList.innerHTML = '<li>Could not load history.</li>';
+                } finally {
+                    hideLoading();
+                }
+            }
+
             // --- EVENT LISTENERS ---
-            // Login button listener (only visible on login screen)
             if (googleSignInBtn) {
                 googleSignInBtn.addEventListener('click', handleGoogleSignIn);
             }
-            // Sign out button listener (only visible on main menu)
             if (signOutBtn) {
                 signOutBtn.addEventListener('click', handleSignOut);
             }
@@ -1211,9 +1298,10 @@
                 if (order.status === 'completed') {
                     showConfirmationModal(
                         'This will mark the order as pending again. Are you sure?',
-                        'btn-reopen', 'Reopen Order', 'reopen_to_edit', orderId,
+                        'btn-reopen', 'Reopen Order', 'reopen', orderId,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'pending', completedAt: deleteField(), completedBy: deleteField() });
+                            await logHistory(orderId, 'Order Reopened');
                             showMessageModal('Order has been reopened.');
                         }
                     );
@@ -1223,10 +1311,16 @@
                         'btn-success', 'Mark Complete', 'complete', orderId,
                         async (docRef) => {
                             await updateDoc(docRef, { status: 'completed', completedAt: serverTimestamp(), completedBy: currentUserName });
+                            await logHistory(orderId, 'Order Marked as Complete');
                             showMessageModal('Order marked as complete!');
                         }
                     );
                 }
+            });
+
+            detailShowHistoryBtn.addEventListener('click', (e) => {
+                const orderId = e.currentTarget.dataset.id;
+                showHistoryModal(orderId);
             });
 
             detailGeneratePdfBtn.addEventListener('click', (e) => generateOrderPdf(e.currentTarget.dataset.id));
@@ -1234,6 +1328,7 @@
             messageOkBtn.addEventListener('click', () => messageModal.style.display = 'none');
             cancelActionBtn.addEventListener('click', () => confirmationModal.style.display = 'none');
             confirmActionBtn.addEventListener('click', performConfirmedAction);
+            historyCloseBtn.addEventListener('click', () => historyModal.style.display = 'none');
 
             // --- INITIALIZATION ---
             initializeFirebase();
