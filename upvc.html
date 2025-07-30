@@ -1141,6 +1141,48 @@
                 }
             }
 
+            /**
+             * Compares old and new window arrays and returns a detailed object of changes.
+             * @param {Array} oldWindows - The original array of window objects.
+             * @param {Array} newWindows - The new array of window objects.
+             * @returns {Object} An object describing the changes.
+             */
+            function compareWindowChanges(oldWindows, newWindows) {
+                const changes = {};
+                
+                // Check for modifications and deletions by iterating through old windows
+                oldWindows.forEach((oldWin, i) => {
+                    const winNum = i + 1;
+                    if (newWindows[i]) {
+                        // Window at this index still exists, check for modifications
+                        const newWin = newWindows[i];
+                        const heightChanged = oldWin.height !== newWin.height;
+                        const widthChanged = oldWin.width !== newWin.width;
+
+                        if (heightChanged || widthChanged) {
+                            let details = [];
+                            if (heightChanged) details.push(`Height: ${oldWin.height}cm → ${newWin.height}cm`);
+                            if (widthChanged) details.push(`Width: ${oldWin.width}cm → ${newWin.width}cm`);
+                            changes[`Window ${winNum}`] = details.join(', ');
+                        }
+                    } else {
+                        // Window at this index no longer exists, it was deleted
+                        changes[`Window ${winNum} Deleted`] = `(was H: ${oldWin.height}cm, W: ${oldWin.width}cm)`;
+                    }
+                });
+
+                // Check for additions
+                if (newWindows.length > oldWindows.length) {
+                    for (let i = oldWindows.length; i < newWindows.length; i++) {
+                        const winNum = i + 1;
+                        const newWin = newWindows[i];
+                        changes[`Window ${winNum} Added`] = `(H: ${newWin.height}cm, W: ${newWin.width}cm)`;
+                    }
+                }
+
+                return changes;
+            }
+
             async function handleFormSubmit(e) {
                 e.preventDefault();
                 showLoading();
@@ -1166,18 +1208,26 @@
                     if(isUpdating) {
                         const originalOrder = orders.find(o => o.id === orderId);
                         const updateData = { ...orderData, updatedAt: serverTimestamp() };
-                        await updateDoc(doc(collectionRef, orderId), updateData);
-
+                        
                         const changes = {};
                         if (originalOrder.name !== updateData.name) changes.name = `from "${originalOrder.name}" to "${updateData.name}"`;
                         if (originalOrder.address !== updateData.address) changes.address = "updated";
                         if (originalOrder.mobileNumber !== updateData.mobileNumber) changes.mobileNumber = `from "${originalOrder.mobileNumber}" to "${updateData.mobileNumber}"`;
                         if (originalOrder.dueDate !== updateData.dueDate) changes.dueDate = `from "${originalOrder.dueDate}" to "${updateData.dueDate}"`;
-                        if (originalOrder.windows !== updateData.windows) changes.windows = "updated";
                         
-                        if (Object.keys(changes).length > 0) {
-                            await logHistory(orderId, 'Order Details Edited', changes);
+                        // Get detailed window changes
+                        const originalWindows = JSON.parse(originalOrder.windows || '[]');
+                        const windowChanges = compareWindowChanges(originalWindows, windowsData);
+
+                        // Combine all changes into one object
+                        const allChanges = { ...changes, ...windowChanges };
+
+                        // Only update and log if there are actual changes
+                        if (Object.keys(allChanges).length > 0) {
+                            await updateDoc(doc(collectionRef, orderId), updateData);
+                            await logHistory(orderId, 'Order Details Edited', allChanges);
                         }
+                        
                     } else {
                         const newData = { ...orderData, status: 'pending', createdBy: currentUserName, createdAt: serverTimestamp() };
                         const newDocRef = await addDoc(collectionRef, newData);
