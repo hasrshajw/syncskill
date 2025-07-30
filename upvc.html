@@ -328,7 +328,7 @@
             </div>
         </div>
 
-        <!-- Add/Edit Order Screens -->
+        <!-- Add/Edit Order Screen (Reusable Form) -->
         <div id="form-screen" class="screen">
             <div class="page-header">
                 <h2 id="form-title">Create New Order</h2>
@@ -462,57 +462,6 @@
             </div>
         </div>
 
-        <!-- Edit Order Screen -->
-        <div id="edit-order-screen" class="screen">
-            <div class="page-header">
-                <h2 id="edit-form-title">Edit Order</h2>
-                <button class="back-to-view-orders btn-secondary">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                    Back
-                </button>
-            </div>
-            <div class="card">
-                <form id="edit-form-actual">
-                    <input type="hidden" id="edit-order-id">
-                    <h3 style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-border);">Customer Information</h3>
-                    <div class="form-grid">
-                        <div class="input-group">
-                            <input type="text" id="edit-customer-name" class="input-field" placeholder=" " required>
-                            <label for="edit-customer-name" class="input-label">Customer Name</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" id="edit-customer-mobile" class="input-field" placeholder=" " pattern="[0-9]{10}" title="10-digit mobile number" required>
-                            <label for="edit-customer-mobile" class="input-label">Mobile Number</label>
-                        </div>
-                        <div class="input-group grid-col-span-2">
-                            <textarea id="edit-customer-address" rows="2" class="input-field" placeholder=" " required></textarea>
-                            <label for="edit-customer-address" class="input-label">Customer Address</label>
-                        </div>
-                        <div class="input-group grid-col-span-2">
-                            <input type="date" id="edit-due-date" class="input-field" placeholder=" " required>
-                            <label for="edit-due-date" class="input-label">Due Date</label>
-                        </div>
-                    </div>
-
-                    <h3 style="margin-top: 2.5rem; margin-bottom: 1rem;">Window Details</h3>
-                    <div id="edit-windows-container">
-                        <!-- Window entries will be added here by JS -->
-                    </div>
-                    <button type="button" id="add-edit-window-btn" class="btn-secondary" style="width: 100%; margin: 1rem 0;">
-                        <span class="material-symbols-outlined">add</span>
-                        Add Another Window
-                    </button>
-                    
-                    <div style="display: flex; justify-content: flex-end; margin-top: 2rem; border-top: 1px solid var(--light-border); padding-top: 2rem;">
-                        <button type="submit" id="update-order-btn" class="btn-success">
-                            <span class="material-symbols-outlined">save</span>
-                            Update Order
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 
     <!-- Confirmation Modal -->
@@ -540,7 +489,7 @@
     </div>
     
     <script type="module">
-        // Import Firebase modules directly from CDN
+        // Import Firebase modules directly into this script module
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, addDoc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, deleteField } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -548,17 +497,70 @@
         // Use a self-executing anonymous function to encapsulate the script
         (function() {
             // --- CACHED DOM ELEMENTS ---
-            // These are now initialized inside initializeFirebase or onAuthStateChanged
-            // to ensure they exist when accessed.
-            let mainMenuScreen, formScreen, viewOrdersScreen, orderDetailsScreen, loginScreen;
-            let formTitle, orderForm, orderIdInput, customerNameInput, customerAddressInput, customerMobileInput, dueDateInput, windowsContainer, addWindowBtn, saveOrderBtn;
-            let orderListContainer, orderListEmpty, userIdDisplay, orderSearchInput, orderFilterSelect, upcomingOverdueList;
-            let googleSignInBtn, signOutBtn;
-            let detailCustomerName, detailCustomerAddress, detailCustomerMobile, detailOrderTakenDate, detailDueDate, detailStatusTag, detailCompletedDateRow, detailCompletedDate, detailCreatedByRow, detailCreatedBy, detailCompletedByRow, detailCompletedBy, detailWindowsList, detailWindowCount, detailTotalWidth, detailTotalHeight, detailEditBtn, detailDeleteBtn, detailGeneratePdfBtn, detailCompleteBtn;
-            let confirmationModal, modalMessage, confirmActionBtn, cancelActionBtn;
-            let messageModal, messageText, messageOkBtn;
-            let loadingOverlay;
+            const mainMenuScreen = document.getElementById('main-menu');
+            const formScreen = document.getElementById('form-screen');
+            const viewOrdersScreen = document.getElementById('view-orders-screen');
+            const orderDetailsScreen = document.getElementById('order-details-screen');
+            const loginScreen = document.getElementById('login-screen'); 
 
+            const addNewBtn = document.getElementById('add-new-btn');
+            const viewOrdersBtn = document.getElementById('view-orders-btn');
+
+            // Reusable Form Elements
+            const orderForm = document.getElementById('order-form');
+            const formTitle = document.getElementById('form-title');
+            const orderIdInput = document.getElementById('order-id');
+            const customerNameInput = document.getElementById('customer-name');
+            const customerAddressInput = document.getElementById('customer-address');
+            const customerMobileInput = document.getElementById('customer-mobile');
+            const dueDateInput = document.getElementById('due-date');
+            const windowsContainer = document.getElementById('windows-container');
+            const addWindowBtn = document.getElementById('add-window-btn');
+            const saveOrderBtn = document.getElementById('save-order-btn');
+            
+            const orderListContainer = document.getElementById('order-list-container');
+            const orderListEmpty = document.getElementById('order-list-empty');
+            const userIdDisplay = document.getElementById('user-id-display');
+            const orderSearchInput = document.getElementById('order-search');
+            const orderFilterSelect = document.getElementById('order-filter');
+            const upcomingOverdueList = document.getElementById('upcoming-overdue-list');
+
+            const googleSignInBtn = document.getElementById('google-sign-in-btn'); 
+            const signOutBtn = document.getElementById('sign-out-btn'); 
+
+
+            // Order Details Screen Elements
+            const detailCustomerName = document.getElementById('detail-customer-name');
+            const detailCustomerAddress = document.getElementById('detail-customer-address');
+            const detailCustomerMobile = document.getElementById('detail-customer-mobile');
+            const detailOrderTakenDate = document.getElementById('detail-order-taken-date');
+            const detailDueDate = document.getElementById('detail-due-date');
+            const detailStatusTag = document.getElementById('detail-status-tag');
+            const detailCompletedDateRow = document.getElementById('detail-completed-date-row');
+            const detailCompletedDate = document.getElementById('detail-completed-date');
+            const detailCreatedByRow = document.getElementById('detail-created-by-row');
+            const detailCreatedBy = document.getElementById('detail-created-by');
+            const detailCompletedByRow = document.getElementById('detail-completed-by-row');
+            const detailCompletedBy = document.getElementById('detail-completed-by');
+            const detailWindowsList = document.getElementById('detail-windows-list');
+            const detailWindowCount = document.getElementById('detail-window-count');
+            const detailTotalWidth = document.getElementById('detail-total-width');
+            const detailTotalHeight = document.getElementById('detail-total-height');
+            const detailEditBtn = document.getElementById('detail-edit-btn');
+            const detailDeleteBtn = document.getElementById('detail-delete-btn');
+            const detailGeneratePdfBtn = document.getElementById('detail-generate-pdf-btn');
+            const detailCompleteBtn = document.getElementById('detail-complete-btn');
+
+            const confirmationModal = document.getElementById('confirmation-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const confirmActionBtn = document.getElementById('confirm-action-btn');
+            const cancelActionBtn = document.getElementById('cancel-action-btn');
+
+            const messageModal = document.getElementById('message-modal');
+            const messageText = document.getElementById('message-text');
+            const messageOkBtn = document.getElementById('message-ok-btn');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            
             // --- APP STATE ---
             let orders = [];
             let currentAction = { type: null, id: null, callback: null };
@@ -644,12 +646,12 @@
             };
 
             const setupFormForCreate = () => {
-                if (formTitle) formTitle.textContent = 'Create New Order'; // Defensive check
-                if (saveOrderBtn) saveOrderBtn.innerHTML = '<span class="material-symbols-outlined">save</span> Save Order'; // Defensive check
-                if (orderForm) orderForm.reset(); // Defensive check
-                if (orderIdInput) orderIdInput.value = ''; // Defensive check
-                if (windowsContainer) windowsContainer.innerHTML = ''; // Defensive check
-                if (windowsContainer) addWindowInput(windowsContainer, 1); // Defensive check
+                formTitle.textContent = 'Create New Order';
+                saveOrderBtn.innerHTML = '<span class="material-symbols-outlined">save</span> Save Order';
+                orderForm.reset();
+                orderIdInput.value = '';
+                windowsContainer.innerHTML = '';
+                addWindowInput(windowsContainer, 1);
                 showScreen(formScreen);
             };
 
@@ -977,79 +979,19 @@
                 try {
                     // Your web app's Firebase configuration
                     const firebaseConfig = {
-                      apiKey: "AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E",
-                      authDomain: "harsha-jw.firebaseapp.com",
-                      projectId: "harsha-jw",
-                      storageBucket: "harsha-jw.appspot.com",
-                      messagingSenderId: "471408120499",
-                      appId: "1:471408120499:web:91e61514ad3703ce3b16c6",
-                      measurementId: "G-NBC16X4R1T"
+                        apiKey: "AIzaSyBp4XoqX-MYvOlweR5dPfEqAP9qXu2P81E",
+                        authDomain: "harsha-jw.firebaseapp.com",
+                        projectId: "harsha-jw",
+                        storageBucket: "harsha-jw.appspot.com",
+                        messagingSenderId: "471408120499",
+                        appId: "1:471408120499:web:91e61514ad3703ce3b16c6",
+                        measurementId: "G-NBC16X4R1T"
                     };
 
                     const app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
                     
-                    // Initialize DOM elements here, after Firebase app is created
-                    mainMenuScreen = document.getElementById('main-menu');
-                    formScreen = document.getElementById('form-screen');
-                    viewOrdersScreen = document.getElementById('view-orders-screen');
-                    orderDetailsScreen = document.getElementById('order-details-screen');
-                    loginScreen = document.getElementById('login-screen'); 
-
-                    formTitle = document.getElementById('form-title');
-                    orderForm = document.getElementById('order-form');
-                    orderIdInput = document.getElementById('order-id');
-                    customerNameInput = document.getElementById('customer-name');
-                    customerAddressInput = document.getElementById('customer-address');
-                    customerMobileInput = document.getElementById('customer-mobile');
-                    dueDateInput = document.getElementById('due-date');
-                    windowsContainer = document.getElementById('windows-container');
-                    addWindowBtn = document.getElementById('add-window-btn');
-                    saveOrderBtn = document.getElementById('save-order-btn');
-                    
-                    orderListContainer = document.getElementById('order-list-container');
-                    orderListEmpty = document.getElementById('order-list-empty');
-                    userIdDisplay = document.getElementById('user-id-display');
-                    orderSearchInput = document.getElementById('order-search');
-                    orderFilterSelect = document.getElementById('order-filter');
-                    upcomingOverdueList = document.getElementById('upcoming-overdue-list');
-
-                    googleSignInBtn = document.getElementById('google-sign-in-btn'); 
-                    signOutBtn = document.getElementById('sign-out-btn'); 
-
-                    detailCustomerName = document.getElementById('detail-customer-name');
-                    detailCustomerAddress = document.getElementById('detail-customer-address');
-                    detailCustomerMobile = document.getElementById('detail-customer-mobile');
-                    detailOrderTakenDate = document.getElementById('detail-order-taken-date');
-                    detailDueDate = document.getElementById('detail-due-date');
-                    detailStatusTag = document.getElementById('detail-status-tag');
-                    detailCompletedDateRow = document.getElementById('detail-completed-date-row');
-                    detailCompletedDate = document.getElementById('detail-completed-date');
-                    detailCreatedByRow = document.getElementById('detail-created-by-row');
-                    detailCreatedBy = document.getElementById('detail-created-by');
-                    detailCompletedByRow = document.getElementById('detail-completed-by-row');
-                    detailCompletedBy = document.getElementById('detail-completed-by');
-                    detailWindowsList = document.getElementById('detail-windows-list');
-                    detailWindowCount = document.getElementById('detail-window-count');
-                    detailTotalWidth = document.getElementById('detail-total-width');
-                    detailTotalHeight = document.getElementById('detail-total-height');
-                    detailEditBtn = document.getElementById('detail-edit-btn');
-                    detailDeleteBtn = document.getElementById('detail-delete-btn');
-                    detailGeneratePdfBtn = document.getElementById('detail-generate-pdf-btn');
-                    detailCompleteBtn = document.getElementById('detail-complete-btn');
-
-                    confirmationModal = document.getElementById('confirmation-modal');
-                    modalMessage = document.getElementById('modal-message');
-                    confirmActionBtn = document.getElementById('confirm-action-btn');
-                    cancelActionBtn = document.getElementById('cancel-action-btn');
-
-                    messageModal = document.getElementById('message-modal');
-                    messageText = document.getElementById('message-text');
-                    messageOkBtn = document.getElementById('message-ok-btn');
-                    loadingOverlay = document.getElementById('loading-overlay');
-
-
                     onAuthStateChanged(auth, async (user) => {
                         if (user) {
                             currentUserId = user.uid;
@@ -1174,52 +1116,6 @@
                     width: entry.querySelector('.window-width-input').value,
                 }));
 
-                // Basic validation for customer name, mobile, address, due date
-                if (!customerNameInput.value.trim()) {
-                    showMessageModal("Customer Name is required.");
-                    hideLoading();
-                    return;
-                }
-                if (!customerAddressInput.value.trim()) {
-                    showMessageModal("Customer Address is required.");
-                    hideLoading();
-                    return;
-                }
-                // Mobile number pattern validation (already in HTML, but double-check here)
-                const mobilePattern = /^[0-9]{10}$/;
-                if (!mobilePattern.test(customerMobileInput.value.trim())) {
-                    showMessageModal("Please enter a valid 10-digit mobile number.");
-                    hideLoading();
-                    return;
-                }
-                if (!dueDateInput.value) {
-                    showMessageModal("Due Date is required.");
-                    hideLoading();
-                    return;
-                }
-
-                // Validate window dimensions
-                let allWindowsValid = true;
-                if (windowsData.length === 0) {
-                    allWindowsValid = false;
-                    showMessageModal("Please add at least one window entry.");
-                    hideLoading();
-                    return;
-                }
-                for (const win of windowsData) {
-                    if (isNaN(parseFloat(win.height)) || parseFloat(win.height) <= 0 ||
-                        isNaN(parseFloat(win.width)) || parseFloat(win.width) <= 0) {
-                        allWindowsValid = false;
-                        showMessageModal("Please ensure all window height and width values are positive numbers.");
-                        hideLoading();
-                        return;
-                    }
-                }
-                if (!allWindowsValid) { // Redundant if checks above return, but good for safety
-                    return;
-                }
-
-
                 const orderData = {
                     name: customerNameInput.value.trim(),
                     address: customerAddressInput.value.trim(),
@@ -1227,7 +1123,7 @@
                     dueDate: dueDateInput.value,
                     windows: JSON.stringify(windowsData),
                     [isUpdating ? 'updatedAt' : 'createdAt']: serverTimestamp(),
-                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName, createdByUid: currentUserId }) // Store createdByUid
+                    ...(isUpdating ? {} : { status: 'pending', createdBy: currentUserName })
                 };
 
                 try {
@@ -1274,8 +1170,8 @@
                 signOutBtn.addEventListener('click', handleSignOut);
             }
 
-            document.getElementById('add-new-btn').addEventListener('click', setupFormForCreate);
-            document.getElementById('view-orders-btn').addEventListener('click', () => showScreen(viewOrdersScreen));
+            addNewBtn.addEventListener('click', setupFormForCreate);
+            viewOrdersBtn.addEventListener('click', () => showScreen(viewOrdersScreen));
             document.querySelectorAll('.back-to-main').forEach(btn => btn.addEventListener('click', () => showScreen(mainMenuScreen)));
             document.querySelectorAll('.back-to-view-orders').forEach(btn => btn.addEventListener('click', () => showScreen(viewOrdersScreen)));
             
