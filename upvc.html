@@ -266,7 +266,9 @@
         .loading-overlay {
             position: fixed; inset: 0; width: 100%; height: 100%;
             background-color: rgba(255, 255, 255, 0.9); z-index: 1001;
-            display: none; align-items: center; justify-content: center;
+            /* Changed to flex to be visible on page load */
+            display: flex; 
+            align-items: center; justify-content: center;
         }
         .spinner {
             border: 6px solid var(--light-bg-tertiary); border-top: 6px solid var(--color-primary);
@@ -311,8 +313,8 @@
 <body>
 
     <div class="app-container">
-        <!-- Login Screen (Initial View) -->
-        <div id="login-screen" class="screen active text-center">
+        <!-- Login Screen (Initial View) - active class removed -->
+        <div id="login-screen" class="screen text-center">
             <h1 style="margin-bottom: 0.5rem;">Welcome to uPVC Pro</h1>
             <p style="margin-bottom: 2rem; color: var(--light-text-muted);">Sign in to manage your orders.</p>
             <button id="google-sign-in-btn" class="btn-primary">
@@ -1027,12 +1029,22 @@
                             listenForOrders();
                             showScreen(mainMenuScreen);
                         } else {
+                            // If no user, clear data and show login screen
+                            if(unsubscribe) unsubscribe();
+                            orders = [];
+                            currentUserId = null;
+                            currentUserName = "Unknown User";
+                            renderOrderList();
+                            populateUpcomingOverdueList();
                             showScreen(loginScreen);
                         }
+                        // Hide the main loading overlay after the auth check is complete
+                        hideLoading();
                     });
                 } catch (error) {
                     console.error("Firebase Initialization Error:", error);
                     showMessageModal("Critical error initializing the application. Please refresh.");
+                    hideLoading();
                 }
             }
 
@@ -1041,19 +1053,17 @@
                 const provider = new GoogleAuthProvider();
                 try {
                     const result = await signInWithPopup(auth, provider);
-                    showMessageModal(`Welcome, ${result.user.displayName || result.user.email}!`);
+                    // onAuthStateChanged will handle the UI transition
                 } catch (error) {
                     console.error("Google Sign-In Error:", error);
                     if (error.code === 'auth/popup-closed-by-user') {
                         showMessageModal("Sign-in cancelled. Please try again.");
                     } else if (error.code === 'auth/cancelled-popup-request') {
                          showMessageModal("Sign-in already in progress. Please wait.");
-                    }
-                    else {
+                    } else {
                         showMessageModal(`Sign-in failed: ${error.message}`);
                     }
-                } finally {
-                    hideLoading();
+                    hideLoading(); // Hide loading only on error, as success is handled by onAuthStateChanged
                 }
             }
 
@@ -1061,11 +1071,10 @@
                 showLoading();
                 try {
                     await signOut(auth);
-                    showMessageModal("You have been signed out.");
+                    // onAuthStateChanged will handle the UI transition
                 } catch (error) {
                     console.error("Sign Out Error:", error);
                     showMessageModal("Failed to sign out. Please try again.");
-                } finally {
                     hideLoading();
                 }
             }
@@ -1129,7 +1138,6 @@
                     orders = [];
                     renderOrderList();
                     populateUpcomingOverdueList();
-                    hideLoading();
                 }
             }
 
@@ -1331,6 +1339,8 @@
             historyCloseBtn.addEventListener('click', () => historyModal.style.display = 'none');
 
             // --- INITIALIZATION ---
+            // Don't show any screen initially, wait for auth check.
+            // The loading overlay is visible by default via CSS.
             initializeFirebase();
             addWindowInput(windowsContainer, 1);
         })();
