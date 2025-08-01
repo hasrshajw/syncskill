@@ -3,509 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowthSchool with Lottie Player</title>
-    
-    <!-- Your Lottie Player Script -->
+    <title>GrowthSchool - AI-First World</title>
+
+    <!-- Lottie Player Script -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
+
     <style>
-        /* Basic body styling to remove default margin */
+        /* Base styling for the body */
         body {
             margin: 0;
             font-family: sans-serif;
-            background-color: #ffffff;
+            background-color: #ffffff; /* Page background */
         }
+
+        /* Responsive container for the main content */
+        .main-container {
+            width: 100%;
+            background-color: #ffffff;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        /* The main card with background and rounded corners */
+        .content-card {
+            width: 90%;
+            margin: auto;
+            position: relative;
+            border-radius: 1.5rem; /* Rounded corners */
+            overflow: hidden;
+            background-color: #012726; /* Dark green background */
+            padding: 4rem; /* Padding inside the card */
+            box-sizing: border-box; /* Ensures padding is included in width/height */
+        }
+
+        /* Background grid image */
+        .background-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* The main flex container for the two-column layout */
+        .flex-container {
+            position: relative;
+            z-index: 2; /* Ensures content is on top of the grid */
+            display: flex;
+            align-items: center; /* Vertically center align items */
+            gap: 2rem; /* Space between columns */
+        }
+
+        /* Left column for text content */
+        .left-column {
+            flex: 1; /* Takes up available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Right column for the Lottie animation */
+        .right-column {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Heading style */
+        .heading {
+            font-size: 3rem; /* 48px */
+            font-weight: 500;
+            color: #FFFFFF;
+            line-height: 1.2;
+            margin: 0 0 1rem 0; /* No top margin */
+        }
+
+        /* Paragraph style */
+        .paragraph {
+            color: #F0E8D6; /* Off-white text color */
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.6;
+            margin: 0 0 2rem 0;
+            max-width: 500px; /* Limit text width for readability */
+        }
+
+        /* Button style */
+        .explore-button {
+            background-color: #33C375; /* Bright green background */
+            color: #012726; /* Dark text color */
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* Slightly rounded corners */
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem; /* Space between text and icon */
+            transition: background-color 0.3s ease;
+        }
+
+        .explore-button:hover {
+            background-color: #6AD384; /* Lighter green on hover */
+        }
+        
+        /* Media query for responsive design on smaller screens */
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 2rem; /* Reduce padding on smaller screens */
+            }
+            .flex-container {
+                flex-direction: column; /* Stack columns vertically */
+                text-align: center; /* Center-align text */
+            }
+            .left-column, .right-column {
+                align-items: center; /* Center items in the column */
+            }
+            .heading {
+                font-size: 2rem; /* Smaller heading on mobile */
+            }
+            .paragraph {
+                font-size: 1rem; /* Smaller paragraph text */
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <div style="width: 100%; background-color: #ffffff; padding-top: 2.5rem; padding-bottom: 2.5rem; margin-top: 5rem;">
-        <div style="width: 90%; margin-left: auto; margin-right: auto; position: relative; border-radius: 1.5rem; overflow: hidden; background-color: #012726;">
+    <div class="main-container">
+        <div class="content-card">
             
-            <div style="position: relative;">
-                <!-- Background Grid Image -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" style="object-fit: cover; width: 100%; height: 100%; color: transparent;">
+            <!-- Background Image -->
+            <img alt="grid" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" class="background-grid">
+
+            <!-- Two-Column Layout Container -->
+            <div class="flex-container">
+
+                <!-- Left Column (Text Content) -->
+                <div class="left-column">
+                    <h1 class="heading">Become Top 1% in the AI-First World</h1>
+                    <p class="paragraph">
+                        Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
+                    </p>
+                    <button class="explore-button">
+                        <span>Explore Programs</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
+                            <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
                 </div>
-                <!-- Background Text Image with Opacity -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/herotext.webp" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.15; color: transparent;">
+                
+                <!-- Right Column (Lottie Animation) -->
+                <div class="right-column">
+                    <lottie-player 
+                        src="animation.json" 
+                        background="transparent" 
+                        speed="1" 
+                        style="width: 100%; max-width: 400px;" 
+                        loop 
+                        autoplay>
+                    </lottie-player>
                 </div>
 
-                <!-- Main Content Flex Container -->
-                <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; position: relative; z-index: 10;">
-
-                    <!-- Left Side Content -->
-                    <div style="width: 100%; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                        <h1 style="font-size: 1.875rem; font-weight: 500; color: #F0E8D6; line-height: 1.2; margin-bottom: 1rem;">
-                            Become Top 1% in the AI-First World
-                        </h1>
-                        <p style="color: #F0E8D6; font-size: 1rem; font-weight: 400; opacity: 0.9; margin-bottom: 2rem; max-width: 36rem;">
-                            Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
-                        </p>
-                        <button style="background-color: #33c375; box-shadow: inset 0 0 0 2px rgba(0,39,38,0.3); cursor: pointer; color: #012726; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 0.75rem; display: flex; align-items: center; border: none; transition: background-color 0.3s;">
-                            Explore Programs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" style="margin-left: 0.5rem;">
-                                <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <!-- MODIFIED PART: Right Side Lottie Animation Container -->
-                    <div style="display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; position: relative;">
-                         <!-- Your Lottie Player implementation -->
-                         <lottie-player 
-                            src="animation.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 348px; height: 380px; --mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);"
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
-    
-    <!-- Media query for larger screens -->
-    <style>
-        @media (min-width: 768px) {
-            /* Targeting the main flex container for responsiveness */
-            .main-content {
-                flex-direction: row !important;
-                padding-left: 4rem !important;
-                padding-right: 4rem !important;
-            }
-            /* Targeting the left content block */
-            .left-content {
-                width: 50% !important;
-                margin-bottom: 0 !important;
-            }
-            /* Targeting the heading for font size change */
-            .main-heading {
-                font-size: 48px !important;
-            }
-        }
-    </style>
-    
-    <script>
-        // JS to add classes for styling hooks, making it easier to target elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('div.flex-col').classList.add('main-content');
-            document.querySelector('div.w-full').classList.add('left-content');
-            document.querySelector('h1').classList.add('main-heading');
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowthSchool with Lottie Player</title>
-    
-    <!-- Your Lottie Player Script -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <style>
-        /* Basic body styling to remove default margin */
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
 
-    <div style="width: 100%; background-color: #ffffff; padding-top: 2.5rem; padding-bottom: 2.5rem; margin-top: 5rem;">
-        <div style="width: 90%; margin-left: auto; margin-right: auto; position: relative; border-radius: 1.5rem; overflow: hidden; background-color: #012726;">
-            
-            <div style="position: relative;">
-                <!-- Background Grid Image -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" style="object-fit: cover; width: 100%; height: 100%; color: transparent;">
-                </div>
-                <!-- Background Text Image with Opacity -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/herotext.webp" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.15; color: transparent;">
-                </div>
-
-                <!-- Main Content Flex Container -->
-                <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; position: relative; z-index: 10;">
-
-                    <!-- Left Side Content -->
-                    <div style="width: 100%; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                        <h1 style="font-size: 1.875rem; font-weight: 500; color: #F0E8D6; line-height: 1.2; margin-bottom: 1rem;">
-                            Become Top 1% in the AI-First World
-                        </h1>
-                        <p style="color: #F0E8D6; font-size: 1rem; font-weight: 400; opacity: 0.9; margin-bottom: 2rem; max-width: 36rem;">
-                            Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
-                        </p>
-                        <button style="background-color: #33c375; box-shadow: inset 0 0 0 2px rgba(0,39,38,0.3); cursor: pointer; color: #012726; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 0.75rem; display: flex; align-items: center; border: none; transition: background-color 0.3s;">
-                            Explore Programs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" style="margin-left: 0.5rem;">
-                                <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <!-- MODIFIED PART: Right Side Lottie Animation Container -->
-                    <div style="display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; position: relative;">
-                         <!-- Your Lottie Player implementation -->
-                         <lottie-player 
-                            src="animation.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 348px; height: 380px; --mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);"
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Media query for larger screens -->
-    <style>
-        @media (min-width: 768px) {
-            /* Targeting the main flex container for responsiveness */
-            .main-content {
-                flex-direction: row !important;
-                padding-left: 4rem !important;
-                padding-right: 4rem !important;
-            }
-            /* Targeting the left content block */
-            .left-content {
-                width: 50% !important;
-                margin-bottom: 0 !important;
-            }
-            /* Targeting the heading for font size change */
-            .main-heading {
-                font-size: 48px !important;
-            }
-        }
-    </style>
-    
-    <script>
-        // JS to add classes for styling hooks, making it easier to target elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('div.flex-col').classList.add('main-content');
-            document.querySelector('div.w-full').classList.add('left-content');
-            document.querySelector('h1').classList.add('main-heading');
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowthSchool with Lottie Player</title>
-    
-    <!-- Your Lottie Player Script -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <style>
-        /* Basic body styling to remove default margin */
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-
-    <div style="width: 100%; background-color: #ffffff; padding-top: 2.5rem; padding-bottom: 2.5rem; margin-top: 5rem;">
-        <div style="width: 90%; margin-left: auto; margin-right: auto; position: relative; border-radius: 1.5rem; overflow: hidden; background-color: #012726;">
-            
-            <div style="position: relative;">
-                <!-- Background Grid Image -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" style="object-fit: cover; width: 100%; height: 100%; color: transparent;">
-                </div>
-                <!-- Background Text Image with Opacity -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/herotext.webp" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.15; color: transparent;">
-                </div>
-
-                <!-- Main Content Flex Container -->
-                <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; position: relative; z-index: 10;">
-
-                    <!-- Left Side Content -->
-                    <div style="width: 100%; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                        <h1 style="font-size: 1.875rem; font-weight: 500; color: #F0E8D6; line-height: 1.2; margin-bottom: 1rem;">
-                            Become Top 1% in the AI-First World
-                        </h1>
-                        <p style="color: #F0E8D6; font-size: 1rem; font-weight: 400; opacity: 0.9; margin-bottom: 2rem; max-width: 36rem;">
-                            Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
-                        </p>
-                        <button style="background-color: #33c375; box-shadow: inset 0 0 0 2px rgba(0,39,38,0.3); cursor: pointer; color: #012726; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 0.75rem; display: flex; align-items: center; border: none; transition: background-color 0.3s;">
-                            Explore Programs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" style="margin-left: 0.5rem;">
-                                <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <!-- MODIFIED PART: Right Side Lottie Animation Container -->
-                    <div style="display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; position: relative;">
-                         <!-- Your Lottie Player implementation -->
-                         <lottie-player 
-                            src="animation.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 348px; height: 380px; --mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);"
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Media query for larger screens -->
-    <style>
-        @media (min-width: 768px) {
-            /* Targeting the main flex container for responsiveness */
-            .main-content {
-                flex-direction: row !important;
-                padding-left: 4rem !important;
-                padding-right: 4rem !important;
-            }
-            /* Targeting the left content block */
-            .left-content {
-                width: 50% !important;
-                margin-bottom: 0 !important;
-            }
-            /* Targeting the heading for font size change */
-            .main-heading {
-                font-size: 48px !important;
-            }
-        }
-    </style>
-    
-    <script>
-        // JS to add classes for styling hooks, making it easier to target elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('div.flex-col').classList.add('main-content');
-            document.querySelector('div.w-full').classList.add('left-content');
-            document.querySelector('h1').classList.add('main-heading');
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowthSchool with Lottie Player</title>
-    
-    <!-- Your Lottie Player Script -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <style>
-        /* Basic body styling to remove default margin */
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-
-    <div style="width: 100%; background-color: #ffffff; padding-top: 2.5rem; padding-bottom: 2.5rem; margin-top: 5rem;">
-        <div style="width: 90%; margin-left: auto; margin-right: auto; position: relative; border-radius: 1.5rem; overflow: hidden; background-color: #012726;">
-            
-            <div style="position: relative;">
-                <!-- Background Grid Image -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" style="object-fit: cover; width: 100%; height: 100%; color: transparent;">
-                </div>
-                <!-- Background Text Image with Opacity -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/herotext.webp" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.15; color: transparent;">
-                </div>
-
-                <!-- Main Content Flex Container -->
-                <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; position: relative; z-index: 10;">
-
-                    <!-- Left Side Content -->
-                    <div style="width: 100%; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                        <h1 style="font-size: 1.875rem; font-weight: 500; color: #F0E8D6; line-height: 1.2; margin-bottom: 1rem;">
-                            Become Top 1% in the AI-First World
-                        </h1>
-                        <p style="color: #F0E8D6; font-size: 1rem; font-weight: 400; opacity: 0.9; margin-bottom: 2rem; max-width: 36rem;">
-                            Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
-                        </p>
-                        <button style="background-color: #33c375; box-shadow: inset 0 0 0 2px rgba(0,39,38,0.3); cursor: pointer; color: #012726; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 0.75rem; display: flex; align-items: center; border: none; transition: background-color 0.3s;">
-                            Explore Programs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" style="margin-left: 0.5rem;">
-                                <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <!-- MODIFIED PART: Right Side Lottie Animation Container -->
-                    <div style="display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; position: relative;">
-                         <!-- Your Lottie Player implementation -->
-                         <lottie-player 
-                            src="animation.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 348px; height: 380px; --mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);"
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Media query for larger screens -->
-    <style>
-        @media (min-width: 768px) {
-            /* Targeting the main flex container for responsiveness */
-            .main-content {
-                flex-direction: row !important;
-                padding-left: 4rem !important;
-                padding-right: 4rem !important;
-            }
-            /* Targeting the left content block */
-            .left-content {
-                width: 50% !important;
-                margin-bottom: 0 !important;
-            }
-            /* Targeting the heading for font size change */
-            .main-heading {
-                font-size: 48px !important;
-            }
-        }
-    </style>
-    
-    <script>
-        // JS to add classes for styling hooks, making it easier to target elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('div.flex-col').classList.add('main-content');
-            document.querySelector('div.w-full').classList.add('left-content');
-            document.querySelector('h1').classList.add('main-heading');
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrowthSchool with Lottie Player</title>
-    
-    <!-- Your Lottie Player Script -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
-    <style>
-        /* Basic body styling to remove default margin */
-        body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-
-    <div style="width: 100%; background-color: #ffffff; padding-top: 2.5rem; padding-bottom: 2.5rem; margin-top: 5rem;">
-        <div style="width: 90%; margin-left: auto; margin-right: auto; position: relative; border-radius: 1.5rem; overflow: hidden; background-color: #012726;">
-            
-            <div style="position: relative;">
-                <!-- Background Grid Image -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png" style="object-fit: cover; width: 100%; height: 100%; color: transparent;">
-                </div>
-                <!-- Background Text Image with Opacity -->
-                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;">
-                    <img alt="grid" width="1200" height="800" src="https://d31bwppm8yl9g2.cloudfront.net/learner/website/herotext.webp" style="object-fit: cover; width: 100%; height: 100%; opacity: 0.15; color: transparent;">
-                </div>
-
-                <!-- Main Content Flex Container -->
-                <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; position: relative; z-index: 10;">
-
-                    <!-- Left Side Content -->
-                    <div style="width: 100%; margin-bottom: 2.5rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center;">
-                        <h1 style="font-size: 1.875rem; font-weight: 500; color: #F0E8D6; line-height: 1.2; margin-bottom: 1rem;">
-                            Become Top 1% in the AI-First World
-                        </h1>
-                        <p style="color: #F0E8D6; font-size: 1rem; font-weight: 400; opacity: 0.9; margin-bottom: 2rem; max-width: 36rem;">
-                            Whether it is Product, Growth, Design, Business, Tech or Data, GrowthSchool is the place to learn from top experts in the field to become the Top 1%
-                        </p>
-                        <button style="background-color: #33c375; box-shadow: inset 0 0 0 2px rgba(0,39,38,0.3); cursor: pointer; color: #012726; font-weight: 500; padding: 0.75rem 1.5rem; border-radius: 0.75rem; display: flex; align-items: center; border: none; transition: background-color 0.3s;">
-                            Explore Programs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="13" viewBox="0 0 12 13" fill="none" style="margin-left: 0.5rem;">
-                                <path d="M1 7.11108L6 12L11 7.11108" stroke="#002726" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M1 1L6 5.88889L11 1" stroke="#002726" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <!-- MODIFIED PART: Right Side Lottie Animation Container -->
-                    <div style="display: flex; align-items: flex-end; justify-content: flex-end; width: 100%; position: relative;">
-                         <!-- Your Lottie Player implementation -->
-                         <lottie-player 
-                            src="animation.json" 
-                            background="transparent" 
-                            speed="1" 
-                            style="width: 348px; height: 380px; --mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);"
-                            loop 
-                            autoplay>
-                        </lottie-player>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Media query for larger screens -->
-    <style>
-        @media (min-width: 768px) {
-            /* Targeting the main flex container for responsiveness */
-            .main-content {
-                flex-direction: row !important;
-                padding-left: 4rem !important;
-                padding-right: 4rem !important;
-            }
-            /* Targeting the left content block */
-            .left-content {
-                width: 50% !important;
-                margin-bottom: 0 !important;
-            }
-            /* Targeting the heading for font size change */
-            .main-heading {
-                font-size: 48px !important;
-            }
-        }
-    </style>
-    
-    <script>
-        // JS to add classes for styling hooks, making it easier to target elements
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('div.flex-col').classList.add('main-content');
-            document.querySelector('div.w-full').classList.add('left-content');
-            document.querySelector('h1').classList.add('main-heading');
-        });
-    </script>
 </body>
 </html>
