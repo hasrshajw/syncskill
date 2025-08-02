@@ -17,7 +17,6 @@
         /* Base styling */
         body {
             margin: 0;
-            /* Applying the correct font family */
             font-family: 'IBM Plex Sans', sans-serif;
             background-color: #f4f4f4; /* A light gray background to see the card */
         }
@@ -25,22 +24,22 @@
         /* Container to center the main card */
         .page-container {
             width: 100%;
-            padding: 4rem 1rem; /* Add some space around the card */
+            padding: 4rem 1rem;
             box-sizing: border-box;
         }
 
-        /* The main card with background, border-radius, and background image */
+        /* The main card with adjusted width and padding */
         .content-card {
-            max-width: 1200px; /* Max width to match the website's container */
+            max-width: 1100px; /* DECREASED: Reduced max-width for a narrower look */
             margin: auto;
             position: relative;
             border-radius: 1.5rem; /* 24px */
             overflow: hidden;
-            background-color: #002726; /* The correct dark teal background */
+            background-color: #002726;
             background-image: url('https://d31bwppm8yl9g2.cloudfront.net/learner/website/GS-Grid.png');
             background-size: cover;
             background-position: center;
-            padding: 5rem; /* Generous padding like the reference */
+            padding: 4rem; /* DECREASED: Reduced padding for a tighter layout */
             box-sizing: border-box;
         }
 
@@ -51,9 +50,9 @@
             gap: 2rem;
         }
 
-        /* Left column for text content - given more space */
+        /* Left column for text content */
         .left-column {
-            flex: 1.5; /* Makes this column wider than the right one */
+            flex: 1.5;
         }
 
         /* Right column for the Lottie animation */
@@ -64,39 +63,38 @@
             justify-content: center;
         }
 
-        /* Heading style - larger, bolder, and with more line height */
+        /* Heading style */
         .heading {
-            font-size: 3rem; /* 48px */
-            font-weight: 600; /* Bolder text */
+            font-size: 3rem;
+            font-weight: 600;
             color: #FFFFFF;
             line-height: 1.25;
-            margin: 0 0 1.5rem 0;
+            margin: 0 0 1rem 0; /* DECREASED: Tighter margin-bottom */
         }
 
-        /* Paragraph style - correct color and opacity */
+        /* Paragraph style */
         .paragraph {
-            color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
-            font-size: 1.125rem; /* 18px */
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.125rem;
             font-weight: 400;
             line-height: 1.6;
-            margin: 0 0 2.5rem 0;
+            margin: 0 0 2rem 0; /* DECREASED: Tighter margin-bottom */
             max-width: 500px;
         }
 
-        /* Button style - correct colors, padding, and inset shadow */
+        /* Button style */
         .explore-button {
             background-color: #33C375;
             color: #012726;
             font-weight: 500;
             font-size: 1rem;
             padding: 0.8rem 1.5rem;
-            border-radius: 0.75rem; /* 12px */
+            border-radius: 0.75rem;
             border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            /* This inset shadow is the key detail from the original CSS */
             box-shadow: inset 0 0 0 1px rgba(0, 39, 38, 0.3);
             transition: background-color 0.3s ease;
         }
@@ -108,14 +106,17 @@
         /* Responsive design for smaller screens */
         @media (max-width: 992px) {
             .content-card {
-                padding: 3rem; /* Reduce padding */
+                padding: 3rem 1.5rem; /* Adjust padding for mobile */
             }
             .flex-container {
-                flex-direction: column; /* Stack the columns */
+                flex-direction: column;
                 text-align: center;
             }
             .left-column {
-                order: 2; /* Move text below the animation on mobile */
+                order: 2;
+                display: flex; /* Ensure button is centered correctly */
+                flex-direction: column;
+                align-items: center;
             }
             .right-column {
                 order: 1;
@@ -123,7 +124,7 @@
                 margin-bottom: 2rem;
             }
             .heading {
-                font-size: 2.25rem; /* Adjust font size for mobile */
+                font-size: 2.25rem;
             }
         }
     </style>
@@ -155,7 +156,7 @@
                         src="animation.json"
                         background="transparent"
                         speed="1"
-                        style="width: 100%; max-width: 350px;"
+                        style="width: 100%; max-width: 320px;" /* DECREASED: Adjusted size of animation */
                         loop
                         autoplay>
                     </lottie-player>
