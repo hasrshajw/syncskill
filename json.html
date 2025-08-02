@@ -1304,9 +1304,6 @@
 
 
     <style>
-        /* --- 1. Global Font Definitions & Reset --- */
-        /* CHANGE: Removed Trustpilot fonts and imported IBM Plex Sans & IBM Plex Sans Condensed */
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@700&family=IBM+Plex+Sans:wght@400;700&display=swap');
 
 
         /* =================================================================== */
@@ -1329,7 +1326,7 @@
         .FeatureGrid_container__GuRmV {
             background: #f3f0ec;
             border: 1px solid #e9e4e0;
-            border-radius: 20px;
+            border-radius: 1.5rem;
             padding: 28px 24px;
             grid-column: span 5;
             display: flex;
@@ -1379,6 +1376,7 @@
         .CTA_CTALinkButton__uuWrs:active {
             transform: translateY(0);
         }
+        /* CHANGE: Explicitly set button text to white, overriding other styles */
         .CTA_WhiteButtonText__0azAO {
             color: #ffffff;
         }
@@ -1389,23 +1387,21 @@
         .CDS_Typography_appearance-default__96c1da { color: #2d2f29; }
         .CDS_Typography_prettyStyle__96c1da { text-wrap: pretty; }
         
-        /* CHANGE: Headings now use IBM Plex Sans Condensed */
         .CDS_Typography_display-m__96c1da { 
-
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
             font-size: 22px; 
             font-weight: 700; 
             line-height: 1.25; 
         }
         
-        /* CHANGE: Body and button text now use IBM Plex Sans */
+        /* CHANGE: Paragraph font size increased to 1.125rem */
         .CDS_Typography_body__96c1da, .CDS_Typography_body-l__96c1da { 
-
-            font-size: 14px; 
-            font-weight: 400; /* Regular weight */
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1.125rem; 
+            font-weight: 400;
             line-height: 1.5; 
         }
         
-        /* This will apply the bold version of IBM Plex Sans to button text */
         .CDS_Typography_weight-heavy__96c1da { 
             font-weight: 700; 
         }
@@ -1421,11 +1417,13 @@
         }
         @media (max-width: 768px) {
             .FeatureGrid_grid__xJPcm {
-                padding: 24px 16px; /* Tighter padding on mobile */
+                padding: 24px 16px;
             }
             .CTA_CTALinkButton__uuWrs.CTA_fullWidthOnMobile__7o1cH {
                 display: block;
                 width: 100%;
+                /* CHANGE: Increased padding for a larger touch target on mobile */
+                padding: 14px 24px;
             }
         }
         @media (min-width: 1024px) {
