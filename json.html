@@ -1303,8 +1303,179 @@
 
 
 
+    <style>
+        /* --- 1. Global Font Definitions & Reset --- */
+        /* CHANGE: Removed Trustpilot fonts and imported IBM Plex Sans & IBM Plex Sans Condensed */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@700&family=IBM+Plex+Sans:wght@400;700&display=swap');
 
 
+        /* =================================================================== */
+        /* --- 2. Layout & Grid System --- */
+        /* =================================================================== */
+        .ContentWrapper_contentWrapper__CvQFo {
+            margin: 0 auto;
+            max-width: 960px;
+        }
+        .FeatureGrid_grid__xJPcm {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 16px;
+            padding: 24px;
+        }
+
+        /* =================================================================== */
+        /* --- 3. Card Component --- */
+        /* =================================================================== */
+        .FeatureGrid_container__GuRmV {
+            background: #f3f0ec;
+            border: 1px solid #e9e4e0;
+            border-radius: 20px;
+            padding: 28px 24px;
+            grid-column: span 5;
+            display: flex;
+            flex-direction: column;
+        }
+        .FeatureGrid_container__GuRmV.FeatureGrid_green__wt3n6 {
+            background-color: #04da8d;
+        }
+        .FeatureGrid_container__GuRmV:first-child,
+        .FeatureGrid_container__GuRmV:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        /* =================================================================== */
+        /* --- 4. Content & Vertical Alignment --- */
+        /* =================================================================== */
+        .RichText_rich_text_headers__y_K9t {
+            margin-bottom: 8px !important;
+        }
+        .RichText_rich_text_spacing__5RysE {
+            margin-bottom: 20px;
+        }
+        .CTA_CTAButtonContainer__pkQFp {
+            margin-top: auto;
+        }
+        p.RichText_rich_text_spacing__5RysE:last-of-type {
+            display: none;
+        }
+
+        /* =================================================================== */
+        /* --- 5. Button Component --- */
+        /* =================================================================== */
+        .CTA_CTALinkButton__uuWrs {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            background-color: #1c1c1c;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+        }
+        .CTA_CTALinkButton__uuWrs:hover,
+        .CTA_CTALinkButton__uuWrs:focus-visible {
+            background-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+        .CTA_CTALinkButton__uuWrs:active {
+            transform: translateY(0);
+        }
+        .CTA_WhiteButtonText__0azAO {
+            color: #ffffff;
+        }
+
+        /* =================================================================== */
+        /* --- 6. Typography (Using IBM Plex Fonts) --- */
+        /* =================================================================== */
+        .CDS_Typography_appearance-default__96c1da { color: #2d2f29; }
+        .CDS_Typography_prettyStyle__96c1da { text-wrap: pretty; }
+        
+        /* CHANGE: Headings now use IBM Plex Sans Condensed */
+        .CDS_Typography_display-m__96c1da { 
+
+            font-size: 22px; 
+            font-weight: 700; 
+            line-height: 1.25; 
+        }
+        
+        /* CHANGE: Body and button text now use IBM Plex Sans */
+        .CDS_Typography_body__96c1da, .CDS_Typography_body-l__96c1da { 
+
+            font-size: 14px; 
+            font-weight: 400; /* Regular weight */
+            line-height: 1.5; 
+        }
+        
+        /* This will apply the bold version of IBM Plex Sans to button text */
+        .CDS_Typography_weight-heavy__96c1da { 
+            font-weight: 700; 
+        }
+
+        /* =================================================================== */
+        /* --- 7. Responsive Design --- */
+        /* =================================================================== */
+        @media (max-width: 992px) {
+            .FeatureGrid_grid__xJPcm {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            .FeatureGrid_grid__xJPcm {
+                padding: 24px 16px; /* Tighter padding on mobile */
+            }
+            .CTA_CTALinkButton__uuWrs.CTA_fullWidthOnMobile__7o1cH {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .CDS_Typography_display-m__96c1da {
+                font-size: 28px;
+            }
+        }
+    </style>
+<div class="ContentWrapper_contentWrapper__CvQFo max_width FeatureGrid_grid__xJPcm" data-testid="content-wrapper">
+    <div class="FeatureGrid_container__GuRmV">
+        <h1 class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_display-m__96c1da RichText_rich_text_headers__y_K9t">Salesforce integration</h1>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE">Seamlessly integrate Salesforce with Trustpilot and turn your CRM into a reliable hub for trusted review data.</p>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE"></p>
+        <div class="CTA_CTAButtonContainer__pkQFp CTA_fullWidthOnMobile__7o1cH" data-testid="cta">
+            <a class="CTA_CTALinkButton__uuWrs CTA_BlackPrimary__bs_f_ CTA_fullWidthOnMobile__7o1cH" href="#">
+                <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body-l__96c1da CDS_Typography_weight-heavy__96c1da CTA_WhiteButtonText__0azAO" weight="heavy">Find out more</p>
+            </a>
+        </div>
+    </div>
+    <div class="FeatureGrid_container__GuRmV">
+        <h1 class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_display-m__96c1da RichText_rich_text_headers__y_K9t">Trustpilot is a founding member of the Coalition for Trusted reviews</h1>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE">Trustpilot, Amazon, Booking.com, Expedia Group, Glassdoor and Tripadvisor have formed the Coalition for Trusted Reviews. A shared commitment to protecting the integrity of online consumer reviews worldwide.</p>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE"></p>
+        <div class="CTA_CTAButtonContainer__pkQFp CTA_fullWidthOnMobile__7o1cH" data-testid="cta">
+            <a rel="" target="" class="CTA_CTALinkButton__uuWrs CTA_BlackPrimary__bs_f_ CTA_fullWidthOnMobile__7o1cH" href="#">
+                <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body-l__96c1da CDS_Typography_weight-heavy__96c1da CTA_WhiteButtonText__0azAO" weight="heavy">View all referral partners</p>
+            </a>
+        </div>
+    </div>
+    <div class="FeatureGrid_container__GuRmV">
+        <h1 class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_display-m__96c1da RichText_rich_text_headers__y_K9t">Find the right Pricing plan for your business</h1>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE">Whether you’re a new business or a household name, we have a range of plans to help you reach more customers than ever before.</p>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE"></p>
+        <div class="CTA_CTAButtonContainer__pkQFp CTA_fullWidthOnMobile__7o1cH" data-testid="cta">
+            <a class="CTA_CTALinkButton__uuWrs CTA_BlackPrimary__bs_f_ CTA_fullWidthOnMobile__7o1cH" href="#">
+                <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body-l__96c1da CDS_Typography_weight-heavy__96c1da CTA_WhiteButtonText__0azAO" weight="heavy">View our pricing plans</p>
+            </a>
+        </div>
+    </div>
+    <div class="FeatureGrid_container__GuRmV FeatureGrid_green__wt3n6">
+        <h1 class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_display-m__96c1da RichText_rich_text_headers__y_K9t">Trustpilot’s Marketing widgets</h1>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE"><b>73.6%</b> of Trustpilot visitors say they are more likely to make a purchase from a website that's displaying Trustpilot reviews on-site.</p>
+        <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body__96c1da RichText_rich_text_spacing__5RysE"></p>
+        <div class="CTA_CTAButtonContainer__pkQFp CTA_fullWidthOnMobile__7o1cH" data-testid="cta">
+            <a class="CTA_CTALinkButton__uuWrs CTA_BlackPrimary__bs_f_ CTA_fullWidthOnMobile__7o1cH" href="#">
+                <p class="CDS_Typography_appearance-default__96c1da CDS_Typography_prettyStyle__96c1da CDS_Typography_body-l__96c1da CDS_Typography_weight-heavy__96c1da CTA_WhiteButtonText__0azAO" weight="heavy">Learn more</p>
+            </a>
+        </div>
+    </div>
+</div>
 
 
 
